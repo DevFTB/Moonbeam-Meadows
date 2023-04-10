@@ -2,6 +2,8 @@ extends Sprite2D
 
 @export var reference_node : Node2D
 
+
+var selection = Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,6 +14,9 @@ func _process(delta):
 	pass
 
 func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("use_item"):
+			reference_node.use_tool(selection)
 	if event is InputEventMouseMotion:
 		var mouse_position = get_global_mouse_position()
 		var offset_angle = (mouse_position - reference_node.global_position).angle() + PI  /8
@@ -34,6 +39,6 @@ func _input(event):
 		else:
 			cangle = Vector2(-1,0)
 		
-		var new_selection  =get_parent().local_to_map(reference_node.position )
-		position = get_parent().map_to_local(new_selection + Vector2i(cangle))
+		selection =get_parent().local_to_map(reference_node.position ) + Vector2i(cangle)
+		position = get_parent().map_to_local(selection)
 

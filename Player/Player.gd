@@ -26,9 +26,15 @@ func switch_tool(tool : Tool):
 		tool_changed.emit(current_tool)
 		
 	pass
+	
+func use_tool(grid_position):
+	match(current_tool):
+		Tool.TILL:
+			get_parent().till_land(grid_position)
+	pass
 
 func _input(event):
-	
+
 	if event is InputEventKey:
 		if event.is_action_pressed("select_tool1"):
 			switch_tool(Tool.TILL)
