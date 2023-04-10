@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://231ph0b21oc1"]
+[gd_scene load_steps=8 format=3 uid="uid://gxslbfw5ud7q"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
-[ext_resource type="Script" path="res://Level/Player.gd" id="2_w68rn"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="2_p03jk"]
+[ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
+[ext_resource type="Script" path="res://Level/SelectionMarker.gd" id="5_7l4a3"]
+[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://Player/selection_marker.png" id="5_jbcsb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4osl"]
+radius = 17.0
+height = 60.0
 
 [node name="Moon" type="TileMap"]
 tile_set = ExtResource("1_7871s")
@@ -12,12 +19,56 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 0, 1, 131072, 0, 2, 0, 0, 3, 0, 0
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(234, 110)
 motion_mode = 1
-script = ExtResource("2_w68rn")
+script = ExtResource("2_p03jk")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_i4osl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = ExtResource("2_373r8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = -1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToolGUI" type="VBoxContainer" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -66.0
+offset_right = 201.0
+offset_bottom = -10.0
+grow_vertical = 0
+script = ExtResource("4_i0hmv")
+
+[node name="ToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Current Tool:"
+
+[node name="CurrentToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tiller"
+
+[node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
+texture = ExtResource("5_jbcsb")
+script = ExtResource("5_7l4a3")
+reference_node = NodePath("../Player")
+
+[connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
