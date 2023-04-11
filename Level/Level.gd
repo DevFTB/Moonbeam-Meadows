@@ -51,3 +51,12 @@ func water_land(grid_position: Vector2i):
 		return true
 	else:
 		return false
+		
+func harvest_land(grid_position: Vector2i):
+	if crop_map.has(grid_position):
+		var crop_entity = crop_map[grid_position]
+		
+		if crop_entity.is_fully_grown():
+			$Player/InventoryComponent.add_produce(crop_entity.crop, 1)
+			crop_entity.harvest()
+	pass

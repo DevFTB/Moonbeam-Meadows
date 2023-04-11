@@ -32,9 +32,15 @@ func increment_stage():
 		current_stage += 1
 		$Sprite2D.texture = crop.stage_textures[current_stage]
 	pass
+	
+func is_fully_grown():
+	return current_stage == crop.amount_of_stages - 1
 
 func fill_water():
 	water_level = 1
+	
+func harvest():
+	queue_free()
 
 func _on_growth_timer_timeout():
 	increment_stage()
