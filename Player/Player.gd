@@ -31,6 +31,10 @@ func use_tool(grid_position):
 	match(current_tool):
 		Tool.TILL:
 			get_parent().till_land(grid_position)
+		Tool.FERTILISE:
+			if $InventoryComponent.get_selected_item() != null:
+				if get_parent().plant_land(grid_position, $InventoryComponent.get_selected_item()):
+					$InventoryComponent.spend_seed($InventoryComponent.get_selected_item())
 	pass
 
 func _input(event):
