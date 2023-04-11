@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gxslbfw5ud7q"]
+[gd_scene load_steps=15 format=3 uid="uid://b5c8887peqbbx"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -8,10 +8,10 @@
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
 [ext_resource type="Resource" uid="uid://digrf2r5b0p0h" path="res://Level/Crops/lunar_sprinkles.tres" id="4_o1p1q"]
 [ext_resource type="Script" path="res://Player/InventoryComponent.gd" id="5_0ppol"]
-[ext_resource type="Script" path="res://Level/SelectionMarker.gd" id="5_7l4a3"]
-[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://Player/selection_marker.png" id="5_jbcsb"]
-[ext_resource type="Script" path="res://Level/InventoryGUI.gd" id="9_eeu31"]
-[ext_resource type="Script" path="res://Level/PhoneGUI.gd" id="9_qrgnn"]
+[ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
+[ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
+[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
+[ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4osl"]
 radius = 17.0
@@ -103,7 +103,7 @@ offset_right = -105.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("9_qrgnn")
+script = ExtResource("9_kceb6")
 
 [node name="Inventory" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
 layout_mode = 2
@@ -136,7 +136,7 @@ text = "Seeds
 [node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer" node_paths=PackedStringArray("inventory")]
 layout_mode = 2
 size_flags_vertical = 2
-script = ExtResource("9_eeu31")
+script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../Player/SeedInventory")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
@@ -150,7 +150,7 @@ text = "Produce"
 [node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2" node_paths=PackedStringArray("inventory")]
 layout_mode = 2
 size_flags_vertical = 2
-script = ExtResource("9_eeu31")
+script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../Player/ProduceInventory")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
@@ -164,7 +164,7 @@ text = "Fertiliser"
 [node name="Label3" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3" node_paths=PackedStringArray("inventory")]
 layout_mode = 2
 size_flags_vertical = 2
-script = ExtResource("9_eeu31")
+script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../Player/FertiliserInventory")
 
 [node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
@@ -172,8 +172,8 @@ visible = false
 layout_mode = 2
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
-texture = ExtResource("5_jbcsb")
-script = ExtResource("5_7l4a3")
+texture = ExtResource("11_8edbx")
+script = ExtResource("12_fbvmq")
 reference_node = NodePath("../Player")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
