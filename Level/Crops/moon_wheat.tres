@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="CropResource" load_steps=6 format=3 uid="uid://dul251cg8kghb"]
+[gd_resource type="Resource" script_class="CropResource" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://Level/CropResource.gd" id="1_uesbj"]
-[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/crop_spritesheet.png" id="2_kng6a"]
+[ext_resource type="Script" path="res://Level/Crops/CropResource.gd" id="1_uesbj"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="2_kng6a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3e4s"]
 atlas = ExtResource("2_kng6a")

@@ -1,24 +1,35 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dsntvsfcov3kf"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dsntvsfcov3kf"]
 
 [ext_resource type="Texture2D" uid="uid://blhedjwfhypws" path="res://Level/level_spritesheety.png" id="1_ixll4"]
+[ext_resource type="Texture2D" uid="uid://ckkh15mdf55bh" path="res://Level/farmland_spritesheet.png" id="2_dd7xp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m3asn"]
 resource_name = "ground_atlas"
 texture = ExtResource("1_ixll4")
 texture_region_size = Vector2i(32, 32)
-2:0/0 = 0
-2:0/0/custom_data_0 = true
+0:0/0 = 0
 1:0/0 = 0
-1:0/0/custom_data_0 = true
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+1:2/0 = 0
+1:2/0/custom_data_0 = true
+2:2/0 = 0
+2:2/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ek77a"]
+texture = ExtResource("2_dd7xp")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = true
-0:1/0 = 0
-0:1/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
 
 [resource]
 tile_size = Vector2i(32, 32)
 custom_data_layer_0/name = "tillable"
 custom_data_layer_0/type = 1
-custom_data_layer_1/name = "farmland"
-custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_m3asn")
+sources/1 = SubResource("TileSetAtlasSource_ek77a")

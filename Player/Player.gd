@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal tool_changed(new_tool: Tool)
 
 enum Tool {
-	TILL, WATER, FERTILISE, HARVEST, 
+	TILL, WATER, PLANT, FERTILISE, HARVEST, 
 }
 
 var current_tool = Tool.TILL
@@ -34,10 +34,14 @@ func use_tool(grid_position):
 	match(current_tool):
 		Tool.TILL:
 			get_parent().till_land(grid_position)
+		Tool.PLANT:
+			if $SeedInventory.get_selected() != null:
+				if get_parent().plant_land(grid_position, $SeedInventory.get_selected()):
+					$SeedInventory.remove($SeedInventory.get_selected())
 		Tool.FERTILISE:
-			if $InventoryComponent.get_selected_item() != null:
-				if get_parent().plant_land(grid_position, $InventoryComponent.get_selected_item()):
-					$InventoryComponent.spend_seed($InventoryComponent.get_selected_item())
+			if $FertiliserInventory.get_selected() != null:
+				if get_parent().fertilise_land(grid_position, $FertiliserInventory.get_selected()):
+					$FertiliserInventory.remove($FertiliserInventory.get_selected())
 		Tool.WATER:
 			if water_tank > 0:
 				if get_parent().water_land(grid_position):
@@ -56,11 +60,15 @@ func _input(event):
 			switch_tool(Tool.TILL)
 			pass
 		elif event.is_action_pressed("select_tool2"):
-			switch_tool(Tool.WATER)
+			switch_tool(Tool.PLANT)
 			pass
 		elif event.is_action_pressed("select_tool3"):
-			switch_tool(Tool.FERTILISE)
+			switch_tool(Tool.WATER)
 			pass
 		elif event.is_action_pressed("select_tool4"):
+			switch_tool(Tool.FERTILISE)
+			pass
+		elif event.is_action_pressed("select_tool5"):
 			switch_tool(Tool.HARVEST)
 			pass
+

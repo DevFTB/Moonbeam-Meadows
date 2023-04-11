@@ -27,6 +27,8 @@ func _on_player_tool_changed(new_tool):
 		Player.Tool.FERTILISE:
 			new_text = "Fertilising Machine"
 			pass
-		
+		Player.Tool.PLANT:
+			new_text = "Planter"
+			pass
 	$CurrentToolText.text = new_text
 	pass # Replace with function body.

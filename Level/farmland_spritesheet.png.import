@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://klmhj7adxkvh"
-path="res://.godot/imported/crop_spritesheet.png-f98f8e47ca94afb076118e4c0162e00b.ctex"
+uid="uid://ckkh15mdf55bh"
+path="res://.godot/imported/farmland_spritesheet.png-c343ffb1a243bdfc2a9cf47da6646017.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/crop_spritesheet.png"
-dest_files=["res://.godot/imported/crop_spritesheet.png-f98f8e47ca94afb076118e4c0162e00b.ctex"]
+source_file="res://Level/farmland_spritesheet.png"
+dest_files=["res://.godot/imported/farmland_spritesheet.png-c343ffb1a243bdfc2a9cf47da6646017.ctex"]
 
 [params]
 

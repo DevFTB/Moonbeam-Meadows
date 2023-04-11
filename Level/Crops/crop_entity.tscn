@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvcxigp1btgot"]
+[gd_scene load_steps=3 format=3 uid="uid://dvcxigp1btgot"]
 
 [ext_resource type="Script" path="res://Level/Crops/CropEntity.gd" id="1_74xqp"]
-[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/crop_spritesheet.png" id="2_f08aq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_702a0"]
 font_color = Color(0.0196078, 0.568627, 1, 1)
@@ -11,14 +10,14 @@ outline_color = Color(0, 0, 0, 1)
 [node name="CropEntity" type="Node2D"]
 script = ExtResource("1_74xqp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_f08aq")
+[node name="CropSprite" type="Sprite2D" parent="."]
 centered = false
 offset = Vector2(-16, -48)
 
+[node name="FertilisedSprite" type="Sprite2D" parent="."]
+
 [node name="GrowthTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="WaterLabel" type="Label" parent="."]
 z_index = 1
