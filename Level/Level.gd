@@ -23,10 +23,12 @@ func get_entity_at_grid(grid_position : Vector2i):
 
 func plant_land(grid_position : Vector2i, crop: CropResource):
 	if crop_map.has(grid_position):
-		crop_map[grid_position].set_crop(crop)
-		return true
-	else:
-		return false
+		var crop_entity = crop_map[grid_position]
+		if crop_entity.crop == null:
+			crop_map[grid_position].set_crop(crop)
+			return true
+
+	return false
 	
 func fertilise_land(grid_position : Vector2i, fertiliser : FertiliserResource):
 	if crop_map.has(grid_position):
@@ -35,7 +37,6 @@ func fertilise_land(grid_position : Vector2i, fertiliser : FertiliserResource):
 		return true
 	else:
 		return false
-	pass
 
 func till_land(grid_position : Vector2i):
 	var tile_data : TileData = get_cell_tile_data(0, grid_position)
@@ -57,11 +58,11 @@ func water_land(grid_position: Vector2i):
 	else:
 		return false
 		
-func harvest_land(grid_position: Vector2i):
+func harvest_land(grid_position: Vector2i, inventory):
 	if crop_map.has(grid_position):
 		var crop_entity = crop_map[grid_position]
 		
 		if crop_entity.is_fully_grown():
-			$Player/ProduceInventory.add(crop_entity.crop, 1)
+			inventory.add(crop_entity.crop, 1)
 			crop_entity.harvest()
 	pass

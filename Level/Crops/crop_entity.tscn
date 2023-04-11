@@ -14,12 +14,11 @@ script = ExtResource("1_74xqp")
 centered = false
 offset = Vector2(-16, -48)
 
-[node name="FertilisedSprite" type="Sprite2D" parent="."]
-
 [node name="GrowthTimer" type="Timer" parent="."]
 wait_time = 2.0
 
 [node name="WaterLabel" type="Label" parent="."]
+visible = false
 z_index = 1
 offset_left = -2.0
 offset_top = -40.0

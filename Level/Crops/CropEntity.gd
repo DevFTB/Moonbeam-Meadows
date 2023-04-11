@@ -33,6 +33,7 @@ func set_crop(crop: CropResource):
 		current_stage = 0
 		
 		$GrowthTimer.start()
+		$WaterLabel.visible = true
 
 func increment_stage():
 	if current_stage < crop.amount_of_stages - 1:
@@ -47,7 +48,10 @@ func fill_water():
 	water_level = 1
 	
 func harvest():
-	queue_free()
+	crop = null
+	$CropSprite.texture = null
+	$GrowthTimer.stop()
+	$WaterLabel.visible = false
 
 func _on_growth_timer_timeout():
 	increment_stage()

@@ -47,7 +47,7 @@ func use_tool(grid_position):
 				if get_parent().water_land(grid_position):
 					water_tank -= 1
 		Tool.HARVEST:
-			get_parent().harvest_land(grid_position)
+			get_parent().harvest_land(grid_position, $ProduceInventory)
 	pass
 
 func fill_water_tank():

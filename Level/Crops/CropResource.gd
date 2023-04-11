@@ -14,3 +14,5 @@ class_name CropResource
 @export var seed_texture : Texture2D
 @export var item_texture : Texture2D
 
+func get_display_name():
+	return crop_name

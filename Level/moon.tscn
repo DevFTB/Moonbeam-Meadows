@@ -1,19 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://gxslbfw5ud7q"]
+[gd_scene load_steps=15 format=3 uid="uid://gxslbfw5ud7q"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="2_p03jk"]
 [ext_resource type="Script" path="res://Level/Level.gd" id="2_qn437"]
-[ext_resource type="Resource" path="res://Level/Crops/moon_wheat.tres" id="3_g61yd"]
+[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/moon_wheat.tres" id="3_g61yd"]
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
 [ext_resource type="Resource" uid="uid://digrf2r5b0p0h" path="res://Level/Crops/lunar_sprinkles.tres" id="4_o1p1q"]
 [ext_resource type="Script" path="res://Player/InventoryComponent.gd" id="5_0ppol"]
 [ext_resource type="Script" path="res://Level/SelectionMarker.gd" id="5_7l4a3"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://Player/selection_marker.png" id="5_jbcsb"]
+[ext_resource type="Script" path="res://Level/InventoryGUI.gd" id="9_eeu31"]
+[ext_resource type="Script" path="res://Level/PhoneGUI.gd" id="9_qrgnn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4osl"]
 radius = 17.0
 height = 60.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
+font_size = 48
 
 [node name="Moon" type="TileMap"]
 tile_set = ExtResource("1_7871s")
@@ -85,9 +90,93 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Tiller"
 
+[node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 96.0
+offset_top = -211.0
+offset_right = -105.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_qrgnn")
+
+[node name="Inventory" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
+layout_mode = 1
+offset_right = 224.0
+offset_bottom = 70.0
+text = "Inventory"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="InventorySections" type="HBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer"]
+layout_mode = 2
+text = "Seeds
+"
+
+[node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("9_eeu31")
+inventory = NodePath("../../../../../../../Player/SeedInventory")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2"]
+layout_mode = 2
+text = "Produce"
+
+[node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("9_eeu31")
+inventory = NodePath("../../../../../../../Player/ProduceInventory")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3"]
+layout_mode = 2
+text = "Fertiliser"
+
+[node name="Label3" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("9_eeu31")
+inventory = NodePath("../../../../../../../Player/FertiliserInventory")
+
+[node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
+visible = false
+layout_mode = 2
+
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
 texture = ExtResource("5_jbcsb")
 script = ExtResource("5_7l4a3")
 reference_node = NodePath("../Player")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]
