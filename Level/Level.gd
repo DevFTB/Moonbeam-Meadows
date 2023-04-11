@@ -44,3 +44,10 @@ func till_land(grid_position : Vector2i):
 	if tile_data != null and tile_data.get_custom_data("tillable"):
 		set_cell(0, grid_position, 0, Vector2(0,1))
 	pass
+	
+func water_land(grid_position: Vector2i):
+	if crop_map.has(grid_position):
+		crop_map[grid_position].fill_water()
+		return true
+	else:
+		return false

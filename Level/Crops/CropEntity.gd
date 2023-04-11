@@ -33,6 +33,8 @@ func increment_stage():
 		$Sprite2D.texture = crop.stage_textures[current_stage]
 	pass
 
+func fill_water():
+	water_level = 1
 
 func _on_growth_timer_timeout():
 	increment_stage()
