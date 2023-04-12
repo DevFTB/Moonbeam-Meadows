@@ -11,6 +11,8 @@ const QuestGUI = preload("res://Level/Quests/QuestGUI.gd")
 func _ready():
 	quest_manager.active_quests_updated.connect(_on_active_quests_updated)	
 	for qb in quest_boxes:
+		qb.inventory = quest_manager.player_inventory
+		qb.level = quest_manager.level
 		qb.unset_quest()	
 	pass # Replace with function body.
 
@@ -22,8 +24,8 @@ func set_quests(new_quests):
 	quests = new_quests
 	for i in range(quests.size()):
 		quest_boxes[i].set_quest(quests[i])
+		quest_boxes[i].connect_to_claim(func(): quest_manager.claim_quest(quests[i]))
 	pass
-
 
 func _on_phone_gui_opened_menu():
 	set_quests(quests)
