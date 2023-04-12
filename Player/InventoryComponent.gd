@@ -1,4 +1,5 @@
 extends Node
+class_name InventoryComponent
 
 # items don't get used up
 @export var cheat_mode = true

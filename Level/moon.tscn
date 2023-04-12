@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5c8887peqbbx"]
+[gd_scene load_steps=20 format=3 uid="uid://cdp21melrkaep"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -11,7 +11,12 @@
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
 [ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
+[ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
+[ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
+[ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="15_wrucv"]
+[ext_resource type="Resource" uid="uid://b6tsrspqx0wkg" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
+[ext_resource type="Resource" uid="uid://d115d6u3v35l7" path="res://Level/Quests/quest_campaign_2.tres" id="17_k2pda"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4osl"]
 radius = 17.0
@@ -20,7 +25,7 @@ height = 60.0
 [sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
 font_size = 48
 
-[node name="Moon" type="TileMap"]
+[node name="Level" type="TileMap"]
 tile_set = ExtResource("1_7871s")
 format = 2
 layer_0/name = "ground"
@@ -91,16 +96,15 @@ size_flags_vertical = 3
 text = "Tiller"
 
 [node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI"]
-visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 96.0
-offset_top = -211.0
-offset_right = -105.0
-offset_bottom = 200.0
+offset_left = 99.0
+offset_top = -255.0
+offset_right = -102.0
+offset_bottom = 264.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_kceb6")
@@ -110,8 +114,10 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
 layout_mode = 1
-offset_right = 224.0
-offset_bottom = 70.0
+offset_left = 55.0
+offset_top = 14.0
+offset_right = 279.0
+offset_bottom = 84.0
 text = "Inventory"
 label_settings = SubResource("LabelSettings_qaotf")
 
@@ -120,7 +126,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 73.0
+offset_left = 61.0
+offset_top = 103.0
+offset_right = -55.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -167,16 +176,64 @@ size_flags_vertical = 2
 script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../Player/FertiliserInventory")
 
-[node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
+[node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI" node_paths=PackedStringArray("quest_manager")]
 visible = false
 layout_mode = 2
+script = ExtResource("11_725wh")
+quest_manager = NodePath("../../../../QuestManager")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Quests"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 14.0
+offset_right = 279.0
+offset_bottom = 84.0
+text = "Quests"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 58.0
+offset_top = 102.0
+offset_right = -43.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+inventory = NodePath("../../../../../../Player/ProduceInventory")
+level = NodePath("../../../../../..")
+
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+inventory = NodePath("../../../../../../Player/ProduceInventory")
+level = NodePath("../../../../../..")
+
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+inventory = NodePath("../../../../../../Player/ProduceInventory")
+level = NodePath("../../../../../..")
+
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+inventory = NodePath("../../../../../../Player/ProduceInventory")
+level = NodePath("../../../../../..")
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
 texture = ExtResource("11_8edbx")
 script = ExtResource("12_fbvmq")
 reference_node = NodePath("../Player")
 
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("15_wrucv")
+quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("16_oiwbj"), ExtResource("17_k2pda")])
+
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Quests" method="_on_phone_gui_opened_menu"]

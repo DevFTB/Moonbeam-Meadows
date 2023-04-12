@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=3 format=3 uid="uid://b6tsrspqx0wkg"]
+
+[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/moon_wheat.tres" id="1_n1bhx"]
+[ext_resource type="Script" path="res://Level/Quests/QuestResource.gd" id="1_qdv3o"]
+
+[resource]
+script = ExtResource("1_qdv3o")
+quest_id = 0
+quest_name = "A new beginning"
+is_campaign_quest = true
+quest_items = {
+ExtResource("1_n1bhx"): 5
+}
+reward_text = "A sense of satisfaction"
+predecessor_quest_ids = Array[int]([])

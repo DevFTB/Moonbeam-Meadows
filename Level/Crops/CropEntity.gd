@@ -21,13 +21,15 @@ func _process(delta):
 		$WaterLabel.text = "%.0f" % (water_level * 100)
 	pass
 
-func fertilise(fertiliser : FertiliserResource):
+# Sets the crop entity as fertilised 
+func fertilise(_fertiliser : FertiliserResource):
+	# Only fertilise if there isn't a crop
 	if crop == null:
 		fertilised = true
 	pass
 
-func set_crop(crop: CropResource):
-	self.crop = crop
+func set_crop(new_crop: CropResource):
+	self.crop = new_crop 
 	if crop != null:
 		$CropSprite.texture = crop.stage_textures[0]
 		current_stage = 0
