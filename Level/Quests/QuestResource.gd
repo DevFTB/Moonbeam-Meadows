@@ -12,13 +12,13 @@ class_name QuestResource
 @export var reward_text = "Rewards are nil."
 
 @export var predecessor_quest_ids : Array[int] = []
+
 var rewards: Dictionary = {}
 func can_claim(_level : Level, inv_comp : InventoryComponent):
 	var inventory = inv_comp.inventory	
 	var valid = true
 	for q_item in quest_items:
 		if not inventory.has(q_item) or inventory[q_item] < quest_items[q_item]:
-			
 			valid = false
 	return valid
 # attempts to claim the quest by checking if it can first then removing items from the given inventory.

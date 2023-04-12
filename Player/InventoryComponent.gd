@@ -9,6 +9,8 @@ class_name InventoryComponent
 # -1 means infinite stack size.
 @export var stack_size = -1
 
+signal inventory_modified
+
 var inventory = {}
 var selected = null
 func add(item: Variant, amount : int):
@@ -21,6 +23,8 @@ func add(item: Variant, amount : int):
 		
 	if selected == null:
 		selected = inventory.keys().front()
+	
+	inventory_modified.emit()
 
 func remove(item: Variant, amount : int = 1):
 	if inventory.has(item):
@@ -31,6 +35,7 @@ func remove(item: Variant, amount : int = 1):
 			
 			if selected == item:
 				selected = null
+		inventory_modified.emit()
 	else:
 		print("warning: tried to spend item that was not in seed inventory.")
 	pass
