@@ -203,34 +203,27 @@ offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuestDisplay1" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
-inventory = NodePath("../../../../../../Player/ProduceInventory")
-level = NodePath("../../../../../..")
 
-[node name="QuestDisplay2" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
-inventory = NodePath("../../../../../../Player/ProduceInventory")
-level = NodePath("../../../../../..")
 
-[node name="QuestDisplay3" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
-inventory = NodePath("../../../../../../Player/ProduceInventory")
-level = NodePath("../../../../../..")
 
-[node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" node_paths=PackedStringArray("inventory", "level") instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
-inventory = NodePath("../../../../../../Player/ProduceInventory")
-level = NodePath("../../../../../..")
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
 texture = ExtResource("11_8edbx")
 script = ExtResource("12_fbvmq")
 reference_node = NodePath("../Player")
 
-[node name="QuestManager" type="Node" parent="."]
+[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player_inventory")]
 script = ExtResource("15_wrucv")
 quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("16_oiwbj"), ExtResource("17_k2pda")])
+player_inventory = NodePath("../Player/ProduceInventory")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
