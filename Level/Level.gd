@@ -1,10 +1,10 @@
 extends TileMap
+class_name Level
 
 var crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 
 @export var crops : Array[CropResource] = []
 @export var fertilisers : Array[FertiliserResource] = []
-
 var crop_map = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -13,11 +13,6 @@ func _ready():
 	$Player/FertiliserInventory.add(fertilisers[0], 5)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 func get_entity_at_grid(grid_position : Vector2i):
 	return crop_map.get(grid_position)
 
