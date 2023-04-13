@@ -36,23 +36,24 @@ func switch_tool(tool : Tool):
 	pass
 	
 func use_tool(grid_position):
-	match(current_tool):
-		Tool.TILL:
-			get_parent().till_land(grid_position)
-		Tool.PLANT:
-			if $SeedInventory.get_selected() != null:
-				if get_parent().plant_land(grid_position, $SeedInventory.get_selected()):
-					$SeedInventory.remove($SeedInventory.get_selected())
-		Tool.FERTILISE:
-			if $FertiliserInventory.get_selected() != null:
-				if get_parent().fertilise_land(grid_position, $FertiliserInventory.get_selected()):
-					$FertiliserInventory.remove($FertiliserInventory.get_selected())
-		Tool.WATER:
-			if water_tank > 0:
-				if get_parent().water_land(grid_position):
-					water_tank -= 1
-		Tool.HARVEST:
-			get_parent().harvest_land(grid_position, self)
+	if not frozen:
+		match(current_tool):
+			Tool.TILL:
+				get_parent().till_land(grid_position)
+			Tool.PLANT:
+				if $SeedInventory.get_selected() != null:
+					if get_parent().plant_land(grid_position, $SeedInventory.get_selected()):
+						$SeedInventory.remove($SeedInventory.get_selected())
+			Tool.FERTILISE:
+				if $FertiliserInventory.get_selected() != null:
+					if get_parent().fertilise_land(grid_position, $FertiliserInventory.get_selected()):
+						$FertiliserInventory.remove($FertiliserInventory.get_selected())
+			Tool.WATER:
+				if water_tank > 0:
+					if get_parent().water_land(grid_position):
+						water_tank -= 1
+			Tool.HARVEST:
+				get_parent().harvest_land(grid_position, self)
 	pass
 
 func fill_water_tank():
@@ -94,11 +95,16 @@ func _input(event):
 
 
 
-func _on_phone_gui_opened_menu():
+func _on_gui_opened_menu():
 	set_frozen(true)
+	print("freezing")
 	pass # Replace with function body.
 
 
-func _on_phone_gui_closed_menu():
+func _on_gui_closed_menu():
 	set_frozen(false)
+	pass # Replace with function body.
+
+
+func _on_trade_station_gui_opened_menu():
 	pass # Replace with function body.

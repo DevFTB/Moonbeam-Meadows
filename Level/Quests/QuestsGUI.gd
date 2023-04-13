@@ -31,3 +31,5 @@ func set_quests(new_quests):
 func _on_phone_gui_opened_menu():
 	set_quests(quests)
 	pass # Replace with function body.
+
+

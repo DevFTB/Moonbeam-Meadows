@@ -17,12 +17,14 @@ func _on_interact_area_body_entered(body:Node2D):
 	pass # Replace with function body.
 
 func _on_interact_area_body_exited(body:Node2D):
-	if body == interacting_player:
+	if body == interacting_player and trade_station_gui.visible:
 		interacting_player = null
 		trade_station_gui.hide()
 	pass # Replace with function body.
 
 func _input(event):
-	if event.is_action_pressed("interact") and interacting_player != null and not interacting_player.frozen:
-		trade_station_gui.visible = not trade_station_gui.visible
+	if event.is_action_pressed("interact") and interacting_player != null:
+		if not trade_station_gui.get_parent().get_children().filter(func(x): return x != trade_station_gui).any(func(x): return x.visible):
+			trade_station_gui.visible = not trade_station_gui.visible
+			interacting_player.frozen = trade_station_gui.visible
 	pass

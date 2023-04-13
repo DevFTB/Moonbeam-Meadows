@@ -502,8 +502,8 @@ player = NodePath("../Player")
 script = ExtResource("20_wew0j")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
-[connection signal="closed_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_phone_gui_closed_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_phone_gui_opened_menu"]
+[connection signal="closed_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_gui_closed_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_gui_opened_menu"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]

@@ -11,7 +11,8 @@ var sell_gui_scene = preload("res://Level/Trade Station/ts_sell_item_gui.tscn")
 @onready var level = get_node("/root/Level")
 
 var trade_station : Node = null
-
+signal opened_menu
+signal closed_menu
 func _ready():
 	visibility_changed.connect(update_gui)
 	generate_items(buy_seed_parent, buy_gui_scene, level.crops.map(func(c): return c.seed_item))
