@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="QuestResource" load_steps=5 format=3 uid="uid://d115d6u3v35l7"]
+[gd_resource type="Resource" script_class="QuestResource" load_steps=5 format=3 uid="uid://dli3j27ty21mr"]
 
-[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/moon_wheat.tres" id="1_i01ym"]
+[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/crop_moon_wheat.tres" id="1_i01ym"]
 [ext_resource type="Script" path="res://Level/Quests/QuestResource.gd" id="1_s6kp6"]
 [ext_resource type="Script" path="res://Level/Quests/CurrencyQuestReward.gd" id="2_aksav"]
 
