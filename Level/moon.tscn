@@ -297,8 +297,7 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI" node_paths=PackedStringArray("buy_seed_parent", "sell_seed_parent")]
-visible = false
+[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI" node_paths=PackedStringArray("buy_seed_parent", "buy_fertiliser_parent", "buy_robots_parent", "sell_seed_parent")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,6 +310,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_17121")
 buy_seed_parent = NodePath("TabContainer/Buy/Control/ScrollContainer/SeedParent")
+buy_fertiliser_parent = NodePath("TabContainer/Buy/Control4/ScrollContainer/FertiliserParent")
+buy_robots_parent = NodePath("TabContainer/Buy/Control5/ScrollContainer/RobotsParent")
 sell_seed_parent = NodePath("TabContainer/Sell/ScrollContainer/ProduceParent")
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI"]
@@ -361,11 +362,61 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+[node name="Control4" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Fertilisers"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FertiliserParent" type="VBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control5" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Robots"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RobotsParent" type="VBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
