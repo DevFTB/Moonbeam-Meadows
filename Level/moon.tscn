@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdp21melrkaep"]
+[gd_scene load_steps=24 format=3 uid="uid://cdp21melrkaep"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -12,17 +12,23 @@
 [ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
+[ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
+[ext_resource type="Script" path="res://Level/CurrencyGUI.gd" id="12_ed3dq"]
 [ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
 [ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
 [ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="15_wrucv"]
 [ext_resource type="Resource" uid="uid://b6tsrspqx0wkg" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
 [ext_resource type="Resource" uid="uid://d115d6u3v35l7" path="res://Level/Quests/quest_campaign_2.tres" id="17_k2pda"]
+[ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="20_wew0j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4osl"]
 radius = 17.0
 height = 60.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_0t5le"]
 font_size = 48
 
 [node name="Level" type="TileMap"]
@@ -176,6 +182,45 @@ size_flags_vertical = 2
 script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../Player/FertiliserInventory")
 
+[node name="Control" type="Control" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 21.0
+offset_right = -18.0
+offset_bottom = 85.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/PhoneGUI/Inventory/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("11_736ha")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/Control" node_paths=PackedStringArray("currency_manager")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -25.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "100000"
+label_settings = SubResource("LabelSettings_0t5le")
+script = ExtResource("12_ed3dq")
+currency_manager = NodePath("../../../../../../CurrencyManager")
+
 [node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI" node_paths=PackedStringArray("quest_manager")]
 visible = false
 layout_mode = 2
@@ -220,10 +265,13 @@ texture = ExtResource("11_8edbx")
 script = ExtResource("12_fbvmq")
 reference_node = NodePath("../Player")
 
-[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player_inventory")]
+[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("15_wrucv")
 quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("16_oiwbj"), ExtResource("17_k2pda")])
-player_inventory = NodePath("../Player/ProduceInventory")
+player = NodePath("../Player")
+
+[node name="CurrencyManager" type="Node" parent="."]
+script = ExtResource("20_wew0j")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]

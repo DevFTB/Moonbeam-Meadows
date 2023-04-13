@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Player
+
 @export var speed = 125  # speed in pixels/sec
 
 signal tool_changed(new_tool: Tool)

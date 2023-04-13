@@ -1,21 +1,32 @@
 extends Resource 
 class_name QuestResource
 
-@export var quest_id = 0
+@export var quest_id :int
 
-@export var quest_name = "Quest"
+@export var quest_name : String
 
-@export var is_campaign_quest = true
+@export var is_campaign_quest : bool
 
-@export var quest_items : Dictionary = {}
+@export var quest_items : Dictionary 
 
-@export var reward_text = "Rewards are nil."
+@export var reward_text : String
 
-@export var predecessor_quest_ids : Array[int] = []
 
-var rewards: Dictionary = {}
-func can_claim(_level : Level, inv_comp : InventoryComponent):
-	var inventory = inv_comp.inventory	
+@export var rewards : Array[QuestReward]
+
+@export var predecessor_quest_ids : Array[int]
+
+func _init(p_quest_id = 0, p_quest_name = "Quest", p_is_campaign_quest = true, p_quest_items : Dictionary = {}, p_reward_text = "Rewards are nil.", p_rewards : Array[QuestReward] = [], p_predecessor_quest_ids : Array[int] = []):
+	quest_id = p_quest_id
+	quest_name = p_quest_name
+	is_campaign_quest = p_is_campaign_quest
+	quest_items = p_quest_items
+	reward_text = p_reward_text
+	rewards = p_rewards
+	predecessor_quest_ids = p_predecessor_quest_ids
+
+func can_claim(_level : Level, player: Player):
+	var inventory = player.get_node("ProduceInventory").inventory
 	var valid = true
 	for q_item in quest_items:
 		if not inventory.has(q_item) or inventory[q_item] < quest_items[q_item]:
@@ -23,15 +34,23 @@ func can_claim(_level : Level, inv_comp : InventoryComponent):
 	return valid
 # attempts to claim the quest by checking if it can first then removing items from the given inventory.
 # returns whether this was successful.
-func claim_quest(level: Level, inv_comp: InventoryComponent) -> bool:
-	if can_claim(level, inv_comp):
+func claim_quest(level: Level, player: Player) -> bool:
+	var inv_comp = player.get_node("ProduceInventory")
+	if can_claim(level, player):
 		for q_item in quest_items:
 			inv_comp.remove(q_item, quest_items[q_item])
+
 		# give rewards
+		apply_rewards(level, player)
 		
 		return true
 	else:
 		return false
+
+func apply_rewards(level: Level, player: Player):
+	for r in rewards:
+		r.apply_rewards(level, player)
+	pass
 
 # Returns whether all predecessor quests ids are in the given array of quest ids.
 func has_predecessors(quest_ids) -> bool:

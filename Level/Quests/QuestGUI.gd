@@ -1,7 +1,6 @@
 extends Control
 
-var inventory : InventoryComponent
-var level: Level 
+var quest_manager = null
 
 var campaign_quest_colour = Color.GOLD
 var optional_quest_colour = Color.BLUE
@@ -9,12 +8,15 @@ var no_quest_colour = Color.GRAY
 
 var quest = null
 
-var submit_callback = null
-
 func ready():
 	pass
 
+func set_quest_manager(new_quest_manager):
+	quest_manager = new_quest_manager
+
 func set_quest(new_quest: QuestResource):
+	unset_quest()
+	
 	quest = new_quest
 	$VBoxContainer/NameLabel.text = quest.quest_name
 	$VBoxContainer/RequirementsLabel.text = quest.get_requirements_text()
@@ -22,7 +24,7 @@ func set_quest(new_quest: QuestResource):
 
 	$Panel.modulate = campaign_quest_colour if quest.is_campaign_quest else optional_quest_colour
 	$VBoxContainer.visible = true
-	$VBoxContainer/ClaimButton.disabled = !quest.can_claim(level, inventory)
+	$VBoxContainer/ClaimButton.disabled = !quest.can_claim(quest_manager.level, quest_manager.player)
 	pass
 
 
@@ -31,12 +33,11 @@ func unset_quest():
 
 	$VBoxContainer.visible = false
 	$Panel.modulate = no_quest_colour
-	submit_callback = null
+	
+
 	pass
 
 
-func connect_to_claim(callable: Callable):
-	if submit_callback == null:
-		submit_callback = callable
-		$VBoxContainer/ClaimButton.connect("pressed", submit_callback)
+func _on_claim_button_pressed():
+	quest_manager.claim_quest(quest)
 	pass # Replace with function body.

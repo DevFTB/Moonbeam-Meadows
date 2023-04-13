@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="QuestResource" load_steps=3 format=3 uid="uid://d115d6u3v35l7"]
+[gd_resource type="Resource" script_class="QuestResource" load_steps=5 format=3 uid="uid://d115d6u3v35l7"]
 
 [ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/moon_wheat.tres" id="1_i01ym"]
 [ext_resource type="Script" path="res://Level/Quests/QuestResource.gd" id="1_s6kp6"]
+[ext_resource type="Script" path="res://Level/Quests/CurrencyQuestReward.gd" id="2_aksav"]
+
+[sub_resource type="Resource" id="Resource_3v0f6"]
+script = ExtResource("2_aksav")
+currency_reward = 20
 
 [resource]
 script = ExtResource("1_s6kp6")
@@ -12,4 +17,5 @@ quest_items = {
 ExtResource("1_i01ym"): 20
 }
 reward_text = "A greater sense of satisfaction"
+rewards = Array[Resource("res://Level/Quests/QuestReward.gd")]([SubResource("Resource_3v0f6")])
 predecessor_quest_ids = Array[int]([0])

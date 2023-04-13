@@ -48,3 +48,5 @@ text = "Reward:
 layout_mode = 2
 disabled = true
 text = "Submit"
+
+[connection signal="pressed" from="VBoxContainer/ClaimButton" to="." method="_on_claim_button_pressed"]
