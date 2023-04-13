@@ -23,6 +23,6 @@ func _on_interact_area_body_exited(body:Node2D):
 	pass # Replace with function body.
 
 func _input(event):
-	if event.is_action_pressed("interact") and interacting_player != null:
+	if event.is_action_pressed("interact") and interacting_player != null and not interacting_player.frozen:
 		trade_station_gui.visible = not trade_station_gui.visible
 	pass

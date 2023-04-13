@@ -13,15 +13,18 @@ var current_tool = Tool.TILL
 
 var facing = Vector2.DOWN
 
+var frozen = false
+
 @export var max_water_tank = 10
 @onready var water_tank = max_water_tank
 
 func _physics_process(delta):
-	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	facing = direction.normalized()
-	velocity = direction * speed
+	if not frozen:
+		var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		facing = direction.normalized()
+		velocity = direction * speed
 
-	move_and_slide()
+		move_and_slide()
 
 func switch_tool(tool : Tool):
 	if current_tool != tool:
@@ -67,10 +70,12 @@ func get_inventory(item_type: ItemType):
 
 	return null
 	
+func set_frozen(should_freeze):
+	self.frozen = should_freeze 
 
 func _input(event):
 
-	if event is InputEventKey:
+	if event is InputEventKey and not frozen:
 		if event.is_action_pressed("select_tool1"):
 			switch_tool(Tool.TILL)
 			pass
@@ -87,3 +92,13 @@ func _input(event):
 			switch_tool(Tool.HARVEST)
 			pass
 
+
+
+func _on_phone_gui_opened_menu():
+	set_frozen(true)
+	pass # Replace with function body.
+
+
+func _on_phone_gui_closed_menu():
+	set_frozen(false)
+	pass # Replace with function body.

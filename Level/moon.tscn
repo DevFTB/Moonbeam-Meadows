@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dqssy8nb5t4do"]
+[gd_scene load_steps=32 format=3 uid="uid://dqssy8nb5t4do"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_iadx0"]
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
 [ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
+[ext_resource type="Script" path="res://Level/GUIManager.gd" id="10_yck4d"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
@@ -33,17 +34,17 @@ radius = 88.8144
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0saux"]
 size = Vector2(20, 14)
 
-[sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_0t5le"]
-font_size = 48
-
 [sub_resource type="LabelSettings" id="LabelSettings_5p3lh"]
 font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_5ggu6"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_0t5le"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
+font_size = 48
 
 [node name="Level" type="TileMap"]
 y_sort_enabled = true
@@ -60,7 +61,7 @@ fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([E
 [node name="Trade Station" type="Node2D" parent="." node_paths=PackedStringArray("trade_station_gui")]
 position = Vector2(320, 256)
 script = ExtResource("5_0upu3")
-trade_station_gui = NodePath("../CanvasLayer/GUI/TradeStationGUI")
+trade_station_gui = NodePath("../CanvasLayer/GUI/Control/TradeStationGUI")
 
 [node name="Sprite2D" type="Sprite2D" parent="Trade Station"]
 texture = ExtResource("21_6af3s")
@@ -114,6 +115,8 @@ offset_right = -1.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("10_yck4d")
+exclusive_gui_screens = Array[Control]([null, null])
 
 [node name="ToolGUI" type="VBoxContainer" parent="CanvasLayer/GUI"]
 layout_mode = 1
@@ -137,89 +140,157 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Tiller"
 
-[node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 99.0
-offset_top = -255.0
-offset_right = -102.0
-offset_bottom = 264.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_kceb6")
-
-[node name="Inventory" type="Control" parent="CanvasLayer/GUI/PhoneGUI"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
-layout_mode = 1
-offset_left = 55.0
-offset_top = 14.0
-offset_right = 279.0
-offset_bottom = 84.0
-text = "Inventory"
-label_settings = SubResource("LabelSettings_qaotf")
-
-[node name="InventorySections" type="HBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
+[node name="Control" type="Control" parent="CanvasLayer/GUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 61.0
-offset_top = 103.0
-offset_right = -55.0
-offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
+[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI/Control" node_paths=PackedStringArray("buy_seed_parent", "buy_fertiliser_parent", "buy_robots_parent", "sell_seed_parent")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 49.0
+offset_right = -56.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_17121")
+buy_seed_parent = NodePath("TabContainer/Buy/Control/ScrollContainer/SeedParent")
+buy_fertiliser_parent = NodePath("TabContainer/Buy/Control4/ScrollContainer/FertiliserParent")
+buy_robots_parent = NodePath("TabContainer/Buy/Control5/ScrollContainer/RobotsParent")
+sell_seed_parent = NodePath("TabContainer/Sell/ScrollContainer/ProduceParent")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/TradeStationGUI"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 16.0
+offset_right = 329.0
+offset_bottom = 86.0
+text = "Trade Station"
+label_settings = SubResource("LabelSettings_5p3lh")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 106.0
+offset_right = 983.0
+offset_bottom = 529.0
+
+[node name="Buy" type="HBoxContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer"]
-layout_mode = 2
-text = "Seeds
-"
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Seeds"
+label_settings = SubResource("LabelSettings_5ggu6")
 
-[node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../Player/SeedInventory")
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2"]
-layout_mode = 2
-text = "Produce"
-
-[node name="Label2" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../Player/ProduceInventory")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections"]
+[node name="SeedParent" type="VBoxContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3"]
+[node name="Control4" type="Control" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy"]
 layout_mode = 2
-text = "Fertiliser"
+size_flags_horizontal = 3
 
-[node name="Label3" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3" node_paths=PackedStringArray("inventory")]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Fertilisers"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FertiliserParent" type="VBoxContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control4/ScrollContainer"]
 layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../Player/FertiliserInventory")
+size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="CanvasLayer/GUI/PhoneGUI/Inventory"]
+[node name="Control5" type="Control" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control5"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Robots"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RobotsParent" type="VBoxContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Buy/Control5/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sell" type="Control" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Sell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProduceParent" type="GridContainer" parent="CanvasLayer/GUI/Control/TradeStationGUI/TabContainer/Sell/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/Control/TradeStationGUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -230,7 +301,7 @@ offset_right = -18.0
 offset_bottom = 85.0
 grow_horizontal = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/PhoneGUI/Inventory/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/Control/TradeStationGUI/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -241,7 +312,7 @@ offset_bottom = 20.0
 grow_vertical = 2
 texture = ExtResource("11_736ha")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Inventory/Control" node_paths=PackedStringArray("currency_manager")]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/TradeStationGUI/Control" node_paths=PackedStringArray("currency_manager")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -258,188 +329,88 @@ label_settings = SubResource("LabelSettings_0t5le")
 script = ExtResource("12_ed3dq")
 currency_manager = NodePath("../../../../../../CurrencyManager")
 
-[node name="Quests" type="Control" parent="CanvasLayer/GUI/PhoneGUI" node_paths=PackedStringArray("quest_manager")]
+[node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/Control"]
 visible = false
-layout_mode = 2
-script = ExtResource("11_725wh")
-quest_manager = NodePath("../../../../QuestManager")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 47.0
+offset_right = -57.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_kceb6")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/PhoneGUI/Quests"]
-layout_mode = 0
+[node name="Inventory" type="Control" parent="CanvasLayer/GUI/Control/PhoneGUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory"]
+layout_mode = 1
 offset_left = 55.0
 offset_top = 14.0
 offset_right = 279.0
 offset_bottom = 84.0
-text = "Quests"
+text = "Inventory"
 label_settings = SubResource("LabelSettings_qaotf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/PhoneGUI/Quests"]
+[node name="InventorySections" type="HBoxContainer" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 58.0
-offset_top = 102.0
-offset_right = -43.0
-offset_bottom = -30.0
+offset_left = 61.0
+offset_top = 103.0
+offset_right = -55.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuestDisplay1" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
-layout_mode = 2
-
-[node name="QuestDisplay2" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
-layout_mode = 2
-
-[node name="QuestDisplay3" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
-layout_mode = 2
-
-[node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
-layout_mode = 2
-
-[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI" node_paths=PackedStringArray("buy_seed_parent", "buy_fertiliser_parent", "buy_robots_parent", "sell_seed_parent")]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 58.0
-offset_top = 46.0
-offset_right = -72.0
-offset_bottom = -42.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("17_17121")
-buy_seed_parent = NodePath("TabContainer/Buy/Control/ScrollContainer/SeedParent")
-buy_fertiliser_parent = NodePath("TabContainer/Buy/Control4/ScrollContainer/FertiliserParent")
-buy_robots_parent = NodePath("TabContainer/Buy/Control5/ScrollContainer/RobotsParent")
-sell_seed_parent = NodePath("TabContainer/Sell/ScrollContainer/ProduceParent")
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 16.0
-offset_right = 329.0
-offset_bottom = 86.0
-text = "Trade Station"
-label_settings = SubResource("LabelSettings_5p3lh")
-
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer/GUI/TradeStationGUI"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 106.0
-offset_right = 983.0
-offset_bottom = 529.0
-
-[node name="Buy" type="HBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 8.0
-offset_right = 54.0
-offset_bottom = 34.0
-text = "Seeds"
-label_settings = SubResource("LabelSettings_5ggu6")
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer"]
+layout_mode = 2
+text = "Seeds
+"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = 57.0
-offset_right = -12.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label2" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("10_u7prv")
+inventory = NodePath("../../../../../../../../Player/SeedInventory")
 
-[node name="SeedParent" type="VBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control/ScrollContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control4" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer2"]
+layout_mode = 2
+text = "Produce"
+
+[node name="Label2" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer2" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("10_u7prv")
+inventory = NodePath("../../../../../../../../Player/ProduceInventory")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 8.0
-offset_right = 54.0
-offset_bottom = 34.0
-text = "Fertilisers"
-label_settings = SubResource("LabelSettings_5ggu6")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = 57.0
-offset_right = -12.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FertiliserParent" type="VBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control4/ScrollContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer3"]
 layout_mode = 2
-size_flags_horizontal = 3
+text = "Fertiliser"
 
-[node name="Control5" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
+[node name="Label3" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer3" node_paths=PackedStringArray("inventory")]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 2
+script = ExtResource("10_u7prv")
+inventory = NodePath("../../../../../../../../Player/FertiliserInventory")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 8.0
-offset_right = 54.0
-offset_bottom = 34.0
-text = "Robots"
-label_settings = SubResource("LabelSettings_5ggu6")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = 57.0
-offset_right = -12.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RobotsParent" type="VBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy/Control5/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Sell" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Sell"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ProduceParent" type="GridContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Sell/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
-
-[node name="Control" type="Control" parent="CanvasLayer/GUI/TradeStationGUI"]
+[node name="Control" type="Control" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -450,7 +421,7 @@ offset_right = -18.0
 offset_bottom = 85.0
 grow_horizontal = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/TradeStationGUI/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -461,7 +432,7 @@ offset_bottom = 20.0
 grow_vertical = 2
 texture = ExtResource("11_736ha")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI/Control" node_paths=PackedStringArray("currency_manager")]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Inventory/Control" node_paths=PackedStringArray("currency_manager")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -476,7 +447,46 @@ grow_vertical = 2
 text = "100000"
 label_settings = SubResource("LabelSettings_0t5le")
 script = ExtResource("12_ed3dq")
-currency_manager = NodePath("../../../../../CurrencyManager")
+currency_manager = NodePath("../../../../../../../CurrencyManager")
+
+[node name="Quests" type="Control" parent="CanvasLayer/GUI/Control/PhoneGUI" node_paths=PackedStringArray("quest_manager")]
+visible = false
+layout_mode = 2
+script = ExtResource("11_725wh")
+quest_manager = NodePath("../../../../../QuestManager")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 14.0
+offset_right = 279.0
+offset_bottom = 84.0
+text = "Quests"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 58.0
+offset_top = 102.0
+offset_right = -43.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+layout_mode = 2
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
 texture = ExtResource("11_8edbx")
@@ -492,7 +502,9 @@ player = NodePath("../Player")
 script = ExtResource("20_wew0j")
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/PhoneGUI" to="CanvasLayer/GUI/PhoneGUI/Quests" method="_on_phone_gui_opened_menu"]
+[connection signal="closed_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_phone_gui_closed_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]
+[connection signal="opened_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="CanvasLayer/GUI/Control/PhoneGUI/Quests" method="_on_phone_gui_opened_menu"]
