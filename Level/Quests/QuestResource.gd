@@ -11,7 +11,6 @@ class_name QuestResource
 
 @export var reward_text : String
 
-
 @export var rewards : Array[QuestReward]
 
 @export var predecessor_quest_ids : Array[int]
@@ -67,6 +66,9 @@ func get_requirements_text():
 	return req_test
 
 func get_reward_text():
+	var reward_text = "Rewards: \n"
+	for r in rewards:
+		reward_text += r.get_reward_text() + "\n"
 	return reward_text
 
 func get_display_name():
