@@ -297,7 +297,7 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI" node_paths=PackedStringArray("buy_seed_parent")]
+[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI" node_paths=PackedStringArray("buy_seed_parent", "sell_seed_parent")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -311,6 +311,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_17121")
 buy_seed_parent = NodePath("TabContainer/Buy/Control/ScrollContainer/SeedParent")
+sell_seed_parent = NodePath("TabContainer/Sell/ScrollContainer/ProduceParent")
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/TradeStationGUI"]
 layout_mode = 0
@@ -329,6 +330,7 @@ offset_right = 983.0
 offset_bottom = 529.0
 
 [node name="Buy" type="HBoxContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Buy"]
@@ -369,8 +371,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Sell" type="Control" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Sell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProduceParent" type="GridContainer" parent="CanvasLayer/GUI/TradeStationGUI/TabContainer/Sell/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/TradeStationGUI"]
 layout_mode = 1

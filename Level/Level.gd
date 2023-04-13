@@ -10,6 +10,7 @@ var crop_map = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player/SeedInventory.add(crops[0], 5)
+	$Player/ProduceInventory.add(crops[0],5)
 	$Player/FertiliserInventory.add(fertilisers[0], 5)
 	pass # Replace with function body.
 

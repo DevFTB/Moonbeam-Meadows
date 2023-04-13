@@ -21,6 +21,11 @@ func buy(player:Player, crop: CropResource, amount: int):
 		return true
 	else:
 		return false
+		
+func sell_crop(player: Player, crop: CropResource, amount: int):
+	if player.get_node("ProduceInventory").remove(crop, amount):
+		add_currency(crop.produce_cost * amount)
+	pass
 
 
 func spend_currency(amount):
