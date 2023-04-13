@@ -7,6 +7,8 @@ var crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 @export var fertilisers : Array[FertiliserResource] = []
 var crop_map = {}
 
+@export var base_temp = 20
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player/SeedInventory.add(crops[0].seed_item, 5)
@@ -42,12 +44,16 @@ func till_land(grid_position : Vector2i):
 		var crop_entity  = crop_entity_scene.instantiate()
 		
 		crop_entity.position = map_to_local(grid_position)
+		crop_entity.grid_position = grid_position
 		
 		$Entities.add_child(crop_entity)
 		
 		crop_map[grid_position] = crop_entity
 		set_cell(0, grid_position, 0, Vector2i(0, 0))
 	pass
+
+func get_temp(grid_position : Vector2i):
+	return base_temp
 	
 func water_land(grid_position: Vector2i):
 	if crop_map.has(grid_position):
