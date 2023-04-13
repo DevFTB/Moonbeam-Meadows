@@ -20,6 +20,3 @@ func _init(p_crop_name = "Crop", p_amount_of_stages = 3, p_stage_textures : Arra
 	stage_textures = p_stage_textures
 	rate_of_growth = p_rate_of_growth
 	dehydration_rate = p_dehydration_rate
-
-func get_display_name():
-	return crop_name

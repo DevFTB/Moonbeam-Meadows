@@ -33,9 +33,7 @@ func update_gui():
 func set_trade_station(new_trade_station: Node):
 	trade_station = new_trade_station
 
-	for child in buy_seed_parent.get_children():
-		child.set_trade_station(new_trade_station)
-
-	for child in sell_seed_parent.get_children():
-		child.set_trade_station(new_trade_station)
+	for parent in [buy_seed_parent, buy_fertiliser_parent, buy_robots_parent, sell_seed_parent]:
+		for child in parent.get_children():
+			child.set_trade_station(trade_station)
 	pass
