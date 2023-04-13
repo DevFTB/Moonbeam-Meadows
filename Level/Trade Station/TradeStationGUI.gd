@@ -12,14 +12,15 @@ var trade_station : Node = null
 
 func _ready():
 	visibility_changed.connect(update_gui)
-	for crop in level.crops:
+	for seed_item in level.crops.map(func(c): return c.seed_item):
 		var buy_item_gui = crop_buy_gui_scene.instantiate()
 		buy_seed_parent.add_child(buy_item_gui)
-		buy_item_gui.set_crop(crop)
-
+		buy_item_gui.set_item(seed_item)
+	
+	for produce_item in level.crops.map(func(c): return c.produce_item):
 		var sell_item_gui = crop_sell_gui_scene.instantiate()
 		sell_seed_parent.add_child(sell_item_gui)
-		sell_item_gui.set_crop(crop)
+		sell_item_gui.set_item(produce_item)
 
 func update_gui():
 	for child in buy_seed_parent.get_children():

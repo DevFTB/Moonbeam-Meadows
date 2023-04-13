@@ -13,18 +13,17 @@ func _ready():
 
 func get_currency():
 	return currency
-
-func buy(player:Player, crop: CropResource, amount: int):
-	if spend_currency(crop.seed_cost * amount):
-		print("spent %d currency" % (crop.seed_cost * amount))
-		player.get_node("SeedInventory").add(crop, amount)
+func buy(player:Player, item: Variant, amount: int):
+	if spend_currency(item.get_buy_price() * amount):
+		print("spent %d currency" % (item.get_buy_price() * amount))
+		player.get_inventory(item.get_type()).add(item, amount)
 		return true
 	else:
 		return false
 		
-func sell_crop(player: Player, crop: CropResource, amount: int):
-	if player.get_node("ProduceInventory").remove(crop, amount):
-		add_currency(crop.produce_cost * amount)
+func sell(player: Player, item: Variant, amount: int):
+	if player.get_inventory(item.get_type()).remove(item, amount):
+		add_currency(item.get_sell_price() * amount)
 	pass
 
 

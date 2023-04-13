@@ -1,20 +1,19 @@
 extends Node
 class_name InventoryComponent
 
-# items don't get used up
-@export var cheat_mode = true
-
 @export var inventory_size = 5
 
 # -1 means infinite stack size.
 @export var stack_size = -1
 
+# items don't get used up
+@export var cheat_mode = true
 signal inventory_modified
 
 var inventory = {}
 var selected = null
+
 func add(item: Variant, amount : int):
-	
 	if inventory.has(item):
 		inventory[item] += amount
 	else:

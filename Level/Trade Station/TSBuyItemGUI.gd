@@ -1,6 +1,6 @@
 extends Control
 
-@export var crop : CropResource = null
+@export var item : InventoryItem = null
 @export var player_inventory : Node 
 @export var multibuy_delay = 0.7
 @export var multibuy_rate = 10.0
@@ -30,11 +30,11 @@ func _process(delta):
 			pass
 	pass
 
-func set_crop(crop: CropResource):
-	self.crop = crop
-	$IconTextureRect.texture = crop.seed_texture
-	$NameLabel.text = crop.crop_name
-	$VBoxContainer/HBoxContainer/CostLabel.text = str(crop.seed_cost)
+func set_item(new_item:InventoryItem): 
+	item = new_item
+	$IconTextureRect.texture = item.item_icon
+	$NameLabel.text = item.item_name
+	$VBoxContainer/HBoxContainer/CostLabel.text = str(item.buy_price)
 
 func start_multibuy():
 	print("start multibuy")
@@ -42,12 +42,12 @@ func start_multibuy():
 	if pressed:
 		multibuy = true
 		multibuy_timer = 0
-		max_amount = floor(currency_manager.get_currency() / crop.seed_cost)
+		max_amount = floor(currency_manager.get_currency() / item.buy_price)
 	pass
 
 func _on_buy_button_pressed():
 	if not multibuy:
-		currency_manager.buy(trade_station.get_interacting_player(), crop, 1)	
+		currency_manager.buy(trade_station.get_interacting_player(), item, 1)	
 	pass # Replace with function body.
 
 
@@ -61,14 +61,14 @@ func _on_buy_button_button_up():
 	pressed = false
 	if multibuy:
 		print("multibuy %d" % multibuy_amount)
-		currency_manager.buy(trade_station.get_interacting_player(), crop, multibuy_amount)	
+		currency_manager.buy(trade_station.get_interacting_player(), item, multibuy_amount)	
 		multibuy = false
 		$VBoxContainer/BuyButton.text = "Buy 1"
 		
 	pass # Replace with function body.
 
 func update_gui():
-	$VBoxContainer/BuyButton.disabled = currency_manager.get_currency() < crop.seed_cost	
+	$VBoxContainer/BuyButton.disabled = currency_manager.get_currency() < item.buy_price	
 	pass
 
 func set_trade_station(new_trade_station: Node):

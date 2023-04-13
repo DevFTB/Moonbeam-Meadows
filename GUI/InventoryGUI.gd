@@ -11,7 +11,7 @@ func _ready():
 func update_text():
 	var new_text = ""
 	for item in inventory.inventory.keys():
-		new_text += "%dx %s \n" % [inventory.inventory[item], item.get_display_name()]
+		new_text += "%dx %s \n" % [inventory.inventory[item], item.item_name]
 
 	text = new_text
 	

@@ -61,7 +61,7 @@ func has_predecessors(quest_ids) -> bool:
 func get_requirements_text():
 	var req_test = "Requirements: \n"
 	for item in quest_items.keys():
-		req_test += "%dx %s" % [quest_items[item], item.get_display_name()]
+		req_test += "%dx %s" % [quest_items[item], item.item_name]
 	print("sdf " + req_test)
 	return req_test
 

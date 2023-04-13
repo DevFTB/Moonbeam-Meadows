@@ -1,6 +1,8 @@
 extends Control
+const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
 
-@export var crop : CropResource = null
+@export var item : InventoryItem = null
+@export var item_type: ItemType = ItemType.PRODUCE
 @export var multisell_delay = 0.7
 @export var multisell_rate = 10.0
 
@@ -29,11 +31,11 @@ func _process(delta):
 			pass
 	pass
 
-func set_crop(crop: CropResource):
-	self.crop = crop
-	$IconTextureRect.texture = crop.produce_texture
-	$NameLabel.text = crop.crop_name
-	$VBoxContainer/HBoxContainer/CostLabel.text = str(crop.produce_cost)
+func set_item(new_item: InventoryItem):
+	self.item = new_item
+	$IconTextureRect.texture = item.item_icon
+	$NameLabel.text = item.item_name
+	$VBoxContainer/HBoxContainer/CostLabel.text = str(item.sell_price)
 
 func start_multisell():
 	print("start multisell")
@@ -41,12 +43,12 @@ func start_multisell():
 	if pressed:
 		multisell = true
 		multisell_timer = 0
-		max_amount = player_inventory.get_amount(crop)
+		max_amount = player_inventory.get_amount(item)
 	pass
 
 func _on_sell_button_pressed():
 	if not multisell:
-		currency_manager.sell_crop(trade_station.get_interacting_player(), crop, 1)	
+		currency_manager.sell(trade_station.get_interacting_player(), item, 1)	
 	pass # Replace with function body.
 
 
@@ -60,21 +62,21 @@ func _on_sell_button_button_up():
 	pressed = false
 	if multisell:
 		print("multisell %d" % multisell_amount)
-		currency_manager.sell_crop(trade_station.get_interacting_player(), crop, multisell_amount)	
+		currency_manager.sell(trade_station.get_interacting_player(), item ,multisell_amount)	
 		multisell = false
 		$VBoxContainer/SellButton.text = "Sell 1"
 		
 	pass # Replace with function body.
 
 func update_gui():
-	$VBoxContainer/SellButton.disabled = player_inventory.get_amount(crop) == 0
+	$VBoxContainer/SellButton.disabled = player_inventory.get_amount(item) == 0
 	pass
 
 func set_trade_station(new_trade_station: Node):
 	trade_station = new_trade_station
 	var interacting_player = trade_station.get_interacting_player()
 	if interacting_player != null:
-		player_inventory = interacting_player.get_node("ProduceInventory")	
+		player_inventory = interacting_player.get_inventory(item_type)
 		if not player_inventory.inventory_modified.is_connected(update_gui):
 			player_inventory.inventory_modified.connect(update_gui)
 	update_gui()

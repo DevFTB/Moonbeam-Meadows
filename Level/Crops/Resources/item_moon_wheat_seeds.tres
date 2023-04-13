@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://cjkxor4b8jp5h"]
+
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="1_17ldb"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="2_12306"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq7in"]
+atlas = ExtResource("1_17ldb")
+region = Rect2(192, 32, 32, 32)
+
+[resource]
+script = ExtResource("2_12306")
+item_name = "Moon Wheat Seeds"
+item_icon = SubResource("AtlasTexture_tq7in")
+item_type = 0
+buy_price = 5
+sell_price = 0

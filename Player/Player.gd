@@ -49,11 +49,24 @@ func use_tool(grid_position):
 				if get_parent().water_land(grid_position):
 					water_tank -= 1
 		Tool.HARVEST:
-			get_parent().harvest_land(grid_position, $ProduceInventory)
+			get_parent().harvest_land(grid_position, self)
 	pass
 
 func fill_water_tank():
 	water_tank = max_water_tank
+
+const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
+func get_inventory(item_type: ItemType):
+	match(item_type):
+		ItemType.SEED:
+			return $SeedInventory
+		ItemType.FERTILISER:
+			return $FertiliserInventory
+		ItemType.PRODUCE:
+			return $ProduceInventory
+
+	return null
+	
 
 func _input(event):
 
