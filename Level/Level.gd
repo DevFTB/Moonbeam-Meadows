@@ -7,6 +7,8 @@ var crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 @export var fertilisers : Array[FertiliserResource] = []
 var crop_map = {}
 
+@export var temp = 20
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player/SeedInventory.add(crops[0].seed_item, 5)
