@@ -62,7 +62,7 @@ func harvest_land(grid_position: Vector2i, entity: Node2D):
 		var crop_entity = crop_map[grid_position]
 		
 		if crop_entity.is_fully_grown():
-			entity.get_inventory(ItemType.PRODUCE).add(crop_entity.crop, 1)
+			entity.get_inventory(ItemType.PRODUCE).add(crop_entity.crop.produce_item, 1)
 			crop_entity.harvest()
 	pass
 
