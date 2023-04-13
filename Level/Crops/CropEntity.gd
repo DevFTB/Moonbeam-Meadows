@@ -7,6 +7,7 @@ var current_stage = 0
 var growth_prop = 0
 var water_level = 1.0
 var grid_position = Vector2i(0, 0)
+var fertilisation_factor = 1
 
 @onready var level = get_node("/root/Level")
 
@@ -23,7 +24,7 @@ func _process(delta):
 		
 		if growth_prop < 1 and water_level > 0:
 			var rate_of_growth = 1.0 / (crop.growth_time * 60)
-			var growth_amnt = rate_of_growth * delta * get_temp_mod(level.get_temp(grid_position))
+			var growth_amnt = rate_of_growth * delta * get_temp_mod(level.get_temp(grid_position)) * fertilisation_factor
 			growth_prop = min(1, growth_prop + growth_amnt)
 			$GrowthLabel.text = "%.0f" % (growth_prop * 100)
 			
