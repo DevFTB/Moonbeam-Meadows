@@ -9,14 +9,16 @@ var crop_map = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Player/SeedInventory.add(crops[0], 5)
-	$Player/FertiliserInventory.add(fertilisers[0], 5)
+	$Player/SeedInventory.add(crops[0].seed_item, 5)
+	$Player/ProduceInventory.add(crops[0].produce_item,5)
+	$Player/FertiliserInventory.add(fertilisers[0].fertiliser_item, 5)
 	pass # Replace with function body.
 
 func get_entity_at_grid(grid_position : Vector2i):
 	return crop_map.get(grid_position)
 
-func plant_land(grid_position : Vector2i, crop: CropResource):
+func plant_land(grid_position : Vector2i, item: InventoryItem):
+	var crop = lookup_crop(item)
 	if crop_map.has(grid_position):
 		var crop_entity = crop_map[grid_position]
 		if crop_entity.crop == null:
@@ -25,7 +27,8 @@ func plant_land(grid_position : Vector2i, crop: CropResource):
 
 	return false
 	
-func fertilise_land(grid_position : Vector2i, fertiliser : FertiliserResource):
+func fertilise_land(grid_position : Vector2i, item: InventoryItem):
+	var fertiliser = lookup_fertiliser(item)
 	if crop_map.has(grid_position):
 		crop_map[grid_position].fertilise(fertiliser)
 		set_cell(0, grid_position, 0, Vector2i(0, 1))
@@ -52,12 +55,25 @@ func water_land(grid_position: Vector2i):
 		return true
 	else:
 		return false
-		
-func harvest_land(grid_position: Vector2i, inventory):
+
+const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType	
+func harvest_land(grid_position: Vector2i, entity: Node2D):
 	if crop_map.has(grid_position):
 		var crop_entity = crop_map[grid_position]
 		
 		if crop_entity.is_fully_grown():
-			inventory.add(crop_entity.crop, 1)
+			entity.get_inventory(ItemType.PRODUCE).add(crop_entity.crop.produce_item, 1)
 			crop_entity.harvest()
 	pass
+
+func lookup_crop(item: InventoryItem):
+	for crop in crops:
+		if crop.seed_item == item or crop.produce_item == item:
+			return crop
+	return null
+
+func lookup_fertiliser(item: InventoryItem):
+	for fertiliser in fertilisers:
+		if fertiliser.fertiliser_item == item:
+			return fertiliser
+	return null

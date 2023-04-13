@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FertiliserResource" load_steps=5 format=3 uid="uid://d4eq6g7albnb4"]
+
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="1_2u45p"]
+[ext_resource type="Script" path="res://Level/Fertiliser/FertiliserResource.gd" id="1_qampo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iadkx"]
+
+[sub_resource type="Resource" id="Resource_33686"]
+script = ExtResource("1_2u45p")
+item_name = "Lunar Sprinkles"
+item_icon = SubResource("AtlasTexture_iadkx")
+item_type = 2
+buy_price = 8
+sell_price = 0
+
+[resource]
+script = ExtResource("1_qampo")
+fertiliser_name = "Lunar Sprinkles"
+growth_multiplier = 2
+fertiliser_item = SubResource("Resource_33686")
