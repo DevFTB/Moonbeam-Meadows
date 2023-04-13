@@ -34,7 +34,7 @@ func can_claim(_level : Level, player: Player):
 # attempts to claim the quest by checking if it can first then removing items from the given inventory.
 # returns whether this was successful.
 func claim_quest(level: Level, player: Player) -> bool:
-	var inv_comp = player.get_node("ProduceInventory")
+	var inv_comp = player.get_inventory(preload("res://Inventory/InventoryItem.gd").ItemType.PRODUCE)
 	if can_claim(level, player):
 		for q_item in quest_items:
 			inv_comp.remove(q_item, quest_items[q_item])
