@@ -23,9 +23,11 @@ func _on_active_quests_updated(new_quests):
 
 func set_quests(new_quests):
 	quests = new_quests
-	if quests.size() > 0:
-		for i in range(quests.size()):
-			quest_boxes[i].set_quest(quests[i])
+	for qb in quest_boxes:
+		qb.unset_quest()
+		
+	for i in range(quests.size()):
+		quest_boxes[i].set_quest(quests[i])
 	pass
 
 func _on_phone_gui_opened_menu():
