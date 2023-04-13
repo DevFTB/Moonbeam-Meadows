@@ -19,6 +19,7 @@ func spend_currency(amount):
 	else:
 		return false
 
-func gain_currency(amount):
+func add_currency(amount):
 	currency += amount
+	currency_changed.emit(currency)
 	pass

@@ -265,10 +265,10 @@ texture = ExtResource("11_8edbx")
 script = ExtResource("12_fbvmq")
 reference_node = NodePath("../Player")
 
-[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player_inventory")]
+[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("15_wrucv")
 quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("16_oiwbj"), ExtResource("17_k2pda")])
-player_inventory = NodePath("../Player/ProduceInventory")
+player = NodePath("../Player")
 
 [node name="CurrencyManager" type="Node" parent="."]
 script = ExtResource("20_wew0j")

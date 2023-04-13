@@ -12,3 +12,4 @@ func _input(event):
 		visible = !visible
 		if visible == true:
 			opened_menu.emit()
+			

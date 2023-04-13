@@ -7,7 +7,7 @@ func _ready():
 	currency_manager.currency_changed.connect(update_currency)
 	pass # Replace with function body.
 
-func update_currency(new_value):
+func update_currency(new_value: int):
 	text = str(new_value)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

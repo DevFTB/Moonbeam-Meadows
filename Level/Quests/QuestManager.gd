@@ -2,8 +2,8 @@ extends Node
 
 @export var quests : Array[QuestResource] = []
 
-@export var player_inventory : InventoryComponent
-var level = get_parent()
+@export var player: Player 
+@onready var level = get_parent()
 
 signal active_quests_updated(quests)
 
@@ -19,13 +19,16 @@ func _ready():
 	pass # Replace with function body.
 
 func claim_quest(quest: QuestResource): 
-	if quest.claim_quest(level, player_inventory):
+	if quest.claim_quest(level, player):
 		completed_quests.append(quest)
 		active_quests.erase(quest)
+
+		# Check if there are any new quests to activate
 		if quest.is_campaign_quest:
 			for cq in get_candidate_quests(true):
 				activate_quest(cq)
-
+		
+		active_quests_updated.emit(active_quests)
 	else:
 		print("Quest %s not completed" % quest.quest_id)
 	pass
