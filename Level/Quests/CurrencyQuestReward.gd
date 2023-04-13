@@ -13,4 +13,3 @@ func apply_rewards(level: Level, _player: Player):
 
 func get_reward_text():
 	return "%dx Unicoins" % currency_reward
-	pass
