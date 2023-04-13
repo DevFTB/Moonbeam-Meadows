@@ -95,12 +95,15 @@ sprite_frames = ExtResource("2_373r8")
 
 [node name="SeedInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+cheat_mode = false
 
 [node name="ProduceInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+cheat_mode = false
 
 [node name="FertiliserInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+cheat_mode = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
