@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CropResource" load_steps=8 format=3 uid="uid://cnm02ycr4lvmh"]
+
+[ext_resource type="Resource" uid="uid://dki8bjg8m7jsc" path="res://Level/Crops/Resources/item_nebula_berry_produce.tres" id="1_sgm66"]
+[ext_resource type="Script" path="res://Level/Crops/CropResource.gd" id="2_7ij5d"]
+[ext_resource type="Resource" uid="uid://cvo07a6en0igs" path="res://Level/Crops/Resources/item_nebula_berry_seeds.tres" id="3_aibl4"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="4_x6xfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3e4s"]
+atlas = ExtResource("4_x6xfb")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8v1"]
+atlas = ExtResource("4_x6xfb")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rlhg"]
+atlas = ExtResource("4_x6xfb")
+region = Rect2(64, 0, 32, 64)
+
+[resource]
+script = ExtResource("2_7ij5d")
+crop_name = "Nebula Berry"
+seed_item = ExtResource("3_aibl4")
+produce_item = ExtResource("1_sgm66")
+amount_of_stages = 3
+stage_textures = Array[Texture2D]([SubResource("AtlasTexture_h3e4s"), SubResource("AtlasTexture_5y8v1"), SubResource("AtlasTexture_5rlhg")])
+growth_time = 12.5
+dehydration_rate = 0.06
+optimal_temperature = -15.0
+max_temp_modifier = 1.5
+heat_sensitivity = 9.0

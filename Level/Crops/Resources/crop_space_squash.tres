@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CropResource" load_steps=8 format=3 uid="uid://dman554bg3qsy"]
+
+[ext_resource type="Resource" uid="uid://bj7313yfe2a2q" path="res://Level/Crops/Resources/item_space_squash_produce.tres" id="1_otnfo"]
+[ext_resource type="Script" path="res://Level/Crops/CropResource.gd" id="2_1l3l1"]
+[ext_resource type="Resource" uid="uid://bxmpgj0r6mhkp" path="res://Level/Crops/Resources/item_space_squash_seeds.tres" id="3_ricvw"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="4_xrcjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3e4s"]
+atlas = ExtResource("4_xrcjv")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8v1"]
+atlas = ExtResource("4_xrcjv")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rlhg"]
+atlas = ExtResource("4_xrcjv")
+region = Rect2(64, 0, 32, 64)
+
+[resource]
+script = ExtResource("2_1l3l1")
+crop_name = "Space Squash"
+seed_item = ExtResource("3_ricvw")
+produce_item = ExtResource("1_otnfo")
+amount_of_stages = 3
+stage_textures = Array[Texture2D]([SubResource("AtlasTexture_h3e4s"), SubResource("AtlasTexture_5y8v1"), SubResource("AtlasTexture_5rlhg")])
+growth_time = 5.0
+dehydration_rate = 0.03
+optimal_temperature = 15.0
+max_temp_modifier = 3.0
+heat_sensitivity = 15.0

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CropResource" load_steps=8 format=3 uid="uid://d3oxw6ij0d1bw"]
+
+[ext_resource type="Resource" uid="uid://dhs57j1asnwfj" path="res://Level/Crops/Resources/item_marshroom_produce.tres" id="1_vr80k"]
+[ext_resource type="Script" path="res://Level/Crops/CropResource.gd" id="2_82orw"]
+[ext_resource type="Resource" uid="uid://by7sfry613hye" path="res://Level/Crops/Resources/item_marshroom_seeds.tres" id="3_5n7i1"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="4_ag171"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3e4s"]
+atlas = ExtResource("4_ag171")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8v1"]
+atlas = ExtResource("4_ag171")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rlhg"]
+atlas = ExtResource("4_ag171")
+region = Rect2(64, 0, 32, 64)
+
+[resource]
+script = ExtResource("2_82orw")
+crop_name = "Marshroom"
+seed_item = ExtResource("3_5n7i1")
+produce_item = ExtResource("1_vr80k")
+amount_of_stages = 3
+stage_textures = Array[Texture2D]([SubResource("AtlasTexture_h3e4s"), SubResource("AtlasTexture_5y8v1"), SubResource("AtlasTexture_5rlhg")])
+growth_time = 3.0
+dehydration_rate = 0.02
+optimal_temperature = 0.0
+max_temp_modifier = 2.5
+heat_sensitivity = 20.0

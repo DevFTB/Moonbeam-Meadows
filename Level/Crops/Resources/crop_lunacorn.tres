@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CropResource" load_steps=8 format=3 uid="uid://dnsh0tfcrcfys"]
+
+[ext_resource type="Resource" uid="uid://dlmt6ikcqe7nn" path="res://Level/Crops/Resources/item_lunacorn_seeds.tres" id="1_o3dck"]
+[ext_resource type="Script" path="res://Level/Crops/CropResource.gd" id="2_cx1od"]
+[ext_resource type="Resource" uid="uid://cvwvdo6c4ylpg" path="res://Level/Crops/Resources/item_lunacorn_produce.tres" id="3_c2qht"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="4_c8440"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3e4s"]
+atlas = ExtResource("4_c8440")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8v1"]
+atlas = ExtResource("4_c8440")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rlhg"]
+atlas = ExtResource("4_c8440")
+region = Rect2(64, 0, 32, 64)
+
+[resource]
+script = ExtResource("2_cx1od")
+crop_name = "Lunacorn"
+seed_item = ExtResource("1_o3dck")
+produce_item = ExtResource("3_c2qht")
+amount_of_stages = 3
+stage_textures = Array[Texture2D]([SubResource("AtlasTexture_h3e4s"), SubResource("AtlasTexture_5y8v1"), SubResource("AtlasTexture_5rlhg")])
+growth_time = 2.0
+dehydration_rate = 0.01
+optimal_temperature = -10.0
+max_temp_modifier = 2.0
+heat_sensitivity = 13.0

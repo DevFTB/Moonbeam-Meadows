@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://dhs57j1asnwfj"]
+
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="1_7yg4y"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="2_n16c5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra178"]
+atlas = ExtResource("1_7yg4y")
+region = Rect2(224, 32, 32, 32)
+
+[resource]
+script = ExtResource("2_n16c5")
+item_name = "Marshrooms"
+item_icon = SubResource("AtlasTexture_ra178")
+item_type = 1
+buy_price = 0
+sell_price = 7
