@@ -12,5 +12,5 @@ script = ExtResource("2_12306")
 item_name = "Moon Wheat Seeds"
 item_icon = SubResource("AtlasTexture_tq7in")
 item_type = 0
-buy_price = 5
+buy_price = 1
 sell_price = 0

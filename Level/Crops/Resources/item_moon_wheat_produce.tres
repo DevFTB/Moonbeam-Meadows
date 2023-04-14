@@ -13,4 +13,4 @@ item_name = "Moon Wheat Bundle"
 item_icon = SubResource("AtlasTexture_ra178")
 item_type = 1
 buy_price = 0
-sell_price = 8
+sell_price = 2
