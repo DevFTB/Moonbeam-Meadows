@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dqssy8nb5t4do"]
+[gd_scene load_steps=38 format=3 uid="uid://dqssy8nb5t4do"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -22,8 +22,12 @@
 [ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
 [ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="17_17121"]
 [ext_resource type="Resource" uid="uid://c6irvbqybpvwr" path="res://Level/Quests/quest_campaign_2.tres" id="17_k2pda"]
+[ext_resource type="Script" path="res://Robots/GridPathLine.gd" id="19_gqpxo"]
+[ext_resource type="Script" path="res://Robots/PathSelectionGUI.gd" id="20_jbywo"]
 [ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="20_wew0j"]
 [ext_resource type="Texture2D" uid="uid://c2gmdstv82xv3" path="res://Level/Trade Station/trade_station.png" id="21_6af3s"]
+[ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="25_cbu3v"]
+[ext_resource type="Script" path="res://Level/WateringRobot.gd" id="25_htusm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_111q6"]
 size = Vector2(60, 28)
@@ -45,6 +49,11 @@ font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_yxgws"]
+font_size = 48
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
 
 [node name="Level" type="TileMap"]
 y_sort_enabled = true
@@ -491,6 +500,27 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/Control/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
+[node name="PathSelectionGUI" type="Control" parent="CanvasLayer/GUI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_jbywo")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Control/PathSelectionGUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Editing Path"
+label_settings = SubResource("LabelSettings_yxgws")
+
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("reference_node")]
 texture = ExtResource("11_8edbx")
 script = ExtResource("12_fbvmq")
@@ -503,6 +533,32 @@ player = NodePath("../Player")
 
 [node name="CurrencyManager" type="Node" parent="."]
 script = ExtResource("20_wew0j")
+
+[node name="Robots" type="Node2D" parent="."]
+visible = false
+
+[node name="Robot" type="CharacterBody2D" parent="Robots"]
+position = Vector2(480, 384)
+motion_mode = 1
+script = ExtResource("25_htusm")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Robots/Robot"]
+path_desired_distance = 2.0
+target_desired_distance = 2.0
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Robots/Robot"]
+position = Vector2(0, -10)
+sprite_frames = ExtResource("25_cbu3v")
+frame_progress = 0.801124
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Robots/Robot"]
+shape = SubResource("CircleShape2D_we5yd")
+
+[node name="GridPathLine" type="Node2D" parent="."]
+script = ExtResource("19_gqpxo")
+colour = Color(0, 0.65098, 0, 1)
 
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="closed_menu" from="CanvasLayer/GUI/Control/PhoneGUI" to="Player" method="_on_gui_closed_menu"]
