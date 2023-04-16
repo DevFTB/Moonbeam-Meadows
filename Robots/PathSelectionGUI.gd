@@ -49,4 +49,10 @@ func _gui_input(event):
 					last_mouse_pos = mouse_pos
 					check_pos(mouse_pos)
 		pass
+	
+	
 	pass
+
+func _input(event):
+	if event is InputEventKey and event.keycode == KEY_ENTER:
+		get_node("/root/Level/Robots/Robot").set_path(grid_positions)

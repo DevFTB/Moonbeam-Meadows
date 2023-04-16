@@ -535,7 +535,6 @@ player = NodePath("../Player")
 script = ExtResource("20_wew0j")
 
 [node name="Robots" type="Node2D" parent="."]
-visible = false
 
 [node name="Robot" type="CharacterBody2D" parent="Robots"]
 position = Vector2(480, 384)
@@ -551,7 +550,7 @@ debug_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Robots/Robot"]
 position = Vector2(0, -10)
 sprite_frames = ExtResource("25_cbu3v")
-frame_progress = 0.801124
+frame_progress = 0.81883
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Robots/Robot"]
 shape = SubResource("CircleShape2D_we5yd")

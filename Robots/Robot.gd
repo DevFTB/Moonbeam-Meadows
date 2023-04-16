@@ -12,12 +12,16 @@ var movement_delta : float
 @export var action_energy_cost = 3
 
 @export var path : Array[Vector2] = []
+var path_index = 0
 
 func _ready():
 	navigation_agent.velocity_computed.connect(_on_NavigationAgent2D_velocity_computed)
 
 func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
+		if path_index < path.size() - 1:
+			path_index += 1
+			move_to_grid(path[path_index])
 		return
 
 	movement_delta = movement_speed
@@ -26,6 +30,13 @@ func _physics_process(delta):
 	var new_velocity: Vector2 = (next_path_position - current_agent_position).normalized() * movement_delta
 
 	navigation_agent.set_velocity(new_velocity)
+	
+func set_path(new_path: Array[Vector2]):
+	path = new_path
+	position = level.map_to_local(path[0])
+	move_to_grid(path[1])
+	path_index = 1
+	pass
 
 func move_to_grid(grid_position: Vector2i):
 	navigation_agent.set_target_position(level.map_to_local(grid_position))
