@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RobotResource" load_steps=4 format=3 uid="uid://bhgci1lelg6mr"]
+
+[ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="1_m13tg"]
+[ext_resource type="Script" path="res://Robots/RobotResource.gd" id="1_phmag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khmc4"]
+atlas = ExtResource("1_m13tg")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_phmag")
+robot_type_name = "Watering Robot"
+robot_description = "A robot that waters squares"
+robot_icon = SubResource("AtlasTexture_khmc4")
+robot_energy_capacity = 60

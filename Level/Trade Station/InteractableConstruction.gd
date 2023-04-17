@@ -1,6 +1,7 @@
 extends Node2D
+class_name InteractableConstruction
 
-@export var trade_station_gui : Control
+@export var gui : Control
 
 var interacting_player : Player = null
 func _ready():
@@ -13,18 +14,18 @@ func get_interacting_player() -> Player:
 func _on_interact_area_body_entered(body:Node2D):
 	if body.is_in_group("player"):
 		interacting_player = body
-		trade_station_gui.set_trade_station(self)
+		gui.set_trade_station(self)
 	pass # Replace with function body.
 
 func _on_interact_area_body_exited(body:Node2D):
-	if body == interacting_player and trade_station_gui.visible:
+	if body == interacting_player and gui.visible:
 		interacting_player = null
-		trade_station_gui.hide()
+		gui.hide()
 	pass # Replace with function body.
 
 func _input(event):
 	if event.is_action_pressed("interact") and interacting_player != null:
-		if not trade_station_gui.get_parent().get_children().filter(func(x): return x != trade_station_gui).any(func(x): return x.visible):
-			trade_station_gui.visible = not trade_station_gui.visible
-			interacting_player.frozen = trade_station_gui.visible
+		if gui.can_show():
+			gui.visible = not gui.visible
+			interacting_player.frozen = gui.visible
 	pass

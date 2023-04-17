@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 var buy_gui_scene = preload("res://Level/Trade Station/ts_buy_item_gui.tscn")
 var sell_gui_scene = preload("res://Level/Trade Station/ts_sell_item_gui.tscn")
@@ -30,6 +30,10 @@ func update_gui():
 	for parent in [buy_seed_parent, buy_fertiliser_parent, buy_robots_parent, sell_seed_parent]:
 		for child in parent.get_children():
 			child.update_gui()
+			
+func can_show():
+	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
+	
 
 func set_trade_station(new_trade_station: Node):
 	trade_station = new_trade_station

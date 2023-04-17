@@ -1,23 +1,37 @@
 extends Control
 
+@export var minimum_motion = 8
+@export var colour : Color
+@export var line_width = 5.0
+
+var dragging = false
+var last_mouse_pos : Vector2 = Vector2.ZERO
+var grid_positions: Array[Vector2] = []
+var current_robot = null
+
+signal finished_editing
+
 @onready var level = get_node("/root/Level") as Level
 @onready var grid_path_line = get_node("/root/Level/GridPathLine")
 @onready var player = get_node("/root/Level/Player")
-var dragging = false
-@export var minimum_motion = 8
-var last_mouse_pos : Vector2 = Vector2.ZERO
+@onready var editing_camera = get_node("/root/Level/EditingCamera")
 
-var grid_positions: Array[Vector2] = []
-@export var colour : Color
-@export var line_width = 5.0
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	player.frozen = visible
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func start_editing(robot: Robot):
+	current_robot = robot
+	player.frozen = true 
+	visible = true
+	editing_camera.position = player.global_position
+	editing_camera.enable()
+	grid_positions = robot.path
+	update_path_visual()
+	pass
+
+func update_path_visual():
+	grid_path_line.set_points(grid_positions.map(func(x): return level.map_to_local(x)))
 	pass
 
 func check_pos(mouse_position: Vector2):
@@ -29,7 +43,7 @@ func check_pos(mouse_position: Vector2):
 		print(new_point)
 		grid_positions.append(new_point)
 		
-		grid_path_line.set_points(grid_positions.map(func(x): return level.map_to_local(x)))
+		update_path_visual()
 	pass
 
 func _gui_input(event):
@@ -38,7 +52,6 @@ func _gui_input(event):
 			dragging = event.pressed
 		pass
 	elif event is InputEventMouseMotion:
-		#print("( %s ) vs ( %s ) vs ( %s )" % [player.get_global_mouse_position(), get_global_mouse_position(), get_viewport_transform() * get_global_mouse_position()])
 		var mouse_pos = player.get_global_mouse_position()
 		if dragging:
 			if event.relative.length() > minimum_motion:
@@ -53,6 +66,15 @@ func _gui_input(event):
 	
 	pass
 
-func _input(event):
-	if event is InputEventKey and event.keycode == KEY_ENTER:
-		get_node("/root/Level/Robots/Robot").set_path(grid_positions)
+func is_path_valid():
+	return true
+
+func _on_save_button_pressed():
+	if is_path_valid():
+		current_robot.set_path(grid_positions)
+		editing_camera.disable()
+		finished_editing.emit()
+		player.frozen = false
+		self.visible = false
+
+	pass # Replace with function body.
