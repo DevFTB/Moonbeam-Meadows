@@ -56,7 +56,9 @@ func till_land(grid_position : Vector2i) -> bool:
 		return true
 	else:
 		return false
-
+func is_traversible(grid_position: Vector2i):
+	var tile_data : TileData = get_cell_tile_data(0, grid_position)
+	return tile_data != null and tile_data.get_custom_data("r_traversible")
 func get_temp(grid_position : Vector2i):
 	return base_temp
 

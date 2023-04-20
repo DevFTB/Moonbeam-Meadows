@@ -44,11 +44,14 @@ func _ready():
 func _physics_process(_delta):
 	if is_navigation_finished:
 		# decide next destination
-		if has_energy():
+		if has_energy() and powered:
 			if temp_path.size() == 0:
-				if path_index < path.size() - 1 and energy >= move_energy_cost:
-					path_index += 1
-					move_to_grid(path[path_index])
+				if path.size() > 1 and energy >= move_energy_cost:
+					path_index = (path_index + 1) % path.size()
+					if level.is_traversible(path[path_index]):
+						move_to_grid(path[path_index])
+					else:
+						power_down()
 				
 				var current_position = get_current_position()
 				if path.size() > 0 and last_acted != current_position:
@@ -79,6 +82,7 @@ func _physics_process(_delta):
 				
 func on_traversability_update(grid_position: Vector2i, traversible: bool):
 	astar.set_point_solid(grid_position, not traversible)
+	
 func has_energy():
 	return energy > 0
 
@@ -88,8 +92,11 @@ func power_down():
 
 func set_path(new_path: Array[Vector2]):
 	path = new_path
-	move_to_grid(path[1])
-	path_index = 1
+	if powered:
+		move_to_grid(path[1])
+		path_index = 1
+	else:
+		path_index = 0
 
 	energy -= move_energy_cost
 	pass
