@@ -83,3 +83,13 @@ func lookup_fertiliser(item: InventoryItem):
 		if fertiliser.fertiliser_item == item:
 			return fertiliser
 	return null
+
+var highlight = preload("res://Level/hightlight.png")
+func highlight_tile(grid_position : Vector2i):
+	set_cell(1, grid_position, 1, Vector2i(0, 0))
+
+	pass
+
+func clear_highlight():
+	for cell in get_used_cells_by_id(1):
+		set_cell(1, cell, -1)

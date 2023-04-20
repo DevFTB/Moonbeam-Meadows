@@ -4,6 +4,7 @@ extends Control
 @onready var robot_list = $RobotsListSection/ScrollContainer/RobotsList
 @export var path_editing_gui : Control
 var selected_robot = null
+var energy_station = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,15 +13,12 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func set_robots(new_robots):
+func set_energy_station(new_energy_station: EnergyStation):
+	energy_station = new_energy_station
 	for child in robot_list.get_children():
 		child.queue_free()
 		
-	for robot in new_robots:
+	for robot in energy_station.robots:
 		print(robot)
 		var new_tile = robot_list_tile.instantiate()
 		new_tile.set_robot(robot)
@@ -47,9 +45,15 @@ func update_gui():
 
 func _on_edit_path_button_pressed():
 	visible = false
-	path_editing_gui.start_editing(selected_robot)
+	path_editing_gui.start_editing(selected_robot, energy_station)
+	energy_station.show_area()
 	pass # Replace with function body.
 
 func end_editing():
 	visible = true
+	energy_station.hide_area()
 	pass
+
+func can_show():
+	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
+	

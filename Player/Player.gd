@@ -4,6 +4,7 @@ class_name Player
 @export var speed = 125  # speed in pixels/sec
 
 signal tool_changed(new_tool: Tool)
+signal freeze_changed(frozen: bool)
 
 enum Tool {
 	TILL, WATER, PLANT, FERTILISE, HARVEST, 
@@ -71,9 +72,6 @@ func get_inventory(item_type: ItemType):
 
 	return null
 	
-func set_frozen(should_freeze):
-	self.frozen = should_freeze 
-
 func _input(event):
 
 	if event is InputEventKey and not frozen:
@@ -93,18 +91,12 @@ func _input(event):
 			switch_tool(Tool.HARVEST)
 			pass
 
+func freeze():
+	frozen = true
+	freeze_changed.emit(frozen)	
+	pass
 
-
-func _on_gui_opened_menu():
-	set_frozen(true)
-	print("freezing")
-	pass # Replace with function body.
-
-
-func _on_gui_closed_menu():
-	set_frozen(false)
-	pass # Replace with function body.
-
-
-func _on_trade_station_gui_opened_menu():
-	pass # Replace with function body.
+func unfreeze():
+	frozen = false
+	freeze_changed.emit(frozen)
+	pass

@@ -34,7 +34,6 @@ func update_gui():
 func can_show():
 	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
 	
-
 func set_trade_station(new_trade_station: Node):
 	trade_station = new_trade_station
 

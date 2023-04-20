@@ -8,7 +8,7 @@ var dragging = false
 var last_mouse_pos : Vector2 = Vector2.ZERO
 var grid_positions: Array[Vector2] = []
 var current_robot = null
-
+var current_energy_station = null
 signal finished_editing
 
 @onready var level = get_node("/root/Level") as Level
@@ -20,13 +20,19 @@ func _ready():
 	pass # Replace with function body.
 
 
-func start_editing(robot: Robot):
+func start_editing(robot: Robot, energy_station: EnergyStation):
 	current_robot = robot
-	player.frozen = true 
+	current_energy_station = energy_station
+	grid_positions = robot.path.duplicate()
+
+	grid_path_line.visible = true
 	visible = true
+
 	editing_camera.position = player.global_position
 	editing_camera.enable()
-	grid_positions = robot.path
+
+	player.frozen = true 
+
 	update_path_visual()
 	pass
 
@@ -67,8 +73,12 @@ func _gui_input(event):
 	pass
 
 func is_path_valid():
-	return true
-
+	if grid_positions.size() > 1 :
+		var is_start_powered = current_energy_station.is_power_tile(grid_positions[0])
+		var is_loop = grid_positions.size() > 0 and grid_positions[0] == grid_positions.back()
+		return is_loop and is_start_powered
+	else:
+		return false
 func _on_save_button_pressed():
 	if is_path_valid():
 		current_robot.set_path(grid_positions)
@@ -76,5 +86,15 @@ func _on_save_button_pressed():
 		finished_editing.emit()
 		player.frozen = false
 		self.visible = false
+		grid_path_line.visible = false
 
 	pass # Replace with function body.
+
+
+func _on_clear_button_pressed():
+	grid_positions.clear()
+	update_path_visual()
+	pass # Replace with function body.
+
+func _draw():
+	pass
