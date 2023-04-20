@@ -41,7 +41,9 @@ func get_temp_mod(temp):
 	var time_mod = crop.max_temp_modifier if temp_diff >= abs_range else (crop.max_temp_modifier - 1.0)/abs_range * temp_diff + 1
 	return 1.0/time_mod
 	
-
+func get_water_level():
+	return water_level
+	
 # Sets the crop entity as fertilised 
 func fertilise(_fertiliser : FertiliserResource):
 	# Only fertilise if there isn't a crop

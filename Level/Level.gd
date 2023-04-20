@@ -9,6 +9,8 @@ var crop_map = {}
 
 @export var base_temp = 20
 
+signal traversibility_updated(grid_pos: Vector2i, traversible: bool)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player/SeedInventory.add(crops[0].seed_item, 5)
@@ -19,7 +21,7 @@ func _ready():
 func get_entity_at_grid(grid_position : Vector2i):
 	return crop_map.get(grid_position)
 
-func plant_land(grid_position : Vector2i, item: InventoryItem):
+func plant_land(grid_position : Vector2i, item: InventoryItem) -> bool:
 	var crop = lookup_crop(item)
 	if crop_map.has(grid_position):
 		var crop_entity = crop_map[grid_position]
@@ -29,7 +31,7 @@ func plant_land(grid_position : Vector2i, item: InventoryItem):
 
 	return false
 	
-func fertilise_land(grid_position : Vector2i, item: InventoryItem):
+func fertilise_land(grid_position : Vector2i, item: InventoryItem) -> bool:
 	var fertiliser = lookup_fertiliser(item)
 	if crop_map.has(grid_position):
 		crop_map[grid_position].fertilise(fertiliser)
@@ -38,7 +40,7 @@ func fertilise_land(grid_position : Vector2i, item: InventoryItem):
 	else:
 		return false
 
-func till_land(grid_position : Vector2i):
+func till_land(grid_position : Vector2i) -> bool:
 	var tile_data : TileData = get_cell_tile_data(0, grid_position)
 	if tile_data != null and tile_data.get_custom_data("tillable"):
 		var crop_entity  = crop_entity_scene.instantiate()
@@ -50,11 +52,19 @@ func till_land(grid_position : Vector2i):
 		
 		crop_map[grid_position] = crop_entity
 		set_cell(0, grid_position, 0, Vector2i(0, 0))
-	pass
+		traversibility_updated.emit(grid_position, false)
+		return true
+	else:
+		return false
 
 func get_temp(grid_position : Vector2i):
 	return base_temp
-	
+
+func get_water_level(grid_position : Vector2i):
+	if crop_map.has(grid_position):
+		return crop_map[grid_position].get_water_level()
+	else:
+		return 0
 func water_land(grid_position: Vector2i):
 	if crop_map.has(grid_position):
 		crop_map[grid_position].fill_water()

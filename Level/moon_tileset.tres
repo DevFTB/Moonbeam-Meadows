@@ -1,22 +1,7 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dsntvsfcov3kf"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dsntvsfcov3kf"]
 
 [ext_resource type="Texture2D" uid="uid://blhedjwfhypws" path="res://Level/level_spritesheety.png" id="1_ixll4"]
 [ext_resource type="Texture2D" uid="uid://biqnvkknv5sfn" path="res://Level/hightlight.png" id="2_umv7u"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0i7tn"]
-vertices = PackedVector2Array(-16, 3, -16, -2, -4, -2, -4, 3, -4, -16, 1.5, -16, 1.5, -2, 1.5, 3, 16, -2, 16, 3, 1.5, 16, -4, 16)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(3, 7, 10, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -2, -4, -2, -4, -16, 1.5, -16, 1.5, -2, 16, -2, 16, 3, 1.5, 3, 1.5, 16, -4, 16, -4, 3, -16, 3)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_bm03a"]
-vertices = PackedVector2Array(-16, 3, -16, -2, -4, -2, -4, 3, -4, -16, 1.5, -16, 1.5, -2, 1.5, 3, 16, -2, 16, 3, 1.5, 16, -4, 16)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(3, 7, 10, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -2, -4, -2, -4, -16, 1.5, -16, 1.5, -2, 16, -2, 16, 3, 1.5, 3, 1.5, 16, -4, 16, -4, 3, -16, 3)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_dcq0k"]
-vertices = PackedVector2Array(-16, 3, -16, -2, -4, -2, -4, 3, -4, -16, 1.5, -16, 1.5, -2, 1.5, 3, 16, -2, 16, 3, 1.5, 16, -4, 16)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(3, 7, 10, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -2, -4, -2, -4, -16, 1.5, -16, 1.5, -2, 16, -2, 16, 3, 1.5, 3, 1.5, 16, -4, 16, -4, 3, -16, 3)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m3asn"]
 resource_name = "ground_atlas"
@@ -28,15 +13,12 @@ texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 1:1/0 = 0
 0:2/0 = 0
-0:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0i7tn")
 0:2/0/custom_data_0 = true
 0:2/0/custom_data_1 = true
 1:2/0 = 0
-1:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_bm03a")
 1:2/0/custom_data_0 = true
 1:2/0/custom_data_1 = true
 2:2/0 = 0
-2:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dcq0k")
 2:2/0/custom_data_0 = true
 2:2/0/custom_data_1 = true
 7:2/0 = 0
@@ -48,7 +30,6 @@ texture_region_size = Vector2i(32, 32)
 
 [resource]
 tile_size = Vector2i(32, 32)
-navigation_layer_0/layers = 1
 custom_data_layer_0/name = "tillable"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "r_traversible"
