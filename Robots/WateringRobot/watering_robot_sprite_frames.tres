@@ -1,6 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://mo5wyk85dbu8"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://mo5wyk85dbu8"]
 
 [ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="1_rlony"]
+[ext_resource type="Texture2D" uid="uid://clsfot2xray55" path="res://Robots/WateringRobot/watering_robot_power_down.png" id="1_vcjmv"]
+[ext_resource type="Texture2D" uid="uid://c2bn66laf61rs" path="res://Robots/WateringRobot/watering_robot_unpowered.png" id="3_cbmjq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7ri8"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ogbf"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_857wp"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq8bn"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dcgf"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt1gh"]
+atlas = ExtResource("1_vcjmv")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8t77"]
 atlas = ExtResource("1_rlony")
@@ -18,6 +44,34 @@ region = Rect2(64, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_v7ri8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ogbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_857wp")
+}],
+"loop": false,
+"name": &"power_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq8bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dcgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt1gh")
+}],
+"loop": false,
+"name": &"power_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_x8t77")
 }, {
 "duration": 1.0,
@@ -27,6 +81,14 @@ animations = [{
 "texture": SubResource("AtlasTexture_4l7p6")
 }],
 "loop": true,
-"name": &"default",
+"name": &"powered",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cbmjq")
+}],
+"loop": true,
+"name": &"unpowered",
+"speed": 5.0
 }]

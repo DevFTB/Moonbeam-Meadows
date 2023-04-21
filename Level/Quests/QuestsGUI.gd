@@ -29,9 +29,3 @@ func set_quests(new_quests):
 	for i in range(quests.size()):
 		quest_boxes[i].set_quest(quests[i])
 	pass
-
-func _on_phone_gui_opened_menu():
-	set_quests(quests)
-	pass # Replace with function body.
-
-

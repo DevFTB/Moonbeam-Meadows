@@ -38,7 +38,7 @@ func set_item(new_item: InventoryItem):
 	$VBoxContainer/HBoxContainer/CostLabel.text = str(item.sell_price)
 
 func start_multisell():
-	print("start multisell")
+	("start multisell")
 
 	if pressed:
 		multisell = true
@@ -61,7 +61,7 @@ func _on_sell_button_button_down():
 func _on_sell_button_button_up():
 	pressed = false
 	if multisell:
-		print("multisell %d" % multisell_amount)
+		("multisell %d" % multisell_amount)
 		currency_manager.sell(trade_station.get_interacting_player(), item ,multisell_amount)	
 		multisell = false
 		$VBoxContainer/SellButton.text = "Sell 1"

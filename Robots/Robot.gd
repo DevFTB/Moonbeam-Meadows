@@ -43,18 +43,27 @@ func _ready():
 	
 func _physics_process(_delta):
 	if is_navigation_finished:
-		# decide next destination
-		if has_energy() and powered:
-			if temp_path.size() == 0:
-				if path.size() > 1 and energy >= move_energy_cost:
+		# check if should power down
+		if powered:
+			if not has_energy() or path.size() <= 1:
+				power_down()
+				return
+
+			# travelling temp path overrides normal path
+			if temp_path.is_empty():
+
+				# start moving to next grid in path if possible
+				if energy >= move_energy_cost:
 					path_index = (path_index + 1) % path.size()
 					if level.is_traversible(path[path_index]):
 						move_to_grid(path[path_index])
 					else:
 						power_down()
 				
+
+				# try do action in all action directions
 				var current_position = get_current_position()
-				if path.size() > 0 and last_acted != current_position:
+				if last_acted != current_position:
 					#do actions
 					for action in action_directions:
 						var action_position = current_position + action
@@ -62,12 +71,12 @@ func _physics_process(_delta):
 							do_action(action_position)
 
 					last_acted = current_position
-					print("--------------------------------------")
+					("--------------------------------------")
 			else:
+				# temp path doesn't cost energy.
 				move_to_grid(temp_path.pop_front())
-		else:
-			power_down()
 	else:
+		# movement code
 		if target_position != null:
 			var movement_delta = movement_speed * _delta * Vector2(direction)
 			var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
@@ -80,25 +89,37 @@ func _physics_process(_delta):
 		else:
 			is_navigation_finished = true
 				
-func on_traversability_update(grid_position: Vector2i, traversible: bool):
-	astar.set_point_solid(grid_position, not traversible)
+func can_do_action(grid_position: Vector2i)->bool:
+	return false
 	
-func has_energy():
-	return energy > 0
+func do_action(grid_position: Vector2i) -> void:
+	energy -= action_energy_cost
+	pass
 
 func power_down():
 	powered = false
+	$RobotAnimationController.power_down()
 	pass
+
+func power_on():
+	powered= true
+	$RobotAnimationController.power_on()
+
+func check_power():
+	if has_energy():
+		power_on()
+	else:
+		power_down()
 
 func set_path(new_path: Array[Vector2]):
 	path = new_path
+	check_power()
 	if powered:
 		move_to_grid(path[1])
 		path_index = 1
 	else:
 		path_index = 0
 
-	energy -= move_energy_cost
 	pass
 	
 func move_to_grid(grid_position: Vector2i):
@@ -107,7 +128,8 @@ func move_to_grid(grid_position: Vector2i):
 		if (current_position - grid_position).length() == 1:
 			direction =  grid_position - current_position
 			target_position = grid_position
-			print("target %s" % str(target_position))
+			("target %s" % str(target_position))
+			energy -= move_energy_cost
 			is_navigation_finished = false
 		else:
 			position = level.map_to_local(current_position)
@@ -116,13 +138,11 @@ func move_to_grid(grid_position: Vector2i):
 	else:
 		is_navigation_finished = true
 
-func can_do_action(grid_position: Vector2i)->bool:
-	return false
-	
-func do_action(grid_position: Vector2i) -> void:
-	energy -= action_energy_cost
-	pass
+func has_energy():
+	return energy > 0
 
+func on_traversability_update(grid_position: Vector2i, traversible: bool):
+	astar.set_point_solid(grid_position, not traversible)
 func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
 	# Move CharacterBody3D with the computed `safe_velocity` to avoid dynamic obstacles.
 	velocity = safe_velocity

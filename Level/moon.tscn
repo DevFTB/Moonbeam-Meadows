@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdmo5ruhun88h"]
+[gd_scene load_steps=55 format=3 uid="uid://bdmo5ruhun88h"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -34,6 +34,7 @@
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="31_d0ajy"]
 [ext_resource type="Script" path="res://Level/EditingCamera.gd" id="34_jlqph"]
+[ext_resource type="Script" path="res://Level/RobotAnimationController.gd" id="34_jpdug"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="34_nfl1j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0yc4t"]
@@ -141,6 +142,8 @@ gui = NodePath("../CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Energy Station"]
 sprite_frames = SubResource("SpriteFrames_6xwl5")
+autoplay = "default"
+frame_progress = 0.330715
 offset = Vector2(0, -16)
 
 [node name="InteractArea" type="Area2D" parent="Energy Station"]
@@ -778,15 +781,16 @@ script = ExtResource("20_wew0j")
 [node name="Robots" type="Node2D" parent="."]
 
 [node name="Robot" type="CharacterBody2D" parent="Robots" groups=["robot"]]
-position = Vector2(480, 384)
+position = Vector2(496, 400)
 motion_mode = 1
 script = ExtResource("29_ho6k8")
 robot_type = ExtResource("30_acke8")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Robots/Robot"]
+[node name="RobotAnimationController" type="AnimatedSprite2D" parent="Robots/Robot"]
 position = Vector2(0, -10)
 sprite_frames = ExtResource("25_cbu3v")
-frame_progress = 0.81883
+animation = &"power_up"
+script = ExtResource("34_jpdug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Robots/Robot"]
 shape = SubResource("CircleShape2D_we5yd")
@@ -804,12 +808,6 @@ script = ExtResource("34_jlqph")
 [connection signal="body_entered" from="Energy Station/InteractArea" to="Energy Station" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="Energy Station/InteractArea" to="Energy Station" method="_on_interact_area_body_exited"]
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
-[connection signal="closed_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="Player" method="_on_gui_closed_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="Player" method="_on_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer/Label2" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2/Label2" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3/Label3" method="_on_phone_gui_opened_menu"]
-[connection signal="opened_menu" from="CanvasLayer/GUI/OverscreenUI/PhoneGUI" to="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests" method="_on_phone_gui_opened_menu"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]

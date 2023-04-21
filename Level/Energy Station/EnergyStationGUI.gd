@@ -19,7 +19,7 @@ func set_energy_station(new_energy_station: EnergyStation):
 		child.queue_free()
 		
 	for robot in energy_station.robots:
-		print(robot)
+		(robot)
 		var new_tile = robot_list_tile.instantiate()
 		new_tile.set_robot(robot)
 		new_tile.set_parent_gui(self)

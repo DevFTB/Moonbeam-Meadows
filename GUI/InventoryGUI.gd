@@ -14,10 +14,3 @@ func update_text():
 		new_text += "%dx %s \n" % [inventory.inventory[item], item.item_name]
 
 	text = new_text
-	
-
-
-
-func _on_phone_gui_opened_menu():
-	update_text()
-	pass # Replace with function body.

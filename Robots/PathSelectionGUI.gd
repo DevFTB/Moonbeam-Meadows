@@ -46,7 +46,7 @@ func check_pos(mouse_position: Vector2):
 	var is_traversible = level.get_cell_tile_data(0, new_point).get_custom_data("r_traversible")
 	var is_continuous = grid_positions.size() == 0 or (grid_positions.back() - new_point).length() == 1
 	if is_not_same and is_traversible and is_continuous:
-		print(new_point)
+		(new_point)
 		grid_positions.append(new_point)
 		
 		update_path_visual()

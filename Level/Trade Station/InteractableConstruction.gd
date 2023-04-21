@@ -19,7 +19,7 @@ func _on_interact_area_body_entered(body:Node2D):
 	pass # Replace with function body.
 
 func _on_interact_area_body_exited(body:Node2D):
-	if body == interacting_player and gui.visible:
+	if body == interacting_player:
 		interacting_player.unfreeze()
 		interacting_player = null
 		gui.hide()

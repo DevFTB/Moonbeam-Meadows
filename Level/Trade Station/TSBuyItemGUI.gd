@@ -37,7 +37,7 @@ func set_item(new_item:InventoryItem):
 	$VBoxContainer/HBoxContainer/CostLabel.text = str(item.buy_price)
 
 func start_multibuy():
-	print("start multibuy")
+	("start multibuy")
 
 	if pressed:
 		multibuy = true
@@ -60,7 +60,7 @@ func _on_buy_button_button_down():
 func _on_buy_button_button_up():
 	pressed = false
 	if multibuy:
-		print("multibuy %d" % multibuy_amount)
+		("multibuy %d" % multibuy_amount)
 		currency_manager.buy(trade_station.get_interacting_player(), item, multibuy_amount)	
 		multibuy = false
 		$VBoxContainer/BuyButton.text = "Buy 1"

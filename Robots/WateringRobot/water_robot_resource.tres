@@ -12,4 +12,4 @@ script = ExtResource("1_phmag")
 robot_type_name = "Watering Robot"
 robot_description = "A robot that waters squares"
 robot_icon = SubResource("AtlasTexture_khmc4")
-robot_energy_capacity = 60
+robot_energy_capacity = 30
