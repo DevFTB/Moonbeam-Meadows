@@ -56,6 +56,8 @@ func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			dragging = event.pressed
+			$VBoxContainer/ErrorPassText.show_text(not is_path_valid())
+			$VBoxContainer/SaveButton.disabled = not is_path_valid() or grid_positions.size() == 0
 		pass
 	elif event is InputEventMouseMotion:
 		var mouse_pos = player.get_global_mouse_position()
@@ -82,13 +84,24 @@ func is_path_valid():
 func _on_save_button_pressed():
 	if is_path_valid():
 		current_robot.set_path(grid_positions)
-		editing_camera.disable()
-		finished_editing.emit()
-		player.frozen = false
-		self.visible = false
-		grid_path_line.visible = false
+		close_gui()
+	else:
+		if grid_positions.size() == 0:
+			close_gui()
+		else:
+			print("invalid path")
 
 	pass # Replace with function body.
+
+
+func close_gui():
+	editing_camera.disable()
+	finished_editing.emit()
+	player.frozen = false
+	self.visible = false
+	grid_path_line.visible = false
+
+	pass
 
 
 func _on_clear_button_pressed():

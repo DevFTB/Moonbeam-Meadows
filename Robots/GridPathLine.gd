@@ -1,11 +1,16 @@
 extends Node2D
 
 @export var points : PackedVector2Array
-@export var colour : Color
+
+@export var line_colour : Color
 @export var line_width = 5.0
 
-func set_points(points):
-	self.points = PackedVector2Array(points)
+@export var tile_colour : Color
+@export var tile_line_width = 5.0
+@export var final_tile_colour : Color
+
+func set_points(new_points):
+	self.points = PackedVector2Array(new_points)
 	queue_redraw()
 
 func _draw():
@@ -22,9 +27,9 @@ func _draw():
 			var p2_1 = p2 + perpendicular_vec * line_width / 2
 			var p2_2 = p2 - perpendicular_vec * line_width / 2
 			
-			draw_colored_polygon(PackedVector2Array([p1_1, p1_2, p2_2, p2_1]), colour)
+			draw_colored_polygon(PackedVector2Array([p1_1, p1_2, p2_2, p2_1]), line_colour)
 			
-			draw_rect(Rect2(p1 - Vector2(16,16), Vector2(32,32)), colour, false)
+			draw_rect(Rect2(p1 - Vector2(16,16), Vector2(32,32)), tile_colour, false, tile_line_width)
 		
-		draw_rect(Rect2(points[points.size() - 1] - Vector2(16,16), Vector2(32,32)), Color.BLUE, false, 3)
+		draw_rect(Rect2(points[points.size() - 1] - Vector2(16,16), Vector2(32,32)), final_tile_colour, false, tile_line_width)
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bdmo5ruhun88h"]
+[gd_scene load_steps=68 format=3 uid="uid://bdmo5ruhun88h"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
+[ext_resource type="FontFile" uid="uid://co884e118qm4h" path="res://GUI/upheavtt.ttf" id="12_4a7m6"]
 [ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
 [ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
 [ext_resource type="Script" path="res://Level/Currency/CurrencyGUI.gd" id="14_cssu7"]
@@ -30,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://c2gmdstv82xv3" path="res://Level/Trade Station/trade_station.png" id="21_6af3s"]
 [ext_resource type="PackedScene" uid="uid://spk8mxahrjo3" path="res://Level/Energy Station/robot_list_tile.tscn" id="21_mjtxo"]
 [ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="25_cbu3v"]
+[ext_resource type="Script" path="res://Level/ErrorPassLabel.gd" id="26_d32qs"]
 [ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="29_ho6k8"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="31_d0ajy"]
@@ -92,6 +94,93 @@ size = Vector2(60, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0saux"]
 size = Vector2(20, 14)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihevp"]
+bg_color = Color(0.611765, 0.584314, 0.721569, 1)
+border_width_bottom = 5
+border_color = Color(0.517647, 0.494118, 0.74902, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwolf"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.839216, 0.858824, 0.992157, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geu22"]
+bg_color = Color(0.6, 0.415686, 0.992157, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7c6f"]
+bg_color = Color(0.556863, 0.329412, 0.976471, 1)
+border_width_bottom = 5
+border_color = Color(0.262745, 0.219608, 0.745098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x873"]
+bg_color = Color(0.482353, 0.156863, 0.917647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 6
+border_color = Color(0.196078, 0.156863, 0.584314, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmx2m"]
+bg_color = Color(0.368627, 0.615686, 0.72549, 0.392157)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.458824, 0.513726, 0.898039, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[sub_resource type="Theme" id="Theme_lqq5a"]
+default_font = ExtResource("12_4a7m6")
+Button/font_sizes/font_size = 20
+Button/styles/disabled = SubResource("StyleBoxFlat_ihevp")
+Button/styles/focus = SubResource("StyleBoxFlat_hwolf")
+Button/styles/hover = SubResource("StyleBoxFlat_geu22")
+Button/styles/normal = SubResource("StyleBoxFlat_g7c6f")
+Button/styles/pressed = SubResource("StyleBoxFlat_3x873")
+Panel/styles/panel = SubResource("StyleBoxFlat_jmx2m")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykmqp"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_7u08u"]
+font_size = 24
+
 [sub_resource type="LabelSettings" id="LabelSettings_5p3lh"]
 font_size = 48
 
@@ -113,6 +202,18 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yxgws"]
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_p54c1"]
+font_size = 24
+font_color = Color(0.85098, 0.298039, 0.247059, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lmxb2"]
+font_size = 24
+font_color = Color(0.231373, 0.584314, 0.494118, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
 
@@ -215,6 +316,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_lqq5a")
 script = ExtResource("10_yck4d")
 exclusive_gui_screens = Array[Control]([null, null])
 
@@ -234,11 +336,13 @@ script = ExtResource("4_i0hmv")
 layout_mode = 2
 size_flags_vertical = 3
 text = "Current Tool:"
+label_settings = SubResource("LabelSettings_ykmqp")
 
 [node name="CurrentToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Tiller"
+label_settings = SubResource("LabelSettings_7u08u")
 
 [node name="OverscreenUI" type="Control" parent="CanvasLayer/GUI"]
 layout_mode = 1
@@ -650,15 +754,14 @@ layout_mode = 2
 
 [node name="RobotDetails" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -674.0
-offset_top = -267.5
+anchor_bottom = 1.0
+offset_left = -631.0
+offset_top = 12.0
 offset_right = -15.0
-offset_bottom = 266.5
+offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -742,15 +845,6 @@ grow_horizontal = 2
 text = "Editing Path"
 label_settings = SubResource("LabelSettings_yxgws")
 
-[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/PathSelectionGUI"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 11.0
-offset_right = 52.0
-offset_bottom = 42.0
-text = "Save"
-
 [node name="ClearButton" type="Button" parent="CanvasLayer/GUI/PathSelectionGUI"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 1
@@ -764,6 +858,34 @@ offset_bottom = 67.0
 grow_horizontal = 0
 text = "Clear
 "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/PathSelectionGUI"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 111.0
+offset_bottom = 125.0
+
+[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Save"
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ErrorPassText" type="Label" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+layout_mode = 2
+text = "Path Invalid"
+label_settings = SubResource("LabelSettings_p54c1")
+horizontal_alignment = 1
+autowrap_mode = 2
+script = ExtResource("26_d32qs")
+error_text = "Path Invalid"
+error_settings = SubResource("LabelSettings_p54c1")
+pass_text = "Path Valid"
+pass_settings = SubResource("LabelSettings_lmxb2")
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 texture = ExtResource("11_8edbx")
@@ -797,7 +919,10 @@ shape = SubResource("CircleShape2D_we5yd")
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")
-colour = Color(0, 0.65098, 0, 1)
+line_colour = Color(0.341176, 0.729412, 0.647059, 1)
+tile_colour = Color(0.0431373, 0.588235, 0.305882, 1)
+tile_line_width = 2.0
+final_tile_colour = Color(0.290196, 0.411765, 0.8, 1)
 
 [node name="EditingCamera" type="Camera2D" parent="."]
 position = Vector2(416, 326)
@@ -809,5 +934,5 @@ script = ExtResource("34_jlqph")
 [connection signal="body_exited" from="Energy Station/InteractArea" to="Energy Station" method="_on_interact_area_body_exited"]
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]
