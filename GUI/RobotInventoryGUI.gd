@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @export var inventory : InventoryComponent
 
-var list_tile_scene = preload("res://Inventory/inventory_robot_list_tile.tscn")
+var list_tile_scene = preload("res://GUI/inventory_robot_list_tile.tscn")
 
 func _ready():
 	inventory.inventory_modified.connect(_on_inventory_modified)

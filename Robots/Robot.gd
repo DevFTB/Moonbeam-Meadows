@@ -144,6 +144,12 @@ func move_to_grid(grid_position: Vector2i):
 		pass
 	else:
 		is_navigation_finished = true
+		
+func add_energy(amount: int) -> void:
+	energy = min(energy + amount, energy_capacity)
+	print("added %d energy, now at %d" % [amount, energy])
+	check_power()
+	pass
 
 func has_energy():
 	return energy > 0
