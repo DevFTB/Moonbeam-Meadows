@@ -22,6 +22,7 @@ func calculate_power_tiles():
 func add_robot(robot: Robot) -> void:
 	robots.append(robot)
 	robot.parent_energy_station = self
+	print("added robot")
 	gui.update_gui()
 
 func set_gui_owner():

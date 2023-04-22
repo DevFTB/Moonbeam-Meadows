@@ -113,10 +113,12 @@ func power_on():
 	$RobotAnimationController.power_on()
 
 func check_power():
-	if has_energy():
-		power_on()
+	if has_energy() and not path.is_empty():
+		if not powered:
+			power_on()
 	else:
-		power_down()
+		if powered:
+			power_down()
 
 func set_path(new_path: Array[Vector2]):
 	path = new_path

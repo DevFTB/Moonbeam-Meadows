@@ -1,12 +1,12 @@
 extends Control 
 
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
-@onready var robot_list = $RobotsListSection/ScrollContainer/RobotsList
 @export var path_editing_gui : Control
 
 var selected_robot = null
 var energy_station = null
 
+signal changed_energy_station(energy_station: EnergyStation)
 signal opened_menu
 signal closed_menu
 # Called when the node enters the scene tree for the first time.
@@ -17,16 +17,8 @@ func _ready():
 
 func set_energy_station(new_energy_station: EnergyStation):
 	energy_station = new_energy_station
-	for child in robot_list.get_children():
-		child.queue_free()
-		
-	for robot in energy_station.robots:
-		var level = get_node("/root/Level")
-		var new_tile = robot_list_tile.instantiate()
-		var robot_type = level.lookup_robot(robot.pickup_item)
-		new_tile.set_robot(robot, robot_type.get_icon(), robot_type.get_type_name())
-		new_tile.set_parent_gui(self)
-		robot_list.add_child(new_tile)
+	changed_energy_station.emit(energy_station)
+	update_gui()
 	pass
 
 func on_robot_selected(robot):
@@ -41,9 +33,24 @@ func update_gui():
 		$RobotDetails/RobotDescription/Control/RobotNameLabel.text =robot_type.get_type_name()
 		$RobotDetails/RobotDescription/Control/RobotDescriptionLabel.text = robot_type.robot_description
 		$RobotDetails/RobotDescription/RobotIcon.texture = robot_type.get_icon()
+		
 	else:
 		$RobotDetails.visible = false
+
 		pass
+
+	for child in $RobotsListSection/ScrollContainer/RobotsList.get_children():
+		child.queue_free()
+	
+	if energy_station != null:
+		for robot in energy_station.robots:
+			var robot_type = get_node("/root/Level").lookup_robot(robot.pickup_item)
+			
+			var new_tile = robot_list_tile.instantiate()
+			new_tile.set_robot(robot, robot_type.get_icon(), robot_type.get_type_name())
+			new_tile.set_parent_gui(self)
+			
+			$RobotsListSection/ScrollContainer/RobotsList.add_child(new_tile)
 	pass
 
 
@@ -60,4 +67,17 @@ func end_editing():
 
 func can_show():
 	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
-	
+
+func _on_add_robot_button_pressed():
+	$RobotSelectionPopup.show()
+	pass # Replace with function body.
+
+
+func _on_inventory_robot_gui_placed_robot():
+	$RobotSelectionPopup.hide()
+	pass # Replace with function body.
+
+
+func _on_close_popup_button_pressed():
+	$RobotSelectionPopup.hide()
+	pass # Replace with function body.

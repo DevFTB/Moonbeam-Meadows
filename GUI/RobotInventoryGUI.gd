@@ -2,7 +2,10 @@ extends VBoxContainer
 
 @export var inventory : InventoryComponent
 
+var energy_station = null
 var list_tile_scene = preload("res://GUI/inventory_robot_list_tile.tscn")
+
+signal placed_robot()
 
 func _ready():
 	inventory.inventory_modified.connect(_on_inventory_modified)
@@ -25,5 +28,12 @@ func update_gui():
 
 
 func on_place_button_pressed(robot: RobotResource):
-	get_node("/root/Level").place_robot_near_player(robot)
+	if get_node("/root/Level").place_robot_near_station(robot, energy_station):
+		placed_robot.emit()
+
 	pass
+
+
+func _on_energy_station_gui_changed_energy_station(new_energy_station:EnergyStation):
+	energy_station = new_energy_station
+	pass # Replace with function body.
