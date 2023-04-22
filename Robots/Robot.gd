@@ -130,14 +130,16 @@ func set_path(new_path: Array[Vector2]):
 		path_index = 0
 
 	pass
+func on_move_start():
+	pass	
 	
 func move_to_grid(grid_position: Vector2i):
+	on_move_start()
 	var current_position = get_current_position()
 	if grid_position != current_position:
 		if (current_position - grid_position).length() == 1:
 			direction =  grid_position - current_position
 			target_position = grid_position
-			("target %s" % str(target_position))
 			energy -= move_energy_cost
 			is_navigation_finished = false
 		else:

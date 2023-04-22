@@ -52,7 +52,7 @@ func on_body_exited(body: Node2D):
 
 func _input(event):
 	if event is InputEventKey:
-		if event.is_action_pressed("pickup"):
+		if event.is_action_pressed("pickup") and interacting_player != null:
 			start_pickup()
 		elif event.is_action_released("pickup"):
 			stop_pickup()

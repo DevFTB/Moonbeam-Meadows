@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bc8dvj0w1jewu"]
+[gd_scene load_steps=53 format=3 uid="uid://bc8dvj0w1jewu"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_57r43"]
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
 [ext_resource type="PackedScene" uid="uid://si140o2awqdt" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
+[ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_iruk3"]
 [ext_resource type="Script" path="res://Level/Trade Station/TradeStation.gd" id="8_3x22d"]
 [ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_iadx0"]
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
@@ -33,6 +34,7 @@
 [ext_resource type="Script" path="res://GUI/RobotInventoryGUI.gd" id="21_ktqqq"]
 [ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="28_48y4d"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
+[ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
 
@@ -104,7 +106,7 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_qn437")
 crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_v0lsh")])
 fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_57r43")])
-robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8")])
+robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8"), ExtResource("6_iruk3")])
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -475,18 +477,19 @@ size_flags_vertical = 2
 script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../../Player/FertiliserInventory")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer4"]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer5"]
 layout_mode = 2
-text = "Robots"
+text = "Robots
+"
 
-[node name="InventoryRobotGUI" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer4" node_paths=PackedStringArray("inventory")]
+[node name="Label3" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer5" node_paths=PackedStringArray("inventory")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("21_ktqqq")
+size_flags_vertical = 2
+script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../../Player/RobotInventory")
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
@@ -823,7 +826,10 @@ script = ExtResource("20_wew0j")
 
 [node name="Robots" type="Node2D" parent="."]
 
-[node name="Robot" parent="Robots" instance=ExtResource("35_74b3b")]
+[node name="WateringRobot" parent="Robots" instance=ExtResource("35_74b3b")]
+
+[node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
+position = Vector2(551, 404)
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")

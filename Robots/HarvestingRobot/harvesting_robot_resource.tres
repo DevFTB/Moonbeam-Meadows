@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RobotResource" load_steps=6 format=3 uid="uid://choblhjhtnuhb"]
+
+[ext_resource type="Script" path="res://Robots/RobotResource.gd" id="1_2uf1l"]
+[ext_resource type="Texture2D" uid="uid://dcw0unc4ct51o" path="res://Robots/HarvestingRobot/harvesting_robot.png" id="1_l3hbm"]
+[ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="1_tps6f"]
+[ext_resource type="Resource" uid="uid://bj22gf230c1eh" path="res://Robots/HarvestingRobot/harvesting_robot_item.tres" id="2_rwbp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hfow"]
+atlas = ExtResource("1_l3hbm")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_2uf1l")
+robot_type_name = "Harvesting Robot"
+robot_description = "A robot that harvests. Specially equipped to go over farmland"
+robot_icon = SubResource("AtlasTexture_6hfow")
+robot_item = ExtResource("2_rwbp5")
+entity_scene = ExtResource("1_tps6f")

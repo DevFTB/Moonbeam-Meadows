@@ -127,3 +127,6 @@ func highlight_tile(grid_position : Vector2i):
 func clear_highlight():
 	for cell in get_used_cells_by_id(1):
 		set_cell(1, cell, -1)
+
+func get_crop_entity(grid_position: Vector2i) -> CropEntity:
+	return crop_map.get(grid_position)
