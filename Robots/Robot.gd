@@ -1,19 +1,21 @@
 extends CharacterBody2D
 class_name Robot
 
-@export var robot_type : RobotResource
 @export var movement_speed: float = 125.0
 @export var movement_penalty : float = 0.25
 @export var move_energy_cost = 1
 @export var action_energy_cost = 3
 @export var path : Array[Vector2] = []
+@export var energy_capacity = 30
+
+@export var pickup_item : InventoryItem
 
 var path_index = 0
 var powered = true
 
 var last_acted = Vector2i.ZERO
 
-@onready var energy = robot_type.robot_energy_capacity
+@onready var energy = energy_capacity
 @onready var level = get_node("/root/Level") as Level
 
 var action_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
@@ -24,9 +26,14 @@ var is_navigation_finished = true
 var direction = Vector2i.ZERO
 var temp_path = []
 
+var parent_energy_station = null
+
 var astar : AStarGrid2D
 
 func _ready():
+
+	$ProximityInteractor.successful_pickup.connect(on_successful_pickup)
+
 	level.traversibility_updated.connect(on_traversability_update)
 	astar = AStarGrid2D.new()
 	astar.size = level.get_used_rect().size
@@ -150,3 +157,13 @@ func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
 
 func get_current_position() -> Vector2i:
 	return level.local_to_map(position)
+
+func on_successful_pickup(interacting_player: Player):
+	interacting_player.get_inventory(InventoryItem.ItemType.ROBOT).add(pickup_item, 1)
+	remove_self()
+	pass
+
+func remove_self():
+	if parent_energy_station != null:
+		parent_energy_station.remove_robot(self)
+	queue_free()

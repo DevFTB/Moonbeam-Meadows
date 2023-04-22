@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bdmo5ruhun88h"]
+[gd_scene load_steps=59 format=3 uid="uid://bc8dvj0w1jewu"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -7,18 +7,18 @@
 [ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_v0lsh"]
 [ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_57r43"]
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
-[ext_resource type="Script" path="res://Level/TradeStation.gd" id="5_f56v1"]
+[ext_resource type="Script" path="res://Level/Trade Station/TradeStation.gd" id="8_3x22d"]
 [ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_iadx0"]
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
 [ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
-[ext_resource type="Script" path="res://Level/GUIManager.gd" id="10_yck4d"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
-[ext_resource type="FontFile" uid="uid://co884e118qm4h" path="res://GUI/upheavtt.ttf" id="12_4a7m6"]
 [ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
 [ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="13_yumjg"]
 [ext_resource type="Script" path="res://Level/Currency/CurrencyGUI.gd" id="14_cssu7"]
+[ext_resource type="Script" path="res://GUI/GUIManager.gd" id="14_qo620"]
 [ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="15_wrucv"]
 [ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
 [ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="17_17121"]
@@ -29,15 +29,14 @@
 [ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="20_r57gi"]
 [ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="20_wew0j"]
 [ext_resource type="Texture2D" uid="uid://c2gmdstv82xv3" path="res://Level/Trade Station/trade_station.png" id="21_6af3s"]
+[ext_resource type="Script" path="res://GUI/RobotInventoryGUI.gd" id="21_ktqqq"]
 [ext_resource type="PackedScene" uid="uid://spk8mxahrjo3" path="res://Level/Energy Station/robot_list_tile.tscn" id="21_mjtxo"]
-[ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="25_cbu3v"]
-[ext_resource type="Script" path="res://Level/ErrorPassLabel.gd" id="26_d32qs"]
-[ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="29_ho6k8"]
+[ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="28_48y4d"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="31_d0ajy"]
-[ext_resource type="Script" path="res://Level/EditingCamera.gd" id="34_jlqph"]
-[ext_resource type="Script" path="res://Level/RobotAnimationController.gd" id="34_jpdug"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="34_nfl1j"]
+[ext_resource type="PackedScene" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
+[ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0yc4t"]
 atlas = ExtResource("34_nfl1j")
@@ -94,87 +93,6 @@ size = Vector2(60, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0saux"]
 size = Vector2(20, 14)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihevp"]
-bg_color = Color(0.611765, 0.584314, 0.721569, 1)
-border_width_bottom = 5
-border_color = Color(0.517647, 0.494118, 0.74902, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwolf"]
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.839216, 0.858824, 0.992157, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geu22"]
-bg_color = Color(0.6, 0.415686, 0.992157, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7c6f"]
-bg_color = Color(0.556863, 0.329412, 0.976471, 1)
-border_width_bottom = 5
-border_color = Color(0.262745, 0.219608, 0.745098, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x873"]
-bg_color = Color(0.482353, 0.156863, 0.917647, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color(0.196078, 0.156863, 0.584314, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmx2m"]
-bg_color = Color(0.368627, 0.615686, 0.72549, 0.392157)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.458824, 0.513726, 0.898039, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_size = 8
-
-[sub_resource type="Theme" id="Theme_lqq5a"]
-default_font = ExtResource("12_4a7m6")
-Button/font_sizes/font_size = 20
-Button/styles/disabled = SubResource("StyleBoxFlat_ihevp")
-Button/styles/focus = SubResource("StyleBoxFlat_hwolf")
-Button/styles/hover = SubResource("StyleBoxFlat_geu22")
-Button/styles/normal = SubResource("StyleBoxFlat_g7c6f")
-Button/styles/pressed = SubResource("StyleBoxFlat_3x873")
-Panel/styles/panel = SubResource("StyleBoxFlat_jmx2m")
-
 [sub_resource type="LabelSettings" id="LabelSettings_ykmqp"]
 font_size = 24
 
@@ -215,8 +133,6 @@ font_color = Color(0.231373, 0.584314, 0.494118, 1)
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
-
 [node name="Level" type="TileMap"]
 y_sort_enabled = true
 tile_set = ExtResource("1_7871s")
@@ -233,6 +149,7 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_qn437")
 crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_v0lsh")])
 fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_57r43")])
+robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8")])
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -249,12 +166,15 @@ offset = Vector2(0, -16)
 
 [node name="InteractArea" type="Area2D" parent="Energy Station"]
 position = Vector2(0, -14)
+collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Energy Station/InteractArea"]
 shape = SubResource("CircleShape2D_p2cju")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Energy Station"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Energy Station/StaticBody2D"]
 position = Vector2(0, -0.5)
@@ -262,19 +182,22 @@ shape = SubResource("RectangleShape2D_8rcr6")
 
 [node name="Trade Station" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
 position = Vector2(320, 256)
-script = ExtResource("5_f56v1")
+script = ExtResource("8_3x22d")
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/TradeStationGUI")
 
 [node name="Sprite2D" type="Sprite2D" parent="Trade Station"]
 texture = ExtResource("21_6af3s")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Trade Station"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trade Station/StaticBody2D"]
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_111q6")
 
 [node name="InteractArea" type="Area2D" parent="Trade Station"]
+collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trade Station/InteractArea"]
@@ -282,6 +205,7 @@ shape = SubResource("CircleShape2D_p2cju")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(418, 328)
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("2_p03jk")
 
@@ -289,10 +213,10 @@ script = ExtResource("2_p03jk")
 zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0, 21)
 shape = SubResource("RectangleShape2D_0saux")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(0, -22)
 sprite_frames = ExtResource("2_373r8")
 
 [node name="SeedInventory" type="Node" parent="Player"]
@@ -307,6 +231,10 @@ cheat_mode = false
 script = ExtResource("9_iadx0")
 cheat_mode = false
 
+[node name="RobotInventory" type="Node" parent="Player"]
+script = ExtResource("9_iadx0")
+cheat_mode = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
@@ -316,8 +244,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_lqq5a")
-script = ExtResource("10_yck4d")
+theme = ExtResource("13_yumjg")
+script = ExtResource("14_qo620")
 exclusive_gui_screens = Array[Control]([null, null])
 
 [node name="ToolGUI" type="VBoxContainer" parent="CanvasLayer/GUI"]
@@ -614,6 +542,20 @@ size_flags_vertical = 2
 script = ExtResource("10_u7prv")
 inventory = NodePath("../../../../../../../../Player/FertiliserInventory")
 
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer4"]
+layout_mode = 2
+text = "Robots"
+
+[node name="InventoryRobotGUI" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer4" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("21_ktqqq")
+inventory = NodePath("../../../../../../../../Player/RobotInventory")
+
 [node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
 layout_mode = 1
 anchors_preset = 1
@@ -881,7 +823,7 @@ text = "Path Invalid"
 label_settings = SubResource("LabelSettings_p54c1")
 horizontal_alignment = 1
 autowrap_mode = 2
-script = ExtResource("26_d32qs")
+script = ExtResource("28_48y4d")
 error_text = "Path Invalid"
 error_settings = SubResource("LabelSettings_p54c1")
 pass_text = "Path Valid"
@@ -902,20 +844,7 @@ script = ExtResource("20_wew0j")
 
 [node name="Robots" type="Node2D" parent="."]
 
-[node name="Robot" type="CharacterBody2D" parent="Robots" groups=["robot"]]
-position = Vector2(496, 400)
-motion_mode = 1
-script = ExtResource("29_ho6k8")
-robot_type = ExtResource("30_acke8")
-
-[node name="RobotAnimationController" type="AnimatedSprite2D" parent="Robots/Robot"]
-position = Vector2(0, -10)
-sprite_frames = ExtResource("25_cbu3v")
-animation = &"power_up"
-script = ExtResource("34_jpdug")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Robots/Robot"]
-shape = SubResource("CircleShape2D_we5yd")
+[node name="Robot" parent="Robots" instance=ExtResource("35_74b3b")]
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")
@@ -928,7 +857,7 @@ final_tile_colour = Color(0.290196, 0.411765, 0.8, 1)
 position = Vector2(416, 326)
 enabled = false
 zoom = Vector2(2, 2)
-script = ExtResource("34_jlqph")
+script = ExtResource("37_irf5s")
 
 [connection signal="body_entered" from="Energy Station/InteractArea" to="Energy Station" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="Energy Station/InteractArea" to="Energy Station" method="_on_interact_area_body_exited"]

@@ -61,7 +61,7 @@ func fill_water_tank():
 	water_tank = max_water_tank
 
 const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
-func get_inventory(item_type: ItemType):
+func get_inventory(item_type: ItemType) -> InventoryComponent:
 	match(item_type):
 		ItemType.SEED:
 			return $SeedInventory
@@ -69,7 +69,8 @@ func get_inventory(item_type: ItemType):
 			return $FertiliserInventory
 		ItemType.PRODUCE:
 			return $ProduceInventory
-
+		ItemType.ROBOT:
+			return $RobotInventory
 	return null
 	
 func _input(event):

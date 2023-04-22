@@ -3,15 +3,17 @@ extends Control
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
 @onready var robot_list = $RobotsListSection/ScrollContainer/RobotsList
 @export var path_editing_gui : Control
+
 var selected_robot = null
 var energy_station = null
 
+signal opened_menu
+signal closed_menu
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
 	pass # Replace with function body.
-
 
 func set_energy_station(new_energy_station: EnergyStation):
 	energy_station = new_energy_station
@@ -19,9 +21,10 @@ func set_energy_station(new_energy_station: EnergyStation):
 		child.queue_free()
 		
 	for robot in energy_station.robots:
-		(robot)
+		var level = get_node("/root/Level")
 		var new_tile = robot_list_tile.instantiate()
-		new_tile.set_robot(robot)
+		var robot_type = level.lookup_robot(robot.pickup_item)
+		new_tile.set_robot(robot, robot_type.get_icon(), robot_type.get_type_name())
 		new_tile.set_parent_gui(self)
 		robot_list.add_child(new_tile)
 	pass
@@ -33,10 +36,11 @@ func on_robot_selected(robot):
 
 func update_gui():
 	if selected_robot != null:
+		var robot_type = get_node("/root/Level").lookup_robot(selected_robot.pickup_item)
 		$RobotDetails.visible = true
-		$RobotDetails/RobotDescription/Control/RobotNameLabel.text = selected_robot.robot_type.get_type_name()
-		$RobotDetails/RobotDescription/Control/RobotDescriptionLabel.text = selected_robot.robot_type.robot_description
-		$RobotDetails/RobotDescription/RobotIcon.texture = selected_robot.robot_type.get_icon()
+		$RobotDetails/RobotDescription/Control/RobotNameLabel.text =robot_type.get_type_name()
+		$RobotDetails/RobotDescription/Control/RobotDescriptionLabel.text = robot_type.robot_description
+		$RobotDetails/RobotDescription/RobotIcon.texture = robot_type.get_icon()
 	else:
 		$RobotDetails.visible = false
 		pass

@@ -5,6 +5,7 @@ var crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 
 @export var crops : Array[CropResource] = []
 @export var fertilisers : Array[FertiliserResource] = []
+@export var robots : Array[RobotResource] = []
 var crop_map = {}
 
 @export var base_temp = 20
@@ -84,6 +85,23 @@ func harvest_land(grid_position: Vector2i, entity: Node2D):
 			crop_entity.harvest()
 	pass
 
+func place_robot_near_player(robot: RobotResource) -> bool:
+	var player_grid_pos = local_to_map($Player.position)
+	
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			var grid_pos = Vector2i(player_grid_pos.x + i, player_grid_pos.y + j)
+			if is_traversible(grid_pos) and not crop_map.has(grid_pos) and grid_pos != player_grid_pos and $Robots.get_children().all(func(r): return r.get_current_position() != grid_pos):
+				if $Player.get_inventory(InventoryItem.ItemType.ROBOT).remove(robot.robot_item, 1):
+					var robot_entity = robot.generate_entity()
+
+					robot_entity.position = map_to_local(grid_pos)
+
+					$Robots.add_child(robot_entity)
+					return true
+	
+	return false
+
 func lookup_crop(item: InventoryItem):
 	for crop in crops:
 		if crop.seed_item == item or crop.produce_item == item:
@@ -95,6 +113,9 @@ func lookup_fertiliser(item: InventoryItem):
 		if fertiliser.fertiliser_item == item:
 			return fertiliser
 	return null
+
+func lookup_robot(item: InventoryItem):
+	return robots.filter(func(r): return r.robot_item == item).front()
 
 var highlight = preload("res://Level/hightlight.png")
 func highlight_tile(grid_position : Vector2i):

@@ -2,12 +2,13 @@ extends InteractableConstruction
 class_name EnergyStation
 
 @export var power_range = 2
-@onready var robots = get_tree().get_nodes_in_group("robot")
+var robots = []
 
 var power_tiles = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	calculate_power_tiles()
+	for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)
 	pass # Replace with function body.
 
 func calculate_power_tiles():
@@ -16,6 +17,11 @@ func calculate_power_tiles():
 	for i in range(-power_range, power_range + 1):
 		for j in range(-power_range, power_range + 1):
 			power_tiles.append(grid_position + Vector2i(i, j))
+
+func add_robot(robot: Robot) -> void:
+	robots.append(robot)
+	robot.parent_energy_station = self
+	gui.update_gui()
 
 func set_gui_owner():
 	gui.set_energy_station(self)
@@ -32,3 +38,7 @@ func hide_area():
 	var level = get_node("/root/Level") as Level 	
 	level.clear_highlight()
 	pass
+
+func remove_robot(robot: Robot) -> void:
+	robots.erase(robot)
+	gui.update_gui()
