@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b5s3wfvixcbtk"]
+[gd_scene load_steps=59 format=3 uid="uid://b5s3wfvixcbtk"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -9,11 +9,13 @@
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
 [ext_resource type="PackedScene" uid="uid://si140o2awqdt" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
 [ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_iruk3"]
+[ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_ohfto"]
 [ext_resource type="PackedScene" uid="uid://clviqes13sw1b" path="res://Level/Trade Station/trade_station.tscn" id="8_oo5fl"]
 [ext_resource type="Script" path="res://Level/DepositBox.gd" id="9_fo6d0"]
 [ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_iadx0"]
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
 [ext_resource type="Texture2D" uid="uid://j0e4jncrtuqr" path="res://Level/DepositBox/deposit_box.png" id="10_16se4"]
+[ext_resource type="Resource" uid="uid://cjkxor4b8jp5h" path="res://Level/Crops/Resources/item_moon_wheat_seeds.tres" id="10_bgtt6"]
 [ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
@@ -40,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
+[ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3fxa"]
 size = Vector2(30, 26)
@@ -109,7 +112,7 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_qn437")
 crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_v0lsh")])
 fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_57r43")])
-robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8"), ExtResource("6_iruk3")])
+robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8"), ExtResource("6_iruk3"), ExtResource("7_ohfto")])
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -122,6 +125,11 @@ gui = NodePath("../CanvasLayer/GUI/OverscreenUI/TradeStationGUI")
 [node name="DepositBox" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
 position = Vector2(624, 304)
 script = ExtResource("9_fo6d0")
+providing_items = true
+item_types = Array[int]([1, 0])
+initial_items = {
+ExtResource("10_bgtt6"): 5
+}
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/DepositBoxGUI")
 
 [node name="Sprite2D" type="Sprite2D" parent="DepositBox"]
@@ -163,21 +171,17 @@ sprite_frames = ExtResource("2_373r8")
 
 [node name="SeedInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
-cheat_mode = false
 inventory_type = 0
 
 [node name="ProduceInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
-cheat_mode = false
 
 [node name="FertiliserInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
-cheat_mode = false
 inventory_type = 2
 
 [node name="RobotInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
-cheat_mode = false
 inventory_type = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -883,6 +887,9 @@ script = ExtResource("20_wew0j")
 
 [node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
 position = Vector2(624, 240)
+
+[node name="PlanterRobot" parent="Robots" instance=ExtResource("40_4ntqc")]
+position = Vector2(592, 368)
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")

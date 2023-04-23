@@ -10,6 +10,9 @@ class_name Robot
 
 @export var pickup_item : InventoryItem
 
+@export var should_deposit = false
+@export var should_withdraw = false
+
 var path_index = 0
 var powered = true
 
@@ -32,6 +35,7 @@ var parent_energy_station = null
 var astar : AStarGrid2D
 
 var acted_last_tile = false
+var temp_path_completed = false
 
 func _ready():
 
@@ -61,7 +65,7 @@ func _physics_process(_delta):
 
 			# travelling temp path overrides normal path
 			if temp_path.is_empty():
-
+				temp_path_completed  = true
 				# start moving to next grid in path if possible
 				if energy >= move_energy_cost:
 					path_index = (path_index + 1) % path.size()
@@ -104,9 +108,9 @@ func _physics_process(_delta):
 					is_navigation_finished = true
 				else:
 					velocity = actual_movement_speed * direction
-					if temp_path.is_empty() and not path.is_empty():
+					if temp_path_completed and not path.is_empty():
 						if not path.has(get_current_position()):
-							print(get_current_position())
+							print("powering down. not on path " , get_current_position())
 							power_down()
 					move_and_slide()
 			else:
@@ -134,6 +138,7 @@ func check_power():
 			power_on()
 	else:
 		if powered:
+			print("powering down. no energy or no path")
 			power_down()
 
 func set_path(new_path: Array[Vector2i]):
@@ -165,6 +170,7 @@ func move_to_grid(grid_position: Vector2i):
 		else:
 			position = level.map_to_local(current_position)
 			temp_path = astar.get_id_path(current_position, grid_position).slice(1)
+			temp_path_completed =false
 		pass
 	else:
 		is_navigation_finished = true
@@ -175,20 +181,24 @@ func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_item
 	var total_items = 0
 	if not inventories.is_empty():
 		for item_type in item_types:
-			var inv = inventories.filter(func(x): return x.inventory_type == item_type).front()
-			for item in inv.inventory:
-				print(inv.inventory[item], ", ", max_total_items-total_items)
-				var amnt =  min(inv.inventory[item], max_total_items-total_items)
-				if deposit.has(item):
-					deposit[item] += amnt
-				else:
-					deposit[item] = amnt
-					unique_items += 1
-				total_items += amnt
-				if unique_items >= max_unique_items or total_items >= max_total_items:
-					return deposit
+			var invs = inventories.filter(func(x): return x.inventory_type == item_type)
+			if not invs.is_empty():
+				var inv = invs.front()
+				if inv != null:
+					for item in inv.inventory:
+						print(inv.inventory[item], ", ", max_total_items-total_items)
+						var amnt =  min(inv.inventory[item], max_total_items-total_items)
+						if deposit.has(item):
+							deposit[item] += amnt
+						else:
+							deposit[item] = amnt
+							unique_items += 1
+						total_items += amnt
+						if unique_items >= max_unique_items or total_items >= max_total_items:
+							return deposit
 
 	return deposit
+
 func confirm_deposit(deposit: Dictionary):
 	# remove items from inventories according to the deposit
 	for item in deposit:
@@ -198,6 +208,28 @@ func confirm_deposit(deposit: Dictionary):
 		deposit[item] -= amount
 		if deposit[item] <= 0:
 			break
+
+func get_withdrawal_params():
+	var params = {}
+	for inv in inventories:
+		params[inv.inventory_type] = inv.get_available_capacity()
+	return params
+	pass
+
+func confirm_withdrawal(withdrawal: Dictionary):
+	# add items to inventories according to the withdrawal
+	for item in withdrawal:
+		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
+		
+		if inv == null or inv.get_available_capacity() < withdrawal[item]:
+			return false
+
+	for item in withdrawal:
+		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
+		if not inv.add(item, withdrawal[item]):
+			return false
+	
+	return true
 
 func add_energy(amount: int) -> void:
 	energy = min(energy + amount, energy_capacity)

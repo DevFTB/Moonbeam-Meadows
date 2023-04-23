@@ -66,7 +66,10 @@ func is_fully_grown():
 
 func fill_water():
 	water_level = 1
-	
+
+func has_crop():
+	return crop != null
+
 func harvest():
 	crop = null
 	growth_prop = 0

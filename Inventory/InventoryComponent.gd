@@ -3,11 +3,8 @@ class_name InventoryComponent
 
 @export var inventory_size = 5
 
-# -1 means infinite stack size.
-@export var stack_size = -1
-
 # items don't get used up
-@export var cheat_mode = true
+@export var cheat_mode = false
 
 @export var inventory_type : InventoryItem.ItemType = InventoryItem.ItemType.PRODUCE
 
@@ -16,9 +13,12 @@ signal inventory_modified
 var inventory = {}
 var selected = null
 
-func add(item: Variant, amount : int):
+func add(item: Variant, amount : int) -> bool:
 	if inventory.has(item):
-		inventory[item] += amount
+		if amount + get_amount_of_items() > inventory_size:
+			return false
+		else:
+			inventory[item] += amount
 	else:
 		if inventory_size > inventory.size():
 			inventory[item] = amount
@@ -27,6 +27,7 @@ func add(item: Variant, amount : int):
 		selected = inventory.keys().front()
 	
 	inventory_modified.emit()
+	return true
 
 func remove(item: Variant, amount : int = 1):
 	if inventory.has(item):
@@ -56,10 +57,10 @@ func get_amount(item: Variant):
 func get_amount_of_unique_items():
 	return inventory.size()
 func get_amount_of_items():
-	var amount = 0
-	for item in inventory:
-		amount += inventory[item]
-	return amount
+	return inventory.values().reduce(func(a, b): return a + b,0)
 	
 func get_selected():
 	return selected
+
+func get_available_capacity():
+	return inventory_size - inventory.values().reduce(func(a, b): return a + b,0)

@@ -11,6 +11,6 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("2_843jo")
 item_name = "Watering Robot"
 item_icon = SubResource("AtlasTexture_w2tjx")
-item_type = 0
+item_type = 3
 buy_price = 20
 sell_price = 10

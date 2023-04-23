@@ -23,6 +23,7 @@ motion_mode = 1
 script = ExtResource("1_jlpvt")
 movement_penalty = 0.5
 pickup_item = ExtResource("2_yh3pa")
+should_deposit = true
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-12, -7)
@@ -70,4 +71,4 @@ show_percentage = false
 
 [node name="ProduceInventory" type="Node" parent="."]
 script = ExtResource("7_xumjc")
-cheat_mode = false
+inventory_size = 30
