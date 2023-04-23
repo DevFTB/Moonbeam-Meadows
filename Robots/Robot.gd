@@ -17,6 +17,7 @@ var last_acted = Vector2i.ZERO
 
 @onready var energy = energy_capacity
 @onready var level = get_node("/root/Level") as Level
+@onready var inventories = get_children().filter(func(x): return x is InventoryComponent)
 
 var action_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 
@@ -44,9 +45,8 @@ func _ready():
 	for cell in level.get_used_cells_by_id(0):
 		if not level.get_cell_tile_data(0, cell).get_custom_data("r_traversible"):
 			astar.set_point_solid(cell)
-	
-	pass
-	
+
+	pass	
 	
 func _physics_process(_delta):
 	if is_navigation_finished:
@@ -78,13 +78,18 @@ func _physics_process(_delta):
 							do_action(action_position)
 
 					last_acted = current_position
-					("--------------------------------------")
 			else:
 				# temp path doesn't cost energy.
 				move_to_grid(temp_path.pop_front())
 	else:
 		# movement code
 		if target_position != null:
+#			if direction == Vector2i.UP or direction == Vector2i.DOWN:
+#				if position.x - 16 % 32 != 0:
+#					position.x = floor(position.x / 32) * 32 + 16
+#			elif direction == Vector2i.LEFT or direction == Vector2i.RIGHT:
+#				if position.y - 16 % 32 != 0:
+#					position.y = floor(position.y / 32) * 32 + 16
 			var movement_delta = movement_speed * _delta * Vector2(direction)
 			var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
 			if disp < 5:
@@ -132,10 +137,13 @@ func set_path(new_path: Array[Vector2]):
 	pass
 func on_move_start():
 	pass	
-	
+func snap_to_grid():
+	position = level.map_to_local(get_current_position())
 func move_to_grid(grid_position: Vector2i):
 	on_move_start()
+	snap_to_grid()
 	var current_position = get_current_position()
+
 	if grid_position != current_position:
 		if (current_position - grid_position).length() == 1:
 			direction =  grid_position - current_position
@@ -148,7 +156,37 @@ func move_to_grid(grid_position: Vector2i):
 		pass
 	else:
 		is_navigation_finished = true
-		
+
+func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_items: int, max_total_items: int) -> Dictionary:
+	var deposit = {}
+	var unique_items = 0
+	var total_items = 0
+
+	for item_type in item_types:
+		var inv = inventories.filter(func(x): return x.inventory_type == item_type).front()
+		for item in inv.inventory:
+			print(inv.inventory[item], ", ", max_total_items-total_items)
+			var amnt =  min(inv.inventory[item], max_total_items-total_items)
+			if deposit.has(item):
+				deposit[item] += amnt
+			else:
+				deposit[item] = amnt
+				unique_items += 1
+			total_items += amnt
+			if unique_items >= max_unique_items or total_items >= max_total_items:
+				return deposit
+
+	return deposit
+func confirm_deposit(deposit: Dictionary):
+	# remove items from inventories according to the deposit
+	for item in deposit:
+		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
+		var amount = min(inv.get_amount(item), deposit[item])
+		inv.remove(item, amount)
+		deposit[item] -= amount
+		if deposit[item] <= 0:
+			break
+
 func add_energy(amount: int) -> void:
 	energy = min(energy + amount, energy_capacity)
 	print("added %d energy, now at %d" % [amount, energy])

@@ -8,6 +8,9 @@ class_name InventoryComponent
 
 # items don't get used up
 @export var cheat_mode = true
+
+@export var inventory_type : InventoryItem.ItemType = InventoryItem.ItemType.PRODUCE
+
 signal inventory_modified
 
 var inventory = {}
@@ -49,6 +52,14 @@ func get_amount(item: Variant):
 		return inventory[item]
 	else:
 		return 0
+
+func get_amount_of_unique_items():
+	return inventory.size()
+func get_amount_of_items():
+	var amount = 0
+	for item in inventory:
+		amount += inventory[item]
+	return amount
 	
 func get_selected():
 	return selected

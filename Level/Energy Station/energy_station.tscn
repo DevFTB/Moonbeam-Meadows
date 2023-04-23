@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://si140o2awqdt"]
+[gd_scene load_steps=11 format=3 uid="uid://si140o2awqdt"]
 
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="1_ykrsn"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="2_4ubjf"]
@@ -47,10 +47,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p2cju"]
-radius = 88.8144
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lggnc"]
-size = Vector2(96, 96)
+radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rcr6"]
 size = Vector2(24, 29)
@@ -73,14 +70,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea"]
 shape = SubResource("CircleShape2D_p2cju")
 
-[node name="RobotInteractArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RobotInteractArea"]
-shape = SubResource("RectangleShape2D_lggnc")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 0
@@ -90,10 +79,9 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_8rcr6")
 
 [node name="PulseTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [connection signal="body_entered" from="PlayerInteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="PlayerInteractArea" to="." method="_on_interact_area_body_exited"]
-[connection signal="body_entered" from="RobotInteractArea" to="." method="_on_interact_area_body_entered"]
-[connection signal="body_exited" from="RobotInteractArea" to="." method="_on_interact_area_body_exited"]
 [connection signal="timeout" from="PulseTimer" to="." method="_on_pulse_timer_timeout"]

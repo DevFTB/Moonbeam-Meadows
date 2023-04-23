@@ -9,8 +9,10 @@ var energy_station = null
 signal changed_energy_station(energy_station: EnergyStation)
 signal opened_menu
 signal closed_menu
+var level
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	level = get_node("/root/Level")
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
 	pass # Replace with function body.
@@ -28,7 +30,7 @@ func on_robot_selected(robot):
 
 func update_gui():
 	if selected_robot != null:
-		var robot_type = get_node("/root/Level").lookup_robot(selected_robot.pickup_item)
+		var robot_type = level.lookup_robot(selected_robot.pickup_item)
 		$RobotDetails.visible = true
 		$RobotDetails/RobotDescription/Control/RobotNameLabel.text =robot_type.get_type_name()
 		$RobotDetails/RobotDescription/Control/RobotDescriptionLabel.text = robot_type.robot_description
@@ -44,7 +46,7 @@ func update_gui():
 	
 	if energy_station != null:
 		for robot in energy_station.robots:
-			var robot_type = get_node("/root/Level").lookup_robot(robot.pickup_item)
+			var robot_type = level.lookup_robot(robot.pickup_item)
 			
 			var new_tile = robot_list_tile.instantiate()
 			new_tile.set_robot(robot, robot_type.get_icon(), robot_type.get_type_name())
@@ -72,9 +74,9 @@ func _on_add_robot_button_pressed():
 	$RobotSelectionPopup.show()
 	pass # Replace with function body.
 
-
-func _on_inventory_robot_gui_placed_robot():
-	$RobotSelectionPopup.hide()
+func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
+	if level.place_robot_near_station(level.lookup_robot(item), energy_station):
+		$RobotSelectionPopup.hide()
 	pass # Replace with function body.
 
 

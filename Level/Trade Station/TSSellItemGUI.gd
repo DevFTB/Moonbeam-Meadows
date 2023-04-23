@@ -69,7 +69,8 @@ func _on_sell_button_button_up():
 	pass # Replace with function body.
 
 func update_gui():
-	$VBoxContainer/SellButton.disabled = player_inventory.get_amount(item) == 0
+	if player_inventory != null:
+		$VBoxContainer/SellButton.disabled = player_inventory.get_amount(item) == 0
 	pass
 
 func set_trade_station(new_trade_station: Node):

@@ -63,7 +63,7 @@ texture = ExtResource("3_yovqt")
 lifetime = 0.4
 
 [node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0, -2)
 sprite_frames = ExtResource("3_pjssa")
 animation = &"powered"
 script = ExtResource("4_kvdie")

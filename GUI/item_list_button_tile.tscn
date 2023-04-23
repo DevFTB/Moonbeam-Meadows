@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://8s5gvu1etb4j"]
+[gd_scene load_steps=5 format=3 uid="uid://b5dkgv4h0bld8"]
 
-[ext_resource type="Script" path="res://GUI/InventoryRobotListTile.gd" id="1_2isvl"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_kjom0"]
+[ext_resource type="Script" path="res://GUI/InventoryListButtonTile.gd" id="2_wf4h5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fb33o"]
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsff3"]
 
-[node name="InventoryRobotListTile" type="HBoxContainer"]
+[node name="ItemListButtonTile" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 offset_right = 200.0
 offset_bottom = 60.0
-script = ExtResource("1_2isvl")
+theme = ExtResource("1_kjom0")
+script = ExtResource("2_wf4h5")
 
 [node name="AmountLabel" type="Label" parent="."]
 layout_mode = 2
@@ -26,7 +28,7 @@ label_settings = SubResource("LabelSettings_jsff3")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="PlaceButton" type="Button" parent="."]
+[node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 size_flags_vertical = 4

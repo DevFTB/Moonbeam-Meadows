@@ -22,12 +22,13 @@ func _on_interact_area_body_exited(body:Node2D):
 	if body == interacting_player:
 		interacting_player.unfreeze()
 		interacting_player = null
-		gui.hide()
+		if gui != null:
+			gui.hide()
 	pass # Replace with function body.
 
 func _input(event):
 	if event.is_action_pressed("interact") and interacting_player != null:
-		if gui.can_show():
+		if gui != null and gui.can_show():
 			gui.visible = not gui.visible
 			if gui.visible:
 				interacting_player.freeze() 
