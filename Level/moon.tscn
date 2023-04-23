@@ -880,8 +880,6 @@ script = ExtResource("20_wew0j")
 [node name="Robots" type="Node2D" parent="."]
 
 [node name="WateringRobot" parent="Robots" instance=ExtResource("35_74b3b")]
-process_mode = 4
-visible = false
 
 [node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
 position = Vector2(624, 240)

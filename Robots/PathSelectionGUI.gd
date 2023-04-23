@@ -6,7 +6,7 @@ extends Control
 
 var dragging = false
 var last_mouse_pos : Vector2 = Vector2.ZERO
-var grid_positions: Array[Vector2] = []
+var grid_positions: Array[Vector2i] = []
 var current_robot = null
 var current_energy_station = null
 signal finished_editing
@@ -41,7 +41,7 @@ func update_path_visual():
 	pass
 
 func check_pos(mouse_position: Vector2):
-	var new_point = Vector2(level.local_to_map(mouse_position))
+	var new_point = level.local_to_map(mouse_position)
 	var is_not_same = grid_positions.size() == 0 or grid_positions.back() != new_point
 	var is_traversible = level.get_cell_tile_data(0, new_point).get_custom_data("r_traversible")
 	var is_continuous = grid_positions.size() == 0 or (grid_positions.back() - new_point).length() == 1

@@ -5,7 +5,7 @@ class_name Robot
 @export var movement_penalty : float = 0.25
 @export var move_energy_cost = 1
 @export var action_energy_cost = 3
-@export var path : Array[Vector2] = []
+@export var path : Array[Vector2i] = []
 @export var energy_capacity = 30
 
 @export var pickup_item : InventoryItem
@@ -31,6 +31,8 @@ var parent_energy_station = null
 
 var astar : AStarGrid2D
 
+var acted_last_tile = false
+
 func _ready():
 
 	$ProximityInteractor.successful_pickup.connect(on_successful_pickup)
@@ -50,6 +52,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	if is_navigation_finished:
+		acted_last_tile = false
 		# check if should power down
 		if powered:
 			if not has_energy() or path.size() <= 1:
@@ -76,30 +79,38 @@ func _physics_process(_delta):
 						var action_position = current_position + action
 						if can_do_action(action_position) and energy >= action_energy_cost:
 							do_action(action_position)
+							acted_last_tile = true
 
 					last_acted = current_position
+					
 			else:
 				# temp path doesn't cost energy.
 				move_to_grid(temp_path.pop_front())
 	else:
+		if powered:
 		# movement code
-		if target_position != null:
-#			if direction == Vector2i.UP or direction == Vector2i.DOWN:
-#				if position.x - 16 % 32 != 0:
-#					position.x = floor(position.x / 32) * 32 + 16
-#			elif direction == Vector2i.LEFT or direction == Vector2i.RIGHT:
-#				if position.y - 16 % 32 != 0:
-#					position.y = floor(position.y / 32) * 32 + 16
-			var movement_delta = movement_speed * _delta * Vector2(direction)
-			var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
-			if disp < 5:
-				global_position = level.map_to_local(target_position)
-				is_navigation_finished = true
+			if target_position != null :
+	#			if direction == Vector2i.UP or direction == Vector2i.DOWN:
+	#				if position.x - 16 % 32 != 0:
+	#					position.x = floor(position.x / 32) * 32 + 16
+	#			elif direction == Vector2i.LEFT or direction == Vector2i.RIGHT:
+	#				if position.y - 16 % 32 != 0:
+	#					position.y = floor(position.y / 32) * 32 + 16
+				var actual_movement_speed = movement_speed if not acted_last_tile else movement_speed * movement_penalty 
+				var movement_delta = actual_movement_speed * _delta * Vector2(direction)
+				var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
+				if disp < 5:
+					global_position = level.map_to_local(target_position)
+					is_navigation_finished = true
+				else:
+					velocity = actual_movement_speed * direction
+					if temp_path.is_empty() and not path.is_empty():
+						if not path.has(get_current_position()):
+							print(get_current_position())
+							power_down()
+					move_and_slide()
 			else:
-				velocity = movement_speed * direction
-				move_and_slide()
-		else:
-			is_navigation_finished = true
+				is_navigation_finished = true
 				
 func can_do_action(grid_position: Vector2i)->bool:
 	return false
@@ -125,20 +136,21 @@ func check_power():
 		if powered:
 			power_down()
 
-func set_path(new_path: Array[Vector2]):
+func set_path(new_path: Array[Vector2i]):
 	path = new_path
 	check_power()
 	if powered:
-		move_to_grid(path[1])
-		path_index = 1
-	else:
-		path_index = 0
+		move_to_grid(path[0])
 
+	path_index = 0
 	pass
+	
 func on_move_start():
-	pass	
+	pass
+	
 func snap_to_grid():
 	position = level.map_to_local(get_current_position())
+	
 func move_to_grid(grid_position: Vector2i):
 	on_move_start()
 	snap_to_grid()
@@ -161,20 +173,20 @@ func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_item
 	var deposit = {}
 	var unique_items = 0
 	var total_items = 0
-
-	for item_type in item_types:
-		var inv = inventories.filter(func(x): return x.inventory_type == item_type).front()
-		for item in inv.inventory:
-			print(inv.inventory[item], ", ", max_total_items-total_items)
-			var amnt =  min(inv.inventory[item], max_total_items-total_items)
-			if deposit.has(item):
-				deposit[item] += amnt
-			else:
-				deposit[item] = amnt
-				unique_items += 1
-			total_items += amnt
-			if unique_items >= max_unique_items or total_items >= max_total_items:
-				return deposit
+	if not inventories.is_empty():
+		for item_type in item_types:
+			var inv = inventories.filter(func(x): return x.inventory_type == item_type).front()
+			for item in inv.inventory:
+				print(inv.inventory[item], ", ", max_total_items-total_items)
+				var amnt =  min(inv.inventory[item], max_total_items-total_items)
+				if deposit.has(item):
+					deposit[item] += amnt
+				else:
+					deposit[item] = amnt
+					unique_items += 1
+				total_items += amnt
+				if unique_items >= max_unique_items or total_items >= max_total_items:
+					return deposit
 
 	return deposit
 func confirm_deposit(deposit: Dictionary):
