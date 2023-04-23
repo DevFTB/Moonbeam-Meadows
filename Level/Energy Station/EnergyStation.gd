@@ -8,6 +8,7 @@ var power_tiles = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$RobotInteractor.update_range(power_range)
 	calculate_power_tiles()
 	for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)
 	pass # Replace with function body.
@@ -50,17 +51,26 @@ func _on_pulse_timer_timeout():
 	pass # Replace with function body.
 
 func pulse():
-	var pulse_query_params = PhysicsShapeQueryParameters2D.new()
-	pulse_query_params.collision_mask = 0b10
-
-	var query_shape = RectangleShape2D.new()
-	query_shape.size = Vector2(32 * (power_range + 1), 32 * (power_range + 1))
-	pulse_query_params.shape = query_shape
-	pulse_query_params.transform = get_global_transform()
-	var intersected_shapes = get_world_2d().direct_space_state.intersect_shape(pulse_query_params)
-	print(intersected_shapes)
-	for shape in intersected_shapes: 
-		if shape["collider"].is_in_group("robot"):
-			var robot = shape["collider"] as Robot
-			robot.add_energy(99999)
+#	var pulse_query_params = PhysicsShapeQueryParameters2D.new()
+#	pulse_query_params.collision_mask = 0b10
+#
+#	var query_shape = RectangleShape2D.new()
+#	query_shape.size = Vector2(32 * (power_range + 1), 32 * (power_range + 1))
+#	pulse_query_params.shape = query_shape
+#	pulse_query_params.transform = get_global_transform()
+#	var intersected_shapes = get_world_2d().direct_space_state.intersect_shape(pulse_query_params)
+#	print(intersected_shapes)
+#	for shape in intersected_shapes: 
+#		if shape["collider"].is_in_group("robot"):
+#			var robot = shape["collider"] as Robot
+#			robot.add_energy(99999)
 	pass
+
+
+func _on_robot_interactor_robot_entered(robot):
+	robot.add_energy(99999)
+	pass # Replace with function body.
+
+
+func _on_robot_interactor_robot_exited(robot):
+	pass # Replace with function body.

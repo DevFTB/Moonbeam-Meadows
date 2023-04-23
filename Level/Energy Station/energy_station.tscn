@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://si140o2awqdt"]
+[gd_scene load_steps=12 format=3 uid="uid://si140o2awqdt"]
 
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="1_ykrsn"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="2_4ubjf"]
+[ext_resource type="Script" path="res://Level/RobotInteractor.gd" id="3_740e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0yc4t"]
 atlas = ExtResource("2_4ubjf")
@@ -82,6 +83,11 @@ shape = SubResource("RectangleShape2D_8rcr6")
 wait_time = 0.5
 autostart = true
 
+[node name="RobotInteractor" type="Node2D" parent="."]
+script = ExtResource("3_740e3")
+
 [connection signal="body_entered" from="PlayerInteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="PlayerInteractArea" to="." method="_on_interact_area_body_exited"]
 [connection signal="timeout" from="PulseTimer" to="." method="_on_pulse_timer_timeout"]
+[connection signal="robot_entered" from="RobotInteractor" to="." method="_on_robot_interactor_robot_entered"]
+[connection signal="robot_exited" from="RobotInteractor" to="." method="_on_robot_interactor_robot_exited"]

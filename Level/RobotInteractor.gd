@@ -35,7 +35,12 @@ func _ready():
 
 func _exit_tree():
 	PhysicsServer2D.area_set_space(area, RID())
+
+func update_range(new_ir):
+	interact_range = new_ir
 	
+	var size = Vector2(interact_range*32*2 + 32, interact_range*32*2 + 32)
+	PhysicsServer2D.shape_set_data(shape, size / 2)
 
 
 func on_body_entered(status, body_rid, _instance_id, _body_shape_idx, _self_shape_idx):
