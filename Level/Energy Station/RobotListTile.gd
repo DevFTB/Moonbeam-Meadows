@@ -10,5 +10,5 @@ func set_parent_gui(gui):
 	pass
 func set_robot(new_robot: Robot, icon, type_name):
 	robot = new_robot
-	$RobotIcon.texture = icon
-	$RobotNameLabel.text = type_name 
+	$HBoxContainer/RobotIcon.texture = icon
+	$HBoxContainer/RobotNameLabel.text = type_name 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b5s3wfvixcbtk"]
+[gd_scene load_steps=65 format=3 uid="uid://b5s3wfvixcbtk"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" path="res://GUI/InventoryButtonList.gd" id="27_qww4w"]
 [ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="28_48y4d"]
 [ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="28_lgf16"]
+[ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="29_0m65b"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
@@ -71,12 +72,40 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
 font_size = 48
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6peq"]
+draw_center = false
+border_width_bottom = 8
+border_color = Color(0.196078, 0.8, 0.8, 1)
+border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qc2v5"]
+font_size = 48
+font_color = Color(0.8, 0.615686, 0.984314, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_tjvg7"]
+font_size = 36
+font_color = Color(0.721569, 0.439216, 0.972549, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fjph3"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_he7pp"]
 font_size = 24
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mstbw"]
 atlas = ExtResource("20_r57gi")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf8tp"]
+bg_color = Color(0.505882, 0.811765, 0.776471, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_pcxb4"]
 font_size = 32
@@ -152,6 +181,7 @@ shape = SubResource("CircleShape2D_3wcbl")
 
 [node name="RobotInteractor" type="Node2D" parent="DepositBox"]
 script = ExtResource("11_dymyn")
+interact_range = 1
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(418, 328)
@@ -586,132 +616,274 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="EnergyStationGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui")]
+[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_details", "robot_inv_list")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = 48.0
-offset_right = -55.0
-offset_bottom = -33.0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = -19.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("20_m3hsh")
 path_editing_gui = NodePath("../../PathSelectionGUI")
+robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
+robot_inv_list = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer/RobotsList")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 16.0
-offset_right = 329.0
-offset_bottom = 86.0
-text = "Energy Station"
-label_settings = SubResource("LabelSettings_5p3lh")
-
-[node name="RobotsListSection" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 31.0
-offset_top = -179.5
-offset_right = 344.0
-offset_bottom = 254.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotsListSection"]
+[node name="Content" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s6peq")
+text = "Energy Station"
+label_settings = SubResource("LabelSettings_qc2v5")
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Robots" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
 layout_mode = 2
 text = "Robots"
 label_settings = SubResource("LabelSettings_tjvg7")
+horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotsListSection"]
+[node name="RobotsArea" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="AddFromInventory" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RobotsListSection" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RobotsList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotsListSection/ScrollContainer"]
+[node name="RobotsList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AddRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotsListSection"]
+[node name="AddRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Add from Inventory"
+text = "Add from 
+Inventory"
 
-[node name="RobotDetails" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -631.0
-offset_top = 12.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="RobotDetailsPanel" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
-[node name="RobotDescription" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails"]
+[node name="RobotDetailsParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RobotDescription" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 
-[node name="Control" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotDescription"]
+[node name="Control" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
-[node name="RobotNameLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotDescription/Control"]
+[node name="RobotNameLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
 layout_mode = 2
 text = "Robot Name"
-label_settings = SubResource("LabelSettings_tjvg7")
+label_settings = SubResource("LabelSettings_fjph3")
 
-[node name="RobotDescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotDescription/Control"]
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="RobotDescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Robot Descriptiona"
-label_settings = SubResource("LabelSettings_tjvg7")
+text = "Robot Descriptions"
+label_settings = SubResource("LabelSettings_he7pp")
+autowrap_mode = 3
 
-[node name="RobotIcon" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotDescription"]
+[node name="Control2" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="RobotIcon" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 263.0
+grow_horizontal = 2
+size_flags_horizontal = 4
 texture = SubResource("AtlasTexture_mstbw")
-expand_mode = 5
-stretch_mode = 6
+expand_mode = 4
+stretch_mode = 5
 
-[node name="RobotActionButtonGrid" type="GridContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails"]
+[node name="RobotActionButtonGrid" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
 
-[node name="EditPathButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid"]
+[node name="EditPathButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Edit Path"
 
-[node name="IdentifyRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid"]
+[node name="IdentifyRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Identify Robot"
 
-[node name="ReturnHomeButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid"]
+[node name="ReturnHomeButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Return Home
 "
 
-[node name="ChangeStationButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid"]
+[node name="ChangeStationButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Change Energy Stations"
 
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Energy" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("29_0m65b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
+layout_mode = 2
+text = "Energy"
+label_settings = SubResource("LabelSettings_tjvg7")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Charging at: 12/s
+Max capacity: 30"
+label_settings = SubResource("LabelSettings_he7pp")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer4" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="AddUpgradeButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+disabled = true
+text = "Add upgrade"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.796078, 0.713726, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/fill = SubResource("StyleBoxFlat_wf8tp")
+value = 50.0
+fill_mode = 3
+
 [node name="RobotSelectionPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -889,7 +1061,7 @@ script = ExtResource("20_wew0j")
 position = Vector2(624, 240)
 
 [node name="PlanterRobot" parent="Robots" instance=ExtResource("40_4ntqc")]
-position = Vector2(592, 368)
+position = Vector2(596, 415)
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")
@@ -909,8 +1081,10 @@ script = ExtResource("37_irf5s")
 [connection signal="robot_entered" from="DepositBox/RobotInteractor" to="DepositBox" method="_on_robot_interactor_robot_entered"]
 [connection signal="robot_exited" from="DepositBox/RobotInteractor" to="DepositBox" method="_on_robot_interactor_robot_exited"]
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
-[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotsListSection/AddRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_robot_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotDetails/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
+[connection signal="changed_energy_station" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy" method="_on_energy_station_gui_changed_energy_station"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_robot_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/AddUpgradeButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_upgrade_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/VBoxContainer4/InventoryRobotGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]

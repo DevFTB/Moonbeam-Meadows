@@ -3,6 +3,9 @@ extends Control
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
 @export var path_editing_gui : Control
 
+@export var robot_details : Control
+@export var robot_inv_list : Control
+
 var selected_robot = null
 var energy_station = null
 
@@ -29,19 +32,20 @@ func on_robot_selected(robot):
 	pass
 
 func update_gui():
+
 	if selected_robot != null:
 		var robot_type = level.lookup_robot(selected_robot.pickup_item)
-		$RobotDetails.visible = true
-		$RobotDetails/RobotDescription/Control/RobotNameLabel.text =robot_type.get_type_name()
-		$RobotDetails/RobotDescription/Control/RobotDescriptionLabel.text = robot_type.robot_description
-		$RobotDetails/RobotDescription/RobotIcon.texture = robot_type.get_icon()
+		robot_details.visible = true
+		robot_details.get_node("RobotDescription/Control/RobotNameLabel").text =robot_type.get_type_name()
+		robot_details.get_node("RobotDescription/Control/RobotDescriptionLabel").text = robot_type.robot_description
+		robot_details.get_node("RobotDescription/Control2/RobotIcon").texture = robot_type.get_icon()
 		
 	else:
-		$RobotDetails.visible = false
+		robot_details.visible = false
 
 		pass
 
-	for child in $RobotsListSection/ScrollContainer/RobotsList.get_children():
+	for child in robot_inv_list.get_children():
 		child.queue_free()
 	
 	if energy_station != null:
@@ -52,7 +56,7 @@ func update_gui():
 			new_tile.set_robot(robot, robot_type.get_icon(), robot_type.get_type_name())
 			new_tile.set_parent_gui(self)
 			
-			$RobotsListSection/ScrollContainer/RobotsList.add_child(new_tile)
+			robot_inv_list.add_child(new_tile)
 	pass
 
 
@@ -82,4 +86,8 @@ func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
 
 func _on_close_popup_button_pressed():
 	$RobotSelectionPopup.hide()
+	pass # Replace with function body.
+
+
+func _on_add_upgrade_button_pressed():
 	pass # Replace with function body.

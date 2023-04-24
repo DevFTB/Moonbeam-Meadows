@@ -19,6 +19,7 @@ func _ready():
 	for item in initial_items.keys():
 		var inv_comp = get_inventory(item.item_type)
 		inv_comp.add(item, initial_items[item])
+	
 		
 func get_inventory(item_type : InventoryItem.ItemType) -> InventoryComponent:
 	return inventories[inventories.find(func(x) : return x.inventory_type == item_type)]

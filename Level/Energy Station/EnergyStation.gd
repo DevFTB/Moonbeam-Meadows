@@ -6,6 +6,8 @@ var robots = []
 
 var power_tiles = []
 
+@onready var battery = $Battery
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$RobotInteractor.update_range(power_range)
@@ -66,9 +68,15 @@ func pulse():
 #			robot.add_energy(99999)
 	pass
 
+func get_battery():
+	return $Battery
 
 func _on_robot_interactor_robot_entered(robot):
-	robot.add_energy(99999)
+	var req = robot.get_energy_requirement()
+	var withdraw_amount = min(battery.value, req)
+	if battery.withdraw(withdraw_amount):
+		robot.add_energy(withdraw_amount)
+
 	pass # Replace with function body.
 
 

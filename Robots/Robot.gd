@@ -214,20 +214,22 @@ func get_withdrawal_params():
 	for inv in inventories:
 		params[inv.inventory_type] = inv.get_available_capacity()
 	return params
-	pass
 
 func confirm_withdrawal(withdrawal: Dictionary):
 	# add items to inventories according to the withdrawal
 	for item in withdrawal:
-		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
-		
-		if inv == null or inv.get_available_capacity() < withdrawal[item]:
-			return false
+		var invs = inventories.filter(func(x): return x.inventory_type == item.item_type)
+		if not invs.is_empty():
+			var inv = invs.front()
+			if inv == null or inv.get_available_capacity() < withdrawal[item]:
+				return false
 
 	for item in withdrawal:
-		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
-		if not inv.add(item, withdrawal[item]):
-			return false
+		var invs = inventories.filter(func(x): return x.inventory_type == item.item_type)
+		if not invs.is_empty():
+			var inv = invs.front()
+			if not inv.add(item, withdrawal[item]):
+				return false
 	
 	return true
 
@@ -239,6 +241,9 @@ func add_energy(amount: int) -> void:
 
 func has_energy():
 	return energy > 0
+
+func get_energy_requirement():
+	return energy_capacity - energy 
 
 func on_traversability_update(grid_position: Vector2i, traversible: bool):
 	astar.set_point_solid(grid_position, not traversible)

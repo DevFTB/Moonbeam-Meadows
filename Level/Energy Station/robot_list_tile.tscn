@@ -1,41 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://spk8mxahrjo3"]
+[gd_scene load_steps=6 format=3 uid="uid://spk8mxahrjo3"]
 
 [ext_resource type="Script" path="res://Level/Energy Station/RobotListTile.gd" id="1_2g4oq"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_55k23"]
 [ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="1_kqddj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mstbw"]
 atlas = ExtResource("1_kqddj")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="LabelSettings" id="LabelSettings_s7xin"]
+font_size = 20
+
 [node name="RobotListTile" type="Button"]
-custom_minimum_size = Vector2(100, 100)
-offset_right = 211.0
+custom_minimum_size = Vector2(0, 80)
+offset_right = 298.0
 offset_bottom = 100.0
+theme = ExtResource("1_55k23")
 script = ExtResource("1_2g4oq")
 
-[node name="RobotIcon" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(90, 90)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 5.0
-offset_top = -45.0
-offset_right = 95.0
-offset_bottom = 45.0
-grow_vertical = 2
-size_flags_horizontal = 3
-texture = SubResource("AtlasTexture_mstbw")
-expand_mode = 5
-stretch_mode = 6
-
-[node name="RobotNameLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = 111.0
-offset_top = 37.0
-offset_right = 211.0
-offset_bottom = 63.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -3.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
+
+[node name="RobotIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_mstbw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="RobotNameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 text = "Water Bot 1"
+label_settings = SubResource("LabelSettings_s7xin")
+horizontal_alignment = 1
+autowrap_mode = 3

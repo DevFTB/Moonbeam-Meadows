@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Robots/PlanterRobot/PlanterRobot.gd" id="1_47d1a"]
 [ext_resource type="Resource" uid="uid://qxg640ruh5kd" path="res://Robots/PlanterRobot/planter_robot_item.tres" id="2_mo584"]
-[ext_resource type="Material" uid="uid://dr3dij87njljy" path="res://Robots/hover_particles.tres" id="3_odq6i"]
-[ext_resource type="Texture2D" uid="uid://p4ionyuu6ioc" path="res://Robots/robot_hover_particle.png" id="4_i12dg"]
+[ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_mr1gt"]
+[ext_resource type="Texture2D" uid="uid://b0e7iq0qo58q4" path="res://Robots/robot_track_particle.png" id="4_cmvge"]
 [ext_resource type="SpriteFrames" uid="uid://bgypqv2aqgos" path="res://Robots/PlanterRobot/planter_robot_sprite_frames.tres" id="5_pbrni"]
 [ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="6_f77af"]
 [ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="7_j7yo0"]
@@ -27,8 +27,8 @@ should_withdraw = true
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-11, 0)
 emitting = false
-process_material = ExtResource("3_odq6i")
-texture = ExtResource("4_i12dg")
+process_material = ExtResource("3_mr1gt")
+texture = ExtResource("4_cmvge")
 lifetime = 0.4
 explosiveness = 0.73
 
@@ -36,8 +36,8 @@ explosiveness = 0.73
 position = Vector2(12, -1)
 emitting = false
 amount = 20
-process_material = ExtResource("3_odq6i")
-texture = ExtResource("4_i12dg")
+process_material = ExtResource("3_mr1gt")
+texture = ExtResource("4_cmvge")
 lifetime = 0.4
 
 [node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
