@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://bmhfxgnjn0nux"]
+
+[ext_resource type="Texture2D" uid="uid://b7aq26lytmg1" path="res://Robots/FertiliserRobot/fertiliser_robot_powered.png" id="1_kt1m2"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="2_mei8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adewq"]
+atlas = ExtResource("1_kt1m2")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_mei8g")
+item_name = "Fertliser Robot"
+item_icon = SubResource("AtlasTexture_adewq")
+item_type = 3
+buy_price = 20
+sell_price = 10

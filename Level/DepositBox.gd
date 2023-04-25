@@ -77,6 +77,7 @@ func consume_withdrawal(withdrawal:Dictionary):
 		var inventory = get_inventory(item.item_type)
 		inventory.remove(item, withdrawal[item])
 	pass # Replace with function body.
+	
 func get_amount_of_unique_items() -> int:
 	var unique_items : int = 0
 	for child in inventories:

@@ -264,3 +264,10 @@ func remove_self():
 	if parent_energy_station != null:
 		parent_energy_station.remove_robot(self)
 	queue_free()
+
+func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
+	var invs = inventories.filter(func(x): return x.inventory_type == item_type)
+	if not invs.is_empty():
+		return invs.front()
+	else:
+		return null

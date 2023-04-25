@@ -1,4 +1,4 @@
-extends Robot
+extends "res://Robots/Robot.gd"
 
 func can_do_action(grid_position):
 	var crop_entity = level.get_crop_entity(grid_position)

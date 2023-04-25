@@ -22,6 +22,7 @@ collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_47d1a")
 pickup_item = ExtResource("2_mo584")
+should_deposit = null
 should_withdraw = true
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
