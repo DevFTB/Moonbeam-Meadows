@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://b5s3wfvixcbtk"]
+[gd_scene load_steps=68 format=3 uid="uid://b5s3wfvixcbtk"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -48,6 +48,7 @@
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
 [ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]
 [ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="44_cxftp"]
+[ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="49_5eap5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3fxa"]
 size = Vector2(30, 26)
@@ -141,6 +142,10 @@ robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Energy Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("6_b6ae7")]
+gui = NodePath("../CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
+
+[node name="Energy Station2" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("6_b6ae7")]
+position = Vector2(304, 400)
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
 
 [node name="Trade Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("8_oo5fl")]
@@ -612,7 +617,7 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_details", "robot_inv_list")]
+[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_details", "robot_inv_list", "identify_camera")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -628,6 +633,7 @@ script = ExtResource("20_m3hsh")
 path_editing_gui = NodePath("../../PathSelectionGUI")
 robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
 robot_inv_list = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer/RobotsList")
+identify_camera = NodePath("../../../../IdentifyCamera")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
 layout_mode = 1
@@ -780,18 +786,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Identify Robot"
 
-[node name="ReturnHomeButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
+[node name="UpgradeRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Return Home
-"
-
-[node name="ChangeStationButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Change Energy Stations"
+text = "Add Upgrades"
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
 custom_minimum_size = Vector2(20, 0)
@@ -1079,6 +1078,11 @@ enabled = false
 zoom = Vector2(2, 2)
 script = ExtResource("37_irf5s")
 
+[node name="IdentifyCamera" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(2, 2)
+script = ExtResource("49_5eap5")
+
 [connection signal="body_entered" from="DepositBox/InteractArea" to="DepositBox" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="DepositBox/InteractArea" to="DepositBox" method="_on_interact_area_body_exited"]
 [connection signal="robot_entered" from="DepositBox/RobotInteractor" to="DepositBox" method="_on_robot_interactor_robot_entered"]
@@ -1087,6 +1091,7 @@ script = ExtResource("37_irf5s")
 [connection signal="changed_energy_station" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy" method="_on_energy_station_gui_changed_energy_station"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_robot_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/IdentifyRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_identify_robot_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/AddUpgradeButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_upgrade_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]

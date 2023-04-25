@@ -15,6 +15,7 @@ signal closed_menu
 var level
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	identify_camera.finished_tracking.connect(on_identify_camera_finished_tracking)
 	level = get_node("/root/Level")
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
@@ -91,3 +92,15 @@ func _on_close_popup_button_pressed():
 
 func _on_add_upgrade_button_pressed():
 	pass # Replace with function body.
+
+@export var identify_camera : Camera2D
+func _on_identify_robot_button_pressed():
+	if identify_camera != null:
+		hide()
+		identify_camera.track_target(selected_robot)	
+	
+	pass # Replace with function body.
+
+func on_identify_camera_finished_tracking():
+	show()	
+	pass
