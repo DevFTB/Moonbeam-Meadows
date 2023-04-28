@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4ispuqcaln3i"]
+[gd_scene load_steps=3 format=3 uid="uid://csuo3hihbosua"]
 
-[ext_resource type="Script" path="res://Level/UpgradeDisplayIcon.gd" id="1_o5jyn"]
+[ext_resource type="Script" path="res://GUI/UpgradeDisplayIcon.gd" id="1_ldeob"]
 [ext_resource type="Texture2D" uid="uid://ct6smfjee2k0f" path="res://Robots/Robot Upgrades/Motor/motor_sprite.png" id="2_m5o45"]
 
 [node name="UpgradeDisplayIcon" type="Control" node_paths=PackedStringArray("texture_rect", "remove_button")]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_o5jyn")
+script = ExtResource("1_ldeob")
 texture_rect = NodePath("TextureRect")
 remove_button = NodePath("Button")
 

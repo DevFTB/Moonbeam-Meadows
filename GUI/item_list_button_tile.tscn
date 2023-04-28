@@ -1,26 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5dkgv4h0bld8"]
+[gd_scene load_steps=6 format=3 uid="uid://b5dkgv4h0bld8"]
 
 [ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_kjom0"]
 [ext_resource type="Script" path="res://GUI/InventoryListButtonTile.gd" id="2_wf4h5"]
+[ext_resource type="Texture2D" uid="uid://ct6smfjee2k0f" path="res://Robots/Robot Upgrades/Motor/motor_sprite.png" id="3_6a5ry"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fb33o"]
 font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsff3"]
 
-[node name="ItemListButtonTile" type="HBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-offset_right = 200.0
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("amount_label", "name_label", "action_button", "icon_texture_rect")]
+offset_right = 261.0
 offset_bottom = 60.0
 theme = ExtResource("1_kjom0")
 script = ExtResource("2_wf4h5")
+amount_label = NodePath("ItemListButtonTile/TextureRect/AmountLabel")
+name_label = NodePath("ItemListButtonTile/NameLabel")
+action_button = NodePath("ItemListButtonTile/Button")
+icon_texture_rect = NodePath("ItemListButtonTile/TextureRect")
 
-[node name="AmountLabel" type="Label" parent="."]
+[node name="ItemListButtonTile" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ItemListButtonTile"]
+layout_mode = 2
+theme = ExtResource("1_kjom0")
+texture = ExtResource("3_6a5ry")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="ItemListButtonTile/TextureRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_right = 27.0
+grow_vertical = 0
 text = "1x"
 label_settings = SubResource("LabelSettings_fb33o")
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="ItemListButtonTile"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Watering Robot"
@@ -28,7 +51,7 @@ label_settings = SubResource("LabelSettings_jsff3")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="ItemListButtonTile"]
 custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 size_flags_vertical = 4

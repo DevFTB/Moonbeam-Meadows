@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://si140o2awqdt"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="1_ykrsn"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="2_4ubjf"]
-[ext_resource type="Script" path="res://Level/RobotInteractor.gd" id="3_740e3"]
+[ext_resource type="Script" path="res://Components/RobotInteractor.gd" id="3_740e3"]
 [ext_resource type="Script" path="res://Components/GrowthValueComponent.gd" id="4_ga5oq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0yc4t"]

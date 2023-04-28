@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dpgxp7wmym5iu"]
+[gd_scene load_steps=72 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_v0lsh"]
 [ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_57r43"]
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
-[ext_resource type="PackedScene" uid="uid://si140o2awqdt" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
+[ext_resource type="PackedScene" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
 [ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_iruk3"]
 [ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_ohfto"]
 [ext_resource type="Resource" uid="uid://f022kek71od4" path="res://Robots/FertiliserRobot/fertiliser_robot_resource.tres" id="8_0b4mc"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
-[ext_resource type="Script" path="res://Level/RobotInteractor.gd" id="11_dymyn"]
 [ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
 [ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
 [ext_resource type="Resource" uid="uid://labeh87uavn3" path="res://Level/Fertiliser/item_lunar_sprinkles.tres" id="13_tuac2"]
@@ -30,6 +29,7 @@
 [ext_resource type="Script" path="res://GUI/GUIManager.gd" id="14_qo620"]
 [ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="15_wrucv"]
 [ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
+[ext_resource type="Script" path="res://Components/RobotInteractor.gd" id="17_8dauk"]
 [ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="17_17121"]
 [ext_resource type="Resource" uid="uid://c6irvbqybpvwr" path="res://Level/Quests/quest_campaign_2.tres" id="17_k2pda"]
 [ext_resource type="Resource" uid="uid://b0exdjec2pc83" path="res://Robots/Robot Upgrades/Energy Cell/item_energy_cell.tres" id="19_fwa5x"]
@@ -46,8 +46,8 @@
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
-[ext_resource type="Script" path="res://Level/AddUpgradesPopup.gd" id="37_18u4g"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
+[ext_resource type="Script" path="res://GUI/AddUpgradesPopup.gd" id="37_viyhm"]
 [ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]
 [ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="44_cxftp"]
 [ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="45_s4v6b"]
@@ -160,7 +160,7 @@ gui = NodePath("../CanvasLayer/GUI/OverscreenUI/TradeStationGUI")
 position = Vector2(624, 304)
 script = ExtResource("9_fo6d0")
 providing_items = true
-item_types = Array[int]([1, 0])
+item_types = Array[int]([1, 0, 2])
 initial_items = {
 ExtResource("10_bgtt6"): 5,
 ExtResource("13_tuac2"): 5
@@ -186,7 +186,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_3wcbl")
 
 [node name="RobotInteractor" type="Node2D" parent="DepositBox"]
-script = ExtResource("11_dymyn")
+script = ExtResource("17_8dauk")
 interact_range = 1
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
@@ -958,7 +958,7 @@ offset_right = 242.5
 offset_bottom = 284.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("37_18u4g")
+script = ExtResource("37_viyhm")
 upgrade_boxes_paths = [NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer2/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer3/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer4/PanelContainer")]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup"]
@@ -1042,8 +1042,7 @@ layout_mode = 2
 script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
-[node name="DepositBoxGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI"]
-visible = false
+[node name="DepositBoxGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("inventory_button_list_parent")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1057,32 +1056,31 @@ offset_bottom = 238.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("28_lgf16")
+inventory_button_list_parent = NodePath("MarginContainer/VBoxContainer/PanelContainer/InventoryButtonListParent")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -155.0
-offset_top = 20.0
-offset_right = 155.0
-offset_bottom = 90.0
-grow_horizontal = 2
-text = "dEPOSIT bOX"
-label_settings = SubResource("LabelSettings_5p3lh")
-
-[node name="InventoryButtonListParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = -399.0
-offset_right = -16.0
-offset_bottom = -15.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "dEPOSIT bOX"
+label_settings = SubResource("LabelSettings_5p3lh")
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryButtonListParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
 
 [node name="PathSelectionGUI" type="Control" parent="CanvasLayer/GUI"]
 visible = false

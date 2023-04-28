@@ -7,14 +7,14 @@ class_name DepositBox
 @export var max_unique_items : int = 10
 
 @export var item_types : Array[InventoryItem.ItemType] = [InventoryItem.ItemType.PRODUCE]
-var inventories = []
+var inventories = {}
 @export var initial_items : Dictionary = {}
 func _ready():
 	for item_type in item_types:
 		var inv_comp = InventoryComponent.new()
 		inv_comp.inventory_type = item_type
 		add_child(inv_comp)
-		inventories.append(inv_comp)
+		inventories[item_type] = inv_comp
 	
 	for item in initial_items.keys():
 		var inv_comp = get_inventory(item.item_type)
@@ -22,7 +22,7 @@ func _ready():
 	
 		
 func get_inventory(item_type : InventoryItem.ItemType) -> InventoryComponent:
-	return inventories[inventories.find(func(x) : return x.inventory_type == item_type)]
+	return inventories[item_type]
 func set_gui_owner():
 	gui.set_deposit_box(self)
 
@@ -80,13 +80,13 @@ func consume_withdrawal(withdrawal:Dictionary):
 	
 func get_amount_of_unique_items() -> int:
 	var unique_items : int = 0
-	for child in inventories:
+	for child in inventories.values():
 		unique_items += child.get_amount_of_unique_items() 
 	return unique_items
 
 func get_amount_of_items():
 	var total_items : int = 0
-	for child in inventories:
+	for child in inventories.values():
 		total_items += child.get_amount_of_items() 
 	return total_items
 
