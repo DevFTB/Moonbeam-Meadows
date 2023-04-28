@@ -70,4 +70,5 @@ show_percentage = false
 
 [node name="SeedInventory" type="Node" parent="."]
 script = ExtResource("8_pvmi0")
+inventory_size = 20
 inventory_type = 0

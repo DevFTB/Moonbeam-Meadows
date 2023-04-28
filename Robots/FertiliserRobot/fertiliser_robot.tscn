@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c808s1n3o1ffb"]
+[gd_scene load_steps=12 format=3 uid="uid://c808s1n3o1ffb"]
 
 [ext_resource type="Script" path="res://Robots/FertiliserRobot/FertiliserRobot.gd" id="1_ecb4k"]
-[ext_resource type="Resource" uid="uid://de0n5ek2p6da4" path="res://Robots/default_robot_stats.tres" id="2_4avxg"]
 [ext_resource type="Resource" uid="uid://bmhfxgnjn0nux" path="res://Robots/FertiliserRobot/fertiliser_robot_item.tres" id="2_4ri60"]
 [ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_2ee4m"]
 [ext_resource type="Texture2D" uid="uid://b0e7iq0qo58q4" path="res://Robots/robot_track_particle.png" id="4_8lltk"]
@@ -22,7 +21,6 @@ collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_ecb4k")
-base_stats = ExtResource("2_4avxg")
 pickup_item = ExtResource("2_4ri60")
 should_withdraw = true
 

@@ -208,21 +208,26 @@ sprite_frames = ExtResource("2_373r8")
 
 [node name="SeedInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+inventory_size = 100
 inventory_type = 0
 
 [node name="ProduceInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+inventory_size = 100
 
 [node name="FertiliserInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+inventory_size = 100
 inventory_type = 2
 
 [node name="RobotInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+inventory_size = 100
 inventory_type = 3
 
 [node name="RobotUpgradeInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
+inventory_size = 100
 inventory_type = 4
 inventory = {
 ExtResource("19_fwa5x"): 2

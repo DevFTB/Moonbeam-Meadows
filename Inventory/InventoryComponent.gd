@@ -1,6 +1,7 @@
 extends Node
 class_name InventoryComponent
 
+# max amount of items in the inventory
 @export var inventory_size = 5
 
 # items don't get used up
@@ -20,8 +21,10 @@ func add(item: Variant, amount : int) -> bool:
 		else:
 			inventory[item] += amount
 	else:
-		if inventory_size > inventory.size():
+		if inventory_size - get_amount_of_items() >= amount:
 			inventory[item] = amount
+		else:
+			return false
 		
 	if selected == null:
 		selected = inventory.keys().front()
