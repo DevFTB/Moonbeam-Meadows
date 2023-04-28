@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=73 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="28_lgf16"]
 [ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="29_0m65b"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
+[ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="34_34xvq"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
@@ -96,12 +97,12 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_fjph3"]
 font_size = 36
 
-[sub_resource type="LabelSettings" id="LabelSettings_he7pp"]
-font_size = 24
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_mstbw"]
 atlas = ExtResource("20_r57gi")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_he7pp"]
+font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf8tp"]
 bg_color = Color(0.505882, 0.811765, 0.776471, 1)
@@ -630,7 +631,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -760,12 +760,20 @@ label_settings = SubResource("LabelSettings_fjph3")
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="RobotDescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
+[node name="RobotDescriptionLabel" type="RichTextLabel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Robot Descriptions"
-label_settings = SubResource("LabelSettings_he7pp")
-autowrap_mode = 3
+bbcode_enabled = true
+text = "status: [color=green]powered[/color]
+
+Energy: 35 / 60
+Inventory: 10 / 60
+"
+script = ExtResource("34_34xvq")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel"]
+wait_time = 0.5
+autostart = true
 
 [node name="Control2" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription"]
 layout_mode = 2
@@ -809,11 +817,14 @@ text = "Add Upgrades"
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Energy" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+[node name="Energy" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox" node_paths=PackedStringArray("description_label", "ttf_label", "progress_bar")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("29_0m65b")
+description_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/DescriptionLabel")
+ttf_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/TimeFillLabel")
+progress_bar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy"]
 layout_mode = 2
@@ -836,12 +847,25 @@ size_flags_horizontal = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control"]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
 text = "Charging at: 12/s
 Max capacity: 30"
 label_settings = SubResource("LabelSettings_he7pp")
+autowrap_mode = 3
+
+[node name="TimeFillLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Time to Fill:
+"
+label_settings = SubResource("LabelSettings_he7pp")
+autowrap_mode = 3
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
 layout_mode = 2
@@ -946,6 +970,7 @@ script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotInventory")
 
 [node name="AddUpgradesPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1043,6 +1068,7 @@ script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
 [node name="DepositBoxGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("inventory_button_list_parent")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1197,7 +1223,9 @@ script = ExtResource("49_5eap5")
 [connection signal="robot_exited" from="DepositBox/RobotInteractor" to="DepositBox" method="_on_robot_interactor_robot_exited"]
 [connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
 [connection signal="changed_energy_station" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy" method="_on_energy_station_gui_changed_energy_station"]
+[connection signal="changed_selected_robot" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel" method="_on_energy_station_gui_changed_selected_robot"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_robot_button_pressed"]
+[connection signal="timeout" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel/Timer" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel" method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/IdentifyRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_identify_robot_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/UpgradeRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_upgrade_robot_button_pressed"]

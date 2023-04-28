@@ -48,3 +48,15 @@ func get_percentage():
         return 0.0
 
     return value / maximum_value
+
+func get_time_to_fill():
+    if growth_per_second == 0:
+        return 0.0
+
+    if growth_per_second < 0:
+        return value / -growth_per_second
+
+    if maximum_value <= 0:
+        return -1.0
+
+    return (maximum_value - value) / growth_per_second

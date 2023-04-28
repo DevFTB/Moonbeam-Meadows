@@ -328,3 +328,6 @@ func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 		return invs.front()
 	else:
 		return null
+
+func get_specific_description():
+	return ""

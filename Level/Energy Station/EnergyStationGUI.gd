@@ -38,12 +38,14 @@ func remove_upgrade(upgrade_entity):
 	energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrade_entity.upgrade.upgrade_item, 1)
 	
 	pass
+
+
+
 func update_gui():
 	if selected_robot != null:
 		var robot_type = level.lookup_robot(selected_robot.pickup_item)
 		robot_details.visible = true
 		robot_details.get_node("RobotDescription/Control/RobotNameLabel").text =robot_type.get_type_name()
-		robot_details.get_node("RobotDescription/Control/RobotDescriptionLabel").text = robot_type.robot_description
 		robot_details.get_node("RobotDescription/Control2/RobotIcon").texture = robot_type.get_icon()
 		
 	else:

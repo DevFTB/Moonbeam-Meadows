@@ -23,3 +23,6 @@ func on_move_start():
 	$WheelParticlesLeft.emitting = true
 	$WheelParticlesRight.emitting = true
 	super.on_move_start()
+
+func get_specific_description():
+	return "Water tank: " + str(water_tank) + "/" + str(max_water_tank)
