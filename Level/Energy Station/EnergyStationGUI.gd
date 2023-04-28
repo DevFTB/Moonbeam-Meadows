@@ -87,6 +87,7 @@ func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
 
 func _on_close_popup_button_pressed():
 	$RobotSelectionPopup.hide()
+	$AddUpgradesPopup.hide()
 	pass # Replace with function body.
 
 
@@ -104,3 +105,7 @@ func _on_identify_robot_button_pressed():
 func on_identify_camera_finished_tracking():
 	show()	
 	pass
+
+func _on_upgrade_robot_button_pressed():
+	$AddUpgradesPopup.show()
+	pass # Replace with function body.

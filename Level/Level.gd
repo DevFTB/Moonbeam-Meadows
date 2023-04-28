@@ -130,3 +130,6 @@ func clear_highlight():
 
 func get_crop_entity(grid_position: Vector2i) -> CropEntity:
 	return crop_map.get(grid_position)
+
+func has_crop(grid_position: Vector2i) -> bool:
+	return crop_map.has(grid_position)

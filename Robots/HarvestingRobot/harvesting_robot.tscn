@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddf6vsbhvrf"]
+[gd_scene load_steps=13 format=3 uid="uid://ddf6vsbhvrf"]
 
 [ext_resource type="Script" path="res://Robots/HarvestingRobot/HarvestingRobot.gd" id="1_jlpvt"]
+[ext_resource type="Resource" uid="uid://de0n5ek2p6da4" path="res://Robots/default_robot_stats.tres" id="2_1ma4h"]
 [ext_resource type="Resource" uid="uid://bj22gf230c1eh" path="res://Robots/HarvestingRobot/harvesting_robot_item.tres" id="2_yh3pa"]
 [ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_mibab"]
 [ext_resource type="SpriteFrames" uid="uid://chcp5qw6tyuew" path="res://Robots/HarvestingRobot/harvesting_robot_sprite_frames.tres" id="3_pjssa"]
@@ -21,7 +22,7 @@ collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_jlpvt")
-movement_penalty = 0.5
+base_stats = ExtResource("2_1ma4h")
 pickup_item = ExtResource("2_yh3pa")
 should_deposit = true
 

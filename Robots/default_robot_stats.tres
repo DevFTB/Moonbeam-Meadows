@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="RobotStats" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://Components/TrackedModifierValue.gd" id="1_4snxx"]
+[ext_resource type="Script" path="res://Robots/RobotUpgrade.gd" id="2_h3noi"]
+
+[sub_resource type="Resource" id="Resource_m8b6h"]
+script = ExtResource("1_4snxx")
+base_value = 3.0
+modifier_mode = 0
+
+[sub_resource type="Resource" id="Resource_xrg72"]
+script = ExtResource("1_4snxx")
+base_value = 60.0
+modifier_mode = 0
+
+[sub_resource type="Resource" id="Resource_g048t"]
+script = ExtResource("1_4snxx")
+base_value = 50.0
+modifier_mode = 0
+
+[sub_resource type="Resource" id="Resource_0ld83"]
+script = ExtResource("1_4snxx")
+base_value = 1.0
+modifier_mode = 0
+
+[sub_resource type="Resource" id="Resource_1fxo1"]
+script = ExtResource("1_4snxx")
+base_value = 0.25
+modifier_mode = 0
+
+[sub_resource type="Resource" id="Resource_xpv7k"]
+script = ExtResource("1_4snxx")
+base_value = 125.0
+modifier_mode = 0
+
+[resource]
+script = ExtResource("2_h3noi")
+movement_speed = SubResource("Resource_xpv7k")
+movement_action_penalty = SubResource("Resource_1fxo1")
+inventory_capacity = SubResource("Resource_g048t")
+move_energy_cost = SubResource("Resource_0ld83")
+action_energy_cost = SubResource("Resource_m8b6h")
+energy_capacity = SubResource("Resource_xrg72")

@@ -10,7 +10,7 @@ class_name InventoryComponent
 
 signal inventory_modified
 
-var inventory = {}
+@export var inventory = {}
 var selected = null
 
 func add(item: Variant, amount : int) -> bool:

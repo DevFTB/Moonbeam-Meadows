@@ -7,6 +7,7 @@ func _ready():
 	for gui in $OverscreenUI.get_children():
 		gui.opened_menu.connect(func(): player.freeze())
 		gui.closed_menu.connect(func(): player.unfreeze())
+		gui.hide()
 	pass # Replace with function body.
 
 

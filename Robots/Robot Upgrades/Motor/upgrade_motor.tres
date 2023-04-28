@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RobotUpgrade" load_steps=3 format=3 uid="uid://g4oi702uwa3t"]
+
+[ext_resource type="Script" path="res://Robots/RobotUpgrade.gd" id="1_u61vd"]
+[ext_resource type="Resource" uid="uid://ct3lfxe3ttjdr" path="res://Robots/Robot Upgrades/Motor/item_motor.tres" id="2_n8rms"]
+
+[resource]
+script = ExtResource("1_u61vd")
+upgrade_name = "Motor"
+upgrade_item = ExtResource("2_n8rms")
+upgrade_properties = {
+"movement_speed": 200.0
+}

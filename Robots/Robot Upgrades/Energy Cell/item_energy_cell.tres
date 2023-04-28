@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://b0exdjec2pc83"]
+
+[ext_resource type="Texture2D" uid="uid://15r15ilqvksa" path="res://Robots/Robot Upgrades/Energy Cell/energy_cell_sprite.png" id="1_jf341"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="2_pwcrb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyo7w"]
+atlas = ExtResource("1_jf341")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_pwcrb")
+item_name = "Energy Cell"
+item_icon = SubResource("AtlasTexture_yyo7w")
+item_type = 4
+buy_price = 50
+sell_price = 5
