@@ -6,7 +6,8 @@ var quests = []
 
 const QuestGUI = preload("res://Level/Quests/QuestGUI.gd")
 
-@onready var quest_boxes = $HBoxContainer.get_children()
+@export var quest_box_parent : Control
+@onready var quest_boxes = quest_box_parent.get_children()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	quest_manager.active_quests_updated.connect(_on_active_quests_updated)	

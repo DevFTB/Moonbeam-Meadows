@@ -41,7 +41,7 @@ func unset_quest():
 	quest = null
 
 	$Panel/VBoxContainer.visible = false
-	$Panel.modulate = no_quest_colour
+	$Panel.self_modulate = no_quest_colour
 	
 
 	pass

@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
 [ext_resource type="Texture2D" uid="uid://j0e4jncrtuqr" path="res://Level/DepositBox/deposit_box.png" id="10_16se4"]
 [ext_resource type="Resource" uid="uid://cjkxor4b8jp5h" path="res://Level/Crops/Resources/item_moon_wheat_seeds.tres" id="10_bgtt6"]
-[ext_resource type="Script" path="res://GUI/InventoryGUI.gd" id="10_u7prv"]
 [ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
 [ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
@@ -43,6 +42,7 @@
 [ext_resource type="LabelSettings" uid="uid://ct0g454548ged" path="res://GUI/heading1_label_settings.tscn.tres" id="28_boey7"]
 [ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="28_lgf16"]
 [ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="29_0m65b"]
+[ext_resource type="Script" path="res://GUI/MultiInventoryButtonLIst.gd" id="29_48v5m"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="34_34xvq"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
@@ -474,100 +474,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_kceb6")
 
-[node name="Inventory" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI"]
+[node name="Inventory" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI"]
+visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
-layout_mode = 1
-offset_left = 55.0
-offset_top = 14.0
-offset_right = 279.0
-offset_bottom = 84.0
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Inventory"
 label_settings = SubResource("LabelSettings_qaotf")
 
-[node name="InventorySections" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 61.0
-offset_top = 103.0
-offset_right = -55.0
-offset_bottom = -25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer"]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer"]
-layout_mode = 2
-text = "Seeds
-"
-
-[node name="Label2" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../../Player/SeedInventory")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2"]
-layout_mode = 2
-text = "Produce"
-
-[node name="Label2" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer2" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../../Player/ProduceInventory")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3"]
-layout_mode = 2
-text = "Fertiliser"
-
-[node name="Label3" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer3" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../../Player/FertiliserInventory")
-
-[node name="VBoxContainer5" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer5"]
-layout_mode = 2
-text = "Robots
-"
-
-[node name="Label3" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/InventorySections/VBoxContainer5" node_paths=PackedStringArray("inventory")]
-layout_mode = 2
-size_flags_vertical = 2
-script = ExtResource("10_u7prv")
-inventory = NodePath("../../../../../../../../Player/RobotInventory")
-
-[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -264.0
-offset_top = 21.0
-offset_right = -18.0
-offset_bottom = 85.0
-grow_horizontal = 0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -578,7 +505,7 @@ offset_bottom = 20.0
 grow_vertical = 2
 texture = ExtResource("11_736ha")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Control" node_paths=PackedStringArray("currency_manager")]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer/Control" node_paths=PackedStringArray("currency_manager")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -593,45 +520,56 @@ grow_vertical = 2
 text = "100000"
 label_settings = SubResource("LabelSettings_0t5le")
 script = ExtResource("14_cssu7")
-currency_manager = NodePath("../../../../../../../CurrencyManager")
+currency_manager = NodePath("../../../../../../../../../CurrencyManager")
 
-[node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager")]
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventorySections" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("29_48v5m")
+inventories = [NodePath("../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../Player/RobotUpgradeInventory")]
+interactable = false
+
+[node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager", "quest_box_parent")]
 layout_mode = 2
 script = ExtResource("11_725wh")
 quest_manager = NodePath("../../../../../QuestManager")
+quest_box_parent = NodePath("MarginContainer/VBoxContainer/HBoxContainer")
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests"]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 14.0
-offset_right = 279.0
-offset_bottom = 84.0
-text = "Quests"
-label_settings = SubResource("LabelSettings_qaotf")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 58.0
-offset_top = 102.0
-offset_right = -43.0
-offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuestDisplay1" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer"]
 layout_mode = 2
 
-[node name="QuestDisplay2" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quests"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="QuestDisplay3" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
+layout_mode = 2
+
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
