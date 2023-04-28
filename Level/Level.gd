@@ -6,6 +6,7 @@ var crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 @export var crops : Array[CropResource] = []
 @export var fertilisers : Array[FertiliserResource] = []
 @export var robots : Array[RobotResource] = []
+@export var robot_upgrades : Array[RobotUpgrade] = []
 var crop_map = {}
 
 @export var base_temp = 20
@@ -117,6 +118,9 @@ func lookup_fertiliser(item: InventoryItem):
 
 func lookup_robot(item: InventoryItem):
 	return robots.filter(func(r): return r.robot_item == item).front()
+	
+func lookup_robot_upgrade(item: InventoryItem):
+	return robot_upgrades.filter(func(r): return r.upgrade_item == item).front()
 
 var highlight = preload("res://Level/hightlight.png")
 func highlight_tile(grid_position : Vector2i):

@@ -2,7 +2,7 @@ extends Control
 
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
 @export var path_editing_gui : Control
-
+@export var robot_upgrade_gui : Control
 @export var robot_details : Control
 @export var robot_inv_list : Control
 
@@ -10,6 +10,7 @@ var selected_robot = null
 var energy_station = null
 
 signal changed_energy_station(energy_station: EnergyStation)
+signal changed_selected_robot(robot: Robot)
 signal opened_menu
 signal closed_menu
 var level
@@ -29,11 +30,15 @@ func set_energy_station(new_energy_station: EnergyStation):
 
 func on_robot_selected(robot):
 	selected_robot = robot
+	changed_selected_robot.emit(selected_robot)
 	update_gui()
 	pass
-
+func remove_upgrade(upgrade_entity):
+	selected_robot.remove_upgrade(upgrade_entity.inst_id)
+	energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrade_entity.upgrade.upgrade_item, 1)
+	
+	pass
 func update_gui():
-
 	if selected_robot != null:
 		var robot_type = level.lookup_robot(selected_robot.pickup_item)
 		robot_details.visible = true
@@ -108,4 +113,11 @@ func on_identify_camera_finished_tracking():
 
 func _on_upgrade_robot_button_pressed():
 	$AddUpgradesPopup.show()
+	pass # Replace with function body.
+
+
+func _on_inventory_robot_upgrade_gui_button_pressed(item, _amount):
+	if energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).remove(item, 1):
+		selected_robot.add_upgrade(level.lookup_robot_upgrade(item))
+	robot_upgrade_gui.update_gui()
 	pass # Replace with function body.

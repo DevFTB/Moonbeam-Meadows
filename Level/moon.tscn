@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dpgxp7wmym5iu"]
+[gd_scene load_steps=72 format=3 uid="uid://dpgxp7wmym5iu"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -46,6 +46,7 @@
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
+[ext_resource type="Script" path="res://Level/AddUpgradesPopup.gd" id="37_18u4g"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
 [ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]
 [ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="44_cxftp"]
@@ -141,6 +142,7 @@ script = ExtResource("2_qn437")
 crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_v0lsh")])
 fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_57r43")])
 robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8"), ExtResource("6_iruk3"), ExtResource("7_ohfto"), ExtResource("8_0b4mc")])
+robot_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("45_s4v6b"), ExtResource("46_tehid")])
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -627,7 +629,8 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_details", "robot_inv_list", "identify_camera")]
+[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -640,6 +643,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("20_m3hsh")
 path_editing_gui = NodePath("../../PathSelectionGUI")
+robot_upgrade_gui = NodePath("AddUpgradesPopup")
 robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
 robot_inv_list = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer/RobotsList")
 identify_camera = NodePath("../../../../IdentifyCamera")
@@ -954,6 +958,8 @@ offset_right = 242.5
 offset_bottom = 284.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("37_18u4g")
+upgrade_boxes_paths = [NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer2/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer3/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer4/PanelContainer")]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup"]
 layout_mode = 1
@@ -1030,6 +1036,11 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+
+[node name="InventoryRobotUpgradeGUI" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("inventory")]
+layout_mode = 2
+script = ExtResource("27_qww4w")
+inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
 [node name="DepositBoxGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI"]
 visible = false
@@ -1153,7 +1164,7 @@ script = ExtResource("20_wew0j")
 [node name="Robots" type="Node2D" parent="."]
 
 [node name="WateringRobot" parent="Robots" instance=ExtResource("35_74b3b")]
-starting_upgrades = [ExtResource("45_s4v6b"), ExtResource("46_tehid")]
+starting_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("45_s4v6b"), ExtResource("46_tehid")])
 
 [node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
 position = Vector2(624, 240)
@@ -1196,5 +1207,6 @@ script = ExtResource("49_5eap5")
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
+[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotUpgradeGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]

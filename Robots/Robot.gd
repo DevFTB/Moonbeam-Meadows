@@ -42,6 +42,7 @@ class UpgradeInstance:
 
 	func _init(upgrade: RobotUpgrade, inst_id = 0):
 		self.upgrade = upgrade
+		self.inst_id = inst_id
 var upgrades = {}
 @export var starting_upgrades = []
 
@@ -278,6 +279,7 @@ func get_energy_requirement():
 
 func add_upgrade(upgrade: RobotUpgrade) -> int:
 	var inst = UpgradeInstance.new(upgrade, upgrade_counter)
+	upgrades[upgrade_counter] = inst
 	upgrade_counter += 1
 
 	for property_name in upgrade.upgrade_properties:
@@ -286,16 +288,18 @@ func add_upgrade(upgrade: RobotUpgrade) -> int:
 			var id = property.add_modifier(upgrade.upgrade_properties[property_name])
 			inst.property_ids[property_name] = id 
 		break
+	
+
 	return -1
 
 func remove_upgrade(inst_id: int):
-	var inst = upgrades.filter(func(x): return x.id == inst_id).front()
+	var inst = upgrades[inst_id]
 	if inst != null:
 		for property_name in inst.upgrade.upgrade_properties:
 			var property = get(property_name)
 			if property != null:
 				property.remove_modifier(inst.property_ids[property_name])
-		upgrades.erase(inst)
+		upgrades.erase(inst_id)
 		return true
 	return false
 func on_traversability_update(grid_position: Vector2i, traversible: bool):

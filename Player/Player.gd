@@ -62,16 +62,10 @@ func fill_water_tank():
 
 const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
 func get_inventory(item_type: ItemType) -> InventoryComponent:
-	match(item_type):
-		ItemType.SEED:
-			return $SeedInventory
-		ItemType.FERTILISER:
-			return $FertiliserInventory
-		ItemType.PRODUCE:
-			return $ProduceInventory
-		ItemType.ROBOT:
-			return $RobotInventory
-	return null
+	var inventories = get_children().filter(func(child):
+		return child is InventoryComponent and child.inventory_type == item_type
+	)
+	return inventories[0] if inventories.size() > 0 else null
 	
 func _input(event):
 
