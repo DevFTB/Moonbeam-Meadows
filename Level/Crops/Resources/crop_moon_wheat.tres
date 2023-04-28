@@ -28,4 +28,4 @@ growth_time = 0.1
 dehydration_rate = 0.05
 optimal_temperature = 20.0
 max_temp_modifier = 2.0
-heat_sensitivity = 15.0
+heat_sensitivity = 10.0
