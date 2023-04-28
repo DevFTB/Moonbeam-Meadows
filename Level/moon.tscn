@@ -462,7 +462,6 @@ script = ExtResource("14_cssu7")
 currency_manager = NodePath("../../../../../../CurrencyManager")
 
 [node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -636,6 +635,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

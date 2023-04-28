@@ -25,19 +25,22 @@ func _init(p_quest_id = 0, p_quest_name = "Quest", p_is_campaign_quest = true, p
 	predecessor_quest_ids = p_predecessor_quest_ids
 
 func can_claim(_level : Level, player: Player):
-	var inventory = player.get_node("ProduceInventory").inventory
 	var valid = true
 	for q_item in quest_items:
-		if not inventory.has(q_item) or inventory[q_item] < quest_items[q_item]:
+		var inventory = player.get_inventory(q_item.item_type)
+		print("Can Claim: Inventory has item? %s %s" % [q_item.item_name, inventory.has_item(q_item)])
+		print("Can Claim: Inventory amount: %s %d" % [inventory.inventory_type, inventory.get_amount(q_item)])
+		print("Can Claim: Quest item amount: %d" % [quest_items[q_item]])
+		if not inventory.has_item(q_item) or inventory.get_amount(q_item) < quest_items[q_item]:
 			valid = false
 	return valid
 # attempts to claim the quest by checking if it can first then removing items from the given inventory.
 # returns whether this was successful.
 func claim_quest(level: Level, player: Player) -> bool:
-	var inv_comp = player.get_inventory(preload("res://Inventory/InventoryItem.gd").ItemType.PRODUCE)
 	if can_claim(level, player):
 		for q_item in quest_items:
-			inv_comp.remove(q_item, quest_items[q_item])
+			var inventory = player.get_inventory(q_item.item_type)
+			inventory.remove(q_item, quest_items[q_item])
 
 		# give rewards
 		apply_rewards(level, player)

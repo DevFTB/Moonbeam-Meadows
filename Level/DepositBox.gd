@@ -13,7 +13,7 @@ func _ready():
 	for item_type in item_types:
 		var inv_comp = InventoryComponent.new()
 		inv_comp.inventory_type = item_type
-		inv_comp.max_items = max_items
+		inv_comp.inventory_size = max_items
 		add_child(inv_comp)
 		inventories[item_type] = inv_comp
 	

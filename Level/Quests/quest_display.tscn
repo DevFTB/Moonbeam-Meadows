@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6jj0bvpw078h"]
+[gd_scene load_steps=3 format=3 uid="uid://c6jj0bvpw078h"]
 
 [ext_resource type="Script" path="res://Level/Quests/QuestGUI.gd" id="1_ipdg8"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_vgmr0"]
 
 [node name="QuestDisplay1" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
+theme = ExtResource("1_vgmr0")
 script = ExtResource("1_ipdg8")
 
-[node name="Panel" type="Panel" parent="."]
-modulate = Color(0.690196, 0.635294, 0.180392, 1)
+[node name="Panel" type="PanelContainer" parent="."]
+self_modulate = Color(0.690196, 0.635294, 0.180392, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,36 +19,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 10.0
-offset_right = -8.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Quest Name"
 
-[node name="RequirementsLabel" type="Label" parent="VBoxContainer"]
+[node name="RequirementsLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Requirements:
 1x Moon Wheat"
 
-[node name="RewardsLabel" type="Label" parent="VBoxContainer"]
+[node name="RewardsLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Reward:
 1x Construction Bot"
 
-[node name="ClaimButton" type="Button" parent="VBoxContainer"]
+[node name="ClaimButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "Submit"
 
-[connection signal="pressed" from="VBoxContainer/ClaimButton" to="." method="_on_claim_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ClaimButton" to="." method="_on_claim_button_pressed"]

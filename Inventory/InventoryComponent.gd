@@ -51,6 +51,9 @@ func remove(item: Variant, amount : int = 1):
 
 	return false
 
+func has_item(item: Variant):
+	return inventory.has(item)
+
 func get_amount(item: Variant):
 	if inventory.has(item):
 		return inventory[item]
