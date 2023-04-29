@@ -1,15 +1,25 @@
 extends Node2D
 
-@onready var level = get_node("/root/Level")
+## This is a helper node that draws a grid on the screen
+
+## The size of the grid
 @export var grid_size = 32
 
+## The colour of the square when it is valid
 @export var valid_colour: Color
+
+## The colour of the square when it is invalidj
 @export var invalid_colour: Color 
+
+## The callback to check if the square is valid
 var valid_cb : Callable
 
+## The position of the square
 var grid_position = Vector2(0,0)
 
-func _process(delta):
+@onready var level = get_node("/root/Level")
+
+func _process(_delta):
 	if visible:
 		queue_redraw()
 

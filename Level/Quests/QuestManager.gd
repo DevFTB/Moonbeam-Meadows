@@ -1,23 +1,22 @@
 extends Node
 
-@export var quests : Array[QuestResource] = []
-
-@export var player: Player 
-@onready var level = get_parent()
-
 signal active_quests_updated(quests)
+
+@export var quests : Array[QuestResource] = []
+@export var player: Player 
 
 var active_quests = []
 var completed_quests = []
 
+@onready var level = get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var initial_quests = get_candidate_quests(true)
 
 	for quest in initial_quests:
 		activate_quest(quest)
-	pass # Replace with function body.
 
+## Claims a quest and removes it from the quest pool. If its a campaign quest, it will also activate any new quests that are unlocked by completing this quest
 func claim_quest(quest: QuestResource): 
 	if quest.claim_quest(level, player):
 		completed_quests.append(quest)
@@ -29,15 +28,13 @@ func claim_quest(quest: QuestResource):
 				activate_quest(cq)
 		
 		active_quests_updated.emit(active_quests)
-	else:
-		print("Quest %s not completed" % quest.quest_id)
-	pass
 
+## Activates a quest and adds it to the active quest pool
 func activate_quest(quest: QuestResource):
 	if quest in active_quests:
 		return
 
-	print("Activating quest: %s " % quest.quest_id) 
+	
 	active_quests.append(quest)
 	active_quests_updated.emit(active_quests)
 

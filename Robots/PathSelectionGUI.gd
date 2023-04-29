@@ -1,5 +1,7 @@
 extends Control
 
+signal finished_editing
+
 @export var minimum_motion = 8
 @export var colour : Color
 @export var line_width = 5.0
@@ -9,17 +11,38 @@ var last_mouse_pos : Vector2 = Vector2.ZERO
 var grid_positions: Array[Vector2i] = []
 var current_robot = null
 var current_energy_station = null
-signal finished_editing
 
 @onready var level = get_node("/root/Level") as Level
 @onready var grid_path_line = get_node("/root/Level/GridPathLine")
 @onready var player = get_node("/root/Level/Player")
 @onready var editing_camera = get_node("/root/Level/EditingCamera")
 @onready var grid_square_selector = get_node("/root/Level/GridSquareSelector")
+
 func _ready():
 	grid_square_selector.valid_cb = check_pos
 	grid_square_selector.hide()
-	pass # Replace with function body.
+	
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			dragging = event.pressed
+			$VBoxContainer/ErrorPassText.show_text(not is_path_valid())
+			$VBoxContainer/SaveButton.disabled = not is_path_valid() or grid_positions.size() == 0
+		pass
+	elif event is InputEventMouseMotion:
+		var mouse_pos = player.get_global_mouse_position()
+		if dragging:
+			if event.relative.length() > minimum_motion:
+				add_pos(mouse_pos)
+				pass
+			else:
+				if (mouse_pos - last_mouse_pos).length() > 8:
+					last_mouse_pos = mouse_pos
+					add_pos(mouse_pos)
+		pass
+	
+	
+	pass
 
 func start_editing(robot: Robot, energy_station: EnergyStation):
 	current_robot = robot
@@ -60,26 +83,13 @@ func check_pos(mouse_position: Vector2) -> bool:
 	else:
 		return false
 
-func _gui_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			dragging = event.pressed
-			$VBoxContainer/ErrorPassText.show_text(not is_path_valid())
-			$VBoxContainer/SaveButton.disabled = not is_path_valid() or grid_positions.size() == 0
-		pass
-	elif event is InputEventMouseMotion:
-		var mouse_pos = player.get_global_mouse_position()
-		if dragging:
-			if event.relative.length() > minimum_motion:
-				add_pos(mouse_pos)
-				pass
-			else:
-				if (mouse_pos - last_mouse_pos).length() > 8:
-					last_mouse_pos = mouse_pos
-					add_pos(mouse_pos)
-		pass
-	
-	
+func close_gui():
+	editing_camera.disable()
+	finished_editing.emit()
+	player.frozen = false
+	hide()
+	grid_path_line.hide()
+	grid_square_selector.hide()
 	pass
 
 func is_path_valid():
@@ -96,26 +106,15 @@ func _on_save_button_pressed():
 	else:
 		if grid_positions.size() == 0:
 			close_gui()
-		else:
-			print("invalid path")
-
-	pass # Replace with function body.
+	
 
 
-func close_gui():
-	editing_camera.disable()
-	finished_editing.emit()
-	player.frozen = false
-	hide()
-	grid_path_line.hide()
-	grid_square_selector.hide()
-	pass
 
 
 func _on_clear_button_pressed():
 	grid_positions.clear()
 	update_path_visual()
-	pass # Replace with function body.
+	
 
 func _draw():
 	pass

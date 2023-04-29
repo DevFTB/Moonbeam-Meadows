@@ -1,8 +1,14 @@
 extends Control
 const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
 
+## A item tile in the trade station that allows the player to sell items or multisell items
+
 @export var item : InventoryItem = null
+
+## The delay before the item starts to be sold multiple times
 @export var multisell_delay = 0.7
+
+## The rate at which the item is sold multiple times
 @export var multisell_rate = 10.0
 
 @export var icon_texture_rect : TextureRect
@@ -11,21 +17,18 @@ const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
 @export var sell_button : Button
 
 @export var amount_label :Label
+
 var multisell = false
 var multisell_timer = 0.0
 var multisell_amount = 0
 var pressed = false
 var max_amount = 1
-
 var interactable = true
+var player_inventory : Node 
+var interact_callback = null
 
 @onready var currency_manager : Node = get_node("/root/Level/CurrencyManager")
 var trade_station : Node2D
-
-var player_inventory : Node 
-
-var interact_callback = null
-
 func _ready():
 	pass
 
@@ -48,38 +51,12 @@ func set_item(new_item: InventoryItem, _amount):
 
 func start_multisell():
 	if pressed:
-		print("start multisell")
+		
 		multisell = true
 		multisell_timer = 0
 		multisell_amount = 0
 		max_amount = player_inventory.get_amount(item)
 	pass
-
-func _on_sell_button_pressed():
-	if not multisell:
-		print(name, trade_station == null)
-		#currency_manager.sell(trade_station.get_interacting_player(), item, 1)	
-		if interact_callback != null:
-			interact_callback.call(item,1)
-	pass # Replace with function body.
-
-
-func _on_sell_button_button_down():
-	pressed = true
-	get_tree().create_timer(multisell_delay).timeout.connect(start_multisell)
-	pass # Replace with function body.
-
-
-func _on_sell_button_button_up():
-	pressed = false
-	if multisell:
-		print("endmultisell")
-		multisell = false
-		sell_button.text = "Sell 1"
-		if interact_callback!= null:
-			interact_callback.call(item,multisell_amount)
-		
-	pass # Replace with function body.
 
 func update_gui():
 	if player_inventory != null:
@@ -87,9 +64,9 @@ func update_gui():
 	pass
 
 func set_trade_station(new_trade_station: Node):
-	print("new ts: ", new_trade_station, new_trade_station == null)
+	
 	if new_trade_station != null:
-		print("huh")
+		
 		trade_station = new_trade_station
 		var interacting_player = trade_station.get_interacting_player()
 		if interacting_player != null:
@@ -103,3 +80,30 @@ func set_trade_station(new_trade_station: Node):
 
 func connect_to_button(callable: Callable):
 	interact_callback = callable
+
+func _on_sell_button_pressed():
+	if not multisell:
+		
+		#currency_manager.sell(trade_station.get_interacting_player(), item, 1)	
+		if interact_callback != null:
+			interact_callback.call(item,1)
+	
+
+
+func _on_sell_button_button_down():
+	pressed = true
+	get_tree().create_timer(multisell_delay).timeout.connect(start_multisell)
+	
+
+
+func _on_sell_button_button_up():
+	pressed = false
+	if multisell:
+		
+		multisell = false
+		sell_button.text = "Sell 1"
+		if interact_callback!= null:
+			interact_callback.call(item,multisell_amount)
+		
+	
+

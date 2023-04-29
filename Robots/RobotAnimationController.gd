@@ -12,7 +12,7 @@ func power_on():
 	pass
 
 func on_animation_finished():
-	print(animation)
+	
 	if animation == "power_down":
 		play("unpowered")
 	if animation == "power_up":

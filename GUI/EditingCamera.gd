@@ -1,4 +1,5 @@
 extends Camera2D
+## A camera used for examining the world
 
 @export var speed = 100
 

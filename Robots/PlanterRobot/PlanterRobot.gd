@@ -20,8 +20,8 @@ func power_down():
 	$WheelParticlesRight.emitting = false
 	super.power_down()
 
-func on_move_start():
+func _on_move_start():
 	$WheelParticlesLeft.emitting = true
 	$WheelParticlesRight.emitting = true
-	super.on_move_start()
+	super._on_move_start()
 

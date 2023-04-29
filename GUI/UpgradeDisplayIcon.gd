@@ -1,8 +1,9 @@
 extends Control
-var upgrade_inst = null 
 
 @export var texture_rect : TextureRect
 @export var remove_button : Button
+
+var upgrade_inst = null 
 
 func set_upgrade(new_upgrade_inst):
     upgrade_inst = new_upgrade_inst

@@ -1,5 +1,7 @@
 extends Control
 
+## A item tile that represents an InventoryItem
+
 @export var amount_label : Label
 @export var name_label : Label
 @export var action_button : Button

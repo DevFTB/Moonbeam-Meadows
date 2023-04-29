@@ -1,11 +1,10 @@
 extends Control
 
+@export var campaign_quest_colour = Color.GOLD
+@export var optional_quest_colour = Color.BLUE
+@export var no_quest_colour = Color.GRAY
+
 var quest_manager = null
-
-var campaign_quest_colour = Color.GOLD
-var optional_quest_colour = Color.BLUE
-var no_quest_colour = Color.GRAY
-
 var quest = null
 
 func ready():
@@ -46,7 +45,6 @@ func unset_quest():
 
 	pass
 
-
 func _on_claim_button_pressed():
 	quest_manager.claim_quest(quest)
-	pass # Replace with function body.
+	

@@ -1,15 +1,19 @@
 extends Control
 
+## A item tile in the trade station that allows the player to buy items or multibuy items
 @export var item : InventoryItem = null
 @export var player_inventory : Node 
+
+## The delay before multibuy starts
 @export var multibuy_delay = 0.7
+ 
+## The rate at which multibuy increases
 @export var multibuy_rate = 10.0
 
 @export var icon_texture_rect : TextureRect
 @export var name_label : Label
 @export var cost_label : Label
 @export var buy_button : Button
-@onready var currency_manager : Node = get_node("/root/Level/CurrencyManager")
 
 var multibuy = false
 var multibuy_timer = 0.0
@@ -19,6 +23,8 @@ var pressed = false
 var max_amount = 1
 
 var trade_station : Node = null
+
+@onready var currency_manager : Node = get_node("/root/Level/CurrencyManager")
 
 func _ready():
 	currency_manager.currency_changed.connect(func(_x): update_gui())
@@ -47,16 +53,25 @@ func start_multibuy():
 		max_amount = floor(currency_manager.get_currency() / item.buy_price)
 	pass
 
+func update_gui():
+	buy_button.disabled = currency_manager.get_currency() < item.buy_price	
+	pass
+
+func set_trade_station(new_trade_station: Node):
+	trade_station = new_trade_station
+	update_gui()
+	pass
+
 func _on_buy_button_pressed():
 	if not multibuy:
 		currency_manager.buy(trade_station.get_interacting_player(), item, 1)	
-	pass # Replace with function body.
+	
 
 
 func _on_buy_button_button_down():
 	pressed = true
 	get_tree().create_timer(multibuy_delay).timeout.connect(start_multibuy)
-	pass # Replace with function body.
+	
 
 
 func _on_buy_button_button_up():
@@ -66,13 +81,4 @@ func _on_buy_button_button_up():
 		multibuy = false
 		buy_button.text = "Buy 1"
 		
-	pass # Replace with function body.
-
-func update_gui():
-	buy_button.disabled = currency_manager.get_currency() < item.buy_price	
-	pass
-
-func set_trade_station(new_trade_station: Node):
-	trade_station = new_trade_station
-	update_gui()
-	pass
+	

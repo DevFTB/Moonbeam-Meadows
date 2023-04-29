@@ -1,14 +1,26 @@
 extends "res://Level/Trade Station/InteractableConstruction.gd"
 class_name DepositBox
+
+## Is the box currently receiving items from robots?
 @export var receiving_items : bool = true
+
+## Is the box currently providing items to robots?j
 @export var providing_items : bool = false
 
+## The maximum amount of items that can be stored in the box
 @export var max_items : int = 60
+
+## The maximum amount of unique items that can be stored in the box
 @export var max_unique_items : int = 10
 
+## The types of items that can be stored in the boxj
 @export var item_types : Array[InventoryItem.ItemType] = [InventoryItem.ItemType.PRODUCE]
-var inventories = {}
+
+## The items that the box starts with
 @export var initial_items : Dictionary = {}
+
+var inventories = {}
+
 func _ready():
 	for item_type in item_types:
 		var inv_comp = InventoryComponent.new()
@@ -21,19 +33,17 @@ func _ready():
 		var inv_comp = get_inventory(item.item_type)
 		inv_comp.add(item, initial_items[item])
 	
-		
-func get_inventory(item_type : InventoryItem.ItemType) -> InventoryComponent:
-	return inventories[item_type]
-func set_gui_owner():
-	gui.set_deposit_box(self)
+## Transfer an item from the box to the player		
+func transfer_to_player(item, amount):
+	if get_inventory(item.item_type).remove(item, amount):
+		interacting_player.get_inventory(item.item_type).add(item, amount)
 
-func _on_robot_interactor_robot_exited(_robot:Robot):
-	pass # Replace with function body.
+## Transfer an item from the player to the box
+func transfer_to_box(item, amount):
+	if interacting_player.get_inventory(item.item_type).remove(item, amount):
+		get_inventory(item.item_type).add(item, amount)
 
-func _on_robot_interactor_robot_entered(robot:Robot):
-	if receiving_items and robot.should_deposit: ask_for_deposit(robot)
-	if providing_items and robot.should_withdraw: ask_for_withdrawal(robot)
-
+## Asks the given robot to deposit items into the box with the box's current constraints 
 func ask_for_deposit(robot:Robot):
 	var unique_items = max_unique_items - get_amount_of_unique_items()
 	var items = max_items - get_amount_of_items()
@@ -41,8 +51,8 @@ func ask_for_deposit(robot:Robot):
 	var deposit = robot.generate_deposit(item_types, unique_items, items)
 	if consume_deposit(deposit):
 		robot.confirm_deposit(deposit)
-	pass # Replace with function body.
-
+	
+## Accepts the deposit from the robot, and adds the items to the box
 func consume_deposit(deposit:Dictionary):
 	for it in item_types:
 		var items = deposit.keys().filter(func(x) : return x.item_type == it)
@@ -52,7 +62,8 @@ func consume_deposit(deposit:Dictionary):
 			inventory.add(item, deposit[item])
 
 	return true
-	
+
+## Asks the given robot to withdraw items from the box with the box's current constraints	
 func ask_for_withdrawal(robot:Robot):
 	var wd_params = robot.get_withdrawal_params()
 	
@@ -73,11 +84,12 @@ func ask_for_withdrawal(robot:Robot):
 
 	return withdrawal
 
+## Accepts the withdrawal from the robot, and removes the items from the box
 func consume_withdrawal(withdrawal:Dictionary):
 	for item in withdrawal.keys():
 		var inventory = get_inventory(item.item_type)
 		inventory.remove(item, withdrawal[item])
-	pass # Replace with function body.
+	
 	
 func get_amount_of_unique_items() -> int:
 	var unique_items : int = 0
@@ -91,10 +103,15 @@ func get_amount_of_items():
 		total_items += child.get_amount_of_items() 
 	return total_items
 
-func transfer_to_player(item, amount):
-	if get_inventory(item.item_type).remove(item, amount):
-		interacting_player.get_inventory(item.item_type).add(item, amount)
+func get_inventory(item_type : InventoryItem.ItemType) -> InventoryComponent:
+	return inventories[item_type]
+func set_gui_owner():
+	gui.set_deposit_box(self)
 
-func transfer_to_box(item, amount):
-	if interacting_player.get_inventory(item.item_type).remove(item, amount):
-		get_inventory(item.item_type).add(item, amount)
+
+func _on_robot_interactor_robot_exited(_robot:Robot):
+	pass	
+
+func _on_robot_interactor_robot_entered(robot:Robot):
+	if receiving_items and robot.should_deposit: ask_for_deposit(robot)
+	if providing_items and robot.should_withdraw: ask_for_withdrawal(robot)

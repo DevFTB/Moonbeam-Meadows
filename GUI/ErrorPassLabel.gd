@@ -1,12 +1,16 @@
 extends Label
 
+## This is a label that can be used to display a pass or error message.
+
 @export var error_text = ""
 @export var error_settings : LabelSettings
 
 @export var pass_text = ""
 @export var pass_settings : LabelSettings
 
-@export var is_error : bool = false
+@export var is_error : bool = false:
+	set(value): 
+		show_text(value)
 
 func show_text(errored: bool = true): 
 	is_error = errored

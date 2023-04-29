@@ -1,5 +1,7 @@
 extends Node2D
 
+## Draws a line with a width, and draws a square at each grid square along that line 
+
 @export var points : PackedVector2Array
 
 @export var line_colour : Color
@@ -7,11 +9,9 @@ extends Node2D
 
 @export var tile_colour : Color
 @export var tile_line_width = 5.0
-@export var final_tile_colour : Color
 
-func set_points(new_points):
-	self.points = PackedVector2Array(new_points)
-	queue_redraw()
+## The colour of the final tile, which is drawn at the end of the line
+@export var final_tile_colour : Color
 
 func _draw():
 	if points.size() > 1:
@@ -33,3 +33,7 @@ func _draw():
 		
 		draw_rect(Rect2(points[points.size() - 1] - Vector2(16,16), Vector2(32,32)), final_tile_colour, false, tile_line_width)
 	pass
+
+func set_points(new_points):
+	self.points = PackedVector2Array(new_points)
+	queue_redraw()

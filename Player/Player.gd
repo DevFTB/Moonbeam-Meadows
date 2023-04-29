@@ -1,29 +1,32 @@
 extends CharacterBody2D
 class_name Player
 
-@export var speed = 125  # speed in pixels/sec
+# The controller for the player character
 
 signal tool_changed(new_tool: Tool)
 signal freeze_changed(frozen: bool)
 
+# The tools the player can use
 enum Tool {
 	TILL, WATER, PLANT, FERTILISE, HARVEST, 
 }
 
+# The speed of the player in pixels/sec
+@export var speed = 125  # speed in pixels/sec
+
+# The maximum amount of water the player can carry
+@export var max_water_tank = 10
+
 var current_tool = Tool.TILL
-
 var facing = Vector2.DOWN
-
 var frozen = false
 
 @onready var inventories = get_children().filter(func(child):
 	return child is InventoryComponent
 )
-
-@export var max_water_tank = 10
 @onready var water_tank = max_water_tank
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not frozen:
 		var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		facing = direction.normalized()
@@ -39,7 +42,7 @@ func switch_tool(tool : Tool):
 		tool_changed.emit(current_tool)
 		
 	pass
-	
+## Conducts an action on the land at the given grid position depending on the current tool	
 func use_tool(grid_position):
 	if not frozen:
 		match(current_tool):
@@ -64,8 +67,7 @@ func use_tool(grid_position):
 func fill_water_tank():
 	water_tank = max_water_tank
 
-const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
-func get_inventory(item_type: ItemType) -> InventoryComponent:
+func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 	var type_inventories = inventories.filter(func(child):
 		return child.inventory_type == item_type
 	)
@@ -88,12 +90,13 @@ func _input(event):
 		elif event.is_action_pressed("select_tool5"):
 			switch_tool(Tool.HARVEST)
 			pass
-
+# Makes the player ignore input
 func freeze():
 	frozen = true
 	freeze_changed.emit(frozen)	
 	pass
 
+# Makes the player respond to input again if it was previously frozen
 func unfreeze():
 	frozen = false
 	freeze_changed.emit(frozen)

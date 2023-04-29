@@ -1,5 +1,6 @@
 extends Resource
 class_name InventoryItem
+## A resource describing an item that can be stored in InventoryComponents
 
 enum ItemType {
 	SEED,
@@ -23,11 +24,11 @@ func _init(p_item_name = "New Item", p_item_icon = null, p_item_type = ItemType.
 	buy_price = p_buy_price
 	sell_price = p_sell_price
 
-func get_buy_price():
+func get_buy_price() -> int:
 	return buy_price
 
-func get_sell_price():
+func get_sell_price()-> int:
 	return sell_price
 
-func get_type():
+func get_type() -> ItemType:
 	return item_type

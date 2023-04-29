@@ -1,71 +1,103 @@
 extends CharacterBody2D
 class_name Robot
+ 
+## A robot entity in the world
 
+## The path the robot will follow
 @export var path : Array[Vector2i] = []
 
+## The item the robot will give the player once it gets picked up
 @export var pickup_item : InventoryItem
 
+## Should the robot deposit the item from its inventory to other inventorie
 @export var should_deposit = false
+
+## Should the robot withdraw the item from other inventories
 @export var should_withdraw = false
+
+@export var base_movement_speed : float = 125
+## The speed at which the robot moves 
+
+@export var base_movement_action_penalty : float = 0.25
+## The penalty to movement speed when doing an action
+
+@export var base_inventory_capacity : int = 10 
+## The capacity of the robot's inventory
+
+@export var base_move_energy_cost  : int = 1
+## The energy cost of moving to an adjacent grid
+
+@export var base_action_energy_cost : int = 3
+## The energy cost of doing an action
+
+@export var base_energy_capacity : int = 60
+#3 The energy capacity of the robot
+
+@export var starting_upgrades = []
+
+var parent_energy_station = null
+var upgrade_counter = 0
 
 @onready var level = get_node("/root/Level") as Level
 @onready var inventories = get_children().filter(func(x): return x is InventoryComponent)
 
-@export var base_movement_speed : float = 125
 @onready var movement_speed = TrackedModifierValue.new(base_movement_speed)
-
-@export var base_movement_action_penalty : float = 0.25
 @onready var movement_action_penalty = TrackedModifierValue.new(base_movement_action_penalty)
-
-@export var base_inventory_capacity : int = 10 
 @onready var inventory_capacity = TrackedModifierValue.new(base_inventory_capacity)
-
-@export var base_move_energy_cost  : int = 1
 @onready var move_energy_cost = TrackedModifierValue.new(base_move_energy_cost)
-
-@export var base_action_energy_cost : int = 3
 @onready var action_energy_cost = TrackedModifierValue.new(base_action_energy_cost)
-
-@export var base_energy_capacity : int = 60
 @onready var energy_capacity = TrackedModifierValue.new(base_energy_capacity)
-
-var parent_energy_station = null
-
-var upgrade_counter = 0
 
 
 class UpgradeInstance:
 	extends RefCounted
+	## An instance of an upgrade applied to a robot
+
+	## An unique id for this instance
 	var inst_id = 0
+
+	## The upgrade this instance is based on
 	var upgrade : RobotUpgrade
+
+	## The property name mapping to the amount of modification
 	var property_ids = {}
 
-	func _init(upgrade: RobotUpgrade, inst_id = 0):
-		self.upgrade = upgrade
-		self.inst_id = inst_id
-var upgrades = {}
-@export var starting_upgrades = []
-
-var powered = true
-var energy = 0
+	func _init(p_upgrade: RobotUpgrade, p_inst_id = 0):
+		upgrade = p_upgrade
+		inst_id = p_inst_id
 
 var astar : AStarGrid2D
+## The upgrades applied to the robot
+var upgrades = {}
+
+## Is the robot powered on
+var powered = true
+
+## The current energy of the robot
+var energy = 0
+
+## The position along the path the robot is currently at
 var path_index = 0
+
+## The target position the robot is moving to
 var target_position = null
+
 var is_navigation_finished = true
 var direction = Vector2i.ZERO
+
+## A temp_path used for the robot overring it's off path detection and energy requirements
 var temp_path = []
 var temp_path_completed = false
 
+## The directions in with the robot can affect with it's actions
 var action_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 var last_acted = Vector2i.ZERO
 var acted_last_tile = false
 
 func _ready():
+	$ProximityInteractor.successful_pickup.connect(_on_successful_pickup)
+	level.traversibility_updated.connect(_on_traversability_update)
 
-	$ProximityInteractor.successful_pickup.connect(on_successful_pickup)
-
-	level.traversibility_updated.connect(on_traversability_update)
 	astar = AStarGrid2D.new()
 	astar.size = level.get_used_rect().size
 	astar.cell_size = Vector2(32,32)
@@ -85,7 +117,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	if is_navigation_finished and powered:
-		print("finished navigation")
+		
 		acted_last_tile = false
 		# check if should power down
 		if not has_energy() or path.size() <= 1:
@@ -113,7 +145,7 @@ func _physics_process(_delta):
 					if can_do_action(action_position) and energy >= action_energy_cost.get_value():
 						do_action(action_position)
 						acted_last_tile = true	
-						print("doing action at ", action_position)
+						
 
 				last_acted = current_position
 				
@@ -124,18 +156,11 @@ func _physics_process(_delta):
 		if powered:
 		# movement code
 			if target_position != null :
-	#			if direction == Vector2i.UP or direction == Vector2i.DOWN:
-	#				if position.x - 16 % 32 != 0:
-	#					position.x = floor(position.x / 32) * 32 + 16
-	#			elif direction == Vector2i.LEFT or direction == Vector2i.RIGHT:
-	#				if position.y - 16 % 32 != 0:
-	#					position.y = floor(position.y / 32) * 32 + 16
-				print(acted_last_tile)
 				var actual_movement_speed = movement_speed.get_value() if not acted_last_tile else movement_speed.get_value() * movement_action_penalty.get_value()
 				var movement_delta = actual_movement_speed * _delta * Vector2(direction)
 				var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
 				if disp < 5:
-					print("snapping")
+					
 					global_position = level.map_to_local(target_position)
 					is_navigation_finished = true
 				else:
@@ -143,16 +168,14 @@ func _physics_process(_delta):
 
 					velocity = actual_movement_speed * direction
 					if (target_position- current_position).length() > 1:
-						print("powering down. not on path " , get_current_position())
+						
 						power_down()
 					move_and_slide()
 			else:
 				is_navigation_finished = true
 				
-func can_do_action(grid_position: Vector2i)->bool:
-	return false
 	
-func do_action(grid_position: Vector2i) -> void:
+func do_action(_grid_position: Vector2i) -> void:
 	energy -= action_energy_cost.get_value()
 	pass
 
@@ -171,7 +194,7 @@ func check_power():
 			power_on()
 	else:
 		if powered:
-			print("powering down. no energy or no path")
+			
 			power_down()
 
 func set_path(new_path: Array[Vector2i]):
@@ -183,14 +206,12 @@ func set_path(new_path: Array[Vector2i]):
 	path_index = 0
 	pass
 	
-func on_move_start():
-	pass
-	
 func snap_to_grid():
 	position = level.map_to_local(get_current_position())
-	
+
+## Starts the robot moving to the given grid position	
 func move_to_grid(grid_position: Vector2i):
-	on_move_start()
+	_on_move_start()
 	snap_to_grid()
 	var current_position = get_current_position()
 
@@ -208,6 +229,7 @@ func move_to_grid(grid_position: Vector2i):
 	else:
 		is_navigation_finished = true
 
+## Given constraints by the requesting entity, the robot generates a deposit of items from its inventory 
 func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_items: int, max_total_items: int) -> Dictionary:
 	var deposit = {}
 	var unique_items = 0
@@ -219,7 +241,7 @@ func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_item
 				var inv = invs.front()
 				if inv != null:
 					for item in inv.inventory:
-						print(inv.inventory[item], ", ", max_total_items-total_items)
+						
 						var amnt =  min(inv.inventory[item], max_total_items-total_items)
 						if deposit.has(item):
 							deposit[item] += amnt
@@ -268,15 +290,15 @@ func confirm_withdrawal(withdrawal: Dictionary):
 
 func add_energy(amount: int) -> void:
 	energy = min(energy + amount, energy_capacity.get_value())
-	print("added %d energy, now at %d" % [amount, energy])
+	
 	check_power()
 	pass
 
-func has_energy():
-	return energy > 0
-
-func get_energy_requirement():
-	return energy_capacity.get_value() - energy 
+func remove_self():
+	if parent_energy_station != null:
+		parent_energy_station.remove_robot(self)
+	
+	queue_free()
 
 func add_upgrade(upgrade: RobotUpgrade) -> int:
 	var inst = UpgradeInstance.new(upgrade, upgrade_counter)
@@ -289,8 +311,6 @@ func add_upgrade(upgrade: RobotUpgrade) -> int:
 			var id = property.add_modifier(upgrade.upgrade_properties[property_name])
 			inst.property_ids[property_name] = id 
 		break
-	
-
 	return -1
 
 func remove_upgrade(inst_id: int):
@@ -303,30 +323,6 @@ func remove_upgrade(inst_id: int):
 		upgrades.erase(inst_id)
 		return true
 	return false
-func on_traversability_update(grid_position: Vector2i, traversible: bool):
-	astar.set_point_solid(grid_position, not traversible)
-func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
-	# Move CharacterBody3D with the computed `safe_velocity` to avoid dynamic obstacles.
-	velocity = safe_velocity
-	move_and_slide()
-
-func get_current_position() -> Vector2i:
-	return level.local_to_map(position)
-
-func on_successful_pickup(interacting_player: Player):
-	interacting_player.get_inventory(InventoryItem.ItemType.ROBOT).add(pickup_item, 1)
-	for id in upgrades.keys():
-		interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrades[id].upgrade.upgrade_item, 1)
-		remove_upgrade(id)
-	remove_self()
-	pass
-
-func remove_self():
-	if parent_energy_station != null:
-		parent_energy_station.remove_robot(self)
-	
-	queue_free()
-
 
 func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 	var invs = inventories.filter(func(x): return x.inventory_type == item_type)
@@ -335,5 +331,33 @@ func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 	else:
 		return null
 
+func get_current_position() -> Vector2i:
+	return level.local_to_map(position)
 func get_specific_description():
 	return ""
+
+func can_do_action(_grid_position: Vector2i)->bool:
+	return false
+
+func has_energy(): 
+	return energy > 0
+
+func get_energy_requirement():
+	return energy_capacity.get_value() - energy 
+
+func _on_move_start():
+	pass
+	
+func _on_successful_pickup(interacting_player: Player):
+	interacting_player.get_inventory(InventoryItem.ItemType.ROBOT).add(pickup_item, 1)
+	for id in upgrades.keys():
+		interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrades[id].upgrade.upgrade_item, 1)
+		remove_upgrade(id)
+	remove_self()
+
+func _on_traversability_update(grid_position: Vector2i, traversible: bool):
+	astar.set_point_solid(grid_position, not traversible)
+func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
+	# Move CharacterBody3D with the computed `safe_velocity` to avoid dynamic obstacles.
+	velocity = safe_velocity
+	move_and_slide()

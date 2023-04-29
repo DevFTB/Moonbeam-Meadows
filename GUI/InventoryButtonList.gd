@@ -1,11 +1,16 @@
-extends VBoxContainer
+extends Control 
+
+signal button_pressed(item: InventoryItem, amount :int)
 
 @export var inventory : InventoryComponent
 @export var interactable = true
 
 @export var list_tile_scene = preload("res://GUI/item_list_button_tile.tscn")
 @export var button_text = "Place"
-signal button_pressed(item: InventoryItem, amount :int)
+
+func _ready():
+	set_inventory(inventory)
+
 func set_inventory(new_inventory : InventoryComponent):
 	inventory = new_inventory
 
@@ -13,11 +18,10 @@ func set_inventory(new_inventory : InventoryComponent):
 		inventory.inventory_modified.connect(_on_inventory_modified)
 	update_gui()
 	pass
-func _ready():
-	set_inventory(inventory)
 
-func _on_inventory_modified():
-	update_gui()
+func set_button_text(new_text : String):
+	button_text = new_text
+	pass
 
 func update_gui():
 	for child in get_children():
@@ -32,20 +36,20 @@ func update_gui():
 			list_tile.set_button_text(button_text)
 		list_tile.set_item(item, inventory.inventory[item])
 		if list_tile.has_method("connect_to_button"):
-			list_tile.connect_to_button(on_button_pressed)
+			list_tile.connect_to_button(_on_button_pressed)
 		list_tile.interactable = interactable
 		add_child(list_tile)
 
-		configure_tile(list_tile)
+		_configure_tile(list_tile)
 	pass
 
-func configure_tile(new_tile):
+func _on_inventory_modified():
+	update_gui()
+
+func _configure_tile(_new_tile):
 	pass
 
-func on_button_pressed(item: InventoryItem, amount: int):
+func _on_button_pressed(item: InventoryItem, amount: int):
 	button_pressed.emit(item, amount)
 	pass
 
-func set_button_text(new_text : String):
-	button_text = new_text
-	pass
