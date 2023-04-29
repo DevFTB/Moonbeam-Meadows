@@ -2,8 +2,8 @@ extends VBoxContainer
 
 @export var inventory : InventoryComponent
 @export var interactable = true
-var list_tile_scene = preload("res://GUI/item_list_button_tile.tscn")
 
+@export var list_tile_scene = preload("res://GUI/item_list_button_tile.tscn")
 
 signal button_pressed(item: InventoryItem, amount :int)
 func set_inventory(new_inventory : InventoryComponent):
@@ -29,9 +29,15 @@ func update_gui():
 	for item in inventory.inventory.keys():
 		var list_tile = list_tile_scene.instantiate()
 		list_tile.set_item(item, inventory.inventory[item])
-		list_tile.connect_to_button(on_button_pressed)
+		if list_tile.has_method("connect_to_button"):
+			list_tile.connect_to_button(on_button_pressed)
 		list_tile.interactable = interactable
 		add_child(list_tile)
+
+		configure_tile(list_tile)
+	pass
+
+func configure_tile(new_tile):
 	pass
 
 func on_button_pressed(item: InventoryItem, amount: int):

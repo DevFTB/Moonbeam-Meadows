@@ -106,7 +106,7 @@ func show_popup(popup: Control):
 	pass
 
 func hide_popup(popup: Control):
-	popup.hide()
+	popup.visible = false
 	$Blocking.hide()
 	pass
 
@@ -147,3 +147,10 @@ func is_active():
 
 func can_show():
 	return super.can_show() and not path_editing_gui.visible
+
+func hide_all():
+	hide_popup($RobotSelectionPopup)
+	hide_popup($AddUpgradesPopup)
+	super.hide_all()
+	pass
+	

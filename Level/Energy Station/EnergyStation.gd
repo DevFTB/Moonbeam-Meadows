@@ -32,6 +32,7 @@ func add_robot(robot: Robot) -> void:
 	gui.update_gui()
 
 func set_gui_owner():
+	print(self)
 	gui.set_energy_station(self)
 
 func is_power_tile(grid_position: Vector2i) -> bool:
