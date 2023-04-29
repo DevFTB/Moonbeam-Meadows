@@ -8,11 +8,14 @@ var power_tiles = []
 
 @onready var battery = $Battery
 
+signal robot_added(robot)
+signal robot_removed(robot)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$RobotInteractor.update_range(power_range)
 	calculate_power_tiles()
-	for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)
+	#for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)
 	pass # Replace with function body.
 
 func calculate_power_tiles():
@@ -46,7 +49,10 @@ func hide_area():
 
 func remove_robot(robot: Robot) -> void:
 	robots.erase(robot)
+
+	robot_removed.emit(robot)
 	gui.update_gui()
+	
 
 func _on_pulse_timer_timeout():
 	pulse()

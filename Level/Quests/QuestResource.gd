@@ -65,7 +65,6 @@ func get_requirements_text():
 	var req_test = "Requirements: \n"
 	for item in quest_items.keys():
 		req_test += "%dx %s" % [quest_items[item], item.item_name]
-	("sdf " + req_test)
 	return req_test
 
 func get_reward_text():

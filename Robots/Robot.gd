@@ -320,7 +320,9 @@ func on_successful_pickup(interacting_player: Player):
 func remove_self():
 	if parent_energy_station != null:
 		parent_energy_station.remove_robot(self)
+	
 	queue_free()
+
 
 func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 	var invs = inventories.filter(func(x): return x.inventory_type == item_type)

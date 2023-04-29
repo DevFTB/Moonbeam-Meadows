@@ -20,14 +20,19 @@ func _ready():
 	level = get_node("/root/Level")
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
+
 	pass # Replace with function body.
 
 func set_energy_station(new_energy_station: EnergyStation):
 	energy_station = new_energy_station
 	changed_energy_station.emit(energy_station)
+	if not energy_station.robot_removed.is_connected(on_remove_robot):
+		energy_station.robot_removed.connect(on_remove_robot)
+
 	update_gui()
 	pass
-
+func on_remove_robot(robot: Robot):
+	selected_robot = null
 func on_robot_selected(robot):
 	selected_robot = robot
 	changed_selected_robot.emit(selected_robot)
@@ -84,6 +89,7 @@ func can_show():
 
 func _on_add_robot_button_pressed():
 	$RobotSelectionPopup.show()
+	$Blocking.show()
 	pass # Replace with function body.
 
 func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
@@ -95,6 +101,7 @@ func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
 func _on_close_popup_button_pressed():
 	$RobotSelectionPopup.hide()
 	$AddUpgradesPopup.hide()
+	$Blocking.hide()
 	pass # Replace with function body.
 
 
@@ -115,6 +122,7 @@ func on_identify_camera_finished_tracking():
 
 func _on_upgrade_robot_button_pressed():
 	$AddUpgradesPopup.show()
+	$Blocking.show()
 	pass # Replace with function body.
 
 

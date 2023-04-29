@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_v0lsh"]
 [ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_57r43"]
 [ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
-[ext_resource type="PackedScene" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
+[ext_resource type="PackedScene" uid="uid://ds07jldwr2nb5" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
 [ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_iruk3"]
 [ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_ohfto"]
 [ext_resource type="Resource" uid="uid://f022kek71od4" path="res://Robots/FertiliserRobot/fertiliser_robot_resource.tres" id="8_0b4mc"]
@@ -462,6 +462,7 @@ script = ExtResource("14_cssu7")
 currency_manager = NodePath("../../../../../../CurrencyManager")
 
 [node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,7 +476,6 @@ grow_vertical = 2
 script = ExtResource("9_kceb6")
 
 [node name="Inventory" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI"]
-visible = false
 layout_mode = 2
 
 [node name="Inventory" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
@@ -535,6 +535,7 @@ inventories = [NodePath("../../../../../../../../Player/SeedInventory"), NodePat
 interactable = false
 
 [node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager", "quest_box_parent")]
+visible = false
 layout_mode = 2
 script = ExtResource("11_725wh")
 quest_manager = NodePath("../../../../../QuestManager")
@@ -573,7 +574,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -857,6 +857,14 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_wf8tp")
 value = 50.0
 fill_mode = 3
 
+[node name="Blocking" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RobotSelectionPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
 visible = false
 layout_mode = 1
@@ -913,7 +921,6 @@ script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotInventory")
 
 [node name="AddUpgradesPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

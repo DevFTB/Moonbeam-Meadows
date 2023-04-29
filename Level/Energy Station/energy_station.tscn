@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://ds07jldwr2nb5"]
 
 [ext_resource type="Script" path="res://Level/Energy Station/EnergyStation.gd" id="1_ykrsn"]
 [ext_resource type="Texture2D" uid="uid://cpllgfkuq2efd" path="res://Level/Energy Station/energy_station.png" id="2_4ubjf"]
