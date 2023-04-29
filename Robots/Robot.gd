@@ -139,11 +139,12 @@ func _physics_process(_delta):
 					global_position = level.map_to_local(target_position)
 					is_navigation_finished = true
 				else:
+					var current_position = get_current_position()
+
 					velocity = actual_movement_speed * direction
-					if temp_path_completed and not path.is_empty():
-						if not path.has(get_current_position()):
-							print("powering down. not on path " , get_current_position())
-							power_down()
+					if (target_position- current_position).length() > 1:
+						print("powering down. not on path " , get_current_position())
+						power_down()
 					move_and_slide()
 			else:
 				is_navigation_finished = true

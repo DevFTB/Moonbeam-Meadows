@@ -88,20 +88,27 @@ func can_show():
 	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
 
 func _on_add_robot_button_pressed():
-	$RobotSelectionPopup.show()
-	$Blocking.show()
+	show_popup($RobotSelectionPopup)
 	pass # Replace with function body.
 
 func _on_place_robot_gui_button_pressed(item: InventoryItem, _amount):
 	if level.place_robot_near_station(level.lookup_robot(item), energy_station):
-		$RobotSelectionPopup.hide()
+		hide_popup($RobotSelectionPopup)
 	pass # Replace with function body.
 
+func show_popup(popup: Control):
+	popup.show()
+	$Blocking.show()
+	pass
+
+func hide_popup(popup: Control):
+	popup.hide()
+	$Blocking.hide()
+	pass
 
 func _on_close_popup_button_pressed():
-	$RobotSelectionPopup.hide()
-	$AddUpgradesPopup.hide()
-	$Blocking.hide()
+	hide_popup($RobotSelectionPopup)
+	hide_popup($AddUpgradesPopup)
 	pass # Replace with function body.
 
 
@@ -121,8 +128,7 @@ func on_identify_camera_finished_tracking():
 	pass
 
 func _on_upgrade_robot_button_pressed():
-	$AddUpgradesPopup.show()
-	$Blocking.show()
+	show_popup($AddUpgradesPopup)
 	pass # Replace with function body.
 
 

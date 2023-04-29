@@ -45,15 +45,14 @@ func update_range(new_ir):
 
 func on_body_entered(status, body_rid, _instance_id, _body_shape_idx, _self_shape_idx):
 	if status == PhysicsServer2D.AREA_BODY_ADDED:
-		var body_id = PhysicsServer2D.body_get_object_instance_id(body_rid)
-		var robot = instance_from_id(body_id) as Robot
+		var robot = instance_from_id(_instance_id) as Robot
 		if robot != null:
 			robots.append(robot)
 			robot_entered.emit(robot)
 			print(robot)
 	elif status == PhysicsServer2D.AREA_BODY_REMOVED:
-		var body_id = PhysicsServer2D.body_get_object_instance_id(body_rid)
-		var robot = instance_from_id(body_id) as Robot
+		print(body_rid)
+		var robot = instance_from_id(_instance_id) as Robot
 		if robot != null:
 			robots.erase(robot)
 			robot_exited.emit(robot)
