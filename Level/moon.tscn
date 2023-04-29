@@ -579,7 +579,7 @@ layout_mode = 2
 [node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
 layout_mode = 2
 
-[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "identify_camera")]
+[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "add_from_inventory_button", "identify_camera")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -595,6 +595,7 @@ path_editing_gui = NodePath("../../PathSelectionGUI")
 robot_upgrade_gui = NodePath("AddUpgradesPopup")
 robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
 robot_inv_list = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer/RobotsList")
+add_from_inventory_button = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton")
 identify_camera = NodePath("../../../../IdentifyCamera")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]

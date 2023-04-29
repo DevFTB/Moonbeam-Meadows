@@ -5,6 +5,7 @@ extends OverscreenGUI
 @export var robot_upgrade_gui : Control
 @export var robot_details : Control
 @export var robot_inv_list : Control
+@export var add_from_inventory_button : Button
 
 var selected_robot = null
 var energy_station = null
@@ -58,13 +59,16 @@ func update_gui():
 	else:
 		robot_details.visible = false
 
-		pass
-
 	for child in robot_inv_list.get_children():
 		child.queue_free()
 	
+
 	if energy_station != null:
+		if energy_station.interacting_player:
+			add_from_inventory_button.disabled = energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT).get_amount_of_items() == 0
+
 		for robot in energy_station.robots:
+
 			var robot_type = level.lookup_robot(robot.pickup_item)
 			
 			var new_tile = robot_list_tile.instantiate()
