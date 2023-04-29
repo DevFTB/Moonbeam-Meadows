@@ -22,7 +22,7 @@ var pressed = false
 
 var max_amount = 1
 
-var trade_station : Node = null
+var trade_station : InteractableConstruction
 
 @onready var currency_manager : Node = get_node("/root/Level/CurrencyManager")
 

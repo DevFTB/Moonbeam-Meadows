@@ -18,7 +18,7 @@ signal item_selected(item : InventoryItem, amount : int)
 
 var inventories = {}
 var inventory_button_list = preload("res://GUI/inventory_button_list.tscn")
-
+var on_build_callback 
 func _ready():
 	set_inventories(starting_inventories.map(func(x): return get_node(x)))
 
@@ -28,16 +28,19 @@ func set_inventories(new_inventories : Array):
 	update_gui()
 
 func update_gui():
+	print("asdfasdf ", on_build_callback)
 	for child in get_children():
-		remove_child(child)
 		child.queue_free()
 
 	for it in inventories.keys():
 		var inventory = inventories[it]
 		var new_button_list = inventory_button_list.instantiate() as Control
 
-		if list_tile_scene != null: new_button_list.list_tile_scene = list_tile_scene
-
+		if list_tile_scene != null: 
+			new_button_list.list_tile_scene = list_tile_scene
+		
+		if on_build_callback != null:
+			new_button_list.on_build_callback = on_build_callback
 		new_button_list.interactable = interactable
 		new_button_list.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		new_button_list.set_button_text(button_text)

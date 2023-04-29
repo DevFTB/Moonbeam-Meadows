@@ -23,6 +23,7 @@ func _ready():
 	$Player/SeedInventory.add(crops[0].seed_item, 5)
 	$Player/ProduceInventory.add(crops[0].produce_item,50)
 	$Player/FertiliserInventory.add(fertilisers[0].fertiliser_item, 5)
+	pass
 	
 ## Plants a crop on the given tile based on the given item
 func plant_land(grid_position : Vector2i, item: InventoryItem) -> bool:

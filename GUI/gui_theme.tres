@@ -27,10 +27,10 @@ shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geu22"]
 bg_color = Color(0.6, 0.415686, 0.992157, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4

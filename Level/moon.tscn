@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=75 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="29_0m65b"]
 [ext_resource type="Script" path="res://GUI/MultiInventoryButtonLIst.gd" id="29_48v5m"]
 [ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
+[ext_resource type="PackedScene" uid="uid://bo8vh6e4gjr1b" path="res://Level/Trade Station/ts_sell_item_gui.tscn" id="31_td8hx"]
 [ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="34_34xvq"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
 [ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
@@ -456,6 +457,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("29_48v5m")
 starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
+list_tile_scene = ExtResource("31_td8hx")
 
 [node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI"]
 visible = false
@@ -527,7 +529,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("29_48v5m")
-interactable = false
+starting_inventories = [NodePath("../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../Player/RobotUpgradeInventory")]
+list_tile_scene = ExtResource("31_td8hx")
 
 [node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager", "quest_box_parent")]
 visible = false
@@ -1016,6 +1019,7 @@ script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
 [node name="DepositBoxGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("deposit_box_list", "player_inventory_list", "add_from_inventory_panel")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1075,9 +1079,10 @@ layout_mode = 2
 script = ExtResource("29_48v5m")
 button_text = "Withdraw"
 
-[node name="AddFromInventoryButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="AddFromInventoryButton" type="CheckButton" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Add from inventory "
+text = "insert mode"
+alignment = 1
 
 [node name="AddFromInventoryPanel" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false

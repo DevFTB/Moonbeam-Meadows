@@ -10,10 +10,10 @@ extends Label
 
 @export var is_error : bool = false:
 	set(value): 
+		is_error = value
 		show_text(value)
 
 func show_text(errored: bool = true): 
-	is_error = errored
 	if errored:
 		text = error_text
 		label_settings = error_settings

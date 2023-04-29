@@ -18,6 +18,8 @@ func _ready():
 	generate_items(buy_seed_parent, buy_gui_scene, level.crops.map(func(c): return c.seed_item))
 	generate_items(buy_fertiliser_parent, buy_gui_scene, level.fertilisers.map(func(c): return c.fertiliser_item))
 	sell_parent.item_selected.connect(sell)
+	sell_parent.on_build_callback = func(x): x.set_trade_station(trade_station)
+	sell_parent.update_gui()
 
 func sell(item, amount):
 	currency_manager.sell(trade_station.get_interacting_player(), item , amount)	
@@ -37,7 +39,6 @@ func update_gui():
 		n.set_trade_station(trade_station)
 			
 func set_trade_station(new_trade_station: Node):
-	
 	trade_station = new_trade_station
 
 	for parent in [buy_seed_parent, buy_fertiliser_parent, buy_robots_parent]:

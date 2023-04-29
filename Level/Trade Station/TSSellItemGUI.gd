@@ -24,11 +24,12 @@ var multisell_amount = 0
 var pressed = false
 var max_amount = 1
 var interactable = true
-var player_inventory : Node 
+var player_inventory : Node
 var interact_callback = null
+var trade_station : Node2D
 
 @onready var currency_manager : Node = get_node("/root/Level/CurrencyManager")
-var trade_station : Node2D
+
 func _ready():
 	pass
 
@@ -51,7 +52,6 @@ func set_item(new_item: InventoryItem, _amount):
 
 func start_multisell():
 	if pressed:
-		
 		multisell = true
 		multisell_timer = 0
 		multisell_amount = 0
@@ -64,9 +64,7 @@ func update_gui():
 	pass
 
 func set_trade_station(new_trade_station: Node):
-	
 	if new_trade_station != null:
-		
 		trade_station = new_trade_station
 		var interacting_player = trade_station.get_interacting_player()
 		if interacting_player != null:
@@ -83,8 +81,6 @@ func connect_to_button(callable: Callable):
 
 func _on_sell_button_pressed():
 	if not multisell:
-		
-		#currency_manager.sell(trade_station.get_interacting_player(), item, 1)	
 		if interact_callback != null:
 			interact_callback.call(item,1)
 	
