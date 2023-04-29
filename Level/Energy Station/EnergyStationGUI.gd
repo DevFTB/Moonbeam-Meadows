@@ -1,4 +1,4 @@
-extends Control 
+extends OverscreenGUI
 
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
 @export var path_editing_gui : Control
@@ -11,12 +11,16 @@ var energy_station = null
 
 signal changed_energy_station(energy_station: EnergyStation)
 signal changed_selected_robot(robot: Robot)
-signal opened_menu
-signal closed_menu
 var level
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visibility_changed.connect(
+	func(): if visible: 
+		hide_popup($RobotSelectionPopup)
+		hide_popup($AddUpgradesPopup)
+	)
 	identify_camera.finished_tracking.connect(on_identify_camera_finished_tracking)
+
 	level = get_node("/root/Level")
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
@@ -43,8 +47,6 @@ func remove_upgrade(upgrade_entity):
 	energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrade_entity.upgrade.upgrade_item, 1)
 	
 	pass
-
-
 
 func update_gui():
 	if selected_robot != null:
@@ -84,8 +86,6 @@ func end_editing():
 	energy_station.hide_area()
 	pass
 
-func can_show():
-	return not get_parent().get_children().filter(func(x): return x != self).any(func(x): return x.visible)
 
 func _on_add_robot_button_pressed():
 	show_popup($RobotSelectionPopup)
@@ -137,3 +137,9 @@ func _on_inventory_robot_upgrade_gui_button_pressed(item, _amount):
 		selected_robot.add_upgrade(level.lookup_robot_upgrade(item))
 	robot_upgrade_gui.update_gui()
 	pass # Replace with function body.
+
+func is_active():
+	return visible or $AddUpgradesPopup.visible or $RobotSelectionPopup.visible or path_editing_gui.visible
+
+func can_show():
+	return super.can_show() and not path_editing_gui.visible

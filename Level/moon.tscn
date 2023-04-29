@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=74 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -54,6 +54,7 @@
 [ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="45_s4v6b"]
 [ext_resource type="Resource" uid="uid://g4oi702uwa3t" path="res://Robots/Robot Upgrades/Motor/upgrade_motor.tres" id="46_tehid"]
 [ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="49_5eap5"]
+[ext_resource type="Script" path="res://Level/GridSquareSelector.gd" id="55_6u3el"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3fxa"]
 size = Vector2(30, 26)
@@ -232,6 +233,11 @@ inventory_type = 4
 inventory = {
 ExtResource("19_fwa5x"): 2
 }
+
+[node name="GridSquareSelector" type="Node2D" parent="."]
+script = ExtResource("55_6u3el")
+valid_colour = Color(0, 0.87451, 0, 1)
+invalid_colour = Color(0.905882, 0, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

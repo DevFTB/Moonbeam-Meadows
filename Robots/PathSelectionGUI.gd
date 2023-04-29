@@ -15,10 +15,11 @@ signal finished_editing
 @onready var grid_path_line = get_node("/root/Level/GridPathLine")
 @onready var player = get_node("/root/Level/Player")
 @onready var editing_camera = get_node("/root/Level/EditingCamera")
-
+@onready var grid_square_selector = get_node("/root/Level/GridSquareSelector")
 func _ready():
+	grid_square_selector.valid_cb = check_pos
+	grid_square_selector.hide()
 	pass # Replace with function body.
-
 
 func start_editing(robot: Robot, energy_station: EnergyStation):
 	current_robot = robot
@@ -26,6 +27,7 @@ func start_editing(robot: Robot, energy_station: EnergyStation):
 	grid_positions = robot.path.duplicate()
 
 	grid_path_line.visible = true
+	grid_square_selector.show()
 	visible = true
 
 	editing_camera.position = player.global_position
@@ -40,16 +42,23 @@ func update_path_visual():
 	grid_path_line.set_points(grid_positions.map(func(x): return level.map_to_local(x)))
 	pass
 
-func check_pos(mouse_position: Vector2):
-	var new_point = level.local_to_map(mouse_position)
-	var is_not_same = grid_positions.size() == 0 or grid_positions.back() != new_point
-	var is_traversible = level.get_cell_tile_data(0, new_point).get_custom_data("r_traversible")
-	var is_continuous = grid_positions.size() == 0 or (grid_positions.back() - new_point).length() == 1
-	if is_not_same and is_traversible and is_continuous:
-		grid_positions.append(new_point)
-		
+func add_pos(mouse_position: Vector2):
+	if check_pos(mouse_position):
+		grid_positions.append(level.local_to_map(mouse_position))
 		update_path_visual()
-	pass
+
+func check_pos(mouse_position: Vector2) -> bool:
+	if current_energy_station:
+		var new_point = level.local_to_map(mouse_position)
+		if grid_positions.size() == 0:
+			return current_energy_station.is_power_tile(new_point)
+		else:
+			var is_not_same = grid_positions.back() != new_point
+			var is_traversible = level.get_cell_tile_data(0, new_point).get_custom_data("r_traversible")
+			var is_continuous = (grid_positions.back() - new_point).length() == 1
+			return is_not_same and is_traversible and is_continuous
+	else:
+		return false
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -62,12 +71,12 @@ func _gui_input(event):
 		var mouse_pos = player.get_global_mouse_position()
 		if dragging:
 			if event.relative.length() > minimum_motion:
-				check_pos(mouse_pos)
+				add_pos(mouse_pos)
 				pass
 			else:
 				if (mouse_pos - last_mouse_pos).length() > 8:
 					last_mouse_pos = mouse_pos
-					check_pos(mouse_pos)
+					add_pos(mouse_pos)
 		pass
 	
 	
@@ -97,9 +106,9 @@ func close_gui():
 	editing_camera.disable()
 	finished_editing.emit()
 	player.frozen = false
-	self.visible = false
-	grid_path_line.visible = false
-
+	hide()
+	grid_path_line.hide()
+	grid_square_selector.hide()
 	pass
 
 
