@@ -164,7 +164,7 @@ gui = NodePath("../CanvasLayer/GUI/OverscreenUI/TradeStationGUI")
 position = Vector2(624, 304)
 script = ExtResource("9_fo6d0")
 providing_items = true
-item_types = Array[int]([1, 0, 2])
+item_types = Array[int]([1, 0, 2, 3, 4])
 initial_items = {
 ExtResource("10_bgtt6"): 5,
 ExtResource("13_tuac2"): 5
@@ -289,6 +289,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("buy_seed_parent", "buy_fertiliser_parent", "buy_robots_parent", "sell_parent")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1018,22 +1019,31 @@ layout_mode = 2
 script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
-[node name="DepositBoxGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("inventory_button_list_parent")]
-visible = false
+[node name="DepositBoxGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("deposit_box_list", "player_inventory_list", "add_from_inventory_panel")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = -238.0
-offset_right = 201.0
-offset_bottom = 238.0
+offset_left = -265.0
+offset_top = -262.0
+offset_right = 265.0
+offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("28_lgf16")
-inventory_button_list_parent = NodePath("MarginContainer/VBoxContainer/PanelContainer/InventoryButtonListParent")
+deposit_box_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/DepositBoxList")
+player_inventory_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/PlayerInventoryList")
+add_from_inventory_panel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
 layout_mode = 1
@@ -1052,12 +1062,37 @@ text = "dEPOSIT bOX"
 label_settings = SubResource("LabelSettings_5p3lh")
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InventoryButtonListParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DepositBoxList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+script = ExtResource("29_48v5m")
+button_text = "Withdraw"
+
+[node name="AddFromInventoryButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Add from inventory "
+
+[node name="AddFromInventoryPanel" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerInventoryList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel"]
+layout_mode = 2
+script = ExtResource("29_48v5m")
+button_text = "Deposit"
 
 [node name="PathSelectionGUI" type="Control" parent="CanvasLayer/GUI"]
 visible = false
@@ -1185,5 +1220,6 @@ script = ExtResource("49_5eap5")
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotUpgradeGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddFromInventoryButton" to="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI" method="_on_add_from_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]

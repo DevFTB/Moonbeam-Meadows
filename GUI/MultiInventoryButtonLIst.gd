@@ -8,6 +8,8 @@ var _inventories = {}
 var inventory_button_list = preload("res://GUI/inventory_button_list.tscn")
 @export var list_tile_scene : PackedScene
 
+@export var button_text = "Place"
+
 signal item_selected(item : InventoryItem, amount : int)
 
 func _ready():
@@ -27,6 +29,7 @@ func update_gui():
 
 		new_button_list.interactable = interactable
 		new_button_list.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+		new_button_list.set_button_text(button_text)
 		new_button_list.set_inventory(inventory)
 		new_button_list.button_pressed.connect(on_item_selected)
 		

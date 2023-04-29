@@ -16,6 +16,10 @@ var facing = Vector2.DOWN
 
 var frozen = false
 
+@onready var inventories = get_children().filter(func(child):
+	return child is InventoryComponent
+)
+
 @export var max_water_tank = 10
 @onready var water_tank = max_water_tank
 
@@ -62,11 +66,10 @@ func fill_water_tank():
 
 const ItemType = preload("res://Inventory/InventoryItem.gd").ItemType
 func get_inventory(item_type: ItemType) -> InventoryComponent:
-	var inventories = get_children().filter(func(child):
-		return child is InventoryComponent and child.inventory_type == item_type
+	var type_inventories = inventories.filter(func(child):
+		return child.inventory_type == item_type
 	)
-	return inventories[0] if inventories.size() > 0 else null
-	
+	return type_inventories[0] if type_inventories.size() > 0 else null
 func _input(event):
 
 	if event is InputEventKey and not frozen:

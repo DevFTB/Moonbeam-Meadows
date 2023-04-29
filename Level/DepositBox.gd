@@ -95,3 +95,6 @@ func transfer_to_player(item, amount):
 	if get_inventory(item.item_type).remove(item, amount):
 		interacting_player.get_inventory(item.item_type).add(item, amount)
 
+func transfer_to_box(item, amount):
+	if interacting_player.get_inventory(item.item_type).remove(item, amount):
+		get_inventory(item.item_type).add(item, amount)

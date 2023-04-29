@@ -5,6 +5,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for gui in $OverscreenUI.get_children():
+		
 		gui.opened_menu.connect(func(): player.freeze())
 		gui.closed_menu.connect(func(): player.unfreeze())
 		gui.hide()
