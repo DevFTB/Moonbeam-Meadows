@@ -315,6 +315,9 @@ func get_current_position() -> Vector2i:
 
 func on_successful_pickup(interacting_player: Player):
 	interacting_player.get_inventory(InventoryItem.ItemType.ROBOT).add(pickup_item, 1)
+	for id in upgrades.keys():
+		interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).add(upgrades[id].upgrade.upgrade_item, 1)
+		remove_upgrade(id)
 	remove_self()
 	pass
 
