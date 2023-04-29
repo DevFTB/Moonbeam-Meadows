@@ -21,10 +21,12 @@ func get_selection():
 
 func calculate_selection():
 	var mouse_position = get_global_mouse_position()
+	var mouse_offset = mouse_position.distance_to(player.global_position)
 	var offset_angle = (mouse_position - player.global_position).angle() + PI  /8
-	var cangle = Vector2.ZERO
-	
-	if offset_angle >= 0 and offset_angle < PI / 4 :
+	var cangle = Vector2.ZERO	
+	if mouse_offset <= 16:
+		cangle = Vector2(0, 0)
+	elif offset_angle >= 0 and offset_angle < PI / 4 :
 		cangle = Vector2(1,0)
 	elif offset_angle >= PI / 4 and offset_angle < PI  / 2 :
 		cangle = Vector2(1, 1)

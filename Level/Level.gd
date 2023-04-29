@@ -55,6 +55,8 @@ func till_land(grid_position : Vector2i) -> bool:
 		crop_map[grid_position] = crop_entity
 		set_cell(0, grid_position, 0, Vector2i(0, 0))
 		traversibility_updated.emit(grid_position, false)
+		
+		#play till audio
 		return true
 	else:
 		return false
