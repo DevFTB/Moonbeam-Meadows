@@ -4,6 +4,8 @@ extends Sprite2D
 
 var selection = Vector2.ZERO
 
+var mouse_button_pressed = false
+
 func _ready():
 	player.freeze_changed.connect(on_freeze_changed)
 	pass
@@ -50,6 +52,12 @@ func calculate_selection():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("use_item"):
-			player.use_tool(get_selection())
+			mouse_button_pressed = true
+		elif event.is_action_released("use_item"):
+			mouse_button_pressed = false
 	if event is InputEventMouseMotion:
 		calculate_selection()	
+
+func _process(delta):
+	if mouse_button_pressed == true:
+			player.use_tool(get_selection())
