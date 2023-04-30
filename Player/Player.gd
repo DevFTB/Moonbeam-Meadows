@@ -23,12 +23,16 @@ var current_tool = Tool.TILL
 var facing = Vector2.DOWN
 var frozen = false
 
+@export var action_cooldown = 0.1
+@onready var action_cooldown_timer = action_cooldown
+var cooling_down = false
+
 @onready var inventories = get_children().filter(func(child):
 	return child is InventoryComponent
 )
 @onready var water_tank = max_water_tank
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not frozen:
 		var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		facing = direction.normalized()
@@ -46,7 +50,7 @@ func switch_tool(tool : Tool):
 	pass
 ## Conducts an action on the land at the given grid position depending on the current tool	
 func use_tool(grid_position):
-	if not frozen:
+	if not frozen and cooling_down == false:
 		match(current_tool):
 			Tool.TILL:
 				get_parent().till_land(grid_position)
@@ -64,6 +68,7 @@ func use_tool(grid_position):
 						$WaterInventory.remove_water(1)
 			Tool.HARVEST:
 				get_parent().harvest_land(grid_position, self)
+		start_action_cooldown()
 	pass
 
 func fill_water_tank():
@@ -103,3 +108,16 @@ func unfreeze():
 	frozen = false
 	freeze_changed.emit(frozen)
 	pass
+
+func start_action_cooldown():
+	cooling_down = true
+	
+func finish_cooldown():
+	cooling_down = false
+
+func _process(delta):
+	if cooling_down == true:
+		action_cooldown_timer += delta
+	while action_cooldown_timer >= action_cooldown:
+		finish_cooldown()
+		action_cooldown_timer = 0

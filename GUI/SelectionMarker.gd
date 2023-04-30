@@ -6,6 +6,8 @@ extends Sprite2D
 
 var selection = Vector2.ZERO
 
+var mouse_button_pressed = false
+
 func _ready():
 	player.freeze_changed.connect(_on_freeze_changed)
 	pass
@@ -19,10 +21,12 @@ func _input(event):
 
 func calculate_selection():
 	var mouse_position = get_global_mouse_position()
+	var mouse_offset = mouse_position.distance_to(player.global_position)
 	var offset_angle = (mouse_position - player.global_position).angle() + PI  /8
-	var cangle = Vector2.ZERO
-	
-	if offset_angle >= 0 and offset_angle < PI / 4 :
+	var cangle = Vector2.ZERO	
+	if mouse_offset <= 16:
+		cangle = Vector2(0, 0)
+	elif offset_angle >= 0 and offset_angle < PI / 4 :
 		cangle = Vector2(1,0)
 	elif offset_angle >= PI / 4 and offset_angle < PI  / 2 :
 		cangle = Vector2(1, 1)
@@ -47,6 +51,18 @@ func get_selection():
 	calculate_selection()
 	return selection
 
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("use_item"):
+			mouse_button_pressed = true
+		elif event.is_action_released("use_item"):
+			mouse_button_pressed = false
+	if event is InputEventMouseMotion:
+		calculate_selection()	
+
+func _process(delta):
+	if mouse_button_pressed == true:
+			player.use_tool(get_selection())
 
 func _on_freeze_changed(freeze):
 	if freeze:
