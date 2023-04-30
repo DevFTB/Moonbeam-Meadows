@@ -1142,7 +1142,6 @@ script = ExtResource("27_qww4w")
 inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
 [node name="DepositBoxGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("deposit_box_list", "player_inventory_list", "add_from_inventory_panel")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1156,8 +1155,8 @@ offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("28_lgf16")
-deposit_box_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/DepositBoxList")
-player_inventory_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/PlayerInventoryList")
+deposit_box_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer/DepositBoxList")
+player_inventory_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/ScrollContainer/PlayerInventoryList")
 add_from_inventory_panel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
@@ -1197,8 +1196,13 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DepositBoxList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
+
+[node name="DepositBoxList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("29_48v5m")
 button_text = "Withdraw"
 
@@ -1213,10 +1217,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayerInventoryList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel"]
 layout_mode = 2
+
+[node name="PlayerInventoryList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("29_48v5m")
-starting_inventories = [NodePath("../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../Player/RobotUpgradeInventory")]
+starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
 button_text = "Deposit"
 
 [node name="WaterStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("ttf_label", "progress_bar")]

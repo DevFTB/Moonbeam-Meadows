@@ -33,7 +33,7 @@ func set_gui_owner():
 	gui.set_water_station(self)
 func _on_extract_timer_timeout():
 	for chunk in chunks:
-		if water_inventory.get_available_capacity() > 0:
+		if water_inventory.get_available_capacity() > 0 and chunk.water_inventory.water_amount > 0:
 			if chunk.water_inventory.remove_water(1):
 				water_inventory.add_water(1)
 	pass # Replace with function body.

@@ -15,6 +15,8 @@ signal robot_removed(robot: Robot)
 ## The robots assigned to the energy station
 var robots = []
 
+var robots_ivo_station = []
+
 ## The tiles that the station's power affects
 var power_tiles = []
 
@@ -46,6 +48,12 @@ func show_area() -> void:
 	for tile in power_tiles:
 		level.highlight_tile(tile)
 
+func give_robot_energy(robot: Robot):
+	var req = robot.get_energy_requirement()
+	var withdraw_amount = min(battery.value, req)
+	if battery.withdraw(withdraw_amount):
+		robot.add_energy(withdraw_amount)
+		
 ## Hide the area of effect of the station through the tilemap
 func hide_area() -> void:
 	var level = get_node("/root/Level") as Level 	
@@ -69,13 +77,14 @@ func _calculate_power_tiles() -> void:
 			power_tiles.append(grid_position + Vector2i(i, j))
 
 func _on_pulse_timer_timeout():
+	for robot in robots_ivo_station:
+		give_robot_energy(robot)
 	pass 
 
 func _on_robot_interactor_robot_entered(robot):
-	var req = robot.get_energy_requirement()
-	var withdraw_amount = min(battery.value, req)
-	if battery.withdraw(withdraw_amount):
-		robot.add_energy(withdraw_amount)
+	give_robot_energy(robot)
+	robots_ivo_station.append(robot)
 
-func _on_robot_interactor_robot_exited(_robot):
+func _on_robot_interactor_robot_exited(robot):
+	robots_ivo_station.erase(robot)
 	pass	

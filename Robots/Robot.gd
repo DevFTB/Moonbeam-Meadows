@@ -35,6 +35,9 @@ class_name Robot
 
 @export var starting_upgrades = []
 
+# The distance at which the robot will snap to the target tile
+@export var snap_distance = 5
+
 var parent_energy_station = null
 var upgrade_counter = 0
 
@@ -158,10 +161,10 @@ func _physics_process(_delta):
 			if target_position != null :
 				var actual_movement_speed = movement_speed.get_value() if not acted_last_tile else movement_speed.get_value() * movement_action_penalty.get_value()
 				var movement_delta = actual_movement_speed * _delta * Vector2(direction)
-				var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
-				if disp < 5:
+				var disp = (level.map_to_local(target_position)- Vector2(global_position) ).length()
+				if disp < snap_distance:
 					
-					global_position = level.map_to_local(target_position)
+					#global_position = level.map_to_local(target_position)
 					is_navigation_finished = true
 				else:
 					var current_position = get_current_position()
