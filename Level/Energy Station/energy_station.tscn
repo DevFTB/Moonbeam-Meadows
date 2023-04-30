@@ -86,6 +86,7 @@ autostart = true
 
 [node name="RobotInteractor" type="Node2D" parent="."]
 script = ExtResource("3_740e3")
+debug_draw = true
 
 [node name="Battery" type="Node" parent="."]
 script = ExtResource("4_ga5oq")

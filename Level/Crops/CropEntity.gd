@@ -10,8 +10,14 @@ var current_stage = 0
 var growth_prop = 0
 var water_level = 1.0
 
-var fertilised = false
-var fertilisation_factor = 1
+var fertiliser = null
+var fertilised:
+	get:
+		return fertiliser != null
+var fertilisation_factor:
+	get:
+		return fertiliser.growth_multiplier if fertiliser != null else 1.0
+var fertliser_uses = 0
 
 var grid_position = Vector2i(0, 0)
 
@@ -50,10 +56,20 @@ func harvest() -> void:
 	crop = null
 	growth_prop = 0
 	current_stage = 0
+	fertliser_uses += 1
+
+	if fertilised:
+		if fertliser_uses >= fertiliser.amount_of_uses: 
+			level.clear_fertiliser(grid_position)
+
 	$CropSprite.texture = null
 	$WaterLabel.visible = false
 	$GrowthLabel.visible = false
-	
+
+func clear_fertiliser():
+	fertiliser = null
+	fertliser_uses = 0
+
 func fill_water() -> void:
 	water_level = 1
 # Sets the crop entity as fertilised 
@@ -61,6 +77,7 @@ func fertilise(_fertiliser : FertiliserResource) -> void:
 	# Only fertilise if there isn't a crop
 	if crop == null:
 		fertilised = true
+		fertiliser = _fertiliser
 
 func get_temp_mod(temp) -> float:
 	# abs range determines how steep and far the temp mod absolute function goes

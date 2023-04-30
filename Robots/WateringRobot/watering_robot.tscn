@@ -67,6 +67,7 @@ debug_color = Color(0.705882, 0.447059, 0.533333, 0.419608)
 
 [node name="ProgressBar" type="ProgressBar" parent="ProximityInteractor"]
 visible = false
+z_index = 1
 offset_left = -14.0
 offset_top = -38.0
 offset_right = 16.0

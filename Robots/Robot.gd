@@ -35,6 +35,9 @@ class_name Robot
 
 @export var starting_upgrades = []
 
+# The distance at which the robot will snap to the target tile
+@export var snap_distance = 4
+
 var parent_energy_station = null
 var upgrade_counter = 0
 
@@ -94,6 +97,8 @@ var action_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIG
 var last_acted = Vector2i.ZERO
 var acted_last_tile = false
 
+var e_mode= false
+
 func _ready():
 	$ProximityInteractor.successful_pickup.connect(_on_successful_pickup)
 	level.traversibility_updated.connect(_on_traversability_update)
@@ -116,81 +121,88 @@ func _ready():
 	pass	
 	
 func _physics_process(_delta):
-	if is_navigation_finished and powered:
-		
-		acted_last_tile = false
-		# check if should power down
-		if not has_energy() or path.size() <= 1:
-			power_down()
-			return
+	if powered:
+		if is_navigation_finished and powered:
+			acted_last_tile = false
+			# check if should power down
+			if not has_energy() or path.size() <= 1:
+				power_down()
+				return
 
-		# travelling temp path overrides normal path
-		if temp_path.is_empty():
-			temp_path_completed  = true
-			# start moving to next grid in path if possible
-			if energy >= move_energy_cost.get_value():
-				path_index = (path_index + 1) % path.size()
-				if level.is_traversible(path[path_index]):
-					move_to_grid(path[path_index])
-				else:
-					power_down()
-			
-
-			# try do action in all action directions
-			var current_position = get_current_position()
-			if last_acted != current_position:
-				#do actions
-				for action in action_directions:
-					var action_position = current_position + action
-					if can_do_action(action_position) and energy >= action_energy_cost.get_value():
-						do_action(action_position)
-						acted_last_tile = true	
-						
-
-				last_acted = current_position
-				
-		else:
-			# temp path doesn't cost energy.
-			move_to_grid(temp_path.pop_front())
-	else:
-		if powered:
-		# movement code
-			if target_position != null :
-				var actual_movement_speed = movement_speed.get_value() if not acted_last_tile else movement_speed.get_value() * movement_action_penalty.get_value()
-				var movement_delta = actual_movement_speed * _delta * Vector2(direction)
-				var disp = (level.map_to_local(target_position)- Vector2(global_position) + movement_delta).length()
-				if disp < 5:
-					
-					global_position = level.map_to_local(target_position)
-					is_navigation_finished = true
-				else:
-					var current_position = get_current_position()
-
-					velocity = actual_movement_speed * direction
-					if (target_position- current_position).length() > 1:
-						
+			# travelling temp path overrides normal path
+			if temp_path.is_empty():
+				temp_path_completed  = true
+				# start moving to next grid in path if possible
+				if energy >= move_energy_cost.get_value():
+					path_index = (path_index + 1) % path.size()
+					if level.is_traversible(path[path_index]):
+						move_to_grid(path[path_index])
+					else:
 						power_down()
-					move_and_slide()
-			else:
-				is_navigation_finished = true
 				
+
+				# try do action in all action directions
+				var current_position = get_current_position()
+				if last_acted != current_position:
+					#do actions
+					for action in action_directions:
+						var action_position = current_position + action
+						if can_do_action(action_position) and energy >= action_energy_cost.get_value():
+							do_action(action_position)
+							acted_last_tile = true	
+							
+
+					last_acted = current_position
+					
+			else:
+				# temp path doesn't cost energy.
+				move_to_grid(temp_path.pop_front())
+
+		#	 movement code
+		if target_position != null :
+			var actual_movement_speed = movement_speed.get_value() if not acted_last_tile else movement_speed.get_value() * movement_action_penalty.get_value()
+			var movement_delta = actual_movement_speed * _delta * Vector2(direction)
+			var disp = (level.map_to_local(target_position)- Vector2(global_position) ).length()
+			print(disp)
+			if disp < snap_distance:
+				
+				global_position = level.map_to_local(target_position)
+				is_navigation_finished = true
+			else:
+				var current_position = get_current_position()
+
+				velocity = actual_movement_speed * direction
+				if not is_on_path() or e_mode:
+					if e_mode != true: e_mode = true
+					velocity = actual_movement_speed * (level.map_to_local(target_position)- Vector2(global_position)).normalized()
+					#power_down()
+				move_and_slide()
+		else:
+			is_navigation_finished = true
 	
 func do_action(_grid_position: Vector2i) -> void:
 	energy -= action_energy_cost.get_value()
 	pass
 
+func is_on_path():
+	return (target_position - get_current_position()).length() <= 1 or not temp_path.is_empty()
+
 func power_down():
 	powered = false
 	$RobotAnimationController.power_down()
+	print("power_off")
 	pass
 
 func power_on():
 	powered= true
 	$RobotAnimationController.power_on()
+	print("power on")
 
 func check_power():
 	if has_energy() and not path.is_empty():
-		if not powered:
+		var on_path = target_position == null or is_on_path()
+		print("on path", on_path)
+		if not powered and on_path:
 			power_on()
 	else:
 		if powered:
