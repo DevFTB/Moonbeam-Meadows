@@ -49,6 +49,14 @@ func fertilise_land(grid_position : Vector2i, item: InventoryItem) -> bool:
 	else:
 		return false
 
+func clear_fertiliser(grid_position: Vector2i) -> bool:
+	if crop_map.has(grid_position):
+		crop_map[grid_position].clear_fertiliser()
+		set_cell(0, grid_position, 0, Vector2i(0, 0))
+		return true
+	else:
+		return false
+
 ## Tills the given tile creating a CropEntity on the given tile
 func till_land(grid_position : Vector2i) -> bool:
 	var tile_data : TileData = get_cell_tile_data(0, grid_position)
