@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=94 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -114,7 +114,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3blq"]
-size = Vector2(62, 36)
+size = Vector2(62, 28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yflle"]
 radius = 62.0
@@ -200,6 +200,9 @@ outline_color = Color(0, 0, 0, 1)
 atlas = ExtResource("60_5en5w")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sw7jp"]
+radius = 23.0217
+
 [node name="Level" type="TileMap"]
 y_sort_enabled = true
 tile_set = ExtResource("1_7871s")
@@ -265,8 +268,9 @@ script = ExtResource("17_8dauk")
 interact_range = 1
 
 [node name="WaterStation" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
-position = Vector2(624, 176)
+position = Vector2(624, 208)
 script = ExtResource("18_slsxj")
+chunk_extract_range = 3
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/WaterStationGUI")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="WaterStation"]
@@ -274,14 +278,14 @@ sprite_frames = SubResource("SpriteFrames_2uwva")
 autoplay = "default"
 frame_progress = 0.0885638
 centered = false
-offset = Vector2(-16, -16)
+offset = Vector2(-16, -48)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WaterStation"]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterStation/StaticBody2D"]
-position = Vector2(16, 26)
+position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_m3blq")
 
 [node name="InteractArea" type="Area2D" parent="WaterStation"]
@@ -1212,9 +1216,11 @@ size_flags_vertical = 3
 [node name="PlayerInventoryList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel"]
 layout_mode = 2
 script = ExtResource("29_48v5m")
+starting_inventories = [NodePath("../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../Player/RobotUpgradeInventory")]
 button_text = "Deposit"
 
 [node name="WaterStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("ttf_label", "progress_bar")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1413,20 +1419,11 @@ starting_water = 100
 inventory_size = 100
 inventory_type = 5
 
-[node name="Chunk2" type="Node2D" parent="." groups=["chunk"]]
-position = Vector2(624, 144)
-script = ExtResource("60_vm8yy")
+[node name="StaticBody2D" type="StaticBody2D" parent="Chunk"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Chunk2"]
-texture = SubResource("AtlasTexture_xqjha")
-centered = false
-offset = Vector2(-16, -16)
-
-[node name="WaterInventory" type="Node" parent="Chunk2"]
-script = ExtResource("24_lhr56")
-starting_water = 100
-inventory_size = 100
-inventory_type = 5
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk/StaticBody2D"]
+position = Vector2(17, 16)
+shape = SubResource("CircleShape2D_sw7jp")
 
 [connection signal="body_entered" from="DepositBox/InteractArea" to="DepositBox" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="DepositBox/InteractArea" to="DepositBox" method="_on_interact_area_body_exited"]

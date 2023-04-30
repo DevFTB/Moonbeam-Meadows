@@ -20,7 +20,6 @@ func fill_player_water():
 		if fill_amount > 0:
 			player_inventory.add_water(fill_amount)
 			water_inventory.remove_water(fill_amount)
-			print("filled player with ", fill_amount, " water")
 		
 	pass
 func get_time_to_fill() -> float:
@@ -34,7 +33,6 @@ func set_gui_owner():
 	gui.set_water_station(self)
 func _on_extract_timer_timeout():
 	for chunk in chunks:
-		print("capacity: ", water_inventory.get_available_capacity(), " chunk amount: ", chunk.water_inventory.water_amount)
 		if water_inventory.get_available_capacity() > 0:
 			if chunk.water_inventory.remove_water(1):
 				water_inventory.add_water(1)
@@ -52,7 +50,6 @@ func _on_robot_interactor_robot_entered(robot: Robot):
 				}
 				
 				if robot.confirm_withdrawal(wd):
-					print("withdrew water ", wd_amount)
 					water_inventory.remove_water(wd_amount)
 		
 	pass # Replace with function body.

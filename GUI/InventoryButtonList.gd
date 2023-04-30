@@ -11,7 +11,9 @@ signal button_pressed(item: InventoryItem, amount :int)
 var on_build_callback
 
 func _ready():
-	set_inventory(inventory)
+	if inventory != null:
+		set_inventory(inventory)
+	update_gui()
 
 func set_inventory(new_inventory : InventoryComponent):
 	inventory = new_inventory

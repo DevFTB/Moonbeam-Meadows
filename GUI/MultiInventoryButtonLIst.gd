@@ -40,6 +40,7 @@ func update_gui():
 		
 		if on_build_callback != null:
 			new_button_list.on_build_callback = on_build_callback
+			
 		new_button_list.interactable = interactable
 		new_button_list.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		new_button_list.set_button_text(button_text)
