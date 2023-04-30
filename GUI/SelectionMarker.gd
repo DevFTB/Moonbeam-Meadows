@@ -12,13 +12,6 @@ func _ready():
 	player.freeze_changed.connect(_on_freeze_changed)
 	pass
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_action_pressed("use_item"):
-			player.use_tool(get_selection())
-	if event is InputEventMouseMotion:
-		calculate_selection()	
-
 func calculate_selection():
 	var mouse_position = get_global_mouse_position()
 	var mouse_offset = mouse_position.distance_to(player.global_position)
