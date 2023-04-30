@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://mb4c8yj22ocj"
+path="res://.godot/imported/noise 7.wav-712f4fb04a9091231c0488591740b7e8.sample"
+
+[deps]
+
+source_file="res://Robots/WateringRobot/Sounds/noise 7.wav"
+dest_files=["res://.godot/imported/noise 7.wav-712f4fb04a9091231c0488591740b7e8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
