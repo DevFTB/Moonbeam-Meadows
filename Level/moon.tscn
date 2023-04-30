@@ -353,9 +353,6 @@ ExtResource("19_fwa5x"): 2
 script = ExtResource("24_lhr56")
 inventory_size = 100
 inventory_type = 5
-inventory = {
-ExtResource("24_61pvk"): 10
-}
 
 [node name="GridSquareSelector" type="Node2D" parent="."]
 script = ExtResource("55_6u3el")
@@ -1218,7 +1215,6 @@ script = ExtResource("29_48v5m")
 button_text = "Deposit"
 
 [node name="WaterStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("ttf_label", "progress_bar")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1232,8 +1228,8 @@ offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("44_b52yr")
-ttf_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer/TimeToFillLabel")
-progress_bar = NodePath("MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/ProgressBar")
+ttf_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TimeToFillLabel")
+progress_bar = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ProgressBar")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI"]
 layout_mode = 1
@@ -1264,26 +1260,34 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TimeToFillLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer"]
+[node name="TimeToFillLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Time to fill: 84s"
 label_settings = SubResource("LabelSettings_tgba4")
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_s0g3b")
 value = 38.43
 fill_mode = 3
+
+[node name="FillPlayerWaterButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fill Player water "
 
 [node name="PathSelectionGUI" type="Control" parent="CanvasLayer/GUI"]
 visible = false
@@ -1447,5 +1451,6 @@ inventory_type = 5
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotUpgradeGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddFromInventoryButton" to="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI" method="_on_add_from_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/FillPlayerWaterButton" to="CanvasLayer/GUI/OverscreenUI/WaterStationGUI" method="_on_fill_player_water_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]

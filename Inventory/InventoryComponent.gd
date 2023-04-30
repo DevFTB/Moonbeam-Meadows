@@ -47,7 +47,7 @@ func remove(item: Variant, amount : int = 1) -> bool:
 			push_warning("warning: tried to remove more than was in inventory.")
 
 	else:
-		push_warning("warning: tried to spend item that was not in inventory.")
+		push_error("warning: tried to spend item that was not in inventory.")
 
 	return false
 

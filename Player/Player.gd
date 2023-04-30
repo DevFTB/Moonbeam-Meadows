@@ -59,9 +59,9 @@ func use_tool(grid_position):
 					if get_parent().fertilise_land(grid_position, $FertiliserInventory.get_selected()):
 						$FertiliserInventory.remove($FertiliserInventory.get_selected())
 			Tool.WATER:
-				if $WaterInventory.remove(1, ):
+				if $WaterInventory.water_amount > 0:
 					if get_parent().water_land(grid_position):
-						water_tank -= 1
+						$WaterInventory.remove_water(1)
 			Tool.HARVEST:
 				get_parent().harvest_land(grid_position, self)
 	pass
