@@ -1,18 +1,18 @@
 extends "res://Robots/Robot.gd"
 
-@export var max_water_tank = 10
-var water_tank = 10
+const water = preload("res://Level/WaterStation/item_water.tres")
 
 @export var water_threshold = 0.7
+@onready var water_inventory = $WaterInventory as WaterInventory
 
 func can_do_action(grid_position):
 	var should_water = level.get_water_level(grid_position) < water_threshold and level.has_crop(grid_position)
-	return water_tank > 0 and should_water
+	return water_inventory.water_amount > 0 and should_water
 
 func do_action(grid_position):
 	if level.water_land(grid_position):
-		water_tank -= 1
-		super.do_action(grid_position)
+		if water_inventory.remove(water, 1):
+			super.do_action(grid_position)
 		
 func power_down():
 	$WheelParticlesLeft.emitting = false
@@ -25,4 +25,4 @@ func _on_move_start():
 	super._on_move_start()
 
 func get_specific_description():
-	return "Water tank: " + str(water_tank) + "/" + str(max_water_tank)
+	return "Water tank: " + str(water_inventory.water_amount) + "/" + str(water_inventory.inventory_size)

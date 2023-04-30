@@ -7,7 +7,8 @@ enum ItemType {
 	PRODUCE,
 	FERTILISER,
 	ROBOT,
-	ROBOT_UPGRADE
+	ROBOT_UPGRADE,
+	WATER
 }
 
 @export var item_name : String 

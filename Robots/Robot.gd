@@ -254,7 +254,7 @@ func generate_deposit(item_types: Array[InventoryItem.ItemType], max_unique_item
 
 	return deposit
 
-func confirm_deposit(deposit: Dictionary):
+func confirm_deposit(deposit: Dictionary) -> void:
 	# remove items from inventories according to the deposit
 	for item in deposit:
 		var inv = inventories.filter(func(x): return x.inventory_type == item.item_type).front()
@@ -264,13 +264,13 @@ func confirm_deposit(deposit: Dictionary):
 		if deposit[item] <= 0:
 			break
 
-func get_withdrawal_params():
+func get_withdrawal_params() -> Dictionary:
 	var params = {}
 	for inv in inventories:
 		params[inv.inventory_type] = inv.get_available_capacity()
 	return params
 
-func confirm_withdrawal(withdrawal: Dictionary):
+func confirm_withdrawal(withdrawal: Dictionary) -> bool:
 	# add items to inventories according to the withdrawal
 	for item in withdrawal:
 		var invs = inventories.filter(func(x): return x.inventory_type == item.item_type)

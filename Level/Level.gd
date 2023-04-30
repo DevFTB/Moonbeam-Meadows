@@ -17,6 +17,9 @@ const crop_entity_scene = preload("res://Level/Crops/crop_entity.tscn")
 @export var base_temp = 20
 
 var crop_map = {}
+var chunk_map = {}
+
+var intraversible_grids = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -80,6 +83,12 @@ func harvest_land(grid_position: Vector2i, entity: Node2D):
 			crop_entity.harvest()
 	pass
 
+func set_grid_intraversible(grid_position):
+	if not intraversible_grids.has(grid_position):
+		traversibility_updated.emit(grid_position, true)
+		intraversible_grids.append(grid_position)
+	pass
+
 ## Places a robot on the an available tile near the energy station.
 func place_robot_near_station(robot: RobotResource, energy_station: EnergyStation) -> bool:
 	var tgt_grid_pos = local_to_map(energy_station.global_position)
@@ -129,7 +138,7 @@ func lookup_robot_upgrade(item: InventoryItem):
 ## Is the given tile traversible by robots
 func is_traversible(grid_position: Vector2i):
 	var tile_data : TileData = get_cell_tile_data(0, grid_position)
-	return tile_data != null and tile_data.get_custom_data("r_traversible")
+	return tile_data != null and tile_data.get_custom_data("r_traversible") and not intraversible_grids.has(grid_position)
 
 func get_temp(_grid_position : Vector2i):
 	return base_temp
@@ -147,3 +156,6 @@ func has_crop(grid_position: Vector2i) -> bool:
 
 func get_entity_at_grid(grid_position : Vector2i):
 	return crop_map.get(grid_position)
+	
+func get_grid_distance(a: Vector2, b: Vector2) -> float:
+	return (local_to_map(a) - local_to_map(b)).length()

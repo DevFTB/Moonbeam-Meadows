@@ -28,7 +28,6 @@ func set_inventories(new_inventories : Array):
 	update_gui()
 
 func update_gui():
-	print("asdfasdf ", on_build_callback)
 	for child in get_children():
 		child.queue_free()
 

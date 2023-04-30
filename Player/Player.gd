@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+
+
 # The controller for the player character
 
 signal tool_changed(new_tool: Tool)
@@ -57,7 +59,7 @@ func use_tool(grid_position):
 					if get_parent().fertilise_land(grid_position, $FertiliserInventory.get_selected()):
 						$FertiliserInventory.remove($FertiliserInventory.get_selected())
 			Tool.WATER:
-				if water_tank > 0:
+				if $WaterInventory.remove(1, ):
 					if get_parent().water_land(grid_position):
 						water_tank -= 1
 			Tool.HARVEST:

@@ -53,7 +53,6 @@ func hide_area() -> void:
 	pass
 
 func set_gui_owner() -> void:
-	print(self)
 	gui.set_energy_station(self)
 
 func is_power_tile(grid_position: Vector2i) -> bool:

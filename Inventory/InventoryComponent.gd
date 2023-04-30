@@ -74,3 +74,6 @@ func get_selected() -> InventoryItem:
 ## returns the amount of free space in the inventory
 func get_available_capacity() -> int:
 	return inventory_size - inventory.values().reduce(func(a, b): return a + b,0)
+
+func get_fill_percentage():
+	return inventory.values().reduce(func(a, b): return a + b,0) / inventory_size
