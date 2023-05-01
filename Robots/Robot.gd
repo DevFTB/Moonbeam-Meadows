@@ -55,6 +55,8 @@ class UpgradeInstance:
 # The scaling factor for the snapping distance based on the movement speed as a percentage of the base movement speed
 @export var snap_scaling_unit = 0.8
 
+@export var max_upgrades = 4
+
 var parent_energy_station = null
 var upgrade_counter = 0
 

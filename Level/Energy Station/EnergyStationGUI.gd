@@ -117,9 +117,10 @@ func _on_upgrade_robot_button_pressed():
 	_show_popup($AddUpgradesPopup)
 	
 func _on_inventory_robot_upgrade_gui_button_pressed(item, _amount):
-	if energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).remove(item, 1):
-		selected_robot.add_upgrade(level.lookup_robot_upgrade(item))
-	robot_upgrade_gui.update_gui()
+	if selected_robot.upgrades.size() < selected_robot.max_upgrades:
+		if energy_station.interacting_player.get_inventory(InventoryItem.ItemType.ROBOT_UPGRADE).remove(item, 1):
+			selected_robot.add_upgrade(level.lookup_robot_upgrade(item))
+		robot_upgrade_gui.update_gui()
 	
 func _on_remove_robot(_robot: Robot):
 	selected_robot = null
