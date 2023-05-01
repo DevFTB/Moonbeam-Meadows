@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://cnbuxj36mxtbt"]
+
+[ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="1_lu0el"]
+[ext_resource type="Resource" uid="uid://380w8jbvlnr" path="res://Robots/WateringRobot/watering_robot_item.tres" id="2_6mc4g"]
+[ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="3_fj0m7"]
+[ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="4_hcc7j"]
+[ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="5_ec7cp"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="6_ytyqn"]
+[ext_resource type="Material" uid="uid://dr3dij87njljy" path="res://Robots/hover_particles.tres" id="7_jsnu2"]
+[ext_resource type="Texture2D" uid="uid://p4ionyuu6ioc" path="res://Robots/robot_hover_particle.png" id="9_l2v5t"]
+[ext_resource type="Script" path="res://Level/WaterInventory.gd" id="9_yxuqk"]
+[ext_resource type="Resource" uid="uid://v6tst8k4atog" path="res://Level/WaterStation/item_water.tres" id="10_mbwar"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74qjm"]
+radius = 41.0122
+
+[node name="WateringRobot" type="CharacterBody2D" groups=["robot"]]
+position = Vector2(496, 400)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_lu0el")
+pickup_item = ExtResource("2_6mc4g")
+
+[node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
+position = Vector2(-9, 2)
+emitting = false
+process_material = ExtResource("7_jsnu2")
+texture = ExtResource("9_l2v5t")
+lifetime = 0.4
+explosiveness = 0.73
+
+[node name="WheelParticlesRight" type="GPUParticles2D" parent="."]
+position = Vector2(7, 3)
+emitting = false
+amount = 20
+process_material = ExtResource("7_jsnu2")
+texture = ExtResource("9_l2v5t")
+lifetime = 0.4
+
+[node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = ExtResource("3_fj0m7")
+animation = &"power_up"
+script = ExtResource("4_hcc7j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_we5yd")
+
+[node name="ProximityInteractor" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_ec7cp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityInteractor"]
+shape = SubResource("CircleShape2D_74qjm")
+debug_color = Color(0.705882, 0.447059, 0.533333, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="ProximityInteractor"]
+visible = false
+z_index = 1
+offset_left = -14.0
+offset_top = -38.0
+offset_right = 16.0
+offset_bottom = -28.0
+theme = ExtResource("6_ytyqn")
+value = 47.9
+show_percentage = false
+
+[node name="WaterInventory" type="Node" parent="."]
+script = ExtResource("9_yxuqk")
+inventory_size = 100
+inventory_type = 5
+inventory = {
+ExtResource("10_mbwar"): 10
+}

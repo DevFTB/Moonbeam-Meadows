@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RobotResource" load_steps=6 format=3 uid="uid://cmt6nt2vgl4uy"]
+
+[ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="1_0nmxe"]
+[ext_resource type="Texture2D" uid="uid://cwfq6leoxdcun" path="res://Robots/PlanterRobot/planter_robot_powered.png" id="2_0dcs7"]
+[ext_resource type="Resource" uid="uid://qxg640ruh5kd" path="res://Robots/PlanterRobot/planter_robot_item.tres" id="3_4g4cc"]
+[ext_resource type="Script" path="res://Robots/RobotResource.gd" id="4_rm7ls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi4s0"]
+atlas = ExtResource("2_0dcs7")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("4_rm7ls")
+robot_type_name = "Planter Robot"
+robot_description = "A robot that plants seeds"
+robot_icon = SubResource("AtlasTexture_mi4s0")
+robot_item = ExtResource("3_4g4cc")
+entity_scene = ExtResource("1_0nmxe")

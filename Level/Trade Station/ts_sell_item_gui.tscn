@@ -1,75 +1,80 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo8vh6e4gjr1b"]
+[gd_scene load_steps=5 format=3 uid="uid://bo8vh6e4gjr1b"]
 
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_k2e3v"]
 [ext_resource type="Script" path="res://Level/Trade Station/TSSellItemGUI.gd" id="1_piecu"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="2_3q7ec"]
 
-[node name="TSSellItemGUI" type="Control"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 3
-anchors_preset = 0
+[sub_resource type="LabelSettings" id="LabelSettings_nl5rg"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TSSellItemGUI" type="PanelContainer" node_paths=PackedStringArray("icon_texture_rect", "name_label", "cost_label", "sell_button", "amount_label") groups=["ts_sell_item"]]
+custom_minimum_size = Vector2(300, 100)
 size_flags_horizontal = 3
+theme = ExtResource("1_k2e3v")
 script = ExtResource("1_piecu")
+icon_texture_rect = NodePath("HBoxContainer/IconTextureRect")
+name_label = NodePath("HBoxContainer/NameLabel")
+cost_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/CostLabel")
+sell_button = NodePath("HBoxContainer/VBoxContainer/SellButton")
+amount_label = NodePath("HBoxContainer/IconTextureRect/AmountLabel")
 
-[node name="IconTextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 9.0
-offset_top = -32.0
-offset_right = 68.0
-offset_bottom = 27.0
-grow_vertical = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IconTextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("2_3q7ec")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="AmountLabel" type="Label" parent="HBoxContainer/IconTextureRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.5
-offset_top = -45.0
-offset_right = 58.5
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1x"
+label_settings = SubResource("LabelSettings_nl5rg")
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "Moon Wheat Seeds"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -63.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 
-[node name="SellButton" type="Button" parent="VBoxContainer"]
+[node name="SellButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Sell 1"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_3q7ec")
 
-[node name="CostLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="CostLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "10000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_down" from="VBoxContainer/SellButton" to="." method="_on_sell_button_button_down"]
-[connection signal="button_up" from="VBoxContainer/SellButton" to="." method="_on_sell_button_button_up"]
-[connection signal="pressed" from="VBoxContainer/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/SellButton" to="." method="_on_sell_button_button_down"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/SellButton" to="." method="_on_sell_button_button_up"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/SellButton" to="." method="_on_sell_button_pressed"]

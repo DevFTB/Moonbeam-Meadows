@@ -1,6 +1,8 @@
 extends QuestReward
 class_name CurrencyQuestReward
 
+# A quest reward that gives the player a certain amount of currency
+
 @export var currency_reward : int
 
 func _init(p_currency_reward = 5):

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://bj22gf230c1eh"]
+
+[ext_resource type="Texture2D" uid="uid://dcw0unc4ct51o" path="res://Robots/HarvestingRobot/harvesting_robot.png" id="1_k4rqg"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="1_q5dof"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u7wa"]
+atlas = ExtResource("1_k4rqg")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_q5dof")
+item_name = "Harvesting Robot"
+item_icon = SubResource("AtlasTexture_1u7wa")
+item_type = 3
+buy_price = 20
+sell_price = 10

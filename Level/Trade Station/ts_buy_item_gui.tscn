@@ -1,74 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://pu7tq3lac5p2"]
+[gd_scene load_steps=4 format=3 uid="uid://pu7tq3lac5p2"]
 
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="1_evm3b"]
 [ext_resource type="Script" path="res://Level/Trade Station/TSBuyItemGUI.gd" id="1_rx72f"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="2_q6v7w"]
 
-[node name="TSBuyItemGUI" type="Control"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 3
-anchors_preset = 0
+[node name="TSBuyItemGUI" type="PanelContainer" node_paths=PackedStringArray("icon_texture_rect", "name_label", "cost_label", "buy_button") groups=["ts_sell_item"]]
+custom_minimum_size = Vector2(300, 100)
+theme = ExtResource("1_evm3b")
 script = ExtResource("1_rx72f")
+icon_texture_rect = NodePath("HBoxContainer/IconTextureRect")
+name_label = NodePath("HBoxContainer/NameLabel")
+cost_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/CostLabel")
+buy_button = NodePath("HBoxContainer/VBoxContainer/BuyButton")
 
-[node name="IconTextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 9.0
-offset_top = -32.0
-offset_right = 68.0
-offset_bottom = 27.0
-grow_vertical = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IconTextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("2_q6v7w")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="NameLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.5
-offset_top = -45.0
-offset_right = 58.5
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "Moon Wheat Seeds"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -63.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 
-[node name="BuyButton" type="Button" parent="VBoxContainer"]
+[node name="BuyButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Buy 1"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_q6v7w")
 
-[node name="CostLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="CostLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "10000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_down" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_button_down"]
-[connection signal="button_up" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_button_up"]
-[connection signal="pressed" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_button_down"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_button_up"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

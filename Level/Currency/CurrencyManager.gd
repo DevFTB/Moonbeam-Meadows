@@ -1,8 +1,8 @@
 extends Node
 
-@export var starting_amount = 10
-
 signal currency_changed(new_value)
+
+@export var starting_amount = 10
 
 var currency = 0
 
@@ -11,11 +11,9 @@ func _ready():
 	currency_changed.emit(currency)
 	pass
 
-func get_currency():
-	return currency
 func buy(player:Player, item: Variant, amount: int):
 	if spend_currency(item.get_buy_price() * amount):
-		print("spent %d currency" % (item.get_buy_price() * amount))
+		
 		player.get_inventory(item.get_type()).add(item, amount)
 		return true
 	else:
@@ -39,3 +37,6 @@ func add_currency(amount):
 	currency += amount
 	currency_changed.emit(currency)
 	pass
+
+func get_currency():
+	return currency

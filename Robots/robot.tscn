@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://bot6ih1oo36p3"]
+
+[ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="1_xax3c"]
+[ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="3_86so4"]
+[ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="3_olpwa"]
+[ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="4_0kq7t"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="5_xvv68"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74qjm"]
+radius = 41.0122
+
+[node name="Robot" type="CharacterBody2D" groups=["robot"]]
+position = Vector2(496, 400)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_xax3c")
+
+[node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = ExtResource("3_86so4")
+animation = &"power_up"
+script = ExtResource("3_olpwa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_we5yd")
+
+[node name="ProximityInteractor" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("4_0kq7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityInteractor"]
+shape = SubResource("CircleShape2D_74qjm")
+debug_color = Color(0.705882, 0.447059, 0.533333, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="ProximityInteractor"]
+visible = false
+offset_left = -14.0
+offset_top = -38.0
+offset_right = 16.0
+offset_bottom = -28.0
+theme = ExtResource("5_xvv68")
+value = 47.9
+show_percentage = false

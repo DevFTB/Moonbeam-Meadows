@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://labeh87uavn3"]
+
+[ext_resource type="Script" path="res://Inventory/InventoryItem.gd" id="1_7w3mx"]
+[ext_resource type="Texture2D" uid="uid://klmhj7adxkvh" path="res://Level/Crops/crop_spritesheet.png" id="1_ma28r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxk04"]
+atlas = ExtResource("1_ma28r")
+region = Rect2(192, 32, 32, 32)
+
+[resource]
+script = ExtResource("1_7w3mx")
+item_name = "Lunar Sprinkles"
+item_icon = SubResource("AtlasTexture_hxk04")
+item_type = 2
+buy_price = 20
+sell_price = 10

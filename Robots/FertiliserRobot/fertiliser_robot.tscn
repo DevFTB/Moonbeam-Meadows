@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://c808s1n3o1ffb"]
+
+[ext_resource type="Script" path="res://Robots/FertiliserRobot/FertiliserRobot.gd" id="1_ecb4k"]
+[ext_resource type="Resource" uid="uid://bmhfxgnjn0nux" path="res://Robots/FertiliserRobot/fertiliser_robot_item.tres" id="2_4ri60"]
+[ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_2ee4m"]
+[ext_resource type="Texture2D" uid="uid://b0e7iq0qo58q4" path="res://Robots/robot_track_particle.png" id="4_8lltk"]
+[ext_resource type="SpriteFrames" uid="uid://bw6l4akd87abt" path="res://Robots/FertiliserRobot/fertiliser_robot_sprite_frames.tres" id="5_57vxv"]
+[ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="6_mexv7"]
+[ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="7_1k0xe"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="8_h0yxy"]
+[ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_ag85x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74qjm"]
+radius = 41.0122
+
+[node name="FertiliserRobot" type="CharacterBody2D" groups=["robot"]]
+position = Vector2(496, 400)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_ecb4k")
+pickup_item = ExtResource("2_4ri60")
+should_withdraw = true
+
+[node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
+position = Vector2(-11, 0)
+emitting = false
+process_material = ExtResource("3_2ee4m")
+texture = ExtResource("4_8lltk")
+lifetime = 0.4
+explosiveness = 0.73
+
+[node name="WheelParticlesRight" type="GPUParticles2D" parent="."]
+position = Vector2(12, -1)
+emitting = false
+amount = 20
+process_material = ExtResource("3_2ee4m")
+texture = ExtResource("4_8lltk")
+lifetime = 0.4
+
+[node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = ExtResource("5_57vxv")
+animation = &"power_down"
+script = ExtResource("6_mexv7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_we5yd")
+
+[node name="ProximityInteractor" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("7_1k0xe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityInteractor"]
+shape = SubResource("CircleShape2D_74qjm")
+debug_color = Color(0.705882, 0.447059, 0.533333, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="ProximityInteractor"]
+visible = false
+offset_left = -14.0
+offset_top = -38.0
+offset_right = 16.0
+offset_bottom = -28.0
+theme = ExtResource("8_h0yxy")
+value = 47.9
+show_percentage = false
+
+[node name="FertiliserInventory" type="Node" parent="."]
+script = ExtResource("9_ag85x")
+inventory_size = 30
+inventory_type = 2

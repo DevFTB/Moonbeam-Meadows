@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RobotResource" load_steps=6 format=3 uid="uid://bhgci1lelg6mr"]
+
+[ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="1_adppc"]
+[ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="1_m13tg"]
+[ext_resource type="Script" path="res://Robots/RobotResource.gd" id="1_phmag"]
+[ext_resource type="Resource" uid="uid://380w8jbvlnr" path="res://Robots/WateringRobot/watering_robot_item.tres" id="3_1oq2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khmc4"]
+atlas = ExtResource("1_m13tg")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_phmag")
+robot_type_name = "Watering Robot"
+robot_description = "A robot that waters squares"
+robot_icon = SubResource("AtlasTexture_khmc4")
+robot_item = ExtResource("3_1oq2x")
+entity_scene = ExtResource("1_adppc")

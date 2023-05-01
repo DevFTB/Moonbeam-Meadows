@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddf6vsbhvrf"]
+
+[ext_resource type="Script" path="res://Robots/HarvestingRobot/HarvestingRobot.gd" id="1_jlpvt"]
+[ext_resource type="Resource" uid="uid://bj22gf230c1eh" path="res://Robots/HarvestingRobot/harvesting_robot_item.tres" id="2_yh3pa"]
+[ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_mibab"]
+[ext_resource type="SpriteFrames" uid="uid://chcp5qw6tyuew" path="res://Robots/HarvestingRobot/harvesting_robot_sprite_frames.tres" id="3_pjssa"]
+[ext_resource type="Texture2D" uid="uid://b0e7iq0qo58q4" path="res://Robots/robot_track_particle.png" id="3_yovqt"]
+[ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="4_kvdie"]
+[ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="5_rak5r"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="6_jat5i"]
+[ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="7_xumjc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74qjm"]
+radius = 41.0122
+
+[node name="HarvestingRobot" type="CharacterBody2D" groups=["robot"]]
+position = Vector2(496, 400)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_jlpvt")
+pickup_item = ExtResource("2_yh3pa")
+should_deposit = true
+
+[node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
+position = Vector2(-12, -7)
+emitting = false
+process_material = ExtResource("3_mibab")
+texture = ExtResource("3_yovqt")
+lifetime = 0.4
+explosiveness = 0.73
+
+[node name="WheelParticlesRight" type="GPUParticles2D" parent="."]
+position = Vector2(13, -6)
+emitting = false
+amount = 20
+process_material = ExtResource("3_mibab")
+texture = ExtResource("3_yovqt")
+lifetime = 0.4
+
+[node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = ExtResource("3_pjssa")
+animation = &"power_up"
+script = ExtResource("4_kvdie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_we5yd")
+
+[node name="ProximityInteractor" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_rak5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityInteractor"]
+shape = SubResource("CircleShape2D_74qjm")
+debug_color = Color(0.705882, 0.447059, 0.533333, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="ProximityInteractor"]
+visible = false
+offset_left = -14.0
+offset_top = -38.0
+offset_right = 16.0
+offset_bottom = -28.0
+theme = ExtResource("6_jat5i")
+value = 47.9
+show_percentage = false
+
+[node name="ProduceInventory" type="Node" parent="."]
+script = ExtResource("7_xumjc")
+inventory_size = 30
