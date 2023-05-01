@@ -352,7 +352,7 @@ sprite_frames = ExtResource("2_373r8")
 
 [node name="SeedInventory" type="Node" parent="Player"]
 script = ExtResource("9_iadx0")
-inventory_size = 100
+inventory_size = 30
 inventory_type = 0
 
 [node name="ProduceInventory" type="Node" parent="Player"]
@@ -1465,6 +1465,7 @@ offset = Vector2(-16, -16)
 
 [node name="WaterInventory" type="Node" parent="Chunk"]
 script = ExtResource("24_lhr56")
+starting_water = 100
 inventory_size = 100
 inventory_type = 5
 

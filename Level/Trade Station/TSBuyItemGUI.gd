@@ -55,7 +55,7 @@ func start_multibuy():
 	pass
 
 func update_gui():
-	buy_button.disabled = currency_manager.get_currency() < item.buy_price	
+	buy_button.disabled = currency_manager.get_currency() < item.buy_price or player_inventory and player_inventory.get_available_capacity() == 0
 	pass
 
 func set_trade_station(new_trade_station: Node):
@@ -64,7 +64,8 @@ func set_trade_station(new_trade_station: Node):
 		var interacting_player = trade_station.get_interacting_player()
 		if interacting_player != null:
 			player_inventory = interacting_player.get_inventory(item.item_type)
-		
+			if not player_inventory.inventory_modified.is_connected(update_gui):	
+				player_inventory.inventory_modified.connect(update_gui)
 	update_gui()
 	pass
 
