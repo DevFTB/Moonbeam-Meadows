@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=98 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -59,6 +59,7 @@
 [ext_resource type="Script" path="res://Level/WaterStationGUI.gd" id="44_b52yr"]
 [ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="44_cxftp"]
 [ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="45_s4v6b"]
+[ext_resource type="PackedScene" uid="uid://bnhkn8rycucnb" path="res://GUI/inventory_button_list.tscn" id="45_uexto"]
 [ext_resource type="Resource" uid="uid://g4oi702uwa3t" path="res://Robots/Robot Upgrades/Motor/upgrade_motor.tres" id="46_tehid"]
 [ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="49_5eap5"]
 [ext_resource type="Script" path="res://Level/GridSquareSelector.gd" id="55_6u3el"]
@@ -720,7 +721,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "add_from_inventory_button", "identify_camera", "power_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1029,7 +1029,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RobotSelectionPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1078,9 +1077,9 @@ text = "Close"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InventoryRobotGUI" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer"]
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("45_uexto")]
 layout_mode = 2
-script = ExtResource("27_qww4w")
+_inventory = NodePath("../../../../../../../../../Player/RobotInventory")
 
 [node name="AddUpgradesPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
 visible = false
@@ -1494,7 +1493,7 @@ shape = SubResource("CircleShape2D_sw7jp")
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/PowerButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_power_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/AddUpgradeButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_upgrade_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
-[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
+[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryButtonList" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotUpgradeGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddFromInventoryButton" to="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI" method="_on_add_from_inventory_button_pressed"]
