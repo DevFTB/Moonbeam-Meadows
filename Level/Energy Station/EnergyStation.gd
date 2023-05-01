@@ -40,6 +40,7 @@ func add_robot(robot: Robot) -> void:
 ## Remove a robot from the station
 func remove_robot(robot: Robot) -> void:
 	robots.erase(robot)
+	robots_ivo_station.erase(robot)
 
 	robot_removed.emit(robot)
 	gui.update_gui()

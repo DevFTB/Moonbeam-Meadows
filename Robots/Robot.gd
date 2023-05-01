@@ -214,8 +214,7 @@ func check_power():
 
 func can_power_on():
 	var on_path = target_position == null or is_on_path()
-	print("lies: ", energy > floor(energy_capacity.get_value() / self_power_energy_threshold))
-	return not powered and energy > floor(energy_capacity.get_value() / self_power_energy_threshold) and on_path and not unpowered_override
+	return not powered and energy > floor(energy_capacity.get_value() * self_power_energy_threshold) and on_path and not unpowered_override
 
 func set_path(new_path: Array[Vector2i]):
 	path = new_path

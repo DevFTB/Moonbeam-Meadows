@@ -50,6 +50,7 @@ func start_multibuy():
 	if pressed:
 		multibuy = true
 		multibuy_timer = 0
+		multibuy_amount = 1
 		max_amount = floor(currency_manager.get_currency() / item.buy_price)
 	pass
 
