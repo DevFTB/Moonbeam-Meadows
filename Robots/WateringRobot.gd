@@ -46,5 +46,5 @@ func _process(delta):
 		water_timer = 0
 		$WaterParticles.emitting = false
 		is_watering = false
-		stop_sound()
+		
 		

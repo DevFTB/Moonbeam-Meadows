@@ -1425,15 +1425,19 @@ script = ExtResource("20_wew0j")
 
 [node name="WateringRobot" parent="Robots" instance=ExtResource("35_74b3b")]
 starting_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("45_s4v6b"), ExtResource("46_tehid")])
+pick_up = null
 
 [node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
 position = Vector2(624, 240)
+pick_up = null
 
 [node name="PlanterRobot" parent="Robots" instance=ExtResource("40_4ntqc")]
 position = Vector2(596, 415)
+pick_up = null
 
 [node name="FertiliserRobot" parent="Robots" instance=ExtResource("44_cxftp")]
 position = Vector2(668, 382)
+pick_up = null
 
 [node name="GridPathLine" type="Node2D" parent="."]
 script = ExtResource("19_gqpxo")

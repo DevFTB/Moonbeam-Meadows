@@ -1,14 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddf6vsbhvrf"]
+[gd_scene load_steps=18 format=3 uid="uid://ddf6vsbhvrf"]
 
 [ext_resource type="Script" path="res://Robots/HarvestingRobot/HarvestingRobot.gd" id="1_jlpvt"]
 [ext_resource type="Resource" uid="uid://bj22gf230c1eh" path="res://Robots/HarvestingRobot/harvesting_robot_item.tres" id="2_yh3pa"]
 [ext_resource type="Material" uid="uid://d078y50m4caqj" path="res://Robots/dirt_particles.tres" id="3_mibab"]
 [ext_resource type="SpriteFrames" uid="uid://chcp5qw6tyuew" path="res://Robots/HarvestingRobot/harvesting_robot_sprite_frames.tres" id="3_pjssa"]
+[ext_resource type="AudioStream" uid="uid://bnmypijd65wgr" path="res://Robots/HarvestingRobot/Sounds/turnon.wav" id="3_vge5m"]
 [ext_resource type="Texture2D" uid="uid://b0e7iq0qo58q4" path="res://Robots/robot_track_particle.png" id="3_yovqt"]
 [ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="4_kvdie"]
+[ext_resource type="AudioStream" uid="uid://ckt1sepj7flk5" path="res://Robots/HarvestingRobot/Sounds/shutdown.wav" id="4_ryr0w"]
+[ext_resource type="AudioStream" uid="uid://spuiosmmo1v8" path="res://Robots/HarvestingRobot/Sounds/identified.wav" id="5_n56in"]
 [ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="5_rak5r"]
 [ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="6_jat5i"]
+[ext_resource type="AudioStream" uid="uid://bnfq2aaf5gyx4" path="res://Robots/HarvestingRobot/Sounds/new path.wav" id="6_rws2q"]
+[ext_resource type="AudioStream" uid="uid://dsuyvu8h5tvho" path="res://Robots/HarvestingRobot/Sounds/Working.wav" id="7_vomyu"]
 [ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="7_xumjc"]
+[ext_resource type="AudioStream" uid="uid://un1iy6kjyvu3" path="res://Robots/HarvestingRobot/Sounds/low energy.wav" id="8_743or"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
 
@@ -23,7 +29,14 @@ motion_mode = 1
 script = ExtResource("1_jlpvt")
 pickup_item = ExtResource("2_yh3pa")
 should_deposit = true
-robot_sound_player = null
+volume = -8
+sfx_power_on = ExtResource("3_vge5m")
+sfx_power_down = ExtResource("4_ryr0w")
+sfx_identify = ExtResource("5_n56in")
+sfx_set_path = ExtResource("6_rws2q")
+sfx_working = ExtResource("7_vomyu")
+sfx_energy_low = ExtResource("8_743or")
+pick_up = null
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-12, -7)

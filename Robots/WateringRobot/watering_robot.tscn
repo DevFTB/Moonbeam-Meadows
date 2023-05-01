@@ -42,6 +42,7 @@ sfx_set_path = ExtResource("5_af4pv")
 sfx_working = ExtResource("6_6ekcq")
 sfx_energy_low = ExtResource("7_c2ofo")
 sfx_upgrade = ExtResource("5_8k0un")
+pick_up = null
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-9, 2)

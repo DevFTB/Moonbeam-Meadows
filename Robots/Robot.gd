@@ -58,6 +58,9 @@ class UpgradeInstance:
 # Sound FX for the robots
 
 @export_group("Sound FX")
+@export var sound_max_distance = 1000
+@export var volume = 0
+
 @export var sfx_power_on : AudioStream #Sound on power on
 @export var sfx_power_down : AudioStream #Sound on power down
 @export var sfx_recruit : AudioStream
@@ -67,8 +70,10 @@ class UpgradeInstance:
 @export var sfx_working : AudioStream #Sound on work
 @export var sfx_energy_low : AudioStream
 @export var sfx_upgrade : AudioStream #Sound on upgrade
-@export var pick_up : AudioStream
+@export var sfx_pick_up : AudioStream
 @export_group("")
+
+
 
 var current_sound = null
 
@@ -141,8 +146,10 @@ func _ready():
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.update()
 	
-	
-	
+	#init Robot Sounds
+	RobotSoundPlayer.set_max_distance(sound_max_distance)
+	RobotSoundPlayer.set_volume_db(volume)
+	RobotSoundPlayer.set_bus(&"Robot SFX")
 	for cell in level.get_used_cells_by_id(0):
 		if not level.get_cell_tile_data(0, cell).get_custom_data("r_traversible"):
 			astar.set_point_solid(cell)

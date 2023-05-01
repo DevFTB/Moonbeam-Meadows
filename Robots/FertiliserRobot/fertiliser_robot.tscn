@@ -23,7 +23,7 @@ motion_mode = 1
 script = ExtResource("1_ecb4k")
 pickup_item = ExtResource("2_4ri60")
 should_withdraw = true
-RobotSoundPlayer = NodePath("RobotSound")
+pick_up = null
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-11, 0)
