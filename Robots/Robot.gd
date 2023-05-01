@@ -55,6 +55,39 @@ class UpgradeInstance:
 # The scaling factor for the snapping distance based on the movement speed as a percentage of the base movement speed
 @export var snap_scaling_unit = 0.8
 
+# Sound FX for the robots
+
+#@export_node_path("AudioStreamPlayer2D") var sfx_recruit
+#@export_node_path("AudioStreamPlayer2D") var sfx_moving 
+#@export_node_path("AudioStreamPlayer2D") var sfx_identify #Sound on identify
+#@export_node_path("AudioStreamPlayer2D") var sfx_set_path #Sound on set path
+#@export_node_path("AudioStreamPlayer2D") var sfx_pickup 
+#@export_node_path("AudioStreamPlayer2D") var sfx_working 
+#@export_node_path("AudioStreamPlayer2D") var sfx_energy_low 
+#@export_node_path("AudioStreamPlayer2D") var sfx_power_on #Sound on power on
+#@export_node_path("AudioStreamPlayer2D") var sfx_power_down #Sound on power down
+#@export_node_path("AudioStreamPlayer2D") var sfx_upgrade #Sound on upgrade
+#@export_node_path("AudioStreamPlayer2D") var sfx_chatter1 
+
+
+# @export_node_path("AudioStreamPlayer2D") var RobotSoundPlayer # NodePath to AudioStreamPlayer. Needs to be assigned in the editor.
+
+@onready var RobotSoundPlayer = get_node("RobotSound")
+
+@export_group("Sound FX")
+@export var sfx_power_on : AudioStream
+@export var sfx_power_down : AudioStream
+@export var sfx_recruit : AudioStream
+@export var sfx_moving : AudioStream
+@export var sfx_identify : AudioStream
+@export var sfx_set_path : AudioStream
+@export var sfx_working : AudioStream
+@export var sfx_energy_low : AudioStream
+@export var sfx_upgrade : AudioStream
+@export var pick_up : AudioStream
+@export_group("")
+
+
 var parent_energy_station = null
 var upgrade_counter = 0
 
@@ -122,6 +155,8 @@ func _ready():
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.update()
 	
+	
+	
 	for cell in level.get_used_cells_by_id(0):
 		if not level.get_cell_tile_data(0, cell).get_custom_data("r_traversible"):
 			astar.set_point_solid(cell)
@@ -132,6 +167,7 @@ func _ready():
 
 	energy = energy_capacity.get_value()
 	pass	
+
 	
 func _physics_process(_delta):
 	if powered:
@@ -196,12 +232,18 @@ func do_action(_grid_position: Vector2i) -> void:
 func power_down():
 	powered = false
 	$RobotAnimationController.power_down()
+	
+	play_sound(sfx_power_down)
+	
 	print(name, " power off")
 	pass
 
 func power_on():
 	powered= true
 	$RobotAnimationController.power_on()
+	
+	play_sound(sfx_power_on)
+	
 	print(name + "power on")
 
 func check_power():
@@ -219,6 +261,7 @@ func can_power_on():
 func set_path(new_path: Array[Vector2i]):
 	path = new_path
 	check_power()
+	#sfx_set_path.play(0)
 	if powered:
 		move_to_grid(path[0])
 
@@ -335,6 +378,8 @@ func add_upgrade(upgrade: RobotUpgrade) -> int:
 	var inst = UpgradeInstance.new(upgrade, upgrade_counter)
 	upgrades[upgrade_counter] = inst
 	upgrade_counter += 1
+	
+	play_sound(sfx_upgrade)
 
 	for property_name in upgrade.upgrade_properties:
 		var property = get(property_name)
@@ -395,3 +440,9 @@ func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
 	# Move CharacterBody3D with the computed `safe_velocity` to avoid dynamic obstacles.
 	velocity = safe_velocity
 	move_and_slide()
+
+# Loads and plays the selected sound
+func play_sound(sound):
+	RobotSoundPlayer.set_stream(sound)
+	RobotSoundPlayer.seek(0)
+	RobotSoundPlayer.play()

@@ -72,3 +72,5 @@ show_percentage = false
 script = ExtResource("8_pvmi0")
 inventory_size = 20
 inventory_type = 0
+
+[node name="RobotSound" type="AudioStreamPlayer2D" parent="."]

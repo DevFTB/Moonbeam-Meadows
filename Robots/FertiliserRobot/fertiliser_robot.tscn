@@ -23,6 +23,7 @@ motion_mode = 1
 script = ExtResource("1_ecb4k")
 pickup_item = ExtResource("2_4ri60")
 should_withdraw = true
+RobotSoundPlayer = NodePath("RobotSound")
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-11, 0)
@@ -72,3 +73,5 @@ show_percentage = false
 script = ExtResource("9_ag85x")
 inventory_size = 30
 inventory_type = 2
+
+[node name="RobotSound" type="AudioStreamPlayer2D" parent="."]

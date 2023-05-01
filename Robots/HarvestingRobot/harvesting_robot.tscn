@@ -23,6 +23,7 @@ motion_mode = 1
 script = ExtResource("1_jlpvt")
 pickup_item = ExtResource("2_yh3pa")
 should_deposit = true
+robot_sound_player = null
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-12, -7)
@@ -71,3 +72,5 @@ show_percentage = false
 [node name="ProduceInventory" type="Node" parent="."]
 script = ExtResource("7_xumjc")
 inventory_size = 30
+
+[node name="RobotSound" type="AudioStreamPlayer2D" parent="."]

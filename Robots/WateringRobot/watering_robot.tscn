@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnbuxj36mxtbt"]
+[gd_scene load_steps=17 format=3 uid="uid://cnbuxj36mxtbt"]
 
 [ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="1_lu0el"]
 [ext_resource type="Resource" uid="uid://380w8jbvlnr" path="res://Robots/WateringRobot/watering_robot_item.tres" id="2_6mc4g"]
+[ext_resource type="AudioStream" uid="uid://5cg4jquslqgt" path="res://Robots/WateringRobot/Sounds/noise 2.wav" id="3_820wp"]
 [ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="3_fj0m7"]
 [ext_resource type="Material" uid="uid://d062y8is3ms2b" path="res://Robots/water_particles.tres" id="3_jnhq4"]
 [ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="4_hcc7j"]
+[ext_resource type="AudioStream" uid="uid://v6tqs3aqipxm" path="res://Robots/WateringRobot/Sounds/noise 1.wav" id="4_sna12"]
 [ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="5_ec7cp"]
 [ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="6_ytyqn"]
 [ext_resource type="Material" uid="uid://dr3dij87njljy" path="res://Robots/hover_particles.tres" id="7_jsnu2"]
@@ -30,6 +32,8 @@ collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_lu0el")
 pickup_item = ExtResource("2_6mc4g")
+sfx_power_on = ExtResource("3_820wp")
+sfx_power_down = ExtResource("4_sna12")
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-9, 2)
@@ -95,3 +99,5 @@ explosiveness = 0.12
 trail_enabled = true
 trail_lifetime = 0.2
 trail_sections = 2
+
+[node name="RobotSound" type="AudioStreamPlayer2D" parent="."]
