@@ -35,14 +35,18 @@ func _ready():
 	
 ## Transfer an item from the box to the player		
 func transfer_to_player(item, amount):
-	if get_inventory(item.item_type).remove(item, amount):
-		interacting_player.get_inventory(item.item_type).add(item, amount)
-
+	var p_inv = interacting_player.get_inventory(item.item_type)
+	var b_inv = get_inventory(item.item_type)
+	var transfer_amount = min(amount, p_inv.get_available_capacity())
+	if b_inv.remove(item, transfer_amount):
+		p_inv.add(item, transfer_amount)
 ## Transfer an item from the player to the box
 func transfer_to_box(item, amount):
-	if interacting_player.get_inventory(item.item_type).remove(item, amount):
-		get_inventory(item.item_type).add(item, amount)
-
+	var p_inv = interacting_player.get_inventory(item.item_type)
+	var b_inv = get_inventory(item.item_type)
+	var transfer_amount = min(amount, b_inv.get_available_capacity())
+	if p_inv.remove(item, transfer_amount):
+		b_inv.add(item, transfer_amount)
 ## Asks the given robot to deposit items into the box with the box's current constraints 
 func ask_for_deposit(robot:Robot):
 	var unique_items = max_unique_items - get_amount_of_unique_items()

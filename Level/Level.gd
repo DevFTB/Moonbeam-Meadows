@@ -26,6 +26,13 @@ func _ready():
 	$Player/SeedInventory.add(crops[0].seed_item, 5)
 	$Player/ProduceInventory.add(crops[0].produce_item,50)
 	$Player/FertiliserInventory.add(fertilisers[0].fertiliser_item, 5)
+	
+	for chunk in get_tree().get_nodes_in_group("chunk"):
+		var grid_position = local_to_map(chunk.global_position)
+		chunk_map[grid_position] = chunk
+		set_grid_intraversible(grid_position)
+		for grid in chunk.exclusion_vectors:
+			set_grid_intraversible(grid_position + grid)
 	pass
 	
 ## Plants a crop on the given tile based on the given item
