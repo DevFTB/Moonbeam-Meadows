@@ -52,7 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://bo8vh6e4gjr1b" path="res://Level/Trade Station/ts_sell_item_gui.tscn" id="31_td8hx"]
 [ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="34_34xvq"]
 [ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
-[ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
+[ext_resource type="PackedScene" uid="uid://bmxgm8a1whgqx" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
 [ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
 [ext_resource type="Script" path="res://GUI/AddUpgradesPopup.gd" id="37_viyhm"]
 [ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dkm8m21hgox00"
-path="res://.godot/imported/noise 4.wav-b80e14bb2706ab7ee44ef12556d8a065.sample"
+path="res://.godot/imported/setpath.wav-5d07353871b27b50c736bd034c5559f3.sample"
 
 [deps]
 
-source_file="res://Robots/WateringRobot/Sounds/noise 4.wav"
-dest_files=["res://.godot/imported/noise 4.wav-b80e14bb2706ab7ee44ef12556d8a065.sample"]
+source_file="res://Robots/WateringRobot/Sounds/setpath.wav"
+dest_files=["res://.godot/imported/setpath.wav-5d07353871b27b50c736bd034c5559f3.sample"]
 
 [params]
 

@@ -1,14 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnbuxj36mxtbt"]
+[gd_scene load_steps=21 format=3 uid="uid://bmxgm8a1whgqx"]
 
 [ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="1_lu0el"]
 [ext_resource type="Resource" uid="uid://380w8jbvlnr" path="res://Robots/WateringRobot/watering_robot_item.tres" id="2_6mc4g"]
-[ext_resource type="AudioStream" uid="uid://5cg4jquslqgt" path="res://Robots/WateringRobot/Sounds/noise 2.wav" id="3_820wp"]
 [ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="3_fj0m7"]
 [ext_resource type="Material" uid="uid://d062y8is3ms2b" path="res://Robots/water_particles.tres" id="3_jnhq4"]
+[ext_resource type="AudioStream" uid="uid://5cg4jquslqgt" path="res://Robots/WateringRobot/Sounds/identify whistle.wav" id="3_ldsxp"]
 [ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="4_hcc7j"]
-[ext_resource type="AudioStream" uid="uid://v6tqs3aqipxm" path="res://Robots/WateringRobot/Sounds/noise 1.wav" id="4_sna12"]
+[ext_resource type="AudioStream" uid="uid://v6tqs3aqipxm" path="res://Robots/WateringRobot/Sounds/power down.wav" id="4_p1avr"]
+[ext_resource type="AudioStream" uid="uid://cwuxh31df44wg" path="res://Robots/WateringRobot/Sounds/upgradecheer.wav" id="5_8k0un"]
+[ext_resource type="AudioStream" uid="uid://dkm8m21hgox00" path="res://Robots/WateringRobot/Sounds/setpath.wav" id="5_af4pv"]
 [ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="5_ec7cp"]
+[ext_resource type="AudioStream" uid="uid://mb4c8yj22ocj" path="res://Robots/WateringRobot/Sounds/watering1.wav" id="6_6ekcq"]
 [ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="6_ytyqn"]
+[ext_resource type="AudioStream" uid="uid://dgsrbrw8ss2b7" path="res://Robots/WateringRobot/Sounds/low power.wav" id="7_c2ofo"]
 [ext_resource type="Material" uid="uid://dr3dij87njljy" path="res://Robots/hover_particles.tres" id="7_jsnu2"]
 [ext_resource type="Texture2D" uid="uid://p4ionyuu6ioc" path="res://Robots/robot_hover_particle.png" id="9_l2v5t"]
 [ext_resource type="Script" path="res://Level/WaterInventory.gd" id="9_yxuqk"]
@@ -32,8 +36,12 @@ collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_lu0el")
 pickup_item = ExtResource("2_6mc4g")
-sfx_power_on = ExtResource("3_820wp")
-sfx_power_down = ExtResource("4_sna12")
+sfx_power_on = ExtResource("3_ldsxp")
+sfx_power_down = ExtResource("4_p1avr")
+sfx_set_path = ExtResource("5_af4pv")
+sfx_working = ExtResource("6_6ekcq")
+sfx_energy_low = ExtResource("7_c2ofo")
+sfx_upgrade = ExtResource("5_8k0un")
 
 [node name="WheelParticlesLeft" type="GPUParticles2D" parent="."]
 position = Vector2(-9, 2)

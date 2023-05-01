@@ -21,6 +21,7 @@ func do_action(grid_position):
 		if water_inventory.remove(water, 1):
 			super.do_action(grid_position)
 			
+			
 func power_down():
 	$WheelParticlesLeft.emitting = false
 	$WheelParticlesRight.emitting = false
@@ -40,8 +41,10 @@ func _process(delta):
 	if is_watering == true:
 		$WaterParticles.emitting = true
 		water_timer += delta
+		play_sound(sfx_working)
 	while water_timer >= water_duration:
 		water_timer = 0
 		$WaterParticles.emitting = false
 		is_watering = false
+		stop_sound()
 		

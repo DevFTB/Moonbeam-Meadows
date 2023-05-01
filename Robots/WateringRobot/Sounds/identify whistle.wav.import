@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://5cg4jquslqgt"
-path="res://.godot/imported/noise 2.wav-90d3a26ce1c43965d1cc8775b50cc9aa.sample"
+path="res://.godot/imported/identify whistle.wav-5ea2352c099106ec032c42e339fcd4a9.sample"
 
 [deps]
 
-source_file="res://Robots/WateringRobot/Sounds/noise 2.wav"
-dest_files=["res://.godot/imported/noise 2.wav-90d3a26ce1c43965d1cc8775b50cc9aa.sample"]
+source_file="res://Robots/WateringRobot/Sounds/identify whistle.wav"
+dest_files=["res://.godot/imported/identify whistle.wav-5ea2352c099106ec032c42e339fcd4a9.sample"]
 
 [params]
 

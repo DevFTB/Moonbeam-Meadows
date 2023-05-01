@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bot6ih1oo36p3"]
+[gd_scene load_steps=9 format=3 uid="uid://e6slo4bu326h"]
 
 [ext_resource type="Script" path="res://Robots/WateringRobot.gd" id="1_xax3c"]
 [ext_resource type="SpriteFrames" uid="uid://mo5wyk85dbu8" path="res://Robots/WateringRobot/watering_robot_sprite_frames.tres" id="3_86so4"]
 [ext_resource type="Script" path="res://Robots/RobotAnimationController.gd" id="3_olpwa"]
 [ext_resource type="Script" path="res://Robots/ProximityInteractor.gd" id="4_0kq7t"]
 [ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="5_xvv68"]
-[ext_resource type="AudioStream" uid="uid://v6tqs3aqipxm" path="res://Robots/WateringRobot/Sounds/noise 1.wav" id="6_bqmso"]
+[ext_resource type="AudioStream" uid="uid://v6tqs3aqipxm" path="res://Robots/WateringRobot/Sounds/power down.wav" id="6_q4ccn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_we5yd"]
 
@@ -18,9 +18,6 @@ collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_xax3c")
-sfx_power_on = NodePath("")
-sfx_power_down = NodePath("RobotSound")
-robot_sound = null
 
 [node name="RobotAnimationController" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
@@ -51,5 +48,5 @@ value = 47.9
 show_percentage = false
 
 [node name="RobotSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_bqmso")
+stream = ExtResource("6_q4ccn")
 bus = &"Robot SFX"

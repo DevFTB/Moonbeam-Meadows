@@ -57,36 +57,20 @@ class UpgradeInstance:
 
 # Sound FX for the robots
 
-#@export_node_path("AudioStreamPlayer2D") var sfx_recruit
-#@export_node_path("AudioStreamPlayer2D") var sfx_moving 
-#@export_node_path("AudioStreamPlayer2D") var sfx_identify #Sound on identify
-#@export_node_path("AudioStreamPlayer2D") var sfx_set_path #Sound on set path
-#@export_node_path("AudioStreamPlayer2D") var sfx_pickup 
-#@export_node_path("AudioStreamPlayer2D") var sfx_working 
-#@export_node_path("AudioStreamPlayer2D") var sfx_energy_low 
-#@export_node_path("AudioStreamPlayer2D") var sfx_power_on #Sound on power on
-#@export_node_path("AudioStreamPlayer2D") var sfx_power_down #Sound on power down
-#@export_node_path("AudioStreamPlayer2D") var sfx_upgrade #Sound on upgrade
-#@export_node_path("AudioStreamPlayer2D") var sfx_chatter1 
-
-
-# @export_node_path("AudioStreamPlayer2D") var RobotSoundPlayer # NodePath to AudioStreamPlayer. Needs to be assigned in the editor.
-
-@onready var RobotSoundPlayer = get_node("RobotSound")
-
 @export_group("Sound FX")
-@export var sfx_power_on : AudioStream
-@export var sfx_power_down : AudioStream
+@export var sfx_power_on : AudioStream #Sound on power on
+@export var sfx_power_down : AudioStream #Sound on power down
 @export var sfx_recruit : AudioStream
-@export var sfx_moving : AudioStream
+@export var sfx_moving : AudioStream 
 @export var sfx_identify : AudioStream
 @export var sfx_set_path : AudioStream
-@export var sfx_working : AudioStream
+@export var sfx_working : AudioStream #Sound on work
 @export var sfx_energy_low : AudioStream
-@export var sfx_upgrade : AudioStream
+@export var sfx_upgrade : AudioStream #Sound on upgrade
 @export var pick_up : AudioStream
 @export_group("")
 
+var current_sound = null
 
 var parent_energy_station = null
 var upgrade_counter = 0
@@ -144,6 +128,8 @@ var unpowered_override = false
 @onready var action_energy_cost = TrackedModifierValue.new(base_action_energy_cost)
 ## The energy capacity of the robot
 @onready var energy_capacity = TrackedModifierValue.new(base_energy_capacity)
+## The AudioStreamPlayer2D node
+@onready var RobotSoundPlayer = get_node("RobotSound")
 
 func _ready():
 	$ProximityInteractor.successful_pickup.connect(_on_successful_pickup)
@@ -261,7 +247,6 @@ func can_power_on():
 func set_path(new_path: Array[Vector2i]):
 	path = new_path
 	check_power()
-	#sfx_set_path.play(0)
 	if powered:
 		move_to_grid(path[0])
 
@@ -441,8 +426,20 @@ func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity
 	move_and_slide()
 
-# Loads and plays the selected sound
+
 func play_sound(sound):
+	# Loads and plays the selected sound
 	RobotSoundPlayer.set_stream(sound)
+	current_sound = sound
 	RobotSoundPlayer.seek(0)
 	RobotSoundPlayer.play()
+
+func stop_sound():
+	RobotSoundPlayer.stop()
+
+func resume_sound():
+	RobotSoundPlayer.play()
+
+func get_current_sound():
+	return current_sound
+
