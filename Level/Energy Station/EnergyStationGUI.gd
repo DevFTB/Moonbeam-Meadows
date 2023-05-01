@@ -33,6 +33,7 @@ func _process(delta):
 		update_power_button()
 
 func set_energy_station(new_energy_station: EnergyStation):
+	selected_robot = null
 	energy_station = new_energy_station
 	changed_energy_station.emit(energy_station)
 	if not energy_station.robot_removed.is_connected(_on_remove_robot):

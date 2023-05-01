@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Level/Trade Station/TSBuyItemGUI.gd" id="1_rx72f"]
 [ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="2_q6v7w"]
 
-[node name="TSBuyItemGUI" type="PanelContainer" node_paths=PackedStringArray("icon_texture_rect", "name_label", "cost_label", "buy_button")]
+[node name="TSBuyItemGUI" type="PanelContainer" node_paths=PackedStringArray("icon_texture_rect", "name_label", "cost_label", "buy_button") groups=["ts_sell_item"]]
 custom_minimum_size = Vector2(300, 100)
 theme = ExtResource("1_evm3b")
 script = ExtResource("1_rx72f")

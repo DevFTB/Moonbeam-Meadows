@@ -51,7 +51,7 @@ func start_multibuy():
 		multibuy = true
 		multibuy_timer = 0
 		multibuy_amount = 1
-		max_amount = floor(currency_manager.get_currency() / item.buy_price)
+		max_amount = min(floor(currency_manager.get_currency() / item.buy_price), player_inventory.get_available_capacity())
 	pass
 
 func update_gui():
@@ -59,7 +59,12 @@ func update_gui():
 	pass
 
 func set_trade_station(new_trade_station: Node):
-	trade_station = new_trade_station
+	if new_trade_station != null:
+		trade_station = new_trade_station
+		var interacting_player = trade_station.get_interacting_player()
+		if interacting_player != null:
+			player_inventory = interacting_player.get_inventory(item.item_type)
+		
 	update_gui()
 	pass
 

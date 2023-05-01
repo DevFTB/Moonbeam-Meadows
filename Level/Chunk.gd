@@ -6,7 +6,8 @@ var water_inventory: WaterInventory:
 	get:
 		return $WaterInventory
 
-func init_level(level: Level):
-	for vec in exclusion_vectors:
-		level.set_grid_intraversible(vec)
-	pass
+func _ready():
+	water_inventory.depeleted.connect(_on_depleted)
+
+func _on_depleted():
+	$Sprite2D.play("used")
