@@ -8,3 +8,4 @@ script = ExtResource("1_qampo")
 fertiliser_name = "Lunar Sprinkles"
 growth_multiplier = 2.0
 fertiliser_item = ExtResource("1_6lpl8")
+amount_of_uses = 1

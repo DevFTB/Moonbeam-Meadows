@@ -28,6 +28,8 @@ func _ready():
 	#for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)
 	pass 
 
+		
+
 ## Add a robot to the station
 func add_robot(robot: Robot) -> void:
 	robots.append(robot)
@@ -50,9 +52,11 @@ func show_area() -> void:
 
 func give_robot_energy(robot: Robot):
 	var req = robot.get_energy_requirement()
-	var withdraw_amount = min(battery.value, req)
-	if battery.withdraw(withdraw_amount):
-		robot.add_energy(withdraw_amount)
+	var withdraw_amount = floor(min(battery.value, req))
+	if withdraw_amount > 0:
+		if battery.withdraw(withdraw_amount):
+			print("giving robot ", withdraw_amount, " energy")
+			robot.add_energy(withdraw_amount)
 		
 ## Hide the area of effect of the station through the tilemap
 func hide_area() -> void:

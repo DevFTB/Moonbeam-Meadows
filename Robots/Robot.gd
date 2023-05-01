@@ -3,55 +3,6 @@ class_name Robot
  
 ## A robot entity in the world
 
-## The path the robot will follow
-@export var path : Array[Vector2i] = []
-
-## The item the robot will give the player once it gets picked up
-@export var pickup_item : InventoryItem
-
-## Should the robot deposit the item from its inventory to other inventorie
-@export var should_deposit = false
-
-## Should the robot withdraw the item from other inventories
-@export var should_withdraw = false
-
-@export var base_movement_speed : float = 125
-## The speed at which the robot moves 
-
-@export var base_movement_action_penalty : float = 0.25
-## The penalty to movement speed when doing an action
-
-@export var base_inventory_capacity : int = 10 
-## The capacity of the robot's inventory
-
-@export var base_move_energy_cost  : int = 1
-## The energy cost of moving to an adjacent grid
-
-@export var base_action_energy_cost : int = 3
-## The energy cost of doing an action
-
-@export var base_energy_capacity : int = 60
-#3 The energy capacity of the robot
-
-@export var starting_upgrades = []
-
-# The distance at which the robot will snap to the target tile
-@export var snap_distance = 4
-
-var parent_energy_station = null
-var upgrade_counter = 0
-
-@onready var level = get_node("/root/Level") as Level
-@onready var inventories = get_children().filter(func(x): return x is InventoryComponent)
-
-@onready var movement_speed = TrackedModifierValue.new(base_movement_speed)
-@onready var movement_action_penalty = TrackedModifierValue.new(base_movement_action_penalty)
-@onready var inventory_capacity = TrackedModifierValue.new(base_inventory_capacity)
-@onready var move_energy_cost = TrackedModifierValue.new(base_move_energy_cost)
-@onready var action_energy_cost = TrackedModifierValue.new(base_action_energy_cost)
-@onready var energy_capacity = TrackedModifierValue.new(base_energy_capacity)
-
-
 class UpgradeInstance:
 	extends RefCounted
 	## An instance of an upgrade applied to a robot
@@ -68,6 +19,45 @@ class UpgradeInstance:
 	func _init(p_upgrade: RobotUpgrade, p_inst_id = 0):
 		upgrade = p_upgrade
 		inst_id = p_inst_id
+
+## The path the robot will follow
+@export var path : Array[Vector2i] = []
+
+## The item the robot will give the player once it gets picked up
+@export var pickup_item : InventoryItem
+
+## Should the robot deposit the item from its inventory to other inventorie
+@export var should_deposit = false
+
+## Should the robot withdraw the item from other inventories
+@export var should_withdraw = false
+
+@export var base_movement_speed : float = 125
+
+@export var base_movement_action_penalty : float = 0.25
+
+@export var base_inventory_capacity : int = 10 
+
+@export var base_move_energy_cost  : int = 1
+
+@export var base_action_energy_cost : int = 3
+
+@export var base_energy_capacity : int = 60
+
+@export var starting_upgrades = []
+
+# The distance at which the robot will snap to the target tile
+@export var snap_distance = 4
+
+# The percentage of energy capacity the robot will fill too before self powering on.
+@export var self_power_energy_threshold = 0.5
+
+# The scaling factor for the snapping distance based on the movement speed as a percentage of the base movement speed
+@export var snap_scaling_unit = 0.8
+
+var parent_energy_station = null
+var upgrade_counter = 0
+
 
 var astar : AStarGrid2D
 ## The upgrades applied to the robot
@@ -94,10 +84,33 @@ var temp_path_completed = false
 
 ## The directions in with the robot can affect with it's actions
 var action_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+
+## The grid the robot last performed an action on
 var last_acted = Vector2i.ZERO
+## Whether the robot has performed an action on the previous tile
 var acted_last_tile = false
 
+## Enables emergency pathing back to the target position
 var e_mode= false
+
+## GUI override for the power state. If true the robot will not turn itself on.
+var unpowered_override = false
+
+@onready var level = get_node("/root/Level") as Level
+@onready var inventories = get_children().filter(func(x): return x is InventoryComponent)
+
+## The speed at which the robot moves 
+@onready var movement_speed = TrackedModifierValue.new(base_movement_speed)
+## The penalty to movement speed when doing an action
+@onready var movement_action_penalty = TrackedModifierValue.new(base_movement_action_penalty)
+## The capacity of the robot's inventory
+@onready var inventory_capacity = TrackedModifierValue.new(base_inventory_capacity)
+## The energy cost of moving to an adjacent grid
+@onready var move_energy_cost = TrackedModifierValue.new(base_move_energy_cost)
+## The energy cost of doing an action
+@onready var action_energy_cost = TrackedModifierValue.new(base_action_energy_cost)
+## The energy capacity of the robot
+@onready var energy_capacity = TrackedModifierValue.new(base_energy_capacity)
 
 func _ready():
 	$ProximityInteractor.successful_pickup.connect(_on_successful_pickup)
@@ -161,16 +174,11 @@ func _physics_process(_delta):
 		#	 movement code
 		if target_position != null :
 			var actual_movement_speed = movement_speed.get_value() if not acted_last_tile else movement_speed.get_value() * movement_action_penalty.get_value()
-			var movement_delta = actual_movement_speed * _delta * Vector2(direction)
 			var disp = (level.map_to_local(target_position)- Vector2(global_position) ).length()
-			print(disp)
-			if disp < snap_distance:
-				
+			if disp < snap_distance * (actual_movement_speed / movement_speed.base_value) / snap_scaling_unit:
 				global_position = level.map_to_local(target_position)
 				is_navigation_finished = true
 			else:
-				var current_position = get_current_position()
-
 				velocity = actual_movement_speed * direction
 				if not is_on_path() or e_mode:
 					if e_mode != true: e_mode = true
@@ -184,30 +192,30 @@ func do_action(_grid_position: Vector2i) -> void:
 	energy -= action_energy_cost.get_value()
 	pass
 
-func is_on_path():
-	return (target_position - get_current_position()).length() <= 1 or not temp_path.is_empty()
 
 func power_down():
 	powered = false
 	$RobotAnimationController.power_down()
-	print("power_off")
+	print(name, " power off")
 	pass
 
 func power_on():
 	powered= true
 	$RobotAnimationController.power_on()
-	print("power on")
+	print(name + "power on")
 
 func check_power():
 	if has_energy() and not path.is_empty():
-		var on_path = target_position == null or is_on_path()
-		print("on path", on_path)
-		if not powered and on_path:
+		if can_power_on():
 			power_on()
 	else:
 		if powered:
-			
 			power_down()
+
+func can_power_on():
+	var on_path = target_position == null or is_on_path()
+	print("lies: ", energy > floor(energy_capacity.get_value() / self_power_energy_threshold))
+	return not powered and energy > floor(energy_capacity.get_value() / self_power_energy_threshold) and on_path and not unpowered_override
 
 func set_path(new_path: Array[Vector2i]):
 	path = new_path
@@ -218,6 +226,22 @@ func set_path(new_path: Array[Vector2i]):
 	path_index = 0
 	pass
 	
+func add_energy(amount: int) -> void:
+	energy = min(energy + amount, energy_capacity.get_value())
+	
+	check_power()
+	pass
+
+func toggle_power():
+	if powered:
+		unpowered_override = true
+		power_down()
+	else:
+		unpowered_override = false
+		if can_power_on():
+			power_on()
+	pass
+
 func snap_to_grid():
 	position = level.map_to_local(get_current_position())
 
@@ -232,6 +256,7 @@ func move_to_grid(grid_position: Vector2i):
 			direction =  grid_position - current_position
 			target_position = grid_position
 			energy -= move_energy_cost.get_value()
+			
 			is_navigation_finished = false
 		else:
 			position = level.map_to_local(current_position)
@@ -300,11 +325,6 @@ func confirm_withdrawal(withdrawal: Dictionary) -> bool:
 	
 	return true
 
-func add_energy(amount: int) -> void:
-	energy = min(energy + amount, energy_capacity.get_value())
-	
-	check_power()
-	pass
 
 func remove_self():
 	if parent_energy_station != null:
@@ -335,6 +355,9 @@ func remove_upgrade(inst_id: int):
 		upgrades.erase(inst_id)
 		return true
 	return false
+
+func is_on_path():
+	return (target_position - get_current_position()).length() <= 1 or not temp_path.is_empty()
 
 func get_inventory(item_type: InventoryItem.ItemType) -> InventoryComponent:
 	var invs = inventories.filter(func(x): return x.inventory_type == item_type)

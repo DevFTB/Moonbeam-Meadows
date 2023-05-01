@@ -11,6 +11,7 @@ signal changed_selected_robot(robot: Robot)
 @export var add_from_inventory_button : Button
 @export var robot_list_tile = preload("res://Level/Energy Station/robot_list_tile.tscn")
 @export var identify_camera : Camera2D
+@export var power_button : Button
 
 var selected_robot = null
 var energy_station = null
@@ -26,6 +27,10 @@ func _ready():
 	identify_camera.finished_tracking.connect(_on_identify_camera_finished_tracking)
 	path_editing_gui.finished_editing.connect(end_editing)
 	update_gui()
+
+func _process(delta):
+	if selected_robot != null:
+		update_power_button()
 
 func set_energy_station(new_energy_station: EnergyStation):
 	energy_station = new_energy_station
@@ -138,3 +143,16 @@ func _on_identify_robot_button_pressed():
 	
 func _on_identify_camera_finished_tracking():
 	show()	
+
+
+func _on_power_button_pressed():
+	if selected_robot != null:
+		selected_robot.toggle_power()
+	pass # Replace with function body.
+
+func update_power_button():
+	power_button.text = " Turn Off " if selected_robot.powered else " Turn On "
+	if not selected_robot.powered:
+		power_button.disabled = not selected_robot.can_power_on() 
+	else: 
+		power_button.disabled = false
