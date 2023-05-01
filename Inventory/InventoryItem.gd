@@ -33,3 +33,20 @@ func get_sell_price()-> int:
 
 func get_type() -> ItemType:
 	return item_type
+
+static func type_to_string(type: ItemType):
+	match type:
+		ItemType.SEED:
+			return "Seed"
+		ItemType.PRODUCE:
+			return "Produce"
+		ItemType.FERTILISER:
+			return "Fertiliser"
+		ItemType.ROBOT:
+			return "Robot"
+		ItemType.ROBOT_UPGRADE:
+			return "Robot Upgrade"
+		ItemType.WATER:
+			return "Water"
+		_:
+			return "Unknown"
