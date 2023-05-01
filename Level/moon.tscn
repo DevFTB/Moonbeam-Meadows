@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=97 format=3 uid="uid://c75dkco3nmh04"]
 
 [ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
 [ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
@@ -42,7 +42,6 @@
 [ext_resource type="Resource" uid="uid://v6tst8k4atog" path="res://Level/WaterStation/item_water.tres" id="24_61pvk"]
 [ext_resource type="Script" path="res://Level/WaterInventory.gd" id="24_lhr56"]
 [ext_resource type="Resource" uid="uid://ct3lfxe3ttjdr" path="res://Robots/Robot Upgrades/Motor/item_motor.tres" id="26_qqbio"]
-[ext_resource type="Script" path="res://GUI/InventoryButtonList.gd" id="27_qww4w"]
 [ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="28_48y4d"]
 [ext_resource type="LabelSettings" uid="uid://ct0g454548ged" path="res://GUI/heading1_label_settings.tscn.tres" id="28_boey7"]
 [ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="28_lgf16"]
@@ -1176,9 +1175,9 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="InventoryRobotUpgradeGUI" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer"]
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("45_uexto")]
 layout_mode = 2
-script = ExtResource("27_qww4w")
+_inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
 [node name="DepositBoxGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("deposit_box_list", "player_inventory_list", "add_from_inventory_panel")]
 visible = false
@@ -1497,7 +1496,7 @@ shape = SubResource("CircleShape2D_sw7jp")
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
 [connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryButtonList" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
-[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryRobotUpgradeGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
+[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryButtonList" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddFromInventoryButton" to="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI" method="_on_add_from_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/FillPlayerWaterButton" to="CanvasLayer/GUI/OverscreenUI/WaterStationGUI" method="_on_fill_player_water_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
