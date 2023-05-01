@@ -721,6 +721,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "add_from_inventory_button", "identify_camera", "power_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1029,6 +1030,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RobotSelectionPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
