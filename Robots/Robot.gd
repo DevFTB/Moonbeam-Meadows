@@ -55,8 +55,10 @@ class UpgradeInstance:
 # The scaling factor for the snapping distance based on the movement speed as a percentage of the base movement speed
 @export var snap_scaling_unit = 0.8
 
-# Sound FX for the robots
+# The maximium amount of upgrades for the robots
+@export var max_upgrades = 4
 
+# Sound FX for the robots
 @export_group("Sound FX")
 @export var sound_max_distance = 1000
 @export var volume = 0
@@ -74,8 +76,8 @@ class UpgradeInstance:
 @export_group("")
 
 
-
 var current_sound = null
+
 
 var parent_energy_station = null
 var upgrade_counter = 0
@@ -436,10 +438,11 @@ func _on_NavigationAgent2D_velocity_computed(safe_velocity: Vector2):
 
 func play_sound(sound):
 	# Loads and plays the selected sound
-	RobotSoundPlayer.set_stream(sound)
-	current_sound = sound
-	RobotSoundPlayer.seek(0)
-	RobotSoundPlayer.play()
+	if current_sound != sound :
+		RobotSoundPlayer.set_stream(sound)
+		current_sound = sound
+		RobotSoundPlayer.seek(0)
+		RobotSoundPlayer.play()
 
 func stop_sound():
 	RobotSoundPlayer.stop()
