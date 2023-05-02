@@ -1,0 +1,1231 @@
+[gd_scene load_steps=63 format=3 uid="uid://c24on3317stiv"]
+
+[ext_resource type="TileSet" path="res://Level/Moon/moon_tileset.tres" id="1_37q7m"]
+[ext_resource type="Script" path="res://Level/Level.gd" id="2_nfd1l"]
+[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_ekmjk"]
+[ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_prx1w"]
+[ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="5_on3ne"]
+[ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_h7alu"]
+[ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_b37lr"]
+[ext_resource type="Resource" uid="uid://f022kek71od4" path="res://Robots/FertiliserRobot/fertiliser_robot_resource.tres" id="8_s5fn8"]
+[ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="9_x4r5e"]
+[ext_resource type="Resource" uid="uid://g4oi702uwa3t" path="res://Robots/Robot Upgrades/Motor/upgrade_motor.tres" id="10_v0qml"]
+[ext_resource type="PackedScene" uid="uid://do3r0dx8cxpol" path="res://Player/player.tscn" id="11_qqk5w"]
+[ext_resource type="Script" path="res://Level/GridSquareSelector.gd" id="12_yw0dn"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="13_sqg6f"]
+[ext_resource type="Script" path="res://GUI/GUIManager.gd" id="14_qi2d2"]
+[ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="15_3mvwu"]
+[ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="16_df2cv"]
+[ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="17_n1kp6"]
+[ext_resource type="Script" path="res://Level/Currency/CurrencyGUI.gd" id="18_q4gr5"]
+[ext_resource type="Script" path="res://GUI/MultiInventoryButtonLIst.gd" id="19_xeww1"]
+[ext_resource type="PackedScene" uid="uid://bo8vh6e4gjr1b" path="res://Level/Trade Station/ts_sell_item_gui.tscn" id="20_gd3ps"]
+[ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="21_sd0qw"]
+[ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="22_wwfb1"]
+[ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="23_min3t"]
+[ext_resource type="Script" path="res://Level/Energy Station/EnergyStationGUI.gd" id="24_18434"]
+[ext_resource type="LabelSettings" uid="uid://ct0g454548ged" path="res://GUI/heading1_label_settings.tscn.tres" id="25_bnmy1"]
+[ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="26_3j20c"]
+[ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="27_b2e6k"]
+[ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="28_7sm5s"]
+[ext_resource type="PackedScene" uid="uid://bnhkn8rycucnb" path="res://GUI/inventory_button_list.tscn" id="29_arx36"]
+[ext_resource type="Script" path="res://GUI/AddUpgradesPopup.gd" id="30_mpxq1"]
+[ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="31_7ql3g"]
+[ext_resource type="Script" path="res://GUI/WaterStationGUI.gd" id="32_pdvwb"]
+[ext_resource type="Script" path="res://Robots/PathSelectionGUI.gd" id="33_oh7iv"]
+[ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="34_pild0"]
+[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="35_ym4wf"]
+[ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="36_6mn78"]
+[ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="37_5tscc"]
+[ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="38_a80hi"]
+[ext_resource type="Resource" uid="uid://c6irvbqybpvwr" path="res://Level/Quests/quest_campaign_2.tres" id="39_gqcgj"]
+[ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="40_g6amr"]
+[ext_resource type="Script" path="res://Robots/GridPathLine.gd" id="41_203qa"]
+[ext_resource type="PackedScene" uid="uid://deyxhakaheul8" path="res://Robots/WateringRobot/watering_robot.tscn" id="41_romfb"]
+[ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="42_0xvk5"]
+[ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="43_peroc"]
+[ext_resource type="PackedScene" uid="uid://ds07jldwr2nb5" path="res://Level/Energy Station/energy_station.tscn" id="44_n1uyt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykmqp"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_7u08u"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_5p3lh"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_0t5le"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ggu6"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_qaotf"]
+font_size = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6peq"]
+draw_center = false
+border_width_bottom = 8
+border_color = Color(0.196078, 0.8, 0.8, 1)
+border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qc2v5"]
+font_size = 48
+font_color = Color(0.8, 0.615686, 0.984314, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fjph3"]
+font_size = 36
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mstbw"]
+atlas = ExtResource("27_b2e6k")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_he7pp"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf8tp"]
+bg_color = Color(0.505882, 0.811765, 0.776471, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_tgba4"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0g3b"]
+bg_color = Color(0.27451, 0.580392, 0.74902, 1)
+border_width_bottom = 4
+border_color = Color(0.177866, 0.425575, 0.559564, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_yxgws"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_p54c1"]
+font_size = 24
+font_color = Color(0.85098, 0.298039, 0.247059, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lmxb2"]
+font_size = 24
+font_color = Color(0.231373, 0.584314, 0.494118, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Level" type="TileMap"]
+y_sort_enabled = true
+rotation = 0.000593442
+tile_set = ExtResource("1_37q7m")
+format = 2
+layer_0/name = "ground"
+layer_0/tile_data = PackedInt32Array(65536, 4, 0, 131072, 4, 1, 196608, 4, 1, 262144, 4, 1, 327680, 4, 1, 393216, 4, 1, 458752, 4, 1, 524288, 4, 1, 589824, 4, 1, 655360, 4, 1, 720896, 4, 1, 786432, 4, 1, 851968, 4, 1, 917504, 4, 1, 983040, 4, 1, 1048576, 4, 1, 1114112, 4, 1, 1179648, 4, 1, 1245184, 4, 1, 1310720, 4, 1, 1376256, 4, 1, 1441792, 4, 1, 65537, 65540, 0, 131073, 65540, 1, 196609, 65540, 1, 262145, 65540, 1, 327681, 65540, 1, 393217, 65540, 1, 458753, 65540, 1, 524289, 65540, 1, 589825, 65540, 1, 655361, 65540, 1, 720897, 65540, 1, 786433, 65540, 1, 851969, 65540, 1, 917505, 65540, 1, 983041, 65540, 1, 1048577, 65540, 1, 1114113, 65540, 1, 1179649, 65540, 1, 1245185, 65540, 1, 1310721, 65540, 1, 1376257, 65540, 1, 1441793, 65540, 1, 65538, 65540, 0, 131074, 65540, 1, 196610, 65540, 1, 262146, 65540, 1, 327682, 65540, 1, 393218, 65540, 1, 458754, 65540, 1, 524290, 65540, 1, 589826, 65540, 1, 655362, 65540, 1, 720898, 65540, 1, 786434, 65540, 1, 851970, 65540, 1, 917506, 65540, 1, 983042, 65540, 1, 1048578, 65540, 1, 1114114, 65540, 1, 1179650, 65540, 1, 1245186, 65540, 1, 1310722, 65540, 1, 1376258, 65540, 1, 1441794, 65540, 1, 65539, 65540, 0, 131075, 65540, 1, 196611, 65540, 1, 262147, 65540, 1, 327683, 65540, 1, 393219, 65540, 1, 458755, 65540, 1, 524291, 65540, 1, 589827, 65540, 1, 655363, 65540, 1, 720899, 65540, 1, 786435, 65540, 1, 851971, 65540, 1, 917507, 65540, 1, 983043, 65540, 1, 1048579, 65540, 1, 1114115, 65540, 1, 1179651, 65540, 1, 1245187, 65540, 1, 1310723, 65540, 1, 1376259, 65540, 1, 1441795, 65540, 1, 65540, 65540, 0, 131076, 65540, 1, 196612, 65540, 1, 262148, 65540, 1, 327684, 65540, 1, 393220, 65540, 1, 458756, 65540, 1, 524292, 65540, 1, 589828, 65540, 1, 655364, 65540, 1, 720900, 65540, 1, 786436, 65540, 1, 851972, 65540, 1, 917508, 65540, 1, 983044, 65540, 1, 1048580, 65540, 1, 1114116, 65540, 1, 1179652, 65540, 1, 1245188, 65540, 1, 1310724, 65540, 1, 1376260, 65540, 1, 1441796, 65540, 1, 5, 4, 0, 65541, 65540, 1, 131077, 65540, 1, 196613, 65540, 1, 262149, 65540, 1, 327685, 65540, 1, 393221, 65540, 1, 458757, 65540, 1, 524293, 65540, 1, 589829, 65540, 1, 655365, 65540, 1, 720901, 65540, 1, 786437, 65540, 1, 851973, 65540, 1, 917509, 65540, 1, 983045, 65540, 1, 1048581, 65540, 1, 1114117, 65540, 1, 1179653, 65540, 1, 1245189, 65540, 1, 1310725, 65540, 1, 1376261, 65540, 1, 1441797, 65540, 1, 1507333, 4, 1, 6, 65540, 0, 65542, 65540, 1, 131078, 65540, 1, 196614, 65540, 1, 262150, 131076, 1, 327686, 131076, 1, 393222, 131076, 1, 458758, 131076, 1, 524294, 131076, 1, 589830, 131076, 1, 655366, 131076, 1, 720902, 131076, 1, 786438, 3, 0, 851974, 3, 1, 917510, 3, 2, 983046, 131076, 0, 1048582, 65540, 1, 1114118, 65540, 1, 1179654, 65540, 1, 1245190, 65540, 1, 1310726, 65540, 1, 1376262, 65540, 1, 1441798, 65540, 1, 1507334, 65540, 1, 7, 65540, 0, 65543, 65540, 1, 131079, 65540, 1, 196615, 65540, 1, 262151, 3, 0, 327687, 3, 1, 393223, 3, 1, 458759, 3, 1, 524295, 3, 1, 589831, 3, 1, 655367, 3, 1, 720903, 3, 1, 786439, 393219, 2, 851975, 3, 4, 917511, 393219, 1, 983047, 3, 2, 1048583, 65540, 0, 1114119, 65540, 1, 1179655, 65540, 1, 1245191, 65540, 1, 1310727, 65540, 1, 1376263, 65540, 1, 1441799, 65540, 1, 1507335, 65540, 1, 8, 65540, 0, 65544, 65540, 1, 131080, 65540, 1, 196616, 131076, 1, 262152, 65539, 0, 327688, 65539, 1, 393224, 3, 4, 458760, 65539, 1, 524296, 131075, 4, 589832, 3, 4, 655368, 65539, 1, 720904, 65539, 4, 786440, 3, 4, 851976, 131075, 4, 917512, 327683, 1, 983048, 131075, 2, 1048584, 65540, 0, 1114120, 65540, 1, 1179656, 65540, 1, 1245192, 65540, 1, 1310728, 65540, 1, 1376264, 65540, 1, 1441800, 65540, 1, 1507336, 65540, 1, 9, 65540, 0, 65545, 65540, 1, 131081, 65540, 1, 196617, 3, 0, 262153, 393219, 2, 327689, 65539, 1, 393225, 65539, 1, 458761, 65539, 1, 524297, 65539, 4, 589833, 327683, 1, 655369, 131075, 1, 720905, 131075, 1, 786441, 131075, 1, 851977, 327683, 2, 917513, 65539, 2, 983049, 4, 0, 1048585, 65540, 1, 1114121, 65540, 1, 1179657, 65540, 1, 1245193, 65540, 1, 1310729, 65540, 1, 1376265, 65540, 1, 1441801, 65540, 1, 1507337, 65540, 1, 10, 65540, 0, 65546, 65540, 1, 131082, 65540, 1, 196618, 65539, 0, 262154, 65539, 1, 327690, 65539, 4, 393226, 65539, 1, 458762, 65539, 1, 524298, 65539, 4, 589834, 65539, 2, 655370, 4, 0, 720906, 4, 1, 786442, 4, 1, 851978, 65539, 0, 917514, 65539, 2, 983050, 131076, 0, 1048586, 65540, 1, 1114122, 65540, 1, 1179658, 65540, 1, 1245194, 65540, 1, 1310730, 65540, 1, 1376266, 65540, 1, 1441802, 65540, 1, 1507338, 65540, 1, 11, 65540, 0, 65547, 131076, 1, 131083, 131076, 1, 196619, 65539, 0, 262155, 131075, 4, 327691, 65539, 1, 393227, 65539, 1, 458763, 65539, 1, 524299, 327683, 1, 589835, 131075, 2, 655371, 65540, 0, 720907, 65540, 1, 786443, 65540, 1, 851979, 65539, 0, 917515, 393219, 1, 983051, 3, 2, 1048587, 131076, 0, 1114123, 131076, 1, 1179659, 131076, 1, 1245195, 131076, 1, 1310731, 131076, 1, 1376267, 65540, 1, 1441803, 65540, 1, 1507339, 65540, 1, 12, 65540, 0, 65548, 3, 0, 131084, 3, 1, 196620, 393219, 2, 262156, 196611, 4, 327692, 131075, 4, 393228, 65539, 1, 458764, 327683, 1, 524300, 131075, 2, 589836, 4, 0, 655372, 65540, 1, 720908, 65540, 1, 786444, 65540, 1, 851980, 65539, 0, 917516, 196611, 4, 983052, 393219, 1, 1048588, 3, 1, 1114124, 3, 1, 1179660, 3, 1, 1245196, 3, 2, 1310732, 4, 0, 1376268, 65540, 1, 1441804, 65540, 1, 1507340, 65540, 1, 13, 65540, 0, 65549, 65539, 0, 131085, 65539, 1, 196621, 65539, 4, 262157, 131075, 4, 327693, 65539, 1, 393229, 327683, 1, 458765, 131075, 2, 524301, 4, 0, 589837, 65540, 1, 655373, 65540, 1, 720909, 131076, 1, 786445, 131076, 1, 851981, 65539, 0, 917517, 131075, 4, 983053, 65539, 1, 1048589, 65539, 4, 1114125, 65539, 4, 1179661, 131075, 4, 1245197, 65539, 2, 1310733, 131076, 0, 1376269, 65540, 1, 1441805, 65540, 1, 1507341, 65540, 1, 14, 65540, 0, 65550, 65539, 0, 131086, 65539, 1, 196622, 196611, 4, 262158, 65539, 1, 327694, 327683, 1, 393230, 131075, 2, 458766, 4, 0, 524302, 65540, 1, 589838, 65540, 1, 655374, 131076, 1, 720910, 3, 0, 786446, 3, 1, 851982, 393219, 2, 917518, 65539, 1, 983054, 65539, 1, 1048590, 65539, 1, 1114126, 196611, 4, 1179662, 65539, 1, 1245198, 65539, 2, 1310734, 65540, 2, 1376270, 65540, 1, 1441806, 65540, 1, 1507342, 65540, 1, 15, 131076, 0, 65551, 65539, 0, 131087, 65539, 1, 196623, 131075, 4, 262159, 65539, 1, 327695, 65539, 2, 393231, 4, 0, 458767, 65540, 1, 524303, 65540, 1, 589839, 65540, 1, 655375, 3, 0, 720911, 393219, 2, 786447, 65539, 1, 851983, 65539, 1, 917519, 196611, 4, 983055, 65539, 1, 1048591, 65539, 1, 1114127, 65539, 1, 1179663, 65539, 1, 1245199, 65539, 2, 1310735, 65540, 2, 1376271, 65540, 1, 1441807, 65540, 1, 1507343, 65540, 1, 16, 4, 0, 65552, 65539, 0, 131088, 65539, 1, 196624, 65539, 1, 262160, 65539, 1, 327696, 393219, 1, 393232, 3, 2, 458768, 131076, 0, 524304, 131076, 1, 589840, 131076, 1, 655376, 65539, 0, 720912, 65539, 4, 786448, 65539, 1, 851984, 65539, 1, 917520, 131075, 4, 983056, 65539, 1, 1048592, 65539, 1, 1114128, 65539, 1, 1179664, 65539, 1, 1245200, 65539, 2, 1310736, 4, 0, 1376272, 65540, 1, 1441808, 65540, 1, 1507344, 65540, 1, 17, 65540, 0, 65553, 65539, 0, 131089, 65539, 1, 196625, 65539, 1, 262161, 65539, 1, 327697, 65539, 1, 393233, 393219, 1, 458769, 3, 1, 524305, 3, 1, 589841, 3, 1, 655377, 393219, 2, 720913, 65539, 1, 786449, 131075, 4, 851985, 65539, 1, 917521, 65539, 4, 983057, 65539, 4, 1048593, 65539, 1, 1114129, 65539, 1, 1179665, 65539, 1, 1245201, 65539, 2, 1310737, 65540, 0, 1376273, 65540, 1, 1441809, 65540, 1, 1507345, 65540, 1, 18, 65540, 0, 65554, 131075, 0, 131090, 65539, 1, 196626, 3, 4, 262162, 65539, 1, 327698, 196611, 4, 393234, 3, 4, 458770, 65539, 1, 524306, 65539, 1, 589842, 65539, 1, 655378, 3, 4, 720914, 65539, 4, 786450, 131075, 4, 851986, 65539, 1, 917522, 65539, 1, 983058, 65539, 1, 1048594, 65539, 1, 1114130, 196611, 4, 1179666, 65539, 1, 1245202, 65539, 2, 1310738, 65540, 0, 1376274, 65540, 1, 1441810, 65540, 1, 1507346, 65540, 1, 19, 65540, 0, 65555, 4, 1, 131091, 65539, 0, 196627, 65539, 1, 262163, 65539, 1, 327699, 3, 4, 393235, 3, 4, 458771, 65539, 1, 524307, 65539, 4, 589843, 65539, 4, 655379, 65539, 1, 720915, 65539, 4, 786451, 65539, 4, 851987, 65539, 1, 917523, 65539, 1, 983059, 65539, 1, 1048595, 131075, 4, 1114131, 65539, 1, 1179667, 65539, 1, 1245203, 65539, 2, 1310739, 65540, 0, 1376275, 65540, 1, 1441811, 65540, 1, 1507347, 65540, 1, 20, 65540, 0, 65556, 65540, 1, 131092, 65539, 0, 196628, 131075, 4, 262164, 65539, 1, 327700, 65539, 1, 393236, 65539, 1, 458772, 65539, 1, 524308, 131075, 4, 589844, 65539, 1, 655380, 65539, 1, 720916, 131075, 4, 786452, 65539, 1, 851988, 65539, 1, 917524, 65539, 1, 983060, 65539, 1, 1048596, 3, 4, 1114132, 65539, 1, 1179668, 131075, 4, 1245204, 65539, 2, 1310740, 65540, 0, 1376276, 65540, 1, 1441812, 65540, 1, 1507348, 65540, 1, 21, 65540, 0, 65557, 65540, 1, 131093, 65539, 0, 196629, 3, 4, 262165, 327683, 1, 327701, 131075, 1, 393237, 131075, 1, 458773, 131075, 1, 524309, 131075, 1, 589845, 327683, 2, 655381, 65539, 4, 720917, 65539, 4, 786453, 65539, 1, 851989, 65539, 1, 917525, 65539, 1, 983061, 65539, 1, 1048597, 65539, 1, 1114133, 65539, 1, 1179669, 3, 4, 1245205, 65539, 2, 1310741, 65540, 0, 1376277, 65540, 1, 1441813, 65540, 1, 1507349, 65540, 1, 22, 65540, 0, 65558, 65540, 1, 131094, 131075, 0, 196630, 327683, 2, 262166, 65539, 2, 327702, 4, 0, 393238, 4, 1, 458774, 4, 1, 524310, 4, 1, 589846, 131075, 0, 655382, 327683, 2, 720918, 65539, 1, 786454, 65539, 1, 851990, 65539, 1, 917526, 65539, 1, 983062, 65539, 1, 1048598, 65539, 1, 1114134, 196611, 4, 1179670, 65539, 4, 1245206, 65539, 2, 1310742, 65540, 0, 1376278, 65540, 1, 1441814, 65540, 1, 1507350, 65540, 1, 23, 65540, 0, 65559, 65540, 1, 131095, 4, 1, 196631, 65539, 0, 262167, 393219, 1, 327703, 3, 2, 393239, 131076, 0, 458775, 131076, 1, 524311, 65540, 1, 589847, 4, 1, 655383, 65539, 0, 720919, 65539, 1, 786455, 65539, 1, 851991, 65539, 4, 917527, 65539, 1, 983063, 65539, 1, 1048599, 65539, 1, 1114135, 327683, 1, 1179671, 131075, 1, 1245207, 131075, 2, 1310743, 65540, 0, 1376279, 65540, 1, 1441815, 65540, 1, 1507351, 65540, 1, 24, 65540, 0, 65560, 65540, 1, 131096, 65540, 1, 196632, 65539, 0, 262168, 131075, 4, 327704, 393219, 1, 393240, 3, 1, 458776, 3, 2, 524312, 131076, 0, 589848, 131076, 1, 655384, 65539, 0, 720920, 65539, 1, 786456, 131075, 4, 851992, 65539, 1, 917528, 3, 4, 983064, 65539, 1, 1048600, 65539, 4, 1114136, 65539, 2, 1179672, 4, 0, 1245208, 4, 1, 1310744, 65540, 1, 1376280, 65540, 1, 1441816, 65540, 1, 1507352, 65540, 1, 25, 65540, 0, 65561, 65540, 1, 131097, 65540, 1, 196633, 131075, 0, 262169, 131075, 1, 327705, 327683, 2, 393241, 65539, 4, 458777, 393219, 1, 524313, 3, 1, 589849, 3, 1, 655385, 393219, 2, 720921, 3, 4, 786457, 65539, 4, 851993, 65539, 1, 917529, 65539, 1, 983065, 65539, 1, 1048601, 3, 4, 1114137, 65539, 2, 1179673, 65540, 0, 1245209, 65540, 1, 1310745, 65540, 1, 1376281, 65540, 1, 1441817, 65540, 1, 1507353, 65540, 1, 26, 65540, 0, 65562, 65540, 1, 131098, 65540, 1, 196634, 4, 1, 262170, 4, 1, 327706, 131075, 0, 393242, 327683, 2, 458778, 196611, 4, 524314, 65539, 4, 589850, 196611, 4, 655386, 65539, 1, 720922, 65539, 1, 786458, 65539, 1, 851994, 65539, 1, 917530, 65539, 1, 983066, 65539, 1, 1048602, 327683, 1, 1114138, 131075, 2, 1179674, 65540, 0, 1245210, 65540, 1, 1310746, 65540, 1, 1376282, 65540, 1, 1441818, 65540, 1, 1507354, 65540, 1, 27, 65540, 0, 65563, 65540, 1, 131099, 65540, 1, 196635, 65540, 1, 262171, 65540, 1, 327707, 4, 1, 393243, 131075, 0, 458779, 131075, 1, 524315, 131075, 1, 589851, 327683, 2, 655387, 196611, 4, 720923, 3, 4, 786459, 65539, 1, 851995, 65539, 1, 917531, 65539, 1, 983067, 327683, 1, 1048603, 131075, 2, 1114139, 4, 0, 1179675, 65540, 1, 1245211, 65540, 1, 1310747, 65540, 1, 1376283, 65540, 1, 1441819, 65540, 1, 1507355, 65540, 1, 28, 131076, 0, 65564, 65540, 1, 131100, 65540, 1, 196636, 65540, 1, 262172, 65540, 1, 327708, 65540, 1, 393244, 4, 1, 458780, 4, 1, 524316, 4, 1, 589852, 65539, 0, 655388, 65539, 4, 720924, 3, 4, 786460, 65539, 1, 851996, 327683, 1, 917532, 131075, 1, 983068, 131075, 2, 1048604, 4, 0, 1114140, 65540, 1, 1179676, 65540, 1, 1245212, 65540, 1, 1310748, 65540, 1, 1376284, 65540, 1, 1441820, 65540, 1, 1507356, 65540, 1, 29, 65540, 2, 65565, 65540, 1, 131101, 65540, 1, 196637, 65540, 1, 262173, 65540, 1, 327709, 65540, 1, 393245, 65540, 1, 458781, 65540, 1, 524317, 65540, 1, 589853, 131075, 0, 655389, 327683, 2, 720925, 196611, 4, 786461, 327683, 1, 851997, 131075, 2, 917533, 4, 0, 983069, 4, 1, 1048605, 65540, 1, 1114141, 65540, 1, 1179677, 65540, 1, 1245213, 65540, 1, 1310749, 65540, 1, 1376285, 65540, 1, 1441821, 65540, 1, 1507357, 65540, 1, 30, 65540, 2, 65566, 65540, 1, 131102, 65540, 1, 196638, 65540, 1, 262174, 65540, 1, 327710, 65540, 1, 393246, 65540, 1, 458782, 65540, 1, 524318, 65540, 1, 589854, 4, 1, 655390, 131075, 0, 720926, 131075, 1, 786462, 327683, 3, 851998, 4, 0, 917534, 65540, 1, 983070, 65540, 1, 1048606, 65540, 1, 1114142, 65540, 1, 1179678, 65540, 1, 1245214, 65540, 1, 1310750, 65540, 1, 1376286, 65540, 1, 1441822, 65540, 1, 1507358, 65540, 1, 31, 65540, 2, 65567, 65540, 1, 131103, 65540, 1, 196639, 65540, 1, 262175, 65540, 1, 327711, 65540, 1, 393247, 65540, 1, 458783, 65540, 1, 524319, 65540, 1, 589855, 65540, 1, 655391, 4, 1, 720927, 4, 1, 786463, 131075, 3, 851999, 65540, 0, 917535, 65540, 1, 983071, 65540, 1, 1048607, 65540, 1, 1114143, 65540, 1, 1179679, 65540, 1, 1245215, 65540, 1, 1310751, 65540, 1, 1376287, 65540, 1, 1441823, 65540, 1, 1507359, 65540, 1, 32, 65540, 2, 65568, 65540, 1, 131104, 65540, 1, 196640, 65540, 1, 262176, 65540, 1, 327712, 65540, 1, 393248, 65540, 1, 458784, 65540, 1, 524320, 65540, 1, 589856, 65540, 1, 655392, 65540, 1, 720928, 65540, 1, 786464, 4, 1, 852000, 65540, 1, 917536, 65540, 1, 983072, 65540, 1, 1048608, 65540, 1, 1114144, 65540, 1, 1179680, 65540, 1, 1245216, 65540, 1, 1310752, 65540, 1, 1376288, 65540, 1, 1441824, 65540, 1, 1507360, 65540, 1, 33, 65540, 2, 65569, 65540, 1, 131105, 65540, 1, 196641, 65540, 1, 262177, 65540, 1, 327713, 65540, 1, 393249, 65540, 1, 458785, 65540, 1, 524321, 65540, 1, 589857, 65540, 1, 655393, 65540, 1, 720929, 65540, 1, 786465, 65540, 1, 852001, 65540, 1, 917537, 65540, 1, 983073, 65540, 1, 1048609, 65540, 1, 1114145, 65540, 1, 1179681, 65540, 1, 1245217, 65540, 1, 1310753, 65540, 1, 1376289, 65540, 1, 1441825, 65540, 1, 1507361, 131076, 1, 34, 65540, 2, 65570, 65540, 1, 131106, 65540, 1, 196642, 65540, 1, 262178, 65540, 1, 327714, 65540, 1, 393250, 65540, 1, 458786, 65540, 1, 524322, 65540, 1, 589858, 65540, 1, 655394, 65540, 1, 720930, 65540, 1, 786466, 65540, 1, 852002, 65540, 1, 917538, 65540, 1, 983074, 65540, 1, 1048610, 65540, 1, 1114146, 65540, 1, 1179682, 65540, 1, 1245218, 65540, 1, 1310754, 65540, 1, 1376290, 65540, 1, 1441826, 65540, 1, 1507362, 131076, 0, 35, 65540, 2, 65571, 65540, 1, 131107, 65540, 1, 196643, 65540, 1, 262179, 65540, 1, 327715, 65540, 1, 393251, 65540, 1, 458787, 65540, 1, 524323, 65540, 1, 589859, 65540, 1, 655395, 65540, 1, 720931, 65540, 1, 786467, 65540, 1, 852003, 65540, 1, 917539, 65540, 1, 983075, 65540, 1, 1048611, 65540, 1, 1114147, 65540, 1, 1179683, 65540, 1, 1245219, 65540, 1, 1310755, 65540, 1, 1376291, 65540, 1, 1441827, 65540, 1, 1507363, 4, 1, 36, 4, 0, 65572, 65540, 1, 131108, 65540, 1, 196644, 65540, 1, 262180, 65540, 1, 327716, 65540, 1, 393252, 65540, 1, 458788, 65540, 1, 524324, 65540, 1, 589860, 65540, 1, 655396, 65540, 1, 720932, 65540, 1, 786468, 65540, 1, 852004, 65540, 1, 917540, 65540, 1, 983076, 65540, 1, 1048612, 65540, 1, 1114148, 65540, 1, 1179684, 65540, 1, 1245220, 65540, 1, 1310756, 65540, 1, 1376292, 65540, 1, 1441828, 65540, 1, 1507364, 65540, 1, 37, 131076, 0, 65573, 131076, 1, 131109, 131076, 1, 196645, 131076, 1, 262181, 131076, 1, 327717, 131076, 1, 393253, 131076, 1, 458789, 131076, 1, 524325, 131076, 1, 589861, 131076, 1, 655397, 131076, 1, 720933, 131076, 1, 786469, 131076, 1, 852005, 131076, 1, 917541, 131076, 1, 983077, 131076, 1, 1048613, 131076, 1, 1114149, 131076, 1, 1179685, 131076, 1, 1245221, 131076, 1, 1310757, 131076, 1, 1376293, 131076, 1, 1441829, 131076, 1, 1507365, 131076, 1)
+layer_1/name = "highlight"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("2_nfd1l")
+crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_ekmjk")])
+fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_prx1w")])
+robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("5_on3ne"), ExtResource("6_h7alu"), ExtResource("7_b37lr"), ExtResource("8_s5fn8")])
+robot_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("9_x4r5e"), ExtResource("10_v0qml")])
+
+[node name="Player" parent="." instance=ExtResource("11_qqk5w")]
+position = Vector2(419.273, 459.751)
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="GridSquareSelector" type="Node2D" parent="."]
+script = ExtResource("12_yw0dn")
+valid_colour = Color(0, 0.87451, 0, 1)
+invalid_colour = Color(0.905882, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_sqg6f")
+script = ExtResource("14_qi2d2")
+exclusive_gui_screens = Array[Control]([null, null])
+
+[node name="ToolGUI" type="VBoxContainer" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -66.0
+offset_right = 201.0
+offset_bottom = -10.0
+grow_vertical = 0
+script = ExtResource("15_3mvwu")
+
+[node name="ToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Current Tool:"
+label_settings = SubResource("LabelSettings_ykmqp")
+
+[node name="CurrentToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tiller"
+label_settings = SubResource("LabelSettings_7u08u")
+
+[node name="OverscreenUI" type="Control" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TradeStationGUI" type="Panel" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("buy_seed_parent", "buy_fertiliser_parent", "buy_robots_parent", "sell_parent")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 49.0
+offset_right = -56.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_df2cv")
+buy_seed_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control/ScrollContainer/SeedParent")
+buy_fertiliser_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control4/ScrollContainer/FertiliserParent")
+buy_robots_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control5/ScrollContainer/RobotsParent")
+sell_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Sell/ScrollContainer/InventorySections")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Trade Station"
+label_settings = SubResource("LabelSettings_5p3lh")
+
+[node name="Control2" type="Control" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer/Control"]
+layout_mode = 2
+texture = ExtResource("17_n1kp6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer/Control" node_paths=PackedStringArray("currency_manager")]
+layout_mode = 2
+text = "100000"
+label_settings = SubResource("LabelSettings_0t5le")
+script = ExtResource("18_q4gr5")
+currency_manager = NodePath("../../../../../../../../../CurrencyManager")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buy" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Seeds"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SeedParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control4" type="Control" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Fertilisers"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FertiliserParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control4/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control5" type="Control" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control5"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 54.0
+offset_bottom = 34.0
+text = "Robots"
+label_settings = SubResource("LabelSettings_5ggu6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 57.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RobotsParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Buy/Control5/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sell" type="Control" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Sell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventorySections" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/TabContainer/Sell/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("19_xeww1")
+starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
+list_tile_scene = ExtResource("20_gd3ps")
+
+[node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 47.0
+offset_right = -57.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_sd0qw")
+
+[node name="Inventory" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI"]
+layout_mode = 2
+
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("17_n1kp6")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer/Control" node_paths=PackedStringArray("currency_manager")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -25.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "100000"
+label_settings = SubResource("LabelSettings_0t5le")
+script = ExtResource("18_q4gr5")
+currency_manager = NodePath("../../../../../../../../../CurrencyManager")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventorySections" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("19_xeww1")
+starting_inventories = [NodePath("../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../Player/RobotUpgradeInventory")]
+interactable = false
+
+[node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager", "quest_box_parent")]
+visible = false
+layout_mode = 2
+script = ExtResource("22_wwfb1")
+quest_manager = NodePath("../../../../../QuestManager")
+quest_box_parent = NodePath("MarginContainer/VBoxContainer/HBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quests"
+label_settings = SubResource("LabelSettings_qaotf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_min3t")]
+layout_mode = 2
+
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_min3t")]
+layout_mode = 2
+
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_min3t")]
+layout_mode = 2
+
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_min3t")]
+layout_mode = 2
+
+[node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "add_from_inventory_button", "identify_camera", "power_button")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = -19.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_18434")
+path_editing_gui = NodePath("../../PathSelectionGUI")
+robot_upgrade_gui = NodePath("AddUpgradesPopup")
+robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
+robot_inv_list = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer/RobotsList")
+add_from_inventory_button = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton")
+identify_camera = NodePath("../../../../IdentifyCamera")
+power_button = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/PowerButton")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s6peq")
+text = "Energy Station"
+label_settings = SubResource("LabelSettings_qc2v5")
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Robots" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
+layout_mode = 2
+text = "Robots"
+label_settings = ExtResource("25_bnmy1")
+horizontal_alignment = 1
+
+[node name="RobotsArea" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="AddFromInventory" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RobotsListSection" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RobotsList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Add from 
+Inventory"
+
+[node name="RobotDetailsPanel" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RobotDetailsParent" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RobotDescription" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Control" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RobotNameLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
+layout_mode = 2
+text = "Robot Name"
+label_settings = SubResource("LabelSettings_fjph3")
+
+[node name="Control" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="RobotDescriptionLabel" type="RichTextLabel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "status: [color=green]powered[/color]
+
+Energy: 35 / 60
+Inventory: 10 / 60
+"
+script = ExtResource("26_3j20c")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel"]
+wait_time = 0.5
+autostart = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RobotIcon" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -78.5
+offset_bottom = 78.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_mstbw")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="RobotActionButtonGrid" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditPathButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Edit Path"
+
+[node name="IdentifyRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Identify Robot"
+
+[node name="UpgradeRobotButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Add Upgrades"
+
+[node name="PowerButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = " turn off "
+icon_alignment = 1
+expand_icon = true
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Energy" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox" node_paths=PackedStringArray("description_label", "ttf_label", "progress_bar")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("28_7sm5s")
+description_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/DescriptionLabel")
+ttf_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/TimeFillLabel")
+progress_bar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
+layout_mode = 2
+text = "Energy"
+label_settings = ExtResource("25_bnmy1")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Charging at: 12/s
+Max capacity: 30"
+label_settings = SubResource("LabelSettings_he7pp")
+autowrap_mode = 3
+
+[node name="TimeFillLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Time to Fill:
+"
+label_settings = SubResource("LabelSettings_he7pp")
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer4" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="AddUpgradeButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+disabled = true
+text = "Add upgrade"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.796078, 0.713726, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/fill = SubResource("StyleBoxFlat_wf8tp")
+value = 50.0
+fill_mode = 3
+
+[node name="Blocking" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RobotSelectionPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -226.5
+offset_right = 194.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control"]
+layout_mode = 2
+text = "Choose"
+label_settings = ExtResource("25_bnmy1")
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClosePopupButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Close"
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("29_arx36")]
+layout_mode = 2
+_inventory = NodePath("../../../../../../../../../Player/RobotInventory")
+
+[node name="AddUpgradesPopup" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.5
+offset_top = -284.5
+offset_right = 242.5
+offset_bottom = 284.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("30_mpxq1")
+upgrade_boxes_paths = [NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer2/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer3/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer4/PanelContainer")]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control"]
+layout_mode = 2
+text = "Upgrades"
+label_settings = ExtResource("25_bnmy1")
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClosePopupButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Close"
+
+[node name="GridContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("29_arx36")]
+layout_mode = 2
+_inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
+
+[node name="DepositBoxGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("deposit_box_list", "player_inventory_list", "add_from_inventory_panel")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -262.0
+offset_right = 265.0
+offset_bottom = 262.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("31_7ql3g")
+deposit_box_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer/DepositBoxList")
+player_inventory_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/ScrollContainer/PlayerInventoryList")
+add_from_inventory_panel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "dEPOSIT bOX"
+label_settings = SubResource("LabelSettings_5p3lh")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="DepositBoxList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("19_xeww1")
+button_text = "Withdraw"
+
+[node name="AddFromInventoryButton" type="CheckButton" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "insert mode"
+alignment = 1
+
+[node name="AddFromInventoryPanel" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel"]
+layout_mode = 2
+
+[node name="PlayerInventoryList" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("19_xeww1")
+starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
+button_text = "Deposit"
+
+[node name="WaterStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("ttf_label", "progress_bar")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -143.0
+offset_right = 174.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("32_pdvwb")
+ttf_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TimeToFillLabel")
+progress_bar = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ProgressBar")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "wATER STATION"
+label_settings = SubResource("LabelSettings_5p3lh")
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeToFillLabel" type="Label" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Time to fill: 84s"
+label_settings = SubResource("LabelSettings_tgba4")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_s0g3b")
+value = 38.43
+fill_mode = 3
+
+[node name="FillPlayerWaterButton" type="Button" parent="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fill Player water "
+
+[node name="PathSelectionGUI" type="Control" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_oh7iv")
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/PathSelectionGUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Editing Path"
+label_settings = SubResource("LabelSettings_yxgws")
+
+[node name="ClearButton" type="Button" parent="CanvasLayer/GUI/PathSelectionGUI"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_top = 17.0
+offset_right = -16.0
+offset_bottom = 67.0
+grow_horizontal = 0
+text = "Clear
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/PathSelectionGUI"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 111.0
+offset_bottom = 125.0
+
+[node name="SaveButton" type="Button" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Save"
+
+[node name="Control" type="Control" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ErrorPassText" type="Label" parent="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer"]
+layout_mode = 2
+text = "Path Invalid"
+label_settings = SubResource("LabelSettings_p54c1")
+horizontal_alignment = 1
+autowrap_mode = 2
+script = ExtResource("34_pild0")
+error_text = "Path Invalid"
+error_settings = SubResource("LabelSettings_p54c1")
+pass_text = "Path Valid"
+pass_settings = SubResource("LabelSettings_lmxb2")
+
+[node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
+texture = ExtResource("35_ym4wf")
+script = ExtResource("36_6mn78")
+player = NodePath("../Player")
+
+[node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("37_5tscc")
+quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("38_a80hi"), ExtResource("39_gqcgj")])
+player = NodePath("../Player")
+
+[node name="CurrencyManager" type="Node" parent="."]
+script = ExtResource("40_g6amr")
+
+[node name="Robots" type="Node2D" parent="."]
+
+[node name="WateringRobot" parent="Robots" instance=ExtResource("41_romfb")]
+
+[node name="GridPathLine" type="Node2D" parent="."]
+script = ExtResource("41_203qa")
+line_colour = Color(0.341176, 0.729412, 0.647059, 1)
+tile_colour = Color(0.0431373, 0.588235, 0.305882, 1)
+tile_line_width = 2.0
+final_tile_colour = Color(0.290196, 0.411765, 0.8, 1)
+
+[node name="EditingCamera" type="Camera2D" parent="."]
+position = Vector2(416, 326)
+enabled = false
+zoom = Vector2(2, 2)
+script = ExtResource("42_0xvk5")
+
+[node name="IdentifyCamera" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(2, 2)
+script = ExtResource("43_peroc")
+
+[node name="Constructions" type="Node2D" parent="."]
+
+[node name="Energy Station" parent="Constructions" instance=ExtResource("44_n1uyt")]
+position = Vector2(592.161, 271.649)
+
+[connection signal="tool_changed" from="Player" to="CanvasLayer/GUI/ToolGUI" method="_on_player_tool_changed"]
+[connection signal="changed_energy_station" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy" method="_on_energy_station_gui_changed_energy_station"]
+[connection signal="changed_selected_robot" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel" method="_on_energy_station_gui_changed_selected_robot"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/AddFromInventory/RobotsListSection/AddRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_robot_button_pressed"]
+[connection signal="timeout" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel/Timer" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/EditPathButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_edit_path_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/IdentifyRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_identify_robot_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/UpgradeRobotButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_upgrade_robot_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotActionButtonGrid/PowerButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_power_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer/HBoxContainer/Control/VBoxContainer/AddUpgradeButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_add_upgrade_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
+[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryButtonList" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_place_robot_gui_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control/ClosePopupButton" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_close_popup_button_pressed"]
+[connection signal="button_pressed" from="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer/InventoryButtonList" to="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI" method="_on_inventory_robot_upgrade_gui_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddFromInventoryButton" to="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI" method="_on_add_from_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/OverscreenUI/WaterStationGUI/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/FillPlayerWaterButton" to="CanvasLayer/GUI/OverscreenUI/WaterStationGUI" method="_on_fill_player_water_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/ClearButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_clear_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PathSelectionGUI/VBoxContainer/SaveButton" to="CanvasLayer/GUI/PathSelectionGUI" method="_on_save_button_pressed"]
+
+[editable path="Player"]

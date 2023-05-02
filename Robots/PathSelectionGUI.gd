@@ -77,8 +77,7 @@ func check_pos(mouse_position: Vector2) -> bool:
 			return current_energy_station.is_power_tile(new_point)
 		else:
 			var is_not_same = grid_positions.back() != new_point
-			var tile_data = level.get_cell_tile_data(0, new_point)
-			var is_traversible = tile_data != null and tile_data.get_custom_data("r_traversible")
+			var is_traversible = level.is_traversible(new_point)
 			var is_continuous = (grid_positions.back() - new_point).length() == 1
 			return is_not_same and is_traversible and is_continuous
 	else:

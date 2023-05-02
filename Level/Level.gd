@@ -33,6 +33,12 @@ func _ready():
 		set_grid_intraversible(grid_position)
 		for grid in chunk.exclusion_vectors:
 			set_grid_intraversible(grid_position + grid)
+	
+	for construction in get_tree().get_nodes_in_group("construction"):
+		var grid_position = local_to_map(construction.global_position)
+		set_grid_intraversible(grid_position)
+		for grid in construction.exclusion_vectors:
+			set_grid_intraversible(grid_position + grid)	
 	pass
 	
 ## Plants a crop on the given tile based on the given item
@@ -101,6 +107,7 @@ func harvest_land(grid_position: Vector2i, entity: Node2D):
 func set_grid_intraversible(grid_position):
 	if not intraversible_grids.has(grid_position):
 		traversibility_updated.emit(grid_position, true)
+		print("setting grid ", grid_position, " to intraversible")
 		intraversible_grids.append(grid_position)
 	pass
 

@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://do3r0dx8cxpol"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_r8k3a"]
+[ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_0skaw"]
+[ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="3_ortxo"]
+[ext_resource type="Resource" uid="uid://b0exdjec2pc83" path="res://Robots/Robot Upgrades/Energy Cell/item_energy_cell.tres" id="4_lgj2y"]
+[ext_resource type="Resource" uid="uid://ct3lfxe3ttjdr" path="res://Robots/Robot Upgrades/Motor/item_motor.tres" id="5_nihvq"]
+[ext_resource type="Script" path="res://Inventory/WaterInventory.gd" id="6_2w2r3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0saux"]
+size = Vector2(20, 14)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(418, 328)
+collision_mask = 15
+motion_mode = 1
+script = ExtResource("1_r8k3a")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0saux")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -22)
+sprite_frames = ExtResource("2_0skaw")
+
+[node name="SeedInventory" type="Node" parent="."]
+script = ExtResource("3_ortxo")
+inventory_size = 30
+inventory_type = 0
+
+[node name="ProduceInventory" type="Node" parent="."]
+script = ExtResource("3_ortxo")
+inventory_size = 100
+
+[node name="FertiliserInventory" type="Node" parent="."]
+script = ExtResource("3_ortxo")
+inventory_size = 100
+inventory_type = 2
+
+[node name="RobotInventory" type="Node" parent="."]
+script = ExtResource("3_ortxo")
+inventory_size = 100
+inventory_type = 3
+
+[node name="RobotUpgradeInventory" type="Node" parent="."]
+script = ExtResource("3_ortxo")
+inventory_size = 100
+inventory_type = 4
+inventory = {
+ExtResource("4_lgj2y"): 2,
+ExtResource("5_nihvq"): 5
+}
+
+[node name="WaterInventory" type="Node" parent="."]
+script = ExtResource("6_2w2r3")
+inventory_size = 100
+inventory_type = 5

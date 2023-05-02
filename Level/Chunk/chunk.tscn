@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Level/Chunk/Chunk.gd" id="1_fucyl"]
+[ext_resource type="Texture2D" uid="uid://ct2u1p80tdh70" path="res://Level/level_chunk_spritesheet.png" id="2_s8vwo"]
+[ext_resource type="Script" path="res://Inventory/WaterInventory.gd" id="3_2en3t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayokd"]
+atlas = ExtResource("2_s8vwo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7pkn"]
+atlas = ExtResource("2_s8vwo")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lg4xd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayokd")
+}],
+"loop": true,
+"name": &"unused",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7pkn")
+}],
+"loop": true,
+"name": &"used",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sw7jp"]
+radius = 23.0217
+
+[node name="Chunk" type="Node2D" groups=["chunk"]]
+position = Vector2(656, 144)
+script = ExtResource("1_fucyl")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lg4xd")
+animation = &"unused"
+centered = false
+offset = Vector2(-16, -16)
+
+[node name="WaterInventory" type="Node" parent="."]
+script = ExtResource("3_2en3t")
+starting_water = 100
+inventory_size = 100
+inventory_type = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(17, 16)
+shape = SubResource("CircleShape2D_sw7jp")

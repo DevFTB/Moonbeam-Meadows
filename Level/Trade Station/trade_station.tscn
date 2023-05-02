@@ -4,24 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://c2gmdstv82xv3" path="res://Level/Trade Station/trade_station.png" id="2_45lyd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_111q6"]
-size = Vector2(60, 28)
+size = Vector2(60, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p2cju"]
 radius = 88.8144
 
-[node name="Trade Station" type="Node2D"]
-position = Vector2(320, 256)
+[node name="Trade Station" type="Node2D" groups=["construction"]]
 script = ExtResource("1_2vngr")
+exclusion_vectors = [Vector2i(1, 0)]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_45lyd")
+centered = false
+offset = Vector2(-16, -48)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 17)
+position = Vector2(16, 3)
 shape = SubResource("RectangleShape2D_111q6")
 
 [node name="InteractArea" type="Area2D" parent="."]
@@ -29,4 +31,5 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(16, 3)
 shape = SubResource("CircleShape2D_p2cju")

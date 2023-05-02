@@ -54,8 +54,7 @@ radius = 50.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rcr6"]
 size = Vector2(24, 29)
 
-[node name="Energy Station" type="Node2D"]
-position = Vector2(528, 272)
+[node name="Energy Station" type="Node2D" groups=["construction"]]
 script = ExtResource("1_ykrsn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

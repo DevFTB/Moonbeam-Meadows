@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5pwhrf7t5w1k"]
+
+[ext_resource type="Script" path="res://Level/DepositBox/DepositBox.gd" id="1_w46mf"]
+[ext_resource type="Resource" uid="uid://cjkxor4b8jp5h" path="res://Level/Crops/Resources/item_moon_wheat_seeds.tres" id="2_mjs28"]
+[ext_resource type="Resource" uid="uid://labeh87uavn3" path="res://Level/Fertiliser/item_lunar_sprinkles.tres" id="3_al6mh"]
+[ext_resource type="Texture2D" uid="uid://j0e4jncrtuqr" path="res://Level/DepositBox/deposit_box.png" id="4_rhhww"]
+[ext_resource type="Script" path="res://Components/RobotInteractor.gd" id="5_6wbac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3fxa"]
+size = Vector2(30, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wcbl"]
+radius = 50.0
+
+[node name="DepositBox" type="Node2D" node_paths=PackedStringArray("gui") groups=["construction"]]
+position = Vector2(624, 304)
+script = ExtResource("1_w46mf")
+providing_items = true
+item_types = Array[int]([1, 0, 2, 3, 4])
+initial_items = {
+ExtResource("2_mjs28"): 5,
+ExtResource("3_al6mh"): 5
+}
+gui = NodePath("../CanvasLayer/GUI/OverscreenUI/DepositBoxGUI")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_rhhww")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_m3fxa")
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_3wcbl")
+
+[node name="RobotInteractor" type="Node2D" parent="."]
+script = ExtResource("5_6wbac")
+interact_range = 1
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]
+[connection signal="robot_entered" from="RobotInteractor" to="." method="_on_robot_interactor_robot_entered"]
+[connection signal="robot_exited" from="RobotInteractor" to="." method="_on_robot_interactor_robot_exited"]

@@ -23,6 +23,8 @@ var power_tiles = []
 @onready var battery = $Battery
 
 func _ready():
+	gui = get_node("/root/Level/CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
+
 	$RobotInteractor.update_range(energy_range)
 	_calculate_power_tiles()
 	#for robot in get_tree().get_nodes_in_group("robot"): add_robot(robot)

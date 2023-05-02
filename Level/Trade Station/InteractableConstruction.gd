@@ -5,7 +5,7 @@ class_name InteractableConstruction
 
 ## The GUI to open when interacted with
 @export var gui : Control
-
+@export var exclusion_vectors : Array = []
 ## The player that intearcted with this object
 var interacting_player : Player = null
 

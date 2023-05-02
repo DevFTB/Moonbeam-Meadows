@@ -1,69 +1,69 @@
-[gd_scene load_steps=97 format=3 uid="uid://c75dkco3nmh04"]
+[gd_scene load_steps=97 format=3 uid="uid://gv7h4valf1tv"]
 
-[ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/moon_tileset.tres" id="1_7871s"]
-[ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="2_373r8"]
-[ext_resource type="Script" path="res://Player/Player.gd" id="2_p03jk"]
-[ext_resource type="Script" path="res://Level/Level.gd" id="2_qn437"]
-[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_v0lsh"]
-[ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_57r43"]
-[ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="4_i0hmv"]
-[ext_resource type="PackedScene" uid="uid://ds07jldwr2nb5" path="res://Level/Energy Station/energy_station.tscn" id="6_b6ae7"]
-[ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_iruk3"]
-[ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_ohfto"]
-[ext_resource type="Resource" uid="uid://f022kek71od4" path="res://Robots/FertiliserRobot/fertiliser_robot_resource.tres" id="8_0b4mc"]
-[ext_resource type="PackedScene" uid="uid://clviqes13sw1b" path="res://Level/Trade Station/trade_station.tscn" id="8_oo5fl"]
-[ext_resource type="Script" path="res://Level/DepositBox.gd" id="9_fo6d0"]
-[ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="9_iadx0"]
-[ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="9_kceb6"]
-[ext_resource type="Texture2D" uid="uid://j0e4jncrtuqr" path="res://Level/DepositBox/deposit_box.png" id="10_16se4"]
-[ext_resource type="Resource" uid="uid://cjkxor4b8jp5h" path="res://Level/Crops/Resources/item_moon_wheat_seeds.tres" id="10_bgtt6"]
-[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="11_8edbx"]
-[ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="11_725wh"]
-[ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="11_736ha"]
-[ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="12_fbvmq"]
-[ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="12_nsnn6"]
-[ext_resource type="Resource" uid="uid://labeh87uavn3" path="res://Level/Fertiliser/item_lunar_sprinkles.tres" id="13_tuac2"]
-[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="13_yumjg"]
-[ext_resource type="Script" path="res://Level/Currency/CurrencyGUI.gd" id="14_cssu7"]
-[ext_resource type="Script" path="res://GUI/GUIManager.gd" id="14_qo620"]
-[ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="15_wrucv"]
-[ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="16_oiwbj"]
-[ext_resource type="Script" path="res://Components/RobotInteractor.gd" id="17_8dauk"]
-[ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="17_17121"]
-[ext_resource type="Resource" uid="uid://c6irvbqybpvwr" path="res://Level/Quests/quest_campaign_2.tres" id="17_k2pda"]
-[ext_resource type="Script" path="res://Level/WaterStation.gd" id="18_slsxj"]
-[ext_resource type="Resource" uid="uid://b0exdjec2pc83" path="res://Robots/Robot Upgrades/Energy Cell/item_energy_cell.tres" id="19_fwa5x"]
-[ext_resource type="Script" path="res://Robots/GridPathLine.gd" id="19_gqpxo"]
-[ext_resource type="Texture2D" uid="uid://8drec3sjygo2" path="res://Level/WaterStation/water_station.png" id="19_hcy86"]
-[ext_resource type="Script" path="res://Robots/PathSelectionGUI.gd" id="20_jbywo"]
-[ext_resource type="Script" path="res://Level/Energy Station/EnergyStationGUI.gd" id="20_m3hsh"]
-[ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="20_r57gi"]
-[ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="20_wew0j"]
-[ext_resource type="Resource" uid="uid://v6tst8k4atog" path="res://Level/WaterStation/item_water.tres" id="24_61pvk"]
-[ext_resource type="Script" path="res://Level/WaterInventory.gd" id="24_lhr56"]
-[ext_resource type="Resource" uid="uid://ct3lfxe3ttjdr" path="res://Robots/Robot Upgrades/Motor/item_motor.tres" id="26_qqbio"]
-[ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="28_48y4d"]
-[ext_resource type="LabelSettings" uid="uid://ct0g454548ged" path="res://GUI/heading1_label_settings.tscn.tres" id="28_boey7"]
-[ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="28_lgf16"]
-[ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="29_0m65b"]
-[ext_resource type="Script" path="res://GUI/MultiInventoryButtonLIst.gd" id="29_48v5m"]
-[ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="30_acke8"]
-[ext_resource type="PackedScene" uid="uid://bo8vh6e4gjr1b" path="res://Level/Trade Station/ts_sell_item_gui.tscn" id="31_td8hx"]
-[ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="34_34xvq"]
-[ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="35_42xdg"]
-[ext_resource type="PackedScene" uid="uid://cnbuxj36mxtbt" path="res://Robots/WateringRobot/watering_robot.tscn" id="35_74b3b"]
-[ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="37_irf5s"]
-[ext_resource type="Script" path="res://GUI/AddUpgradesPopup.gd" id="37_viyhm"]
-[ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="40_4ntqc"]
-[ext_resource type="Script" path="res://Level/WaterStationGUI.gd" id="44_b52yr"]
-[ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="44_cxftp"]
-[ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="45_s4v6b"]
-[ext_resource type="PackedScene" uid="uid://bnhkn8rycucnb" path="res://GUI/inventory_button_list.tscn" id="45_uexto"]
-[ext_resource type="Resource" uid="uid://g4oi702uwa3t" path="res://Robots/Robot Upgrades/Motor/upgrade_motor.tres" id="46_tehid"]
-[ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="49_5eap5"]
-[ext_resource type="Script" path="res://Level/GridSquareSelector.gd" id="55_6u3el"]
-[ext_resource type="Texture2D" uid="uid://ct2u1p80tdh70" path="res://Level/level_chunk_spritesheet.png" id="60_5en5w"]
-[ext_resource type="Script" path="res://Level/Chunk.gd" id="60_vm8yy"]
+[ext_resource type="TileSet" uid="uid://dsntvsfcov3kf" path="res://Level/Moon/moon_tileset.tres" id="1_dwaoe"]
+[ext_resource type="Script" path="res://Level/Level.gd" id="2_s5x0q"]
+[ext_resource type="Resource" uid="uid://da3d7042yonen" path="res://Level/Crops/Resources/crop_moon_wheat.tres" id="3_h8uni"]
+[ext_resource type="Resource" uid="uid://d4eq6g7albnb4" path="res://Level/Fertiliser/fertiliser_lunar_sprinkles.tres" id="4_hbpdq"]
+[ext_resource type="Resource" uid="uid://bhgci1lelg6mr" path="res://Robots/WateringRobot/water_robot_resource.tres" id="5_vasmx"]
+[ext_resource type="Resource" uid="uid://choblhjhtnuhb" path="res://Robots/HarvestingRobot/harvesting_robot_resource.tres" id="6_ne3rv"]
+[ext_resource type="Resource" uid="uid://cmt6nt2vgl4uy" path="res://Robots/PlanterRobot/planter_robot_resource.tres" id="7_l4okd"]
+[ext_resource type="Resource" uid="uid://f022kek71od4" path="res://Robots/FertiliserRobot/fertiliser_robot_resource.tres" id="8_a3vlm"]
+[ext_resource type="Resource" uid="uid://b7gg7aeaesstg" path="res://Robots/Robot Upgrades/Energy Cell/upgrade_energy_cell.tres" id="9_vq674"]
+[ext_resource type="Resource" uid="uid://g4oi702uwa3t" path="res://Robots/Robot Upgrades/Motor/upgrade_motor.tres" id="10_2sp3f"]
+[ext_resource type="PackedScene" uid="uid://ds07jldwr2nb5" path="res://Level/Energy Station/energy_station.tscn" id="11_kkbgo"]
+[ext_resource type="PackedScene" uid="uid://clviqes13sw1b" path="res://Level/Trade Station/trade_station.tscn" id="12_ampno"]
+[ext_resource type="Script" path="res://Level/DepositBox/DepositBox.gd" id="13_gd5m1"]
+[ext_resource type="Resource" uid="uid://cjkxor4b8jp5h" path="res://Level/Crops/Resources/item_moon_wheat_seeds.tres" id="14_m0dgt"]
+[ext_resource type="Resource" uid="uid://labeh87uavn3" path="res://Level/Fertiliser/item_lunar_sprinkles.tres" id="15_1fxfd"]
+[ext_resource type="Texture2D" uid="uid://j0e4jncrtuqr" path="res://Level/DepositBox/deposit_box.png" id="16_ubcsb"]
+[ext_resource type="Script" path="res://Components/RobotInteractor.gd" id="17_74nta"]
+[ext_resource type="Script" path="res://Level/WaterStation/WaterStation.gd" id="18_s678n"]
+[ext_resource type="Texture2D" uid="uid://8drec3sjygo2" path="res://Level/WaterStation/water_station.png" id="19_huo62"]
+[ext_resource type="Script" path="res://Inventory/WaterInventory.gd" id="20_fy0r5"]
+[ext_resource type="Resource" uid="uid://v6tst8k4atog" path="res://Level/WaterStation/item_water.tres" id="21_d3iq1"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="22_xxw8f"]
+[ext_resource type="SpriteFrames" uid="uid://batd5fcqiq2fx" path="res://Player/player_sprite_frames.tres" id="23_pc0r4"]
+[ext_resource type="Script" path="res://Inventory/InventoryComponent.gd" id="24_h33v0"]
+[ext_resource type="Resource" uid="uid://b0exdjec2pc83" path="res://Robots/Robot Upgrades/Energy Cell/item_energy_cell.tres" id="25_qcanv"]
+[ext_resource type="Resource" uid="uid://ct3lfxe3ttjdr" path="res://Robots/Robot Upgrades/Motor/item_motor.tres" id="26_dxu6q"]
+[ext_resource type="Script" path="res://Level/GridSquareSelector.gd" id="27_0gvpv"]
+[ext_resource type="Theme" uid="uid://c2bxfvlq30rpq" path="res://GUI/gui_theme.tres" id="28_2jl6n"]
+[ext_resource type="Script" path="res://GUI/GUIManager.gd" id="29_gfs11"]
+[ext_resource type="Script" path="res://GUI/ToolGUI.gd" id="30_fwwhc"]
+[ext_resource type="Script" path="res://Level/Trade Station/TradeStationGUI.gd" id="31_xacft"]
+[ext_resource type="Texture2D" uid="uid://c46lapoj3kgt8" path="res://Level/Currency/unicoin_sprite.png" id="32_fospo"]
+[ext_resource type="Script" path="res://Level/Currency/CurrencyGUI.gd" id="33_crb8o"]
+[ext_resource type="Script" path="res://GUI/MultiInventoryButtonLIst.gd" id="34_vhpbx"]
+[ext_resource type="PackedScene" uid="uid://bo8vh6e4gjr1b" path="res://Level/Trade Station/ts_sell_item_gui.tscn" id="35_q4k4d"]
+[ext_resource type="Script" path="res://GUI/PhoneGUI.gd" id="36_nrqse"]
+[ext_resource type="Script" path="res://Level/Quests/QuestsGUI.gd" id="37_tem8q"]
+[ext_resource type="PackedScene" uid="uid://c6jj0bvpw078h" path="res://Level/Quests/quest_display.tscn" id="38_ul25o"]
+[ext_resource type="Script" path="res://Level/Energy Station/EnergyStationGUI.gd" id="39_4666e"]
+[ext_resource type="LabelSettings" uid="uid://ct0g454548ged" path="res://GUI/heading1_label_settings.tscn.tres" id="40_g8fim"]
+[ext_resource type="Script" path="res://GUI/RobotDescriptionLabel.gd" id="41_tmqq3"]
+[ext_resource type="Texture2D" uid="uid://b2g1vrdcednc8" path="res://Robots/WateringRobot/watering_robot.png" id="42_6mugh"]
+[ext_resource type="Script" path="res://GUI/EnergyStationEnergyGUI.gd" id="43_gcrtw"]
+[ext_resource type="PackedScene" uid="uid://bnhkn8rycucnb" path="res://GUI/inventory_button_list.tscn" id="44_kuyy1"]
+[ext_resource type="Script" path="res://GUI/AddUpgradesPopup.gd" id="45_rbdmx"]
+[ext_resource type="Script" path="res://GUI/DepositBoxGUI.gd" id="46_f47v5"]
+[ext_resource type="Script" path="res://GUI/WaterStationGUI.gd" id="47_t2t0g"]
+[ext_resource type="Script" path="res://Robots/PathSelectionGUI.gd" id="48_g7by7"]
+[ext_resource type="Script" path="res://GUI/ErrorPassLabel.gd" id="49_0bmmr"]
+[ext_resource type="Texture2D" uid="uid://duwmw3oitb6i5" path="res://GUI/selection_marker.png" id="50_t6spk"]
+[ext_resource type="Script" path="res://GUI/SelectionMarker.gd" id="51_sm02e"]
+[ext_resource type="Script" path="res://Level/Quests/QuestManager.gd" id="52_71bwp"]
+[ext_resource type="Resource" uid="uid://cp77d3nlgk6b8" path="res://Level/Quests/quest_campaign_1.tres" id="53_42ba5"]
+[ext_resource type="Resource" uid="uid://c6irvbqybpvwr" path="res://Level/Quests/quest_campaign_2.tres" id="54_ykqu1"]
+[ext_resource type="Script" path="res://Level/Currency/CurrencyManager.gd" id="55_2jnul"]
+[ext_resource type="PackedScene" uid="uid://deyxhakaheul8" path="res://Robots/WateringRobot/watering_robot.tscn" id="56_53mia"]
+[ext_resource type="PackedScene" uid="uid://ddf6vsbhvrf" path="res://Robots/HarvestingRobot/harvesting_robot.tscn" id="57_2c6io"]
+[ext_resource type="PackedScene" uid="uid://c3ltrvep0lhxi" path="res://Robots/PlanterRobot/planter_robot.tscn" id="58_q46jy"]
+[ext_resource type="PackedScene" uid="uid://c808s1n3o1ffb" path="res://Robots/FertiliserRobot/fertiliser_robot.tscn" id="59_k5be6"]
+[ext_resource type="Script" path="res://Robots/GridPathLine.gd" id="60_5j0ep"]
+[ext_resource type="Script" path="res://GUI/EditingCamera.gd" id="61_4s0ww"]
+[ext_resource type="Script" path="res://Level/IdentifyCamera.gd" id="62_3q03r"]
+[ext_resource type="Script" path="res://Level/Chunk/Chunk.gd" id="63_ahj1o"]
+[ext_resource type="Texture2D" uid="uid://ct2u1p80tdh70" path="res://Level/level_chunk_spritesheet.png" id="64_7m5rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3fxa"]
 size = Vector2(30, 26)
@@ -72,23 +72,23 @@ size = Vector2(30, 26)
 radius = 50.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f4px0"]
-atlas = ExtResource("19_hcy86")
+atlas = ExtResource("19_huo62")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8me7"]
-atlas = ExtResource("19_hcy86")
+atlas = ExtResource("19_huo62")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1cyq"]
-atlas = ExtResource("19_hcy86")
+atlas = ExtResource("19_huo62")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5irt5"]
-atlas = ExtResource("19_hcy86")
+atlas = ExtResource("19_huo62")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tl58s"]
-atlas = ExtResource("19_hcy86")
+atlas = ExtResource("19_huo62")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2uwva"]
@@ -157,7 +157,7 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 36
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mstbw"]
-atlas = ExtResource("20_r57gi")
+atlas = ExtResource("42_6mugh")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_he7pp"]
@@ -198,11 +198,11 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayokd"]
-atlas = ExtResource("60_5en5w")
+atlas = ExtResource("64_7m5rs")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7pkn"]
-atlas = ExtResource("60_5en5w")
+atlas = ExtResource("64_7m5rs")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lg4xd"]
@@ -229,7 +229,8 @@ radius = 23.0217
 
 [node name="Level" type="TileMap"]
 y_sort_enabled = true
-tile_set = ExtResource("1_7871s")
+rotation = 0.000593442
+tile_set = ExtResource("1_dwaoe")
 format = 2
 layer_0/name = "ground"
 layer_0/tile_data = PackedInt32Array(2, 65536, 2, 3, 65536, 2, 4, 65536, 2, 5, 131072, 2, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 65545, 65536, 2, 65544, 65536, 2, 65543, 65536, 2, 65542, 65536, 2, 65538, 0, 2, 65537, 65536, 2, 131074, 0, 2, 131075, 0, 2, 131076, 131072, 2, 131079, 65536, 2, 131080, 65536, 2, 131081, 65536, 2, 196609, 65536, 2, 196610, 65536, 2, 196611, 131072, 2, 196614, 0, 2, 196615, 0, 2, 196616, 0, 2, 196617, 0, 2, 262145, 0, 2, 262146, 65536, 2, 262148, 65536, 2, 327690, 0, 2, 262154, 0, 2, 262155, 0, 2, 196619, 65536, 2, 131083, 131072, 2, 65547, 131072, 2, 11, 65536, 2, 10, 65536, 2, 65546, 0, 2, 131082, 0, 2, 196618, 131072, 2, 393226, 65536, 2, 393225, 65536, 2, 393224, 131072, 2, 393222, 65536, 2, 262153, 131072, 2, 327691, 0, 2, 393227, 0, 2, 458763, 65536, 2, 458762, 0, 2, 458761, 65536, 2, 327682, 131072, 2, 393220, 65536, 2, 458756, 65536, 2, 458752, 0, 2, 458760, 65536, 2, 12, 131072, 2, 65548, 0, 2, 131085, 65536, 2, 196621, 0, 2, 262157, 65536, 2, 327693, 0, 2, 393230, 131072, 2, 458766, 65536, 2, 458764, 65536, 2, 393228, 0, 2, 65550, 0, 2, 14, 65536, 2, 131084, 0, 2, 13, 0, 2, 65549, 65536, 2, 196620, 65536, 2, 262156, 65536, 2, 131086, 0, 2, 196622, 0, 2, 262158, 0, 2, 393229, 0, 2, 458765, 131072, 2, 327692, 0, 2, 327694, 131072, 2, 524288, 131072, 2, 524289, 65536, 2, 524290, 0, 2, 524291, 0, 2, 524292, 0, 2, 524294, 0, 2, 524295, 131072, 2, 524296, 0, 2, 524297, 458752, 2, 524298, 458752, 2, 524299, 65536, 2, 524300, 65536, 2, 524301, 131072, 2, 524302, 65536, 2, 65536, 65536, 2, 0, 0, 2, 1, 65536, 2, 131072, 65536, 2, 196608, 0, 2, 262144, 0, 2, 327680, 65536, 2, 393216, 0, 2, 393217, 131072, 2, 327681, 65536, 2, 458753, 131072, 2, 458754, 65536, 2, 393218, 0, 2, 393219, 65536, 2, 327683, 0, 2, 262147, 131072, 2, 327684, 0, 2, 327685, 65536, 2, 262149, 0, 2, 196613, 65536, 2, 131077, 0, 2, 65541, 65536, 2, 65540, 131072, 2, 65539, 0, 2, 131078, 65536, 2, 196612, 65536, 2, 262150, 0, 2, 327686, 65536, 2, 327687, 65536, 2, 262151, 0, 2, 262152, 0, 2, 327688, 0, 2, 327689, 131072, 2, 393223, 0, 2, 458759, 131072, 2, 458758, 65536, 2, 458757, 0, 2, 393221, 65536, 2, 524293, 0, 2, 458755, 65536, 2, 131073, 0, 2, 589824, 131072, 2, 655360, 0, 2, 720896, 0, 2, 786432, 0, 2, 851968, 0, 2, 917504, 0, 2, 983040, 0, 2, 589825, 0, 2, 655361, 0, 2, 720897, 0, 2, 786433, 0, 2, 851969, 0, 2, 917505, 131072, 2, 983041, 0, 2, 589826, 0, 2, 655362, 0, 2, 720898, 0, 2, 786434, 0, 2, 851970, 131072, 2, 917506, 0, 2, 983042, 0, 2, 589827, 0, 2, 655363, 0, 2, 720899, 131072, 2, 786435, 131072, 2, 851971, 0, 2, 917507, 0, 2, 983043, 0, 2, 589828, 0, 2, 655364, 131072, 2, 720900, 0, 2, 786436, 0, 2, 851972, 0, 2, 917508, 65536, 2, 983044, 0, 2, 589829, 0, 2, 655365, 0, 2, 720901, 0, 2, 786437, 0, 2, 851973, 65536, 2, 917509, 0, 2, 983045, 0, 2, 589830, 131072, 2, 655366, 0, 2, 720902, 0, 2, 786438, 0, 2, 851974, 65536, 2, 917510, 0, 2, 983046, 0, 2, 589831, 0, 2, 655367, 0, 2, 720903, 0, 2, 786439, 65536, 2, 851975, 0, 2, 917511, 0, 2, 983047, 0, 2, 589832, 0, 2, 655368, 0, 2, 720904, 65536, 2, 786440, 0, 2, 851976, 0, 2, 917512, 0, 2, 983048, 0, 2, 589833, 0, 2, 655369, 0, 2, 720905, 65536, 2, 786441, 0, 2, 851977, 0, 2, 917513, 0, 2, 983049, 131072, 2, 589834, 0, 2, 655370, 65536, 2, 720906, 0, 2, 786442, 0, 2, 851978, 0, 2, 917514, 131072, 2, 983050, 0, 2, 589835, 65536, 2, 655371, 0, 2, 720907, 0, 2, 786443, 0, 2, 851979, 131072, 2, 917515, 0, 2, 983051, 0, 2, 589836, 131072, 2, 655372, 0, 2, 720908, 0, 2, 786444, 0, 2, 851980, 131072, 2, 917516, 0, 2, 983052, 0, 2, 589837, 65536, 2, 655373, 458752, 2, 720909, 458752, 2, 786445, 458752, 2, 851981, 0, 2, 917517, 0, 2, 983053, 0, 2, 589838, 65536, 2, 655374, 458752, 2, 720910, 0, 2, 786446, 0, 2, 851982, 0, 2, 917518, 0, 2, 983054, 0, 2, 15, 0, 2, 65551, 0, 2, 131087, 0, 2, 196623, 131072, 2, 262159, 131072, 2, 327695, 0, 2, 393231, 65536, 2, 458767, 0, 2, 524303, 0, 2, 589839, 65536, 2, 655375, 458752, 2, 720911, 0, 2, 786447, 0, 2, 851983, 0, 2, 917519, 65536, 2, 983055, 0, 2, 16, 0, 2, 65552, 131072, 2, 131088, 131072, 2, 196624, 0, 2, 262160, 0, 2, 327696, 0, 2, 393232, 65536, 2, 458768, 65536, 2, 524304, 458752, 2, 589840, 131072, 2, 655376, 458752, 2, 720912, 0, 2, 786448, 0, 2, 851984, 65536, 2, 917520, 0, 2, 983056, 0, 2, 17, 131072, 2, 65553, 65536, 2, 131089, 65536, 2, 196625, 65536, 2, 262161, 65536, 2, 327697, 65536, 2, 393233, 0, 2, 458769, 0, 2, 524305, 131072, 2, 589841, 0, 2, 655377, 458752, 2, 720913, 458752, 2, 786449, 458752, 2, 851985, 65536, 2, 917521, 0, 2, 983057, 0, 2, 18, 0, 2, 65554, 0, 2, 131090, 0, 2, 196626, 0, 2, 262162, 0, 2, 327698, 0, 2, 393234, 131072, 2, 458770, 131072, 2, 524306, 0, 2, 589842, 0, 2, 655378, 0, 2, 720914, 0, 2, 786450, 65536, 2, 851986, 0, 2, 917522, 0, 2, 983058, 0, 2, 19, 0, 2, 65555, 0, 2, 131091, 0, 2, 196627, 0, 2, 262163, 0, 2, 327699, 131072, 2, 393235, 458752, 2, 458771, 0, 2, 524307, 0, 2, 589843, 458752, 2, 655379, 0, 2, 720915, 65536, 2, 786451, 0, 2, 851987, 0, 2, 917523, 0, 2, 983059, 0, 2, 20, 0, 2, 65556, 0, 2, 131092, 0, 2, 196628, 0, 2, 262164, 0, 2, 327700, 0, 2, 393236, 458752, 2, 458772, 0, 2, 524308, 0, 2, 589844, 0, 2, 655380, 0, 2, 720916, 0, 2, 786452, 0, 2, 851988, 0, 2, 917524, 0, 2, 983060, 0, 2, 1048576, 131072, 2, 1114112, 131072, 2, 1179648, 0, 2, 1245184, 0, 2, 1310720, 131072, 2, 1048577, 131072, 2, 1114113, 65536, 2, 1179649, 131072, 2, 1245185, 131072, 2, 1310721, 65536, 2, 1048578, 65536, 2, 1114114, 0, 2, 1179650, 131072, 2, 1245186, 65536, 2, 1310722, 131072, 2, 1048579, 65536, 2, 1114115, 131072, 2, 1179651, 0, 2, 1245187, 0, 2, 1310723, 0, 2, 1048580, 131072, 2, 1114116, 65536, 2, 1179652, 65536, 2, 1245188, 131072, 2, 1310724, 0, 2, 1048581, 0, 2, 1114117, 131072, 2, 1179653, 65536, 2, 1245189, 131072, 2, 1310725, 131072, 2, 1048582, 131072, 2, 1114118, 131072, 2, 1179654, 65536, 2, 1245190, 0, 2, 1310726, 131072, 2, 1048583, 0, 2, 1114119, 131072, 2, 1179655, 131072, 2, 1245191, 65536, 2, 1310727, 65536, 2, 1048584, 65536, 2, 1114120, 0, 2, 1179656, 131072, 2, 1245192, 65536, 2, 1310728, 131072, 2, 1048585, 131072, 2, 1114121, 65536, 2, 1179657, 65536, 2, 1245193, 65536, 2, 1310729, 65536, 2, 1048586, 0, 2, 1114122, 65536, 2, 1179658, 65536, 2, 1245194, 131072, 2, 1310730, 65536, 2, 1048587, 65536, 2, 1114123, 65536, 2, 1179659, 131072, 2, 1245195, 131072, 2, 1310731, 0, 2, 1048588, 0, 2, 1114124, 131072, 2, 1179660, 131072, 2, 1245196, 131072, 2, 1310732, 131072, 2, 1048589, 65536, 2, 1114125, 65536, 2, 1179661, 131072, 2, 1245197, 0, 2, 1310733, 131072, 2, 1048590, 0, 2, 1114126, 131072, 2, 1179662, 131072, 2, 1245198, 131072, 2, 1310734, 0, 2, 1048591, 0, 2, 1114127, 131072, 2, 1179663, 65536, 2, 1245199, 65536, 2, 1310735, 131072, 2, 1048592, 0, 2, 1114128, 0, 2, 1179664, 131072, 2, 1245200, 131072, 2, 1310736, 131072, 2, 1048593, 65536, 2, 1114129, 0, 2, 1179665, 0, 2, 1245201, 65536, 2, 1310737, 131072, 2, 1048594, 65536, 2, 1114130, 0, 2, 1179666, 65536, 2, 1245202, 0, 2, 1310738, 0, 2, 1048595, 131072, 2, 1114131, 65536, 2, 1179667, 131072, 2, 1245203, 0, 2, 1310739, 0, 2, 1048596, 0, 2, 1114132, 131072, 2, 1179668, 65536, 2, 1245204, 131072, 2, 1310740, 0, 2, 21, 131072, 2, 65557, 0, 2, 131093, 0, 2, 196629, 65536, 2, 262165, 131072, 2, 327701, 65536, 2, 393237, 65536, 2, 458773, 131072, 2, 524309, 0, 2, 589845, 131072, 2, 655381, 131072, 2, 720917, 131072, 2, 786453, 0, 2, 851989, 0, 2, 917525, 0, 2, 983061, 131072, 2, 1048597, 131072, 2, 1114133, 131072, 2, 1179669, 65536, 2, 1245205, 0, 2, 1310741, 0, 2, 1376277, 0, 2, 1441813, 0, 2, 1507349, 65536, 2, 1572885, 131072, 2, 1638421, 0, 2, 22, 0, 2, 65558, 131072, 2, 131094, 131072, 2, 196630, 131072, 2, 262166, 0, 2, 327702, 0, 2, 393238, 0, 2, 458774, 65536, 2, 524310, 131072, 2, 589846, 0, 2, 655382, 0, 2, 720918, 65536, 2, 786454, 65536, 2, 851990, 131072, 2, 917526, 0, 2, 983062, 131072, 2, 1048598, 131072, 2, 1114134, 65536, 2, 1179670, 0, 2, 1245206, 131072, 2, 1310742, 131072, 2, 1376278, 0, 2, 1441814, 65536, 2, 1507350, 0, 2, 1572886, 0, 2, 1638422, 65536, 2, 23, 65536, 2, 65559, 0, 2, 131095, 65536, 2, 196631, 131072, 2, 262167, 131072, 2, 327703, 65536, 2, 393239, 131072, 2, 458775, 131072, 2, 524311, 131072, 2, 589847, 65536, 2, 655383, 65536, 2, 720919, 0, 2, 786455, 0, 2, 851991, 65536, 2, 917527, 0, 2, 983063, 0, 2, 1048599, 131072, 2, 1114135, 131072, 2, 1179671, 0, 2, 1245207, 0, 2, 1310743, 65536, 2, 1376279, 0, 2, 1441815, 0, 2, 1507351, 65536, 2, 1572887, 0, 2, 1638423, 131072, 2, 24, 0, 2, 65560, 65536, 2, 131096, 0, 2, 196632, 131072, 2, 262168, 131072, 2, 327704, 65536, 2, 393240, 0, 2, 458776, 131072, 2, 524312, 65536, 2, 589848, 0, 2, 655384, 65536, 2, 720920, 0, 2, 786456, 131072, 2, 851992, 65536, 2, 917528, 65536, 2, 983064, 131072, 2, 1048600, 131072, 2, 1114136, 131072, 2, 1179672, 131072, 2, 1245208, 65536, 2, 1310744, 0, 2, 1376280, 0, 2, 1441816, 131072, 2, 1507352, 0, 2, 1572888, 0, 2, 1638424, 131072, 2, 25, 0, 2, 65561, 0, 2, 131097, 0, 2, 196633, 131072, 2, 262169, 65536, 2, 327705, 65536, 2, 393241, 131072, 2, 458777, 131072, 2, 524313, 0, 2, 589849, 65536, 2, 655385, 131072, 2, 720921, 0, 2, 786457, 0, 2, 851993, 131072, 2, 917529, 131072, 2, 983065, 0, 2, 1048601, 0, 2, 1114137, 131072, 2, 1179673, 0, 2, 1245209, 0, 2, 1310745, 65536, 2, 1376281, 131072, 2, 1441817, 65536, 2, 1507353, 0, 2, 1572889, 131072, 2, 1638425, 65536, 2, 26, 131072, 2, 65562, 0, 2, 131098, 65536, 2, 196634, 0, 2, 262170, 65536, 2, 327706, 0, 2, 393242, 0, 2, 458778, 65536, 2, 524314, 0, 2, 589850, 65536, 2, 655386, 131072, 2, 720922, 131072, 2, 786458, 131072, 2, 851994, 131072, 2, 917530, 65536, 2, 983066, 65536, 2, 1048602, 0, 2, 1114138, 0, 2, 1179674, 131072, 2, 1245210, 0, 2, 1310746, 131072, 2, 1376282, 65536, 2, 1441818, 131072, 2, 1507354, 0, 2, 1572890, 65536, 2, 1638426, 0, 2, 27, 131072, 2, 65563, 131072, 2, 131099, 65536, 2, 196635, 65536, 2, 262171, 0, 2, 327707, 131072, 2, 393243, 0, 2, 458779, 65536, 2, 524315, 0, 2, 589851, 131072, 2, 655387, 0, 2, 720923, 65536, 2, 786459, 65536, 2, 851995, 0, 2, 917531, 131072, 2, 983067, 65536, 2, 1048603, 131072, 2, 1114139, 0, 2, 1179675, 131072, 2, 1245211, 131072, 2, 1310747, 0, 2, 1376283, 65536, 2, 1441819, 65536, 2, 1507355, 131072, 2, 1572891, 65536, 2, 1638427, 0, 2, 28, 65536, 2, 65564, 131072, 2, 131100, 131072, 2, 196636, 65536, 2, 262172, 0, 2, 327708, 0, 2, 393244, 65536, 2, 458780, 131072, 2, 524316, 65536, 2, 589852, 131072, 2, 655388, 65536, 2, 720924, 65536, 2, 786460, 131072, 2, 851996, 131072, 2, 917532, 65536, 2, 983068, 131072, 2, 1048604, 0, 2, 1114140, 131072, 2, 1179676, 131072, 2, 1245212, 65536, 2, 1310748, 0, 2, 1376284, 0, 2, 1441820, 0, 2, 1507356, 131072, 2, 1572892, 65536, 2, 1638428, 0, 2, 29, 131072, 2, 65565, 65536, 2, 131101, 0, 2, 196637, 65536, 2, 262173, 65536, 2, 327709, 131072, 2, 393245, 65536, 2, 458781, 131072, 2, 524317, 0, 2, 589853, 131072, 2, 655389, 131072, 2, 720925, 0, 2, 786461, 131072, 2, 851997, 0, 2, 917533, 65536, 2, 983069, 131072, 2, 1048605, 131072, 2, 1114141, 65536, 2, 1179677, 65536, 2, 1245213, 0, 2, 1310749, 65536, 2, 1376285, 65536, 2, 1441821, 131072, 2, 1507357, 131072, 2, 1572893, 65536, 2, 1638429, 0, 2, 30, 65536, 2, 65566, 0, 2, 131102, 131072, 2, 196638, 65536, 2, 262174, 0, 2, 327710, 0, 2, 393246, 65536, 2, 458782, 131072, 2, 524318, 0, 2, 589854, 65536, 2, 655390, 65536, 2, 720926, 131072, 2, 786462, 131072, 2, 851998, 0, 2, 917534, 0, 2, 983070, 131072, 2, 1048606, 0, 2, 1114142, 131072, 2, 1179678, 0, 2, 1245214, 65536, 2, 1310750, 131072, 2, 1376286, 131072, 2, 1441822, 65536, 2, 1507358, 131072, 2, 1572894, 65536, 2, 1638430, 65536, 2, 1376256, 65536, 2, 1441792, 65536, 2, 1507328, 0, 2, 1572864, 0, 2, 1638400, 65536, 2, 1703936, 131072, 2, 1769472, 131072, 2, 1835008, 131072, 2, 1900544, 0, 2, 1966080, 0, 2, 1376257, 65536, 2, 1441793, 65536, 2, 1507329, 131072, 2, 1572865, 65536, 2, 1638401, 0, 2, 1703937, 65536, 2, 1769473, 131072, 2, 1835009, 0, 2, 1900545, 65536, 2, 1966081, 0, 2, 1376258, 65536, 2, 1441794, 0, 2, 1507330, 65536, 2, 1572866, 0, 2, 1638402, 65536, 2, 1703938, 131072, 2, 1769474, 131072, 2, 1835010, 0, 2, 1900546, 131072, 2, 1966082, 65536, 2, 1376259, 131072, 2, 1441795, 0, 2, 1507331, 65536, 2, 1572867, 65536, 2, 1638403, 0, 2, 1703939, 65536, 2, 1769475, 131072, 2, 1835011, 131072, 2, 1900547, 131072, 2, 1966083, 65536, 2, 1376260, 65536, 2, 1441796, 65536, 2, 1507332, 0, 2, 1572868, 0, 2, 1638404, 0, 2, 1703940, 131072, 2, 1769476, 131072, 2, 1835012, 65536, 2, 1900548, 65536, 2, 1966084, 65536, 2, 1376261, 0, 2, 1441797, 0, 2, 1507333, 65536, 2, 1572869, 131072, 2, 1638405, 131072, 2, 1703941, 65536, 2, 1769477, 65536, 2, 1835013, 0, 2, 1900549, 65536, 2, 1966085, 131072, 2, 1376262, 0, 2, 1441798, 131072, 2, 1507334, 131072, 2, 1572870, 65536, 2, 1638406, 0, 2, 1703942, 0, 2, 1769478, 65536, 2, 1835014, 65536, 2, 1900550, 65536, 2, 1966086, 131072, 2, 1376263, 0, 2, 1441799, 0, 2, 1507335, 131072, 2, 1572871, 0, 2, 1638407, 65536, 2, 1703943, 0, 2, 1769479, 65536, 2, 1835015, 65536, 2, 1900551, 0, 2, 1966087, 131072, 2, 1376264, 65536, 2, 1441800, 65536, 2, 1507336, 131072, 2, 1572872, 131072, 2, 1638408, 0, 2, 1703944, 65536, 2, 1769480, 0, 2, 1835016, 131072, 2, 1900552, 65536, 2, 1966088, 65536, 2, 1376265, 0, 2, 1441801, 0, 2, 1507337, 131072, 2, 1572873, 131072, 2, 1638409, 0, 2, 1703945, 65536, 2, 1769481, 131072, 2, 1835017, 0, 2, 1900553, 65536, 2, 1966089, 65536, 2, 1376266, 65536, 2, 1441802, 65536, 2, 1507338, 0, 2, 1572874, 131072, 2, 1638410, 131072, 2, 1703946, 0, 2, 1769482, 65536, 2, 1835018, 65536, 2, 1900554, 131072, 2, 1966090, 131072, 2, 1376267, 131072, 2, 1441803, 65536, 2, 1507339, 65536, 2, 1572875, 131072, 2, 1638411, 131072, 2, 1703947, 0, 2, 1769483, 65536, 2, 1835019, 65536, 2, 1900555, 131072, 2, 1966091, 0, 2, 1376268, 131072, 2, 1441804, 65536, 2, 1507340, 65536, 2, 1572876, 131072, 2, 1638412, 131072, 2, 1703948, 131072, 2, 1769484, 131072, 2, 1835020, 0, 2, 1900556, 131072, 2, 1966092, 131072, 2, 1376269, 131072, 2, 1441805, 0, 2, 1507341, 0, 2, 1572877, 65536, 2, 1638413, 131072, 2, 1703949, 131072, 2, 1769485, 65536, 2, 1835021, 0, 2, 1900557, 131072, 2, 1966093, 65536, 2, 1376270, 65536, 2, 1441806, 65536, 2, 1507342, 131072, 2, 1572878, 0, 2, 1638414, 65536, 2, 1703950, 65536, 2, 1769486, 65536, 2, 1835022, 131072, 2, 1900558, 0, 2, 1966094, 65536, 2, 1376271, 131072, 2, 1441807, 65536, 2, 1507343, 65536, 2, 1572879, 0, 2, 1638415, 65536, 2, 1703951, 65536, 2, 1769487, 131072, 2, 1835023, 65536, 2, 1900559, 131072, 2, 1966095, 65536, 2, 1376272, 0, 2, 1441808, 0, 2, 1507344, 131072, 2, 1572880, 65536, 2, 1638416, 0, 2, 1703952, 131072, 2, 1769488, 0, 2, 1835024, 0, 2, 1900560, 0, 2, 1966096, 0, 2, 1376273, 131072, 2, 1441809, 131072, 2, 1507345, 0, 2, 1572881, 65536, 2, 1638417, 65536, 2, 1703953, 65536, 2, 1769489, 0, 2, 1835025, 0, 2, 1900561, 0, 2, 1966097, 0, 2, 1376274, 0, 2, 1441810, 131072, 2, 1507346, 131072, 2, 1572882, 65536, 2, 1638418, 65536, 2, 1703954, 65536, 2, 1769490, 65536, 2, 1835026, 0, 2, 1900562, 0, 2, 1966098, 131072, 2, 1376275, 131072, 2, 1441811, 131072, 2, 1507347, 65536, 2, 1572883, 131072, 2, 1638419, 131072, 2, 1703955, 65536, 2, 1769491, 0, 2, 1835027, 131072, 2, 1900563, 0, 2, 1966099, 0, 2, 1376276, 0, 2, 1441812, 65536, 2, 1507348, 131072, 2, 1572884, 131072, 2, 1638420, 131072, 2, 1703956, 65536, 2, 1769492, 65536, 2, 1835028, 0, 2, 1900564, 65536, 2, 1966100, 65536, 2, 1703957, 131072, 2, 1769493, 131072, 2, 1835029, 0, 2, 1900565, 65536, 2, 1966101, 65536, 2, 1703958, 131072, 2, 1769494, 65536, 2, 1835030, 131072, 2, 1900566, 131072, 2, 1966102, 131072, 2, 1703959, 0, 2, 1769495, 65536, 2, 1835031, 131072, 2, 1900567, 131072, 2, 1966103, 131072, 2, 1703960, 131072, 2, 1769496, 0, 2, 1835032, 131072, 2, 1900568, 65536, 2, 1966104, 65536, 2, 1703961, 131072, 2, 1769497, 65536, 2, 1835033, 65536, 2, 1900569, 65536, 2, 1966105, 0, 2, 1703962, 131072, 2, 1769498, 65536, 2, 1835034, 65536, 2, 1900570, 65536, 2, 1966106, 0, 2, 1703963, 131072, 2, 1769499, 0, 2, 1835035, 131072, 2, 1900571, 131072, 2, 1966107, 131072, 2, 1703964, 131072, 2, 1769500, 65536, 2, 1835036, 65536, 2, 1900572, 65536, 2, 1966108, 0, 2, 1703965, 65536, 2, 1769501, 65536, 2, 1835037, 65536, 2, 1900573, 0, 2, 1966109, 131072, 2, 1703966, 131072, 2, 1769502, 131072, 2, 1835038, 0, 2, 1900574, 65536, 2, 1966110, 65536, 2)
@@ -240,37 +241,39 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
-script = ExtResource("2_qn437")
-crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_v0lsh")])
-fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_57r43")])
-robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("30_acke8"), ExtResource("6_iruk3"), ExtResource("7_ohfto"), ExtResource("8_0b4mc")])
-robot_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("45_s4v6b"), ExtResource("46_tehid")])
+script = ExtResource("2_s5x0q")
+crops = Array[Resource("res://Level/Crops/CropResource.gd")]([ExtResource("3_h8uni")])
+fertilisers = Array[Resource("res://Level/Fertiliser/FertiliserResource.gd")]([ExtResource("4_hbpdq")])
+robots = Array[Resource("res://Robots/RobotResource.gd")]([ExtResource("5_vasmx"), ExtResource("6_ne3rv"), ExtResource("7_l4okd"), ExtResource("8_a3vlm")])
+robot_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("9_vq674"), ExtResource("10_2sp3f")])
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Energy Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("6_b6ae7")]
+[node name="Energy Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("11_kkbgo")]
+position = Vector2(528, 336)
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
 
-[node name="Energy Station2" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("6_b6ae7")]
+[node name="Energy Station2" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("11_kkbgo")]
 position = Vector2(304, 400)
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/EnergyStationGUI")
 
-[node name="Trade Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("8_oo5fl")]
+[node name="Trade Station" parent="." node_paths=PackedStringArray("gui") instance=ExtResource("12_ampno")]
+position = Vector2(272, 240)
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/TradeStationGUI")
 
 [node name="DepositBox" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
 position = Vector2(624, 304)
-script = ExtResource("9_fo6d0")
+script = ExtResource("13_gd5m1")
 providing_items = true
 item_types = Array[int]([1, 0, 2, 3, 4])
 initial_items = {
-ExtResource("10_bgtt6"): 5,
-ExtResource("13_tuac2"): 5
+ExtResource("14_m0dgt"): 5,
+ExtResource("15_1fxfd"): 5
 }
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/DepositBoxGUI")
 
 [node name="Sprite2D" type="Sprite2D" parent="DepositBox"]
-texture = ExtResource("10_16se4")
+texture = ExtResource("16_ubcsb")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="DepositBox"]
 collision_layer = 4
@@ -288,12 +291,12 @@ monitorable = false
 shape = SubResource("CircleShape2D_3wcbl")
 
 [node name="RobotInteractor" type="Node2D" parent="DepositBox"]
-script = ExtResource("17_8dauk")
+script = ExtResource("17_74nta")
 interact_range = 1
 
 [node name="WaterStation" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
 position = Vector2(624, 208)
-script = ExtResource("18_slsxj")
+script = ExtResource("18_s678n")
 chunk_extract_range = 3
 gui = NodePath("../CanvasLayer/GUI/OverscreenUI/WaterStationGUI")
 
@@ -320,25 +323,25 @@ monitorable = false
 shape = SubResource("CircleShape2D_yflle")
 
 [node name="RobotInteractor" type="Node2D" parent="WaterStation"]
-script = ExtResource("17_8dauk")
+script = ExtResource("17_74nta")
 interact_range = 1
 
 [node name="ExtractTimer" type="Timer" parent="WaterStation"]
 autostart = true
 
 [node name="WaterInventory" type="Node" parent="WaterStation"]
-script = ExtResource("24_lhr56")
+script = ExtResource("20_fy0r5")
 inventory_size = 100
 inventory_type = 5
 inventory = {
-ExtResource("24_61pvk"): 10
+ExtResource("21_d3iq1"): 10
 }
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(418, 328)
 collision_mask = 7
 motion_mode = 1
-script = ExtResource("2_p03jk")
+script = ExtResource("22_xxw8f")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
@@ -348,43 +351,43 @@ shape = SubResource("RectangleShape2D_0saux")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(0, -22)
-sprite_frames = ExtResource("2_373r8")
+sprite_frames = ExtResource("23_pc0r4")
 
 [node name="SeedInventory" type="Node" parent="Player"]
-script = ExtResource("9_iadx0")
+script = ExtResource("24_h33v0")
 inventory_size = 30
 inventory_type = 0
 
 [node name="ProduceInventory" type="Node" parent="Player"]
-script = ExtResource("9_iadx0")
+script = ExtResource("24_h33v0")
 inventory_size = 100
 
 [node name="FertiliserInventory" type="Node" parent="Player"]
-script = ExtResource("9_iadx0")
+script = ExtResource("24_h33v0")
 inventory_size = 100
 inventory_type = 2
 
 [node name="RobotInventory" type="Node" parent="Player"]
-script = ExtResource("9_iadx0")
+script = ExtResource("24_h33v0")
 inventory_size = 100
 inventory_type = 3
 
 [node name="RobotUpgradeInventory" type="Node" parent="Player"]
-script = ExtResource("9_iadx0")
+script = ExtResource("24_h33v0")
 inventory_size = 100
 inventory_type = 4
 inventory = {
-ExtResource("19_fwa5x"): 2,
-ExtResource("26_qqbio"): 5
+ExtResource("25_qcanv"): 2,
+ExtResource("26_dxu6q"): 5
 }
 
 [node name="WaterInventory" type="Node" parent="Player"]
-script = ExtResource("24_lhr56")
+script = ExtResource("20_fy0r5")
 inventory_size = 100
 inventory_type = 5
 
 [node name="GridSquareSelector" type="Node2D" parent="."]
-script = ExtResource("55_6u3el")
+script = ExtResource("27_0gvpv")
 valid_colour = Color(0, 0.87451, 0, 1)
 invalid_colour = Color(0.905882, 0, 0, 1)
 
@@ -399,8 +402,8 @@ offset_top = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("13_yumjg")
-script = ExtResource("14_qo620")
+theme = ExtResource("28_2jl6n")
+script = ExtResource("29_gfs11")
 exclusive_gui_screens = Array[Control]([null, null])
 
 [node name="ToolGUI" type="VBoxContainer" parent="CanvasLayer/GUI"]
@@ -413,7 +416,7 @@ offset_top = -66.0
 offset_right = 201.0
 offset_bottom = -10.0
 grow_vertical = 0
-script = ExtResource("4_i0hmv")
+script = ExtResource("30_fwwhc")
 
 [node name="ToolText" type="Label" parent="CanvasLayer/GUI/ToolGUI"]
 layout_mode = 2
@@ -447,7 +450,7 @@ offset_right = -56.0
 offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("17_17121")
+script = ExtResource("31_xacft")
 buy_seed_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control/ScrollContainer/SeedParent")
 buy_fertiliser_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control4/ScrollContainer/FertiliserParent")
 buy_robots_parent = NodePath("MarginContainer/VBoxContainer/TabContainer/Buy/Control5/ScrollContainer/RobotsParent")
@@ -482,7 +485,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer/HBoxContainer/Control"]
 layout_mode = 2
-texture = ExtResource("11_736ha")
+texture = ExtResource("32_fospo")
 expand_mode = 2
 stretch_mode = 4
 
@@ -490,7 +493,7 @@ stretch_mode = 4
 layout_mode = 2
 text = "100000"
 label_settings = SubResource("LabelSettings_0t5le")
-script = ExtResource("14_cssu7")
+script = ExtResource("33_crb8o")
 currency_manager = NodePath("../../../../../../../../../CurrencyManager")
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI/TradeStationGUI/MarginContainer/VBoxContainer"]
@@ -603,9 +606,9 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("29_48v5m")
+script = ExtResource("34_vhpbx")
 starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
-list_tile_scene = ExtResource("31_td8hx")
+list_tile_scene = ExtResource("35_q4k4d")
 
 [node name="PhoneGUI" type="TabContainer" parent="CanvasLayer/GUI/OverscreenUI"]
 visible = false
@@ -619,7 +622,7 @@ offset_right = -57.0
 offset_bottom = -39.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("9_kceb6")
+script = ExtResource("36_nrqse")
 
 [node name="Inventory" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI"]
 layout_mode = 2
@@ -649,7 +652,7 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
-texture = ExtResource("11_736ha")
+texture = ExtResource("32_fospo")
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory/HBoxContainer/Control" node_paths=PackedStringArray("currency_manager")]
 layout_mode = 1
@@ -665,7 +668,7 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "100000"
 label_settings = SubResource("LabelSettings_0t5le")
-script = ExtResource("14_cssu7")
+script = ExtResource("33_crb8o")
 currency_manager = NodePath("../../../../../../../../../CurrencyManager")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Inventory/Inventory"]
@@ -676,14 +679,14 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("29_48v5m")
+script = ExtResource("34_vhpbx")
 starting_inventories = [NodePath("../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../Player/RobotUpgradeInventory")]
 interactable = false
 
 [node name="Quests" type="Control" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI" node_paths=PackedStringArray("quest_manager", "quest_box_parent")]
 visible = false
 layout_mode = 2
-script = ExtResource("11_725wh")
+script = ExtResource("37_tem8q")
 quest_manager = NodePath("../../../../../QuestManager")
 quest_box_parent = NodePath("MarginContainer/VBoxContainer/HBoxContainer")
 
@@ -707,16 +710,16 @@ label_settings = SubResource("LabelSettings_qaotf")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="QuestDisplay1" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay1" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("38_ul25o")]
 layout_mode = 2
 
-[node name="QuestDisplay2" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay2" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("38_ul25o")]
 layout_mode = 2
 
-[node name="QuestDisplay3" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay3" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("38_ul25o")]
 layout_mode = 2
 
-[node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_nsnn6")]
+[node name="QuestDisplay4" parent="CanvasLayer/GUI/OverscreenUI/PhoneGUI/Quests/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("38_ul25o")]
 layout_mode = 2
 
 [node name="EnergyStationGUI" type="Control" parent="CanvasLayer/GUI/OverscreenUI" node_paths=PackedStringArray("path_editing_gui", "robot_upgrade_gui", "robot_details", "robot_inv_list", "add_from_inventory_button", "identify_camera", "power_button")]
@@ -731,7 +734,7 @@ offset_right = -19.0
 offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("20_m3hsh")
+script = ExtResource("39_4666e")
 path_editing_gui = NodePath("../../PathSelectionGUI")
 robot_upgrade_gui = NodePath("AddUpgradesPopup")
 robot_details = NodePath("Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent")
@@ -790,7 +793,7 @@ size_flags_stretch_ratio = 2.0
 [node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
 layout_mode = 2
 text = "Robots"
-label_settings = ExtResource("28_boey7")
+label_settings = ExtResource("40_g8fim")
 horizontal_alignment = 1
 
 [node name="RobotsArea" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox"]
@@ -861,7 +864,7 @@ text = "status: [color=green]powered[/color]
 Energy: 35 / 60
 Inventory: 10 / 60
 "
-script = ExtResource("34_34xvq")
+script = ExtResource("41_tmqq3")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Robots/VBox/RobotsArea/RobotDetailsPanel/RobotDetailsParent/RobotDescription/Control/RobotDescriptionLabel"]
 wait_time = 0.5
@@ -926,7 +929,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("29_0m65b")
+script = ExtResource("43_gcrtw")
 description_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/DescriptionLabel")
 ttf_label = NodePath("VBoxContainer/HBoxContainer/Control/VBoxContainer/VBoxContainer/TimeFillLabel")
 progress_bar = NodePath("VBoxContainer/HBoxContainer/ProgressBar")
@@ -938,7 +941,7 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
 layout_mode = 2
 text = "Energy"
-label_settings = ExtResource("28_boey7")
+label_settings = ExtResource("40_g8fim")
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/Content/VBox/VBox/HBox/Energy/VBoxContainer"]
@@ -1061,7 +1064,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control"]
 layout_mode = 2
 text = "Choose"
-label_settings = ExtResource("28_boey7")
+label_settings = ExtResource("40_g8fim")
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/Control"]
 layout_mode = 2
@@ -1078,7 +1081,7 @@ text = "Close"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("45_uexto")]
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/RobotSelectionPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("44_kuyy1")]
 layout_mode = 2
 _inventory = NodePath("../../../../../../../../../Player/RobotInventory")
 
@@ -1096,7 +1099,7 @@ offset_right = 242.5
 offset_bottom = 284.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("37_viyhm")
+script = ExtResource("45_rbdmx")
 upgrade_boxes_paths = [NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer2/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer3/PanelContainer"), NodePath("MarginContainer/VBoxContainer4/GridContainer/AspectRatioContainer4/PanelContainer")]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup"]
@@ -1117,7 +1120,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control"]
 layout_mode = 2
 text = "Upgrades"
-label_settings = ExtResource("28_boey7")
+label_settings = ExtResource("40_g8fim")
 
 [node name="Control" type="Control" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/Control"]
 layout_mode = 2
@@ -1175,7 +1178,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("45_uexto")]
+[node name="InventoryButtonList" parent="CanvasLayer/GUI/OverscreenUI/EnergyStationGUI/AddUpgradesPopup/MarginContainer/VBoxContainer4/PanelContainer" node_paths=PackedStringArray("_inventory") instance=ExtResource("44_kuyy1")]
 layout_mode = 2
 _inventory = NodePath("../../../../../../../../../Player/RobotUpgradeInventory")
 
@@ -1193,7 +1196,7 @@ offset_right = 265.0
 offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("28_lgf16")
+script = ExtResource("46_f47v5")
 deposit_box_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer/DepositBoxList")
 player_inventory_list = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel/ScrollContainer/PlayerInventoryList")
 add_from_inventory_panel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/AddFromInventoryPanel")
@@ -1242,7 +1245,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("29_48v5m")
+script = ExtResource("34_vhpbx")
 button_text = "Withdraw"
 
 [node name="AddFromInventoryButton" type="CheckButton" parent="CanvasLayer/GUI/OverscreenUI/DepositBoxGUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -1263,7 +1266,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("29_48v5m")
+script = ExtResource("34_vhpbx")
 starting_inventories = [NodePath("../../../../../../../../../../Player/SeedInventory"), NodePath("../../../../../../../../../../Player/ProduceInventory"), NodePath("../../../../../../../../../../Player/FertiliserInventory"), NodePath("../../../../../../../../../../Player/RobotInventory"), NodePath("../../../../../../../../../../Player/RobotUpgradeInventory")]
 button_text = "Deposit"
 
@@ -1281,7 +1284,7 @@ offset_right = 174.0
 offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("44_b52yr")
+script = ExtResource("47_t2t0g")
 ttf_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/TimeToFillLabel")
 progress_bar = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ProgressBar")
 
@@ -1351,7 +1354,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("20_jbywo")
+script = ExtResource("48_g7by7")
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/PathSelectionGUI"]
 layout_mode = 1
@@ -1401,41 +1404,41 @@ text = "Path Invalid"
 label_settings = SubResource("LabelSettings_p54c1")
 horizontal_alignment = 1
 autowrap_mode = 2
-script = ExtResource("28_48y4d")
+script = ExtResource("49_0bmmr")
 error_text = "Path Invalid"
 error_settings = SubResource("LabelSettings_p54c1")
 pass_text = "Path Valid"
 pass_settings = SubResource("LabelSettings_lmxb2")
 
 [node name="SelectionMarker" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
-texture = ExtResource("11_8edbx")
-script = ExtResource("12_fbvmq")
+texture = ExtResource("50_t6spk")
+script = ExtResource("51_sm02e")
 player = NodePath("../Player")
 
 [node name="QuestManager" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("15_wrucv")
-quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("16_oiwbj"), ExtResource("17_k2pda")])
+script = ExtResource("52_71bwp")
+quests = Array[Resource("res://Level/Quests/QuestResource.gd")]([ExtResource("53_42ba5"), ExtResource("54_ykqu1")])
 player = NodePath("../Player")
 
 [node name="CurrencyManager" type="Node" parent="."]
-script = ExtResource("20_wew0j")
+script = ExtResource("55_2jnul")
 
 [node name="Robots" type="Node2D" parent="."]
 
-[node name="WateringRobot" parent="Robots" instance=ExtResource("35_74b3b")]
-starting_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("45_s4v6b"), ExtResource("46_tehid")])
+[node name="WateringRobot" parent="Robots" instance=ExtResource("56_53mia")]
+starting_upgrades = Array[Resource("res://Robots/RobotUpgrade.gd")]([ExtResource("9_vq674"), ExtResource("10_2sp3f")])
 
-[node name="HarvestingRobot" parent="Robots" instance=ExtResource("35_42xdg")]
+[node name="HarvestingRobot" parent="Robots" instance=ExtResource("57_2c6io")]
 position = Vector2(624, 240)
 
-[node name="PlanterRobot" parent="Robots" instance=ExtResource("40_4ntqc")]
+[node name="PlanterRobot" parent="Robots" instance=ExtResource("58_q46jy")]
 position = Vector2(596, 415)
 
-[node name="FertiliserRobot" parent="Robots" instance=ExtResource("44_cxftp")]
+[node name="FertiliserRobot" parent="Robots" instance=ExtResource("59_k5be6")]
 position = Vector2(668, 382)
 
 [node name="GridPathLine" type="Node2D" parent="."]
-script = ExtResource("19_gqpxo")
+script = ExtResource("60_5j0ep")
 line_colour = Color(0.341176, 0.729412, 0.647059, 1)
 tile_colour = Color(0.0431373, 0.588235, 0.305882, 1)
 tile_line_width = 2.0
@@ -1445,16 +1448,16 @@ final_tile_colour = Color(0.290196, 0.411765, 0.8, 1)
 position = Vector2(416, 326)
 enabled = false
 zoom = Vector2(2, 2)
-script = ExtResource("37_irf5s")
+script = ExtResource("61_4s0ww")
 
 [node name="IdentifyCamera" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(2, 2)
-script = ExtResource("49_5eap5")
+script = ExtResource("62_3q03r")
 
 [node name="Chunk" type="Node2D" parent="." groups=["chunk"]]
 position = Vector2(656, 144)
-script = ExtResource("60_vm8yy")
+script = ExtResource("63_ahj1o")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Chunk"]
 sprite_frames = SubResource("SpriteFrames_lg4xd")
@@ -1463,7 +1466,7 @@ centered = false
 offset = Vector2(-16, -16)
 
 [node name="WaterInventory" type="Node" parent="Chunk"]
-script = ExtResource("24_lhr56")
+script = ExtResource("20_fy0r5")
 starting_water = 100
 inventory_size = 100
 inventory_type = 5
@@ -1471,6 +1474,28 @@ inventory_type = 5
 [node name="StaticBody2D" type="StaticBody2D" parent="Chunk"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk/StaticBody2D"]
+position = Vector2(17, 16)
+shape = SubResource("CircleShape2D_sw7jp")
+
+[node name="Chunk2" type="Node2D" parent="." groups=["chunk"]]
+position = Vector2(656, 144)
+script = ExtResource("63_ahj1o")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Chunk2"]
+sprite_frames = SubResource("SpriteFrames_lg4xd")
+animation = &"unused"
+centered = false
+offset = Vector2(-16, -16)
+
+[node name="WaterInventory" type="Node" parent="Chunk2"]
+script = ExtResource("20_fy0r5")
+starting_water = 100
+inventory_size = 100
+inventory_type = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chunk2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk2/StaticBody2D"]
 position = Vector2(17, 16)
 shape = SubResource("CircleShape2D_sw7jp")
 
